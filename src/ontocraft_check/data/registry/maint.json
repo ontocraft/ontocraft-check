@@ -14,7 +14,7 @@
   "name": "설비 보전·신뢰성",
   "en": "Equipment maintenance and reliability"
  },
- "version": "0.2.2",
+ "version": "0.2.4",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -287,7 +287,9 @@
    "category": "failure",
    "related": [
     "fault",
-    "failure-mode"
+    "failure-mode",
+    "failure-mechanism",
+    "failure-cause"
    ],
    "refs": [
     "IEC 60050-192",
@@ -324,8 +326,8 @@
    ],
    "definition": "고장이 겉으로 드러나는 방식입니다. 누설, 기동 불가, 과열, 진동 과다처럼 관찰할 수 있는 말로 적습니다.",
    "category": "failure",
-   "broader": "failure",
    "related": [
+    "failure",
     "failure-mechanism",
     "failure-cause",
     "fmea"
@@ -345,8 +347,8 @@
    ],
    "definition": "고장을 일으키는 물리적, 화학적, 그 밖의 과정입니다. 피로, 부식, 마모, 과열이 대표적입니다.",
    "category": "failure",
-   "broader": "failure",
    "related": [
+    "failure",
     "failure-mode",
     "degradation"
    ],
@@ -364,8 +366,8 @@
    ],
    "definition": "고장으로 이어진 설계, 제작, 설치, 운전, 보전 쪽의 사정입니다. 원인을 고쳐야 같은 고장이 되풀이되지 않습니다.",
    "category": "failure",
-   "broader": "failure",
    "related": [
+    "failure",
     "rca",
     "failure-mechanism"
    ],
@@ -619,7 +621,6 @@
    "ko": "사후보전",
    "en": "corrective maintenance",
    "alt": [
-    "CM",
     "고장 정비",
     "BM",
     "고장 수리"
@@ -705,8 +706,7 @@
    "ko": "개량보전",
    "en": "improvement maintenance",
    "alt": [
-    "개선보전",
-    "CM(개량)"
+    "개선보전"
    ],
    "definition": "같은 고장이 되풀이되지 않도록 설비의 설계나 부품을 바꾸는 보전입니다. 부품을 같은 것으로 바꾸는 수리와 달리 재질이나 구조를 바꾸며, 근본 원인 분석의 결과로 무엇을 바꿀지 정합니다.",
    "category": "strategy",
@@ -1689,7 +1689,6 @@
    "ko": "상태 감시",
    "en": "condition monitoring",
    "alt": [
-    "CM(상태)",
     "설비 상태 감시"
    ],
    "definition": "설비 상태를 나타내는 값을 주기적이거나 연속으로 재서 변화를 지켜보는 활동입니다.",

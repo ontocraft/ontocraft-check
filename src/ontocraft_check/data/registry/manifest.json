@@ -25,7 +25,7 @@
    "name": "설비 보전·신뢰성",
    "en": "Equipment maintenance and reliability",
    "file": "maint.json",
-   "version": "0.2.2",
+   "version": "0.2.4",
    "terms": 100,
    "related": [
     "mfg-ai"

@@ -1069,7 +1069,7 @@ def check(inv: Inventory, report: Report, cq_path: str | None, query_field: str 
         report.add(Finding(
             CAT, "CQ01", "info", f"{m['kind_ko']} {m['name']}", msg,
             "질의가 틀렸으면 질의를 고치고, 온톨로지에 빠졌으면 요소를 더합니다. OWL 밖에서 정상인 이름이면 "
-            "--cq-allow-labels나 --cq-allow-relations에 넣습니다.",
+            "허용 목록(명령행 --cq-allow-labels·--cq-allow-relations)에 넣습니다.",
             {"kind": m["kind"], "name": m["name"], "cq": ids, "hint": m["hint"]},
         ))
     report.ran.append(CAT)

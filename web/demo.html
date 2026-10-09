@@ -24,7 +24,7 @@
 <pre id="out" hidden></pre>
 <div id="report"></div>
 <script>
-const WHEEL = "ontocraft_check-0.7.0-py3-none-any.whl";
+const WHEEL = "ontocraft_check-0.7.1-py3-none-any.whl";
 const SKIP = new Set(["domains.json", "candidates.json", "manifest.json"]);  // 분야 파일이 아닙니다(ontocraft-check 도 대조에 쓰지 않습니다)
 const worker = new Worker("ontocraft-check-worker.js");
 const st = document.getElementById("status");
