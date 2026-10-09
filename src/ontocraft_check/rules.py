@@ -19,7 +19,8 @@ _INFO = {
             "rdfs:subClassOf 가 길이 2 이상으로 순환합니다. 순환 안의 클래스는 추론으로 모두 같은 클래스가 됩니다.",
             "잘못 넣은 상하위 관계 하나를 지웁니다. 같은 개념이라면 owl:equivalentClass 로 바꿉니다."),
     "P08": ("pitfall", "minor",
-            "rdfs:label 은 있지만 rdfs:comment 와 skos:definition 이 모두 없어 뜻을 확인할 수 없습니다.",
+            "rdfs:label 은 있지만 rdfs:comment 와 skos:definition 이 모두 없어 뜻을 확인할 수 없습니다."
+            " 도구가 만든 이름(예: ActionLog_*)은 --ignore-names로 이 규칙에서 뺄 수 있습니다.",
             "skos:definition(또는 rdfs:comment)으로 한두 문장의 정의를 붙입니다."),
     "P10": ("pitfall", "important",
             "온톨로지 전체에 서로소 공리가 하나도 없습니다. 추론기가 배타적인 클래스에 동시에 속한 개체를 모순으로 잡지 못합니다.",
@@ -35,10 +36,11 @@ _INFO = {
             "한 속성에 rdfs:domain 이나 rdfs:range 가 둘 이상 있습니다. OWL 은 이것을 교집합으로 해석합니다.",
             "뜻한 것이 「어느 하나」라면 owl:unionOf 로 만든 클래스 하나를 도메인이나 레인지로 둡니다."),
     "P22": ("pitfall", "minor",
-            "클래스 이름 표기법(UpperCamel, lowerCamel, snake_case, kebab-case)이 다수와 다릅니다.",
+            "클래스 이름 표기법(UpperCamel, lowerCamel, snake_case, kebab-case)이 다수와 다릅니다. "
+            "--ignore-names로 뺀 클래스는 다수 표기법을 셀 때도 넣지 않습니다. 도구가 만든 이름(예: ActionLog_*)에 씁니다.",
             "온톨로지 안에서 한 가지 표기법으로 맞춥니다. 클래스는 보통 UpperCamel 을 씁니다."),
     "P32": ("pitfall", "minor",
-            "서로 다른 클래스가 같은 레이블을 가집니다.",
+            "서로 다른 클래스가 같은 레이블을 가집니다. 도구가 만든 이름(예: ActionLog_*)은 --ignore-names로 이 규칙에서 뺄 수 있습니다.",
             "같은 개념이면 하나로 합치거나 owl:equivalentClass 로 잇고, 다른 개념이면 레이블을 구별합니다."),
     "LBL01": ("pitfall", "minor",
               "종류가 다른 요소(클래스, 객체 속성, 데이터 속성, 주석 속성)가 같은 언어에서 같은 rdfs:label(공백 정규화 후)을 씁니다. "
@@ -78,10 +80,10 @@ _INFO = {
                "온톨로지 선언에 버전 정보(owl:versionInfo 또는 owl:versionIRI)가 없습니다.",
                "owl:versionInfo \"0.1.0\" 이나 owl:versionIRI 를 붙입니다."),
     "META02": ("metadata", "minor",
-               "레이블이 있는 클래스·속성 가운데 한국어(@ko) 레이블이 없는 것이 있습니다. 한 항목에 개수와 대상을 모읍니다.",
+               "레이블이 있는 클래스·속성 가운데 한국어(@ko) 레이블이 없는 것이 있습니다. 한 항목에 개수와 대상을 모읍니다. 도구가 만든 이름(예: ActionLog_*)은 --ignore-names로 이 규칙에서 뺄 수 있습니다.",
                "rdfs:label \"...\"@ko 를 더합니다."),
     "META03": ("metadata", "minor",
-               "레이블이 있는 클래스·속성 가운데 영어(@en) 레이블이 없는 것이 있습니다. 한 항목에 개수와 대상을 모읍니다.",
+               "레이블이 있는 클래스·속성 가운데 영어(@en) 레이블이 없는 것이 있습니다. 한 항목에 개수와 대상을 모읍니다. 도구가 만든 이름(예: ActionLog_*)은 --ignore-names로 이 규칙에서 뺄 수 있습니다.",
                "rdfs:label \"...\"@en 을 더합니다."),
     "META04": ("metadata", "important",
                "클래스나 속성에 rdfs:label 이 하나도 없습니다. 화면과 보고서에 IRI 가 그대로 드러납니다.",
@@ -107,10 +109,15 @@ _INFO = {
     "REG01": ("registry", "info",
               "클래스의 @ko 레이블(없으면 로컬 이름)이 용어 등록부 용어의 표제어(ko)나 동의어(alt)와 표기가 같습니다. "
               "등록부 용어에 kind(property·relation)가 있으면 속성도 같은 종류끼리 맞춥니다. "
-              "skos:exactMatch 후보입니다. 표제어와 같으면 일치 신뢰도 높음, 동의어로만 맞으면 낮음입니다.",
+              "skos:exactMatch 후보입니다. 표제어와 같으면 일치 신뢰도 높음, 동의어로만 맞으면 낮음입니다. "
+              "0.7부터 --registry-match(ko, en, both, 기본 both)로 영어 대조를 더합니다. 등록부 용어의 en을 요소의 @en 레이블, "
+              "언어 태그 없는 레이블, 로컬 이름을 띄어 쓴 형태(ChemicalAccident는 chemical accident)와 대소문자를 무시하고 맞춥니다. "
+              "both는 한국어로 아무것도 맞지 않은 요소만 영어로 맞춥니다. 영어로 맞은 후보는 일치 신뢰도가 늘 낮음이고 "
+              "「영어 이름으로 맞춤」(detail.match_lang en)으로 표시합니다. @ko 레이블이 하나도 없으면 결과 요약과 건너뜀 사유에 "
+              "「대조할 한국어 표기가 없음(@ko 레이블 0개)」으로 적습니다. 0건이 맞는 용어가 없다는 뜻이 아니기 때문입니다.",
               "정의를 읽고 뜻이 같을 때만 skos:exactMatch 를 더합니다. 표기만 같고 뜻이 다르면 넣지 않습니다."),
     "REG02": ("registry", "info",
-              "고르지 않은 분야의 등록부 용어와 표기만 같습니다. 뜻이 다를 수 있습니다.",
+              "고르지 않은 분야의 등록부 용어와 표기만 같습니다. 뜻이 다를 수 있습니다. 영어 대조로 맞은 것도 같은 기준으로 나눕니다.",
               "고른 분야의 개념이 맞다면 넣지 않습니다. 그 분야의 개념을 뜻한 것이 맞을 때만 정의를 읽고 검토합니다."),
     "REG03": ("registry", "info",
               "객체 속성이나 데이터 속성의 @ko 레이블(없으면 로컬 이름)이 등록부의 개념 용어와 표기가 같습니다. "
@@ -121,7 +128,10 @@ _INFO = {
              "CQ(역량 질문) 질의가 쓴 노드 라벨, 관계 타입, 속성(또는 SPARQL 의 우리 네임스페이스 IRI) 가운데 온톨로지에도 "
              "허용 목록(--cq-allow-labels, --cq-allow-relations)에도 없는 것입니다. 질의와 설계가 어긋난 후보입니다. "
              "속성은 변수 라벨의 클래스와 그 상위 클래스에서 찾고, 하위 클래스에만 있으면 참고로 적습니다. "
-             "--cq 를 줄 때만 냅니다.",
+             "--cq 를 줄 때만 냅니다. ONTOFLOW 카탈로그({id, question, check:{kind, cypher…}})는 자동으로 알아보고, "
+             "--cq-profile ontoflow 를 주면 (:Object {objectType:'X'})를 <기준>X 클래스, [:T]를 <기준>rel/T 객체 속성, "
+             "X 변수의 v.p를 <X의 IRI>/p 데이터 속성으로 맞춥니다(기준은 --cq-base, {project}는 projectId). "
+             "label-exists, project-object-count, project-property-filled, project-link-nonzero 는 check 의 이름으로 맞춥니다.",
              "질의가 틀렸으면 질의를 고치고, 온톨로지에 빠졌으면 요소를 더합니다. OWL 밖에서 정상인 이름(그래프 운영 라벨, "
              "개념 계층 관계 등)이면 허용 목록에 넣습니다."),
 }

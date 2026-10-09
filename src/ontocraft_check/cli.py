@@ -28,6 +28,18 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--cq-query-field", help="CQ 질의 필드 이름(기본: cypher, 없으면 sparql). 이름에 sparql이 들어가거나 질의가 SELECT·PREFIX로 시작하면 SPARQL로 읽습니다")
     p.add_argument("--cq-allow-labels", help="OWL에 없어도 정상인 노드 라벨(쉼표로 구분, 끝의 * 와일드카드, 예: KG_*,Concept)")
     p.add_argument("--cq-allow-relations", help="OWL에 없어도 정상인 관계 타입(쉼표로 구분, 예: BROADER,HAS_LEGAL_BASIS)")
+    p.add_argument("--cq-format", choices=("auto", "default", "ontoflow"), default="auto",
+                   help="CQ 파일 형식. auto(기본)는 items[].check가 있으면 ONTOFLOW 형식({id, question, check:{kind, cypher…}})으로 읽습니다")
+    p.add_argument("--cq-profile", choices=("default", "ontoflow"), default="default",
+                   help="CQ 이름 대응 방식. default는 라벨·영어 레이블, ontoflow는 (:Object {objectType:'X'})를 <기준>X 클래스로, "
+                        "[:T]를 <기준>rel/T로, v.p를 <클래스>/p로 맞춥니다")
+    p.add_argument("--cq-base", help="ontoflow 프로필의 기준 IRI 틀(예: https://ontocraft.com/ontology/{project}/). "
+                                     "{project}는 질의의 projectId로 채웁니다. 없으면 온톨로지 IRI로 정합니다")
+    p.add_argument("--registry-match", choices=("ko", "en", "both"), default="both",
+                   help="등록부 대조 방식. ko는 @ko 레이블(없으면 로컬 이름), en은 영어 이름(@en·태그 없는 레이블·로컬 이름), "
+                        "both(기본)는 한국어를 먼저 맞추고 맞지 않은 요소만 영어로 맞춥니다")
+    p.add_argument("--ignore-names", help="명명·메타데이터 규칙(P08, P22, P32, LBL01, LBL02, META02~04)에서 뺄 이름 glob"
+                                          "(쉼표로 구분, 예: ActionLog_*,rel/LoggedEdit_*). 로컬 이름이나 온톨로지 IRI 아래 상대 경로와 맞춥니다")
     p.add_argument("--format", choices=("md", "html", "json"), default="md", help="보고서 형식(기본 md)")
     p.add_argument("--out", help="보고서를 쓸 파일. 없으면 표준 출력")
     p.add_argument(
@@ -83,6 +95,11 @@ def main(argv: list[str] | None = None) -> int:
             cq_query_field=args.cq_query_field,
             cq_allow_labels=args.cq_allow_labels,
             cq_allow_relations=args.cq_allow_relations,
+            ignore_names=args.ignore_names,
+            registry_match=args.registry_match,
+            cq_format=args.cq_format,
+            cq_profile=args.cq_profile,
+            cq_base=args.cq_base,
         )
     except LoadError as exc:
         print(f"ontocraft-check: {exc}", file=sys.stderr)

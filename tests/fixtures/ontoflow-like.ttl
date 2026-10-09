@@ -1,0 +1,44 @@
+# ONTOFLOW 내보내기 규칙(클래스 <기준>이름, 데이터 속성 <기준>클래스/속성, 관계 <기준>rel/이름, 언어 태그 없는 레이블)을
+# 따라 이 저장소에서 새로 쓴 시험용 온톨로지입니다. 실제 ONTOFLOW 프로젝트의 선언이 아닙니다.
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://ontocraft.com/ontology/demo/> a owl:Ontology ; rdfs:label "ONTOFLOW 온톨로지 · demo" .
+
+<https://ontocraft.com/ontology/demo/Ship> a owl:Class ; rdfs:label "Ship" ; rdfs:comment "배" .
+<https://ontocraft.com/ontology/demo/Tanker> a owl:Class ; rdfs:label "Tanker" ; rdfs:comment "유조선" ;
+    rdfs:subClassOf <https://ontocraft.com/ontology/demo/Ship> .
+<https://ontocraft.com/ontology/demo/Voyage> a owl:Class ; rdfs:label "Voyage" ; rdfs:comment "항차" .
+<https://ontocraft.com/ontology/demo/BulkCargo> a owl:Class ; rdfs:label "Cargo lot" ; rdfs:comment "화물 묶음" .
+<https://ontocraft.com/ontology/demo/Harbor> a owl:Class ; rdfs:label "Harbor" ; rdfs:comment "항구" .
+<https://ontocraft.com/ontology/demo/ActionLog_fix_ship_name> a owl:Class ; rdfs:label "ActionLog_fix_ship_name" ;
+    rdfs:comment "커널이 만든 액션 로그" .
+<https://ontocraft.com/ontology/shared/Company> a owl:Class ; rdfs:label "Company" ; rdfs:comment "다른 프로젝트가 선언" .
+
+<https://ontocraft.com/ontology/demo/Ship/imo> a owl:DatatypeProperty ; rdfs:label "imo" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/Ship> ; rdfs:range xsd:string .
+<https://ontocraft.com/ontology/demo/Ship/name> a owl:DatatypeProperty ; rdfs:label "name" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/Ship> ; rdfs:range xsd:string .
+<https://ontocraft.com/ontology/demo/Tanker/deadweight> a owl:DatatypeProperty ; rdfs:label "deadweight" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/Tanker> ; rdfs:range xsd:decimal .
+<https://ontocraft.com/ontology/demo/Voyage/departedOn> a owl:DatatypeProperty ; rdfs:label "departedOn" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/Voyage> ; rdfs:range xsd:date .
+<https://ontocraft.com/ontology/demo/Harbor/unlocode> a owl:DatatypeProperty ; rdfs:label "unlocode" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/Harbor> ; rdfs:range xsd:string .
+<https://ontocraft.com/ontology/demo/Harbor/name> a owl:DatatypeProperty ; rdfs:label "name" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/Harbor> ; rdfs:range xsd:string .
+<https://ontocraft.com/ontology/demo/ActionLog_fix_ship_name/executedAt> a owl:DatatypeProperty ; rdfs:label "executedAt" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/ActionLog_fix_ship_name> ; rdfs:range xsd:dateTime .
+<https://ontocraft.com/ontology/demo/ActionLog_fix_ship_name/status> a owl:DatatypeProperty ; rdfs:label "status" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/ActionLog_fix_ship_name> ; rdfs:range xsd:string .
+
+<https://ontocraft.com/ontology/demo/rel/SAILED> a owl:ObjectProperty ; rdfs:label "SAILED" ; rdfs:comment "배가 항차를 다녀옴" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/Ship> ; rdfs:range <https://ontocraft.com/ontology/demo/Voyage> .
+<https://ontocraft.com/ontology/demo/rel/CALLED_AT> a owl:ObjectProperty ; rdfs:label "CALLED_AT" ; rdfs:comment "항차가 항구에 들름" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/Voyage> ; rdfs:range <https://ontocraft.com/ontology/demo/Harbor> .
+<https://ontocraft.com/ontology/demo/rel/OWNED_BY> a owl:ObjectProperty ; rdfs:label "OWNED_BY" ; rdfs:comment "배의 소유 회사" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/Ship> ; rdfs:range <https://ontocraft.com/ontology/shared/Company> .
+<https://ontocraft.com/ontology/demo/rel/LoggedEdit_fix_ship_name_Ship> a owl:ObjectProperty ; rdfs:label "LoggedEdit_fix_ship_name_Ship" ;
+    rdfs:comment "커널이 만든 편집 기록 관계" ;
+    rdfs:domain <https://ontocraft.com/ontology/demo/ActionLog_fix_ship_name> ; rdfs:range <https://ontocraft.com/ontology/demo/Ship> .

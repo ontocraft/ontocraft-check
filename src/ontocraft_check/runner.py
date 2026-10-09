@@ -2,14 +2,15 @@
 
 from __future__ import annotations
 
+import fnmatch
 from pathlib import Path
 
 from rdflib.namespace import RDF
 
 from .checks import cq as cq_check
 from .checks import logic, metadata, pitfalls, registry, shacl
-from .graph import build_inventory, find_individuals, load_graph
-from .model import Report
+from .graph import LoadError, build_inventory, find_individuals, load_graph, relative_names
+from .model import IGNORE_NAME_RULES, Report
 from .render import RULE_TITLES
 
 DEFAULT_GROUP_OVER = 10
@@ -43,6 +44,11 @@ def run(
     cq_query_field: str | None = None,
     cq_allow_labels: list[str] | str | None = None,
     cq_allow_relations: list[str] | str | None = None,
+    ignore_names: list[str] | str | None = None,
+    registry_match: str = "both",
+    cq_format: str | None = None,
+    cq_profile: str | None = None,
+    cq_base: str | None = None,
 ) -> Report:
     """검사를 돌립니다.
 
@@ -54,10 +60,20 @@ def run(
     cq: CQ(역량 질문) JSON 파일. 주면 CQ 커버리지(report.cq, 정보 항목 CQ01)를 냅니다.
     cq_query_field: 질의 필드 이름(기본: cypher, 없으면 sparql).
     cq_allow_labels, cq_allow_relations: OWL 에 없어도 정상인 라벨·관계 타입(쉼표 문자열이나 목록, 끝의 * 와일드카드).
+    ignore_names: 명명·메타데이터 규칙(P08, P22, P32, LBL01, LBL02, META02~04)에서 뺄 이름 glob(쉼표 문자열이나 목록).
+        로컬 이름이나 온톨로지 IRI 아래의 상대 경로(예: ActionLog_x/status)와 맞춥니다. 다른 규칙에는 쓰지 않습니다.
+    registry_match: 등록부 대조 방식. ko(한국어 레이블·로컬 이름), en(영어 이름), both(기본, 한국어가 먼저).
+    cq_format: CQ 파일 형식. None·auto(items[].check 가 있으면 ontoflow), default, ontoflow.
+    cq_profile: CQ 이름 대응 방식. default(라벨·영어 레이블) 또는 ontoflow(objectType·rel/·클래스/속성 IRI).
+    cq_base: ontoflow 프로필의 기준 IRI 틀(예: https://ontocraft.com/ontology/{project}/). 없으면 온톨로지 IRI 입니다.
     group_over: 같은 규칙의 항목이 이 수를 넘으면 md·html 보고서에서 한 항목으로 묶습니다. 0이면 묶지 않고, None 이면 기본값(10)입니다.
     """
     domains = split_ids(domains, upper=False)
     disable = split_ids(disable, upper=True)
+    ignore = split_ids(ignore_names, upper=False)
+    registry_match = (registry_match or "both").strip().lower()
+    if registry_match not in registry.MATCH_MODES:
+        raise LoadError(f"--registry-match 는 {', '.join(registry.MATCH_MODES)} 가운데 하나입니다: {registry_match}")
     group_over = DEFAULT_GROUP_OVER if group_over is None else max(0, int(group_over))
     registry_path, registry_label = registry.resolve_registry(registry_dir)
     strict_domains = bool(strict_domains)
@@ -71,6 +87,12 @@ def run(
         shapes_g, shapes_fmt = load_graph(shapes)
 
     inv = build_inventory(tbox)
+    ignore_counts = []
+    for pat in ignore:
+        hit = {e for e in inv.entities if any(fnmatch.fnmatchcase(n, pat) for n in relative_names(inv, str(e)))}
+        inv.ignored |= hit
+        ignore_counts.append({"pattern": pat, "count": len(hit),
+                              "classes": len(hit & inv.classes), "properties": len(hit - inv.classes)})
     stats = {
         "classes": len(inv.classes),
         "object_properties": len(inv.object_props),
@@ -107,14 +129,20 @@ def run(
             "disabled": disable,
             "unknown_disabled": [r for r in disable if r not in RULE_TITLES],
             "group_over": group_over,
+            "ignore_names": ignore_counts,
+            "ignore_name_rules": list(IGNORE_NAME_RULES) if ignore else [],
+            "ignored_total": len(inv.ignored),
+            "registry_match": registry_match,
         },
     )
     pitfalls.check(inv, report)
     metadata.check(inv, report)
     logic.check(tbox, data_g, report, reasoner=reasoner)
     shacl.check(tbox, data_g, shapes_g, report)
-    registry.check(inv, registry_path, report, domains=domains or None, related=related or None)
+    registry.check(inv, registry_path, report, domains=domains or None, related=related or None,
+                   match=registry_match)
     cq_check.check(inv, report, cq, query_field=cq_query_field,
-                   allow_labels=cq_allow_labels, allow_relations=cq_allow_relations)
+                   allow_labels=cq_allow_labels, allow_relations=cq_allow_relations,
+                   cq_format=cq_format, profile=cq_profile, base=cq_base)
     report.apply_disable(disable)
     return report

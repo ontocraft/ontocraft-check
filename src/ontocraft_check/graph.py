@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -145,6 +146,8 @@ class Inventory:
     declared_props: set = field(default_factory=set)
     individuals: set = field(default_factory=set)
     own_ns: set = field(default_factory=set)
+    # 0.7: --ignore-names 로 명명·메타데이터 규칙에서 뺄 요소(클래스·속성)입니다. runner 가 채웁니다.
+    ignored: set = field(default_factory=set)
 
     @property
     def properties(self) -> set:
@@ -199,6 +202,33 @@ def build_inventory(g: Graph) -> Inventory:
             else:
                 inv.own_ns.update({iri + "#", iri + "/"})
     return inv
+
+
+def relative_names(inv: "Inventory", iri: str) -> list[str]:
+    """이름 패턴을 맞출 이름들입니다. 로컬 이름과, 온톨로지 IRI 아래의 상대 경로(있으면)입니다.
+
+    ONTOFLOW 처럼 데이터 속성 IRI 가 「<기준>/<클래스>/<속성>」이면 상대 경로가 「<클래스>/<속성>」이 되어,
+    ActionLog_* 같은 패턴이 그 클래스의 속성에도 맞습니다.
+    """
+    out = [local_name(iri)]
+    for o in inv.ontologies:
+        if not isinstance(o, URIRef):
+            continue
+        base = str(o)
+        bases = [base] if base.endswith(("/", "#")) else [base + "/", base + "#"]
+        for b in bases:
+            if iri.startswith(b) and len(iri) > len(b):
+                rel = iri[len(b):]
+                if rel not in out:
+                    out.append(rel)
+    return out
+
+
+def split_name(name: str) -> str:
+    """로컬 이름을 띄어 쓴 영어 형태로 바꿉니다(ChemicalAccident -> Chemical Accident, ship_type -> ship type)."""
+    s = re.sub(r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])", " ", name)
+    s = re.sub(r"[_\-\s]+", " ", s)
+    return s.strip()
 
 
 def find_individuals(g: Graph, exclude: set) -> set:

@@ -140,6 +140,29 @@ def _disabled_text(report: Report) -> str | None:
     return text
 
 
+def ignore_names_text(report: Report) -> str | None:
+    """보고서 머리에 적을 「건너뛴 이름 패턴과 건수」 문장입니다. --ignore-names 를 주지 않으면 None 입니다."""
+    pats = report.options.get("ignore_names") or []
+    if not pats:
+        return None
+    parts = [f"{x['pattern']}(요소 {x['count']}개: 클래스 {x['classes']}, 속성 {x['properties']})" for x in pats]
+    rules = ", ".join(report.options.get("ignore_name_rules") or [])
+    return ("건너뛴 이름 패턴과 건수: " + ", ".join(parts) + f". 모두 {report.options.get('ignored_total', 0)}개 요소를 "
+            f"명명·메타데이터 규칙({rules})에서 뺐습니다. 논리, SHACL, 그 밖의 함정 규칙에는 그대로 넣었습니다.")
+
+
+def registry_status(report: Report) -> str:
+    """결과 요약 표의 등록부 대조 상태입니다. @ko 레이블이 0개면 그 사실을 함께 적습니다."""
+    if "registry" not in report.ran:
+        return "건너뜀"
+    if report.stats.get("registry_no_ko"):
+        return "실행(@ko 레이블 0개, 한국어 표기 대조 불가)"
+    return "실행"
+
+
+MATCH_KO = {"ko": "한국어(@ko 레이블, 없으면 로컬 이름)", "en": "영어 이름(en)",
+            "both": "한국어 먼저, 한국어로 맞지 않은 요소는 영어 이름"}
+
 REG03_NOTE = "관계 이름은 동사구로, 개념과의 연결은 range 클래스에서 하기를 권합니다."
 
 
@@ -161,6 +184,9 @@ def build_blocks(report: Report) -> list:
     rel_text = _related_text(report)
     if rel_text:
         b.append(("p", rel_text))
+    ign_text = ignore_names_text(report)
+    if ign_text:
+        b.append(("p", ign_text))
 
     s = report.stats
     b.append(("h2", "1. 입력과 규모"))
@@ -187,6 +213,7 @@ def build_blocks(report: Report) -> list:
     if report.inputs.get("registry"):
         rows.append(["용어 등록부", report.inputs["registry"]])
     if report.inputs.get("registry"):
+        rows.append(["등록부 대조 방식", MATCH_KO.get(report.options.get("registry_match", "both"), "")])
         rows.append(["고른 분야", ", ".join(report.options.get("domains") or []) or "(모든 분야)"])
         if report.options.get("related_domains"):
             rows.append(["관련 분야로 함께 봄", ", ".join(report.options["related_domains"])])
@@ -195,6 +222,8 @@ def build_blocks(report: Report) -> list:
     if "disjoint_axioms" in s:
         rows.append(["서로소 공리 수", str(s["disjoint_axioms"])])
     rows.append(["사용자가 끈 규칙", ", ".join(report.options.get("disabled") or []) or "(없음)"])
+    if report.options.get("ignore_names"):
+        rows.append(["건너뛴 이름 패턴", ", ".join(f"{x['pattern']}({x['count']}개)" for x in report.options["ignore_names"])])
     limit = _group_over(report)
     rows.append(["항목 묶기", f"같은 규칙의 항목이 {limit}개를 넘으면 한 항목으로 묶습니다" if limit else "묶지 않습니다"])
     b.append(("table", ["항목", "값"], rows))
@@ -203,7 +232,7 @@ def build_blocks(report: Report) -> list:
     summ = report.summary()
     rows = []
     for cat in _shown(report):
-        status = "실행" if _ran(report, cat) else "건너뜀"
+        status = registry_status(report) if cat == "registry" else ("실행" if _ran(report, cat) else "건너뜀")
         c = summ[cat]
         rows.append([CATEGORY_KO[cat], status] + [str(c[sev]) for sev in SEVERITIES])
     b.append(("table", ["검사 종류", "상태"] + [SEVERITY_KO[sv] for sv in SEVERITIES], rows))
@@ -244,6 +273,19 @@ def build_blocks(report: Report) -> list:
                                "다른 분야와만 맞는 것을 따로 묶습니다."))
             b.append(("p", "REG01 후보는 클래스만 냅니다. 등록부 용어는 대부분 개념이라, 객체·데이터 속성이 개념 용어와 "
                            "표기가 같으면 REG03으로 따로 적습니다. " + REG03_NOTE))
+            match = report.options.get("registry_match", "both")
+            if match in ("en", "both"):
+                b.append(("p", "영어 대조는 등록부 용어의 영어 표기(en)와 요소의 @en 레이블, 언어 태그 없는 레이블, 로컬 이름을 "
+                               "띄어 쓴 형태(ChemicalAccident는 chemical accident)를 대소문자를 무시하고 맞춥니다. "
+                               + ("한국어 대조가 먼저이고, 한국어로 아무것도 맞지 않은 요소만 영어로 맞춥니다. " if match == "both" else "")
+                               + "영어로 맞은 후보는 일치 신뢰도가 늘 낮음이고 「영어 이름으로 맞춤」으로 표시합니다. "
+                               "영어 대조는 REG03을 내지 않습니다."))
+            if s.get("registry_no_ko"):
+                b.append(("p", "이 온톨로지에는 @ko 레이블이 하나도 없습니다. 한국어 표기 대조에서 0건이 나온 것은 대조할 한국어 "
+                               "표기가 없었기 때문이며, 등록부에 맞는 용어가 없다는 뜻이 아닙니다."))
+            byl = s.get("registry_reg01_by_lang") or {}
+            if byl:
+                b.append(("p", f"REG01 후보는 한국어로 맞은 것 {byl.get('ko', 0)}건, 영어 이름으로 맞은 것 {byl.get('en', 0)}건입니다."))
             unknown = s.get("registry_unknown_domains") or []
             if unknown:
                 b.append(("p", "등록부에 없는 분야 id입니다: " + ", ".join(unknown) + "."))
@@ -269,8 +311,21 @@ def build_blocks(report: Report) -> list:
                 b.append(("table", head, [[SEVERITY_KO[f.severity], f.rule, f.target, f.message, f.fix] for f in fs]))
 
     b.append(("h2", f"{len(shown) + 3}. 이 보고서로 말할 수 없는 것"))
-    b.append(("ul", CANNOT_SAY + (CANNOT_SAY_CQ if report.cq else [])))
+    b.append(("ul", cannot_say(report)))
     return b
+
+
+IGNORE_NOTE = ("이름 패턴(--ignore-names)으로 뺀 요소는 명명·메타데이터 규칙에서 보지 않았습니다. 그 요소의 이름과 정의에 "
+               "문제가 없다는 뜻이 아닙니다.")
+
+
+def cannot_say(report: Report) -> list[str]:
+    out = list(CANNOT_SAY)
+    if report.options.get("ignore_names"):
+        out.append(IGNORE_NOTE)
+    if report.cq is not None:
+        out += CANNOT_SAY_CQ
+    return out
 
 
 def _shown(report: Report) -> list[str]:
@@ -290,13 +345,39 @@ def _cq_blocks(report: Report, b: list, n: int) -> None:
     limit = _group_over(report)
     b.append(("p", f"CQ(역량 질문) 파일 {cq['source']}의 질의가 온톨로지의 어느 요소에 닿는지 셉니다. "
                    f"질의 필드는 {cq['query_field']}입니다. 정보 검사이며 심각도가 없습니다."))
-    b.append(("p", "이름 맞추기 규칙은 이렇습니다. Cypher 관계 타입은 객체 속성의 @en 레이블과, 없으면 로컬 이름을 "
-                   "SCREAMING_SNAKE로 바꾼 이름과 맞춥니다. 노드 라벨은 클래스 로컬 이름이나 @en 레이블과 맞춥니다. "
-                   "속성 접근은 변수의 라벨 클래스에서 rdfs:subClassOf를 따라 올라가며 그 클래스가 주인인 데이터 속성"
-                   "(rdfs:domain 또는 「클래스_속성」 이름)을 찾습니다. 라벨이 없는 변수의 속성 접근은 「모호」로 따로 셉니다. "
-                   "labels(n)를 문자열 목록과 비교하는 꼴(l IN [...] 또는 'A' IN labels(n))은 목록 안의 이름을 n의 라벨로 읽고, "
-                   "CQ별 표에 「labels() 목록에서 읽음」으로 적습니다."))
-    rows = [["CQ 수", str(cq["total"])],
+    if cq.get("profile") == "ontoflow":
+        b.append(("p", "이름 맞추기는 ONTOFLOW 프로필입니다. 노드의 objectType 값(노드 맵 {objectType:'X'}와 WHERE v.objectType = 'X' "
+                       "또는 IN [...])을 <기준 IRI>X 클래스로, 관계 타입 T를 <기준 IRI>rel/T 객체 속성으로, 클래스 X 변수의 속성 접근 "
+                       "v.p를 <X의 IRI>/p 데이터 속성으로 맞춥니다. 속성은 rdfs:subClassOf를 따라 부모 클래스 IRI 아래에서도 찾습니다. "
+                       "기준 IRI는 틀의 {project}를 질의의 projectId(또는 check.projectId)로 채웁니다. 노드 라벨 Object와 속성 "
+                       "projectId, objectType은 운영 이름이라 세지 않습니다. NOT이 붙은 objectType·type() 비교는 읽지 않습니다. "
+                       "label-exists는 label을, project-object-count와 project-property-filled는 objectType(과 property)을, "
+                       "project-link-nonzero는 linkType을 닿는 요소로 셉니다."))
+    else:
+        b.append(("p", "이름 맞추기 규칙은 이렇습니다. Cypher 관계 타입은 객체 속성의 @en 레이블과, 없으면 로컬 이름을 "
+                       "SCREAMING_SNAKE로 바꾼 이름과 맞춥니다. 노드 라벨은 클래스 로컬 이름이나 @en 레이블과 맞춥니다. "
+                       "속성 접근은 변수의 라벨 클래스에서 rdfs:subClassOf를 따라 올라가며 그 클래스가 주인인 데이터 속성"
+                       "(rdfs:domain 또는 「클래스_속성」 이름)을 찾습니다. 라벨이 없는 변수의 속성 접근은 「모호」로 따로 셉니다. "
+                       "labels(n)를 문자열 목록과 비교하는 꼴(l IN [...] 또는 'A' IN labels(n))은 목록 안의 이름을 n의 라벨로 읽고, "
+                       "CQ별 표에 「labels() 목록에서 읽음」으로 적습니다."))
+    rows = []
+    if cq.get("format") == "ontoflow":
+        cat = cq.get("catalog") or {}
+        rows.append(["카탈로그 형식", "ONTOFLOW(items[].check)" + (f", 이름 {cat['name']}" if cat.get("name") else "")])
+        if cq.get("check_kinds"):
+            rows.append(["check 종류별 CQ 수", ", ".join(f"{k} {v}" for k, v in cq["check_kinds"].items())])
+    rows.append(["이름 맞추기 프로필", cq.get("profile", "default")])
+    if cq.get("profile") == "ontoflow":
+        rows.append(["기준 IRI 틀", cq.get("base_template") or "(온톨로지 IRI)"])
+        if cq.get("bases"):
+            rows.append(["쓴 기준 IRI", ", ".join(f"{k}: {v}" for k, v in cq["bases"].items())])
+        rule = cq.get("iri_rule") or {}
+        if rule:
+            f, t = rule["follows"], rule["total"]
+            rows.append(["ONTOFLOW IRI 규칙과 맞는 요소", f"클래스 {f['class']}/{t['class']}, 관계 {f['object_property']}/"
+                         f"{t['object_property']}, 데이터 속성 {f['data_property']}/{t['data_property']}"])
+    rows += [["CQ 수", str(cq["total"])],
+            ["수동 판정(check 없음)", str(len(cq.get("manual") or []))],
             ["파싱 성공", str(cq["parsed"])],
             ["파싱 실패", str(len(cq["failed"]))],
             ["닿는 요소가 없는 CQ", str(len(cq["no_touch"]))]]
@@ -316,6 +397,16 @@ def _cq_blocks(report: Report, b: list, n: int) -> None:
                        "하나뿐인 경우입니다. 질의가 그 속성을 뜻했을 가능성이 높지만 라벨로 확인되지 않았으므로 "
                        "「닿음」에 넣지 않았습니다. CQ별 표의 「후보 1개」 표시를 보고 사람이 판단합니다. 질의에 라벨을 "
                        "붙이면 「닿음」으로 셉니다."))
+    if cq.get("profile_hint"):
+        b.append(("p", cq["profile_hint"]))
+    rule = cq.get("iri_rule") or {}
+    if rule and not rule.get("ok"):
+        bad = [x for k in KINDS for x in rule["mismatch"][k]]
+        b.append(("p", "ONTOFLOW IRI 규칙(<기준>클래스, <기준>rel/관계, <클래스 IRI>/속성)과 맞지 않는 요소가 있습니다. 이 요소는 "
+                       "ONTOFLOW 프로필로 맞출 수 없습니다: " + _ids(bad, 8) + "."))
+    if cq.get("manual"):
+        b.append(("p", "check가 없어 수동으로 판정하는 CQ는 커버리지 계산에서 뺐습니다: "
+                       + _ids([x["id"] for x in cq["manual"]]) + "."))
     b.append(("p", NOT_FIT_NOTE))
 
     def table(title, head, rws):
@@ -453,7 +544,8 @@ def to_dict(report: Report) -> dict:
         "triples": report.triples,
         "stats": report.stats,
         "summary": {
-            cat: {"name": CATEGORY_KO[cat], "status": "ran" if _ran(report, cat) else "skipped", **report.summary()[cat]}
+            cat: {"name": CATEGORY_KO[cat], "status": "ran" if _ran(report, cat) else "skipped", **report.summary()[cat],
+                  **({"note": registry_status(report)} if cat == "registry" and report.stats.get("registry_no_ko") else {})}
             for cat in CATEGORIES
             if cat != "cq" or report.cq is not None
         },
@@ -461,7 +553,7 @@ def to_dict(report: Report) -> dict:
         "rules": {k: v for k, v in RULE_TITLES.items()},
         "findings": [f.to_dict() for f in report.findings],
         "grouped": grouped_summary(report),
-        "cannot_say": CANNOT_SAY + (CANNOT_SAY_CQ if report.cq else []),
+        "cannot_say": cannot_say(report),
         **({"cq": report.cq} if report.cq is not None else {}),
     }
 

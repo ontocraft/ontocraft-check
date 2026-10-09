@@ -1,10 +1,18 @@
 // ontocraft-check 브라우저 실행기(Web Worker). 파일은 브라우저 밖으로 나가지 않습니다.
 // 쓰는 쪽: new Worker("ontocraft-check-worker.js")
 //   postMessage({ontology, data, shapes, registry, wheel, domains, disable, group_over, strict_domains,
-//                cq, cq_query_field, cq_allow_labels, cq_allow_relations})
+//                cq, cq_query_field, cq_allow_labels, cq_allow_relations,
+//                ignore_names, registry_match, cq_format, cq_profile, cq_base})
 //   → 진행 중 {stage: "running"}, 끝나면 {ok: true, json, html} 또는 {ok: false, error}
 // ontology·data·shapes 는 파일 내용(문자열)과 이름 {name, text}, registry 는 {파일이름: 내용} 객체입니다.
 //
+// 0.7.0: 선택 필드 다섯 개를 더했습니다. 모두 값을 줄 때만 run() 에 넘기므로 0.6 wheel 과 이전 화면도 그대로 돕니다.
+//   ignore_names: 명명·메타데이터 규칙(P08, P22 등)에서 뺄 이름 glob 배열(예: ["ActionLog_*"]).
+//   registry_match: "ko" | "en" | "both"(기본). 영어 이름으로 맞은 등록부 후보는 detail.match_lang "en", 신뢰도 "낮음" 입니다.
+//   cq_format: "auto"(기본) | "default" | "ontoflow". cq_profile: "default"(기본) | "ontoflow".
+//   cq_base: ontoflow 프로필의 기준 IRI 틀(예: "https://ontocraft.com/ontology/{project}/").
+//   json.options 에 ignore_names(패턴별 건수), registry_match 가 늘고, json.cq 에 format, profile, manual, iri_rule 이 늡니다.
+//   wheel 은 ontocraft_check-0.7.0-py3-none-any.whl 입니다.
 // 0.6.0: CQ 커버리지를 받습니다. cq 는 CQ JSON 파일 {name, text}(최상위 items[]: id, q, cypher 또는 sparql),
 //   cq_query_field 는 질의 필드 이름(문자열), cq_allow_labels·cq_allow_relations 는 문자열 배열입니다.
 //   값을 줄 때만 run() 에 넘기므로, 이 필드를 쓰지 않는 화면과 0.5 wheel 도 그대로 돕니다.
@@ -43,6 +51,7 @@ async function boot(wheel) {
   return py;
 }
 const ids = (v) => (Array.isArray(v) ? v.map(String).filter((x) => x) : []);
+const str = (v) => (typeof v === "string" && v ? v : null);
 self.onmessage = async (e) => {
   const m = e.data;
   try {
@@ -68,7 +77,9 @@ self.onmessage = async (e) => {
     const strict = m.strict_domains === true ? true : null;  // 거짓이나 없음이면 넘기지 않습니다(기본값과 같음)
     py.globals.set("args", py.toPy({ o, d, s, reg, domains: ids(m.domains), disable: ids(m.disable), group_over: groupOver, strict_domains: strict,
       cq, cq_query_field: typeof m.cq_query_field === "string" && m.cq_query_field ? m.cq_query_field : null,
-      cq_allow_labels: ids(m.cq_allow_labels), cq_allow_relations: ids(m.cq_allow_relations) }));
+      cq_allow_labels: ids(m.cq_allow_labels), cq_allow_relations: ids(m.cq_allow_relations),
+      ignore_names: ids(m.ignore_names), registry_match: str(m.registry_match), cq_format: str(m.cq_format),
+      cq_profile: str(m.cq_profile), cq_base: str(m.cq_base) }));
     const out = py.runPython(`
 from ontocraft_check.runner import run
 from ontocraft_check.render import render
@@ -76,6 +87,8 @@ from ontocraft_check.render import render
 kw = {k: args[k] for k in ("domains", "disable", "group_over", "strict_domains") if args[k] is not None and args[k] != []}  # group_over=0(묶지 않음)도 넘김
 # 0.6: CQ 선택지도 값을 줄 때만 넘깁니다.
 kw.update({k: args[k] for k in ("cq", "cq_query_field", "cq_allow_labels", "cq_allow_relations") if args[k] is not None and args[k] != []})
+# 0.7: 이름 패턴, 등록부 대조 방식, ONTOFLOW CQ 선택지도 값을 줄 때만 넘깁니다.
+kw.update({k: args[k] for k in ("ignore_names", "registry_match", "cq_format", "cq_profile", "cq_base") if args[k] is not None and args[k] != []})
 r = run(args["o"], data=args["d"], shapes=args["s"], registry_dir=args["reg"], **kw)
 [render(r, "json"), render(r, "html")]
 `).toJs();

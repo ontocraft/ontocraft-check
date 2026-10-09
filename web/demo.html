@@ -13,6 +13,10 @@
 <label>CQ(역량 질문) JSON(선택, 0.6.0 이상) <input type="file" id="cq" accept=".json"></label>
 <label>CQ 허용 라벨(선택, 쉼표로 구분) <input type="text" id="cqLabels" placeholder="KG_*,Concept"></label>
 <label>CQ 허용 관계(선택, 쉼표로 구분) <input type="text" id="cqRels" placeholder="BROADER,HAS_LEGAL_BASIS"></label>
+<label>CQ 이름 대응(0.7.0 이상) <select id="cqProfile"><option value="">기본(라벨·영어 레이블)</option><option value="ontoflow">ONTOFLOW(objectType·rel/·클래스/속성)</option></select></label>
+<label>ONTOFLOW 기준 IRI 틀(선택) <input type="text" id="cqBase" placeholder="https://ontocraft.com/ontology/{project}/" style="width:28em"></label>
+<label>등록부 대조 방식(0.7.0 이상) <select id="regMatch"><option value="">한국어 먼저, 맞지 않으면 영어(기본)</option><option value="ko">한국어만</option><option value="en">영어 이름만</option></select></label>
+<label>명명 규칙에서 뺄 이름(선택, 쉼표로 구분, 0.7.0 이상) <input type="text" id="ignoreNames" placeholder="ActionLog_*"></label>
 <label><input type="checkbox" id="strict"> 고른 분야만 보기(관련 분야를 더하지 않음, 0.4.0 이상)</label>
 <label><input type="checkbox" id="offP13"> P13 끄기(역관계 없음. 속성 그래프 기반 설계에서는 역관계를 일부러 두지 않는 경우가 흔합니다)</label>
 <label>같은 규칙 항목 묶기 기준 <input type="number" id="group" min="0" value="10" style="width:5em"> 개를 넘으면 묶음(0이면 묶지 않음)</label>
@@ -20,7 +24,7 @@
 <pre id="out" hidden></pre>
 <div id="report"></div>
 <script>
-const WHEEL = "ontocraft_check-0.6.0-py3-none-any.whl";
+const WHEEL = "ontocraft_check-0.7.0-py3-none-any.whl";
 const SKIP = new Set(["domains.json", "candidates.json", "manifest.json"]);  // 분야 파일이 아닙니다(ontocraft-check 도 대조에 쓰지 않습니다)
 const worker = new Worker("ontocraft-check-worker.js");
 const st = document.getElementById("status");
@@ -65,6 +69,11 @@ function options() {
   const list = (id) => document.getElementById(id).value.split(",").map((x) => x.trim()).filter((x) => x);
   if (list("cqLabels").length) out.cq_allow_labels = list("cqLabels");
   if (list("cqRels").length) out.cq_allow_relations = list("cqRels");
+  if (list("ignoreNames").length) out.ignore_names = list("ignoreNames");  // 0.7: 값을 줄 때만 보냅니다
+  for (const [id, key] of [["cqProfile", "cq_profile"], ["cqBase", "cq_base"], ["regMatch", "registry_match"]]) {
+    const v = document.getElementById(id).value.trim();
+    if (v) out[key] = v;
+  }
   return out;
 }
 async function check(ontology, data, shapes) {

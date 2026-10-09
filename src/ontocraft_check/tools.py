@@ -93,19 +93,33 @@ def summarize(report) -> dict:
         "skipped": [{"category": CATEGORY_KO[k.category], "check": k.name, "reason": k.reason} for k in report.skipped],
         "cannot_say": CANNOT_SAY,
     }
+    if report.options.get("ignore_names"):
+        out["ignored_names"] = {"patterns": report.options["ignore_names"], "total": report.options.get("ignored_total", 0),
+                                "rules": report.options.get("ignore_name_rules", [])}
+    if "registry" in ran:
+        out["registry_match"] = report.options.get("registry_match", "both")
+        if report.stats.get("registry_no_ko"):
+            out["registry_note"] = ("대조할 한국어 표기가 없습니다(@ko 레이블 0개). 한국어 대조 0건은 맞는 용어가 없다는 뜻이 "
+                                    "아닙니다.")
     if reg:
         out["registry_candidates"] = {
             "REG01": sum(1 for f in reg if f.rule == "REG01"),
             "REG02": sum(1 for f in reg if f.rule == "REG02"),
             "REG03": sum(1 for f in reg if f.rule == "REG03"),
+            "REG01_by_english_name": sum(1 for f in reg if f.rule == "REG01" and f.detail.get("match_lang") == "en"),
             "examples": [{"target": f.target, "term_iri": f.detail.get("term_iri"),
-                          "confidence": f.detail.get("confidence")} for f in reg if f.rule == "REG01"][:10],
+                          "confidence": f.detail.get("confidence"),
+                          **({"match_note": "영어 이름으로 맞춤"} if f.detail.get("match_lang") == "en" else {})}
+                         for f in reg if f.rule == "REG01"][:10],
             "note": "표기만 같은 후보입니다. get_term 으로 정의를 읽고 뜻이 같을 때만 skos:exactMatch 를 더합니다.",
         }
     if report.cq is not None:
         cq = report.cq
         out["cq_coverage"] = {
             "cq": cq["total"],
+            "format": cq.get("format"),
+            "profile": cq.get("profile"),
+            "manual": [x["id"] for x in cq.get("manual") or []],
             "parsed": cq["parsed"],
             "failed": [x["id"] for x in cq["failed"]],
             "coverage": {k: {"touched": v["touched"], "total": v["total"], "ambiguous_only": v["ambiguous_only"]}
@@ -115,6 +129,7 @@ def summarize(report) -> dict:
             "labels_from_list_cq": [x["cq"] for x in cq["labels_from_list"]],
             "CQ01": len(cq["unresolved"]),
             "CQ01_examples": [{"kind": x["kind"], "name": x["name"], "cq": x["cq"][:5]} for x in cq["unresolved"][:10]],
+            **({"iri_rule": {k: cq["iri_rule"][k] for k in ("follows", "total", "ok")}} if cq.get("iri_rule") else {}),
             "notes": cq["notes"],
             "more": "요소별 표, CQ별 표, 닿지 않는 요소 목록은 format=json 의 cq 나 format=markdown 에 있습니다.",
         }
@@ -138,6 +153,11 @@ def check_ontology(
     cq_query_field: str | None = None,
     cq_allow_labels: list[str] | None = None,
     cq_allow_relations: list[str] | None = None,
+    ignore_names: list[str] | None = None,
+    registry_match: str = "both",
+    cq_format: str | None = None,
+    cq_profile: str | None = None,
+    cq_base: str | None = None,
 ) -> dict | str:
     """온톨로지를 검사합니다. ontology·data·shapes 는 파일 경로나 본문 문자열입니다.
 
@@ -145,6 +165,9 @@ def check_ontology(
     use_registry 가 참이면 내장 용어 등록부와 대조합니다.
     domains 에는 관련 분야를 한 단계 더해 봅니다. strict_domains 가 참이면 더하지 않습니다.
     cq 는 CQ JSON 파일 경로나 JSON 본문입니다. 주면 CQ 커버리지를 냅니다(summary 에 cq_coverage).
+    ignore_names 는 명명·메타데이터 규칙에서 뺄 이름 glob 목록입니다(예: ["ActionLog_*"]).
+    registry_match 는 ko·en·both(기본) 입니다. cq_format(auto·default·ontoflow), cq_profile(default·ontoflow),
+    cq_base(예: https://ontocraft.com/ontology/{project}/)는 ONTOFLOW CQ 카탈로그를 읽을 때 씁니다.
     """
     if format not in FORMATS:
         raise InputError(f"format 은 {', '.join(FORMATS)} 가운데 하나입니다: {format}")
@@ -164,7 +187,9 @@ def check_ontology(
                      registry_dir="builtin" if use_registry else None,
                      domains=domains or None, disable=disable or None, strict_domains=strict_domains,
                      cq=c_path, cq_query_field=cq_query_field or None,
-                     cq_allow_labels=cq_allow_labels or None, cq_allow_relations=cq_allow_relations or None)
+                     cq_allow_labels=cq_allow_labels or None, cq_allow_relations=cq_allow_relations or None,
+                     ignore_names=ignore_names or None, registry_match=registry_match or "both",
+                     cq_format=cq_format or None, cq_profile=cq_profile or None, cq_base=cq_base or None)
     report.source = o_label
     report.inputs.update({"ontology": o_label, "data": d_label, "shapes": s_label})
     if report.cq is not None:

@@ -8,6 +8,9 @@ SEVERITIES = ("critical", "important", "minor", "info")
 SEVERITY_KO = {"critical": "치명", "important": "중요", "minor": "경미", "info": "정보"}
 SEVERITY_RANK = {"critical": 3, "important": 2, "minor": 1, "info": 0}
 
+# 0.7: --ignore-names 로 맞은 요소를 빼는 명명·메타데이터 규칙입니다. 논리·SHACL·구조 규칙에는 쓰지 않습니다.
+IGNORE_NAME_RULES = ("P08", "P22", "P32", "LBL01", "LBL02", "META02", "META03", "META04")
+
 CATEGORIES = ("pitfall", "metadata", "logic", "shacl", "registry", "cq")
 CATEGORY_KO = {
     "pitfall": "모델링 함정",

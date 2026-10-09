@@ -210,7 +210,7 @@ def strongly_connected(edges: dict) -> list:
 
 def _p08(inv: Inventory, report: Report) -> None:
     g = inv.graph
-    for e in sorted(inv.entities, key=str):
+    for e in sorted(inv.entities - inv.ignored, key=str):
         if (e, RDFS.label, None) not in g:
             continue  # 레이블이 없는 경우는 메타데이터 검사가 따로 잡습니다
         if (e, RDFS.comment, None) in g or (e, SKOS.definition, None) in g:
@@ -301,7 +301,7 @@ def name_style(name: str) -> str:
 
 def _p22(inv: Inventory, report: Report) -> None:
     styles = {}
-    for c in inv.classes:
+    for c in inv.classes - inv.ignored:
         if inv.own_ns and not inv.is_own(str(c)):
             continue
         styles[c] = name_style(local_name(str(c)))
@@ -327,7 +327,7 @@ def _p22(inv: Inventory, report: Report) -> None:
 def _p32(inv: Inventory, report: Report) -> None:
     g = inv.graph
     groups = defaultdict(set)
-    for c in inv.classes:
+    for c in inv.classes - inv.ignored:
         for lit in g.objects(c, RDFS.label):
             if isinstance(lit, Literal):
                 groups[(str(lit).strip(), (lit.language or "").lower())].add(c)
@@ -403,7 +403,7 @@ def _lbl(inv: Inventory, report: Report) -> None:
     """
     g = inv.graph
     groups = defaultdict(set)
-    for x in inv.classes | inv.object_props | inv.data_props | inv.annotation_props:
+    for x in (inv.classes | inv.object_props | inv.data_props | inv.annotation_props) - inv.ignored:
         for lit in g.objects(x, RDFS.label):
             if isinstance(lit, Literal):
                 text = norm_label(lit)

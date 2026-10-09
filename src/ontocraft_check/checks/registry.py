@@ -17,14 +17,16 @@ skos:exactMatch 후보를 제안합니다. 심각도가 없는 정보 항목입�
 from __future__ import annotations
 
 import json
+import re
 import unicodedata
 from collections import defaultdict
 from pathlib import Path
 
 
+from rdflib import Literal
 from rdflib.namespace import RDFS, SKOS
 
-from ..graph import Inventory, has_lang, local_name
+from ..graph import Inventory, has_lang, local_name, split_name
 from ..model import Finding, Report
 from ..related import default_related
 
@@ -189,13 +191,66 @@ def _kind_ko(inv: Inventory, e) -> str:
     return "속성"
 
 
+def norm_en(s: str) -> str:
+    """영어 대조용 정규화입니다. 대소문자를 무시하고 _·- 와 연속 공백을 한 칸으로 줄입니다."""
+    s = unicodedata.normalize("NFC", str(s)).casefold()
+    return " ".join(re.sub(r"[_\-]+", " ", s).split())
+
+
+def load_registry_en(folder: str | Path) -> dict:
+    """정규화한 영어 표기(en) -> [항목] 사전입니다. 항목 모양은 load_registry 와 같고 맞은 필드는 en 입니다."""
+    index: dict = defaultdict(list)
+    for p, data in _read_files(Path(folder)):
+        base = data.get("base_uri") or DEFAULT_BASE
+        domain, domain_name = _domain_of(p, data)
+        for t in data["terms"]:
+            if not isinstance(t, dict) or not t.get("id") or t.get("status") not in (None, "active"):
+                continue
+            en = t.get("en")
+            if not isinstance(en, str) or not norm_en(en):
+                continue
+            kind = t.get("kind") if t.get("kind") in ({"class"} | PROPERTY_KINDS) else None
+            item = (t["id"], base + t["id"], domain, "en", t.get("ko") or "", domain_name, kind, en)
+            if not any(x[1] == item[1] for x in index[norm_en(en)]):
+                index[norm_en(en)].append(item)
+    return index
+
+
+def en_keys(inv: Inventory, e) -> list[tuple[str, str]]:
+    """영어 대조에 쓸 (표기, 출처) 목록입니다. @en 레이블, 언어 태그 없는 레이블, 로컬 이름을 띄어 쓴 형태 순입니다."""
+    g = inv.graph
+    out, seen = [], set()
+    labels = [x for x in g.objects(e, RDFS.label) if isinstance(x, Literal)]
+    cands = ([(str(x), "@en 레이블") for x in labels if has_lang(x, "en")]
+             + [(str(x), "언어 태그 없는 레이블") for x in labels if not x.language]
+             + [(split_name(local_name(str(e))), "로컬 이름")])
+    for text, source in cands:
+        key = norm_en(split_name(text))
+        if key and key not in seen:
+            seen.add(key)
+            out.append((text.strip(), source, key))
+    return out
+
+
+MATCH_MODES = ("ko", "en", "both")
+EN_NOTE = ("영어 이름으로 맞춘 후보입니다. 영어 낱말은 뜻이 넓어(Item, Link, Status 같은 이름) 다른 개념과 겹치기 쉬우니 "
+           "정의를 꼭 읽습니다.")
+NO_KO_REASON = ("대조할 한국어 표기가 없습니다(@ko 레이블 0개). 등록부와 맞는 용어가 없다는 뜻이 아닙니다. "
+                "한국어 표제어와는 로컬 이름으로만 맞춰 봤습니다.")
+
+
 def check(inv: Inventory, folder: str | None, report: Report, domains: list[str] | None = None,
-          related: list[str] | None = None) -> None:
+          related: list[str] | None = None, match: str = "both") -> None:
     """domains(와 related)를 주면 그 분야 용어만 후보로 내고, 다른 분야와만 맞는 것은 REG02 로 냅니다.
 
     related 는 runner 가 관련 분야로 더한 분야 id 입니다. 후보를 고를 때는 domains 와 똑같이 봅니다.
     클래스만 REG01 로 냅니다. 속성이 개념 용어(kind 없음이나 class)와 같으면 REG03 입니다.
     용어에 kind 가 property·relation 이면 속성끼리 REG01 로 맞추고, 클래스와는 맞추지 않습니다.
+
+    0.7: match 는 ko(@ko 레이블, 없으면 로컬 이름), en(영어 이름), both(기본) 입니다. both 는 한국어 대조를 먼저 하고,
+    한국어로 아무것도 맞지 않은 요소만 영어로 맞춥니다. 영어 대조는 등록부 용어의 en 과 요소의 @en 레이블,
+    언어 태그 없는 레이블, 로컬 이름을 띄어 쓴 형태를 대소문자를 무시하고 맞춥니다. 신뢰도는 늘 낮음이고,
+    REG03(속성과 개념 용어)은 내지 않습니다(name·status 같은 일반 영어 낱말이 겹쳐 잡음이 많음).
     """
     if not folder:
         report.skip(CAT, "용어 등록부 대조", "--registry가 주어지지 않았습니다.")
@@ -207,21 +262,27 @@ def check(inv: Inventory, folder: str | None, report: Report, domains: list[str]
     if not files:
         report.skip(CAT, "용어 등록부 대조", f"읽을 수 있는 등록부 파일이 없습니다: {folder}")
         return
+    match = match if match in MATCH_MODES else "both"
+    use_ko = match in ("ko", "both")
+    use_en = match in ("en", "both")
+    en_index = load_registry_en(folder) if use_en else {}
     known = {d["id"]: d["name"] for d in list_domains(folder)}
     picked = set(domains or [])
     chosen = picked | set(related or [])
     g = inv.graph
     kind_skipped = 0
-    for e in sorted(inv.entities, key=str):
-        is_class = e in inv.classes
-        ko = [str(l) for l in g.objects(e, RDFS.label) if has_lang(l, "ko")]
-        keys = ko if ko else [local_name(str(e))]
-        source = "@ko 레이블" if ko else "로컬 이름"
-        existing = {str(o) for o in g.objects(e, SKOS.exactMatch)}
+    ko_labelled = sum(1 for e in inv.entities if any(has_lang(l, "ko") for l in g.objects(e, RDFS.label)))
+    counts = {"ko": 0, "en": 0}
+
+    def classify(e, is_class, keyed, idx, existing, lang):
+        nonlocal kind_skipped
         inside, outside, concept = [], [], []
-        for key in keys:
-            for item in index.get(norm(key), []):
+        seen = set()
+        for key, source, nkey in keyed:
+            for item in idx.get(nkey, []):
                 if item[1] in existing:
+                    continue
+                if lang == "en" and item[1] in seen:
                     continue
                 in_scope = not chosen or item[2] in chosen
                 term_is_prop = item[6] in PROPERTY_KINDS
@@ -229,55 +290,39 @@ def check(inv: Inventory, folder: str | None, report: Report, domains: list[str]
                     kind_skipped += 1  # 관계 용어와 클래스는 맞추지 않습니다
                     continue
                 if not is_class and not term_is_prop:
-                    if in_scope:
-                        concept.append((key, item))  # 속성과 개념 용어: REG03
+                    if in_scope and lang == "ko":
+                        concept.append((key, source, item))  # 속성과 개념 용어: REG03
                     continue
-                (inside if in_scope else outside).append((key, item))
-        for key, (term_id, iri, domain, fld, term_ko, dname, tkind) in inside:
-            conf = CONFIDENCE_HIGH if fld == "ko" else CONFIDENCE_LOW
-            how = "표제어(ko)" if fld == "ko" else "동의어(alt)"
-            msg = (f"skos:exactMatch 후보: {iri} ({source} 「{key}」{josa_iga(key)} 등록부 {domain}({dname}) 분야 용어 "
-                   f"「{term_ko}」의 {how}와 같습니다). 일치 신뢰도는 {conf}입니다.")
-            if conf == CONFIDENCE_LOW:
-                msg += " " + LOW_NOTE
-            detail = {"term_id": term_id, "term_iri": iri, "domain": domain, "domain_name": dname,
-                      "matched_field": fld, "matched_text": key, "confidence": conf}
-            if tkind:
-                detail["term_kind"] = tkind
-            if domain in chosen - picked:
-                detail["via_related"] = True
-            report.add(Finding(
-                CAT, "REG01", "info", str(e), msg,
-                f"뜻이 같은지 정의를 읽고 확인한 뒤 <{e}> skos:exactMatch <{iri}>를 더합니다. 표기만 같고 뜻이 다르면 넣지 않습니다.",
-                detail,
-            ))
-        for key, (term_id, iri, domain, fld, term_ko, dname, tkind) in concept:
-            what = _kind_ko(inv, e)
-            report.add(Finding(
-                CAT, "REG03", "info", str(e),
-                f"속성 이름이 개념 용어와 같습니다: {what}의 {source} 「{key}」{josa_iga(key)} 등록부 {domain}({dname}) 분야 "
-                f"개념 용어 「{term_ko}」{josa_wagwa(term_ko)} 표기가 같습니다({iri}). {REG03_ADVICE}",
-                f"속성 이름을 「~에 입항함」, 「~의 지휘를 받음」처럼 동사구로 바꿉니다. 「{term_ko}」 개념과의 skos:exactMatch는 "
-                "이 속성의 rdfs:range 클래스에 둡니다. 속성 자체에는 넣지 않습니다.",
-                {"term_id": term_id, "term_iri": iri, "domain": domain, "domain_name": dname,
-                 "matched_field": fld, "matched_text": key, "entity_kind": what,
-                 **({"term_kind": tkind} if tkind else {})},
-            ))
-        if inside:
-            continue  # 고른 분야에 후보가 있으면 다른 분야의 같은 이름은 싣지 않습니다
-        for key, (term_id, iri, domain, fld, term_ko, dname, tkind) in outside:
-            conf = CONFIDENCE_HIGH if fld == "ko" else CONFIDENCE_LOW
-            report.add(Finding(
-                CAT, "REG02", "info", str(e),
-                f"다른 분야에서 같은 이름이 있습니다(뜻이 다를 수 있음): {source} 「{key}」{josa_iga(key)} 고르지 않은 "
-                f"{domain}({dname}) 분야 용어 「{term_ko}」{josa_wagwa(term_ko)} 표기만 같습니다({iri}).",
-                "고른 분야의 개념이 맞다면 넣지 않습니다. 그 분야의 개념을 뜻한 것이 맞을 때만 정의를 읽고 skos:exactMatch를 검토합니다.",
-                {"term_id": term_id, "term_iri": iri, "domain": domain, "domain_name": dname,
-                 "matched_field": fld, "matched_text": key, "confidence": conf},
-            ))
+                seen.add(item[1])
+                (inside if in_scope else outside).append((key, source, item))
+        return inside, outside, concept
+
+    for e in sorted(inv.entities, key=str):
+        is_class = e in inv.classes
+        existing = {str(o) for o in g.objects(e, SKOS.exactMatch)}
+        ko_hit = False
+        if use_ko:
+            ko = [str(l) for l in g.objects(e, RDFS.label) if has_lang(l, "ko")]
+            source = "@ko 레이블" if ko else "로컬 이름"
+            keyed = [(k, source, norm(k)) for k in (ko if ko else [local_name(str(e))])]
+            inside, outside, concept = classify(e, is_class, keyed, index, existing, "ko")
+            ko_hit = bool(inside or outside or concept)
+            counts["ko"] += len(inside)
+            _emit(report, inv, e, inside, outside, concept, chosen, picked, lang="ko")
+        if use_en and not ko_hit:
+            inside, outside, _ = classify(e, is_class, en_keys(inv, e), en_index, existing, "en")
+            counts["en"] += len(inside)
+            _emit(report, inv, e, inside, outside, [], chosen, picked, lang="en")
     report.stats["registry_files"] = files
     report.stats["registry_keys"] = len(index)
     report.stats["registry_domains"] = [{"id": k, "name": v} for k, v in known.items()]
+    report.stats["registry_match"] = match
+    report.stats["registry_ko_labels"] = ko_labelled
+    report.stats["registry_reg01_by_lang"] = counts
+    if use_ko and ko_labelled == 0:
+        report.stats["registry_no_ko"] = True
+        report.skip(CAT, "한국어 표기 대조", NO_KO_REASON + (" 영어 이름 대조는 따로 했습니다." if use_en else
+                                                          " 영어 이름 대조를 하려면 --registry-match en이나 both를 줍니다."))
     if kind_skipped:
         report.stats["registry_kind_skipped"] = kind_skipped
     if picked:
@@ -288,3 +333,69 @@ def check(inv: Inventory, folder: str | None, report: Report, domains: list[str]
     if related:
         report.stats["registry_related_domains"] = sorted(related)
     report.ran.append("registry")
+
+
+def _emit(report: Report, inv: Inventory, e, inside, outside, concept, chosen, picked, lang: str) -> None:
+    by_en = lang == "en"
+    for key, source, item in inside:
+        term_id, iri, domain, fld, term_ko, dname, tkind = item[:7]
+        if by_en:
+            conf = CONFIDENCE_LOW
+            msg = (f"skos:exactMatch 후보(영어 이름으로 맞춤): {iri} ({source} 「{key}」{josa_iga(key)} 등록부 {domain}({dname}) "
+                   f"분야 용어 「{term_ko}」의 영어 표기(en) 「{item[7]}」와 대소문자를 빼고 같습니다). 일치 신뢰도는 {conf}입니다. "
+                   + EN_NOTE)
+        else:
+            conf = CONFIDENCE_HIGH if fld == "ko" else CONFIDENCE_LOW
+            how = "표제어(ko)" if fld == "ko" else "동의어(alt)"
+            msg = (f"skos:exactMatch 후보: {iri} ({source} 「{key}」{josa_iga(key)} 등록부 {domain}({dname}) 분야 용어 "
+                   f"「{term_ko}」의 {how}와 같습니다). 일치 신뢰도는 {conf}입니다.")
+            if conf == CONFIDENCE_LOW:
+                msg += " " + LOW_NOTE
+        detail = {"term_id": term_id, "term_iri": iri, "domain": domain, "domain_name": dname,
+                  "matched_field": fld, "matched_text": key, "confidence": conf}
+        if by_en:
+            detail.update({"match_lang": "en", "match_note": "영어 이름으로 맞춤", "matched_source": source,
+                           "term_en": item[7]})
+        if tkind:
+            detail["term_kind"] = tkind
+        if domain in chosen - picked:
+            detail["via_related"] = True
+        report.add(Finding(
+            CAT, "REG01", "info", str(e), msg,
+            f"뜻이 같은지 정의를 읽고 확인한 뒤 <{e}> skos:exactMatch <{iri}>를 더합니다. 표기만 같고 뜻이 다르면 넣지 않습니다.",
+            detail,
+        ))
+    for key, source, item in concept:
+        term_id, iri, domain, fld, term_ko, dname, tkind = item[:7]
+        what = _kind_ko(inv, e)
+        report.add(Finding(
+            CAT, "REG03", "info", str(e),
+            f"속성 이름이 개념 용어와 같습니다: {what}의 {source} 「{key}」{josa_iga(key)} 등록부 {domain}({dname}) 분야 "
+            f"개념 용어 「{term_ko}」{josa_wagwa(term_ko)} 표기가 같습니다({iri}). {REG03_ADVICE}",
+            f"속성 이름을 「~에 입항함」, 「~의 지휘를 받음」처럼 동사구로 바꿉니다. 「{term_ko}」 개념과의 skos:exactMatch는 "
+            "이 속성의 rdfs:range 클래스에 둡니다. 속성 자체에는 넣지 않습니다.",
+            {"term_id": term_id, "term_iri": iri, "domain": domain, "domain_name": dname,
+             "matched_field": fld, "matched_text": key, "entity_kind": what,
+             **({"term_kind": tkind} if tkind else {})},
+        ))
+    if inside:
+        return  # 고른 분야에 후보가 있으면 다른 분야의 같은 이름은 싣지 않습니다
+    for key, source, item in outside:
+        term_id, iri, domain, fld, term_ko, dname, tkind = item[:7]
+        conf = CONFIDENCE_LOW if by_en else (CONFIDENCE_HIGH if fld == "ko" else CONFIDENCE_LOW)
+        tail = f"영어 표기(en) 「{item[7]}」" if by_en else f"용어 「{term_ko}」"
+        detail = {"term_id": term_id, "term_iri": iri, "domain": domain, "domain_name": dname,
+                  "matched_field": fld, "matched_text": key, "confidence": conf}
+        if by_en:
+            detail.update({"match_lang": "en", "match_note": "영어 이름으로 맞춤", "matched_source": source,
+                           "term_en": item[7]})
+        report.add(Finding(
+            CAT, "REG02", "info", str(e),
+            f"다른 분야에서 같은 이름이 있습니다(뜻이 다를 수 있음{', 영어 이름으로 맞춤' if by_en else ''}): {source} "
+            f"「{key}」{josa_iga(key)} 고르지 않은 {domain}({dname}) 분야 「{term_ko}」의 {tail}{josa_wagwa(tail)} "
+            f"표기만 같습니다({iri})." if by_en else
+            f"다른 분야에서 같은 이름이 있습니다(뜻이 다를 수 있음): {source} 「{key}」{josa_iga(key)} 고르지 않은 "
+            f"{domain}({dname}) 분야 용어 「{term_ko}」{josa_wagwa(term_ko)} 표기만 같습니다({iri}).",
+            "고른 분야의 개념이 맞다면 넣지 않습니다. 그 분야의 개념을 뜻한 것이 맞을 때만 정의를 읽고 skos:exactMatch를 검토합니다.",
+            detail,
+        ))

@@ -24,7 +24,8 @@ def check(inv: Inventory, report: Report) -> None:
             ))
 
     no_label, no_ko, no_en = [], [], []
-    for e in sorted(inv.entities, key=str):
+    entities = inv.entities - inv.ignored  # 0.7: --ignore-names 로 뺀 요소는 레이블 규칙에서도 뺍니다
+    for e in sorted(entities, key=str):
         labels = list(g.objects(e, RDFS.label))
         if not labels:
             no_label.append(e)
@@ -41,7 +42,7 @@ def check(inv: Inventory, report: Report) -> None:
             f"{kind}에 rdfs:label이 하나도 없습니다. 화면과 보고서에 IRI가 그대로 드러납니다.",
             "rdfs:label을 한국어(@ko)와 영어(@en)로 붙입니다.",
         ))
-    total = len(inv.entities) - len(no_label)
+    total = len(entities) - len(no_label)
     for rule, lang, items, why in (
         ("META02", "ko", no_ko, "한국 사용자가 쓰는 화면에서 영어나 IRI가 보입니다."),
         ("META03", "en", no_en, "해외 도구나 외부 공개 때 레이블이 비어 보입니다."),

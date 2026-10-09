@@ -1,0 +1,33 @@
+{
+  "name": "시험용 ONTOFLOW CQ 카탈로그",
+  "description": "이 저장소에서 새로 쓴 시험용 카탈로그입니다. 질의는 projectId='demo' 에 대한 Cypher 입니다.",
+  "domain": "maritime",
+  "source": "ontocraft-check tests",
+  "items": [
+    {"id": "D-1", "group": "구조", "question": "유조선이 다녀온 항차가 들른 항구는 몇 곳인가?",
+     "check": {"kind": "cypher-nonzero",
+               "cypher": "MATCH (t:Object {projectId:'demo', objectType:'Tanker'})-[:SAILED]->(v:Object {projectId:'demo', objectType:'Voyage'})-[:CALLED_AT]->(h:Object {projectId:'demo'}) WHERE h.objectType = 'Harbor' RETURN count(DISTINCT h.unlocode) AS c"}},
+    {"id": "D-2", "question": "IMO 번호가 같은 배가 둘 있는가?",
+     "check": {"kind": "cypher-expect", "expect": 0,
+               "cypher": "MATCH (s:Object {projectId:'demo'}) WHERE s.objectType IN ['Ship','Tanker'] WITH s.imo AS k, count(*) AS n WHERE n > 1 RETURN count(*) AS c"}},
+    {"id": "D-3", "question": "선언하지 않은 관계가 생기지 않았는가?", "note": "NOT 이 붙은 type() 비교는 읽지 않습니다.",
+     "check": {"kind": "cypher-expect", "expect": 0,
+               "cypher": "MATCH (:Object {projectId:'demo'})-[r]->() WHERE NOT type(r) IN ['SAILED','CALLED_AT'] RETURN count(r) AS c"}},
+    {"id": "D-4", "question": "배에 회사가 이어졌는가?",
+     "check": {"kind": "cypher-nonzero",
+               "cypher": "MATCH (s:Object {projectId:'demo', objectType:'Ship'})-[:OWNED_BY]->(c:Object {objectType:'Company'}) RETURN count(c) AS c"}},
+    {"id": "D-5", "question": "항차 클래스가 있는가?", "check": {"kind": "label-exists", "label": "Voyage"}},
+    {"id": "D-6", "question": "항구가 하나라도 있는가?",
+     "check": {"kind": "project-object-count", "projectId": "demo", "objectType": "Harbor", "op": "nonzero"}},
+    {"id": "D-7", "question": "항차와 항구 연결이 있는가?",
+     "check": {"kind": "project-link-nonzero", "projectId": "demo", "linkType": "CALLED_AT"}},
+    {"id": "D-8", "question": "유조선의 이름이 채워졌는가?",
+     "check": {"kind": "project-property-filled", "projectId": "demo", "objectType": "Tanker", "property": "name"}},
+    {"id": "D-9", "question": "유조선 재화중량을 셀 수 있는가?",
+     "check": {"kind": "cypher-expect", "expect": 3,
+               "cypher": "MATCH (t:Object {projectId:'demo', objectType:'Tanker'}) WHERE t.deadweight > 0 AND t.draft > 0 RETURN count(t) AS c"}},
+    {"id": "D-10", "question": "화면에서 사람이 판정하는 질문", "note": "check 가 없어 수동 판정입니다."},
+    {"id": "D-11", "question": "알 수 없는 판정", "check": {"kind": "sparql-ask", "query": "ASK {}"}},
+    {"id": "D-12", "question": "없는 클래스", "check": {"kind": "project-object-count", "projectId": "demo", "objectType": "Berth", "op": "eq", "expect": 0}}
+  ]
+}
