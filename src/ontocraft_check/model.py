@@ -8,13 +8,14 @@ SEVERITIES = ("critical", "important", "minor", "info")
 SEVERITY_KO = {"critical": "치명", "important": "중요", "minor": "경미", "info": "정보"}
 SEVERITY_RANK = {"critical": 3, "important": 2, "minor": 1, "info": 0}
 
-CATEGORIES = ("pitfall", "metadata", "logic", "shacl", "registry")
+CATEGORIES = ("pitfall", "metadata", "logic", "shacl", "registry", "cq")
 CATEGORY_KO = {
     "pitfall": "모델링 함정",
     "metadata": "메타데이터·명명",
     "logic": "논리",
     "shacl": "데이터 제약",
     "registry": "용어 등록부 대조",
+    "cq": "CQ 커버리지",
 }
 
 
@@ -60,6 +61,8 @@ class Report:
     # 0.2: 실행 선택지입니다. domains(고른 분야), disabled(끈 규칙), disabled_counts(끈 규칙별로 뺀 항목 수),
     # unknown_disabled(이 도구에 없는 규칙 id), group_over(보고서에서 묶는 기준, 0이면 묶지 않음)
     options: dict = field(default_factory=dict)
+    # 0.6: CQ 커버리지 결과입니다(checks/cq.py). --cq 를 주지 않으면 None 입니다.
+    cq: dict | None = None
 
     def add(self, finding: Finding) -> None:
         self.findings.append(finding)

@@ -6,6 +6,7 @@ from pathlib import Path
 
 from rdflib.namespace import RDF
 
+from .checks import cq as cq_check
 from .checks import logic, metadata, pitfalls, registry, shacl
 from .graph import build_inventory, find_individuals, load_graph
 from .model import Report
@@ -38,6 +39,10 @@ def run(
     disable: list[str] | str | None = None,
     group_over: int | None = DEFAULT_GROUP_OVER,
     strict_domains: bool = False,
+    cq: str | None = None,
+    cq_query_field: str | None = None,
+    cq_allow_labels: list[str] | str | None = None,
+    cq_allow_relations: list[str] | str | None = None,
 ) -> Report:
     """검사를 돌립니다.
 
@@ -46,6 +51,9 @@ def run(
         한 단계 더해 함께 봅니다. 더한 분야는 options["related_domains"] 에 적습니다.
     strict_domains: 참이면 관련 분야를 더하지 않고 domains 만 봅니다.
     disable: 끌 규칙 id 목록(예: ["P13", "P22"]). 끈 규칙의 항목은 보고서와 종료 코드에서 빠집니다.
+    cq: CQ(역량 질문) JSON 파일. 주면 CQ 커버리지(report.cq, 정보 항목 CQ01)를 냅니다.
+    cq_query_field: 질의 필드 이름(기본: cypher, 없으면 sparql).
+    cq_allow_labels, cq_allow_relations: OWL 에 없어도 정상인 라벨·관계 타입(쉼표 문자열이나 목록, 끝의 * 와일드카드).
     group_over: 같은 규칙의 항목이 이 수를 넘으면 md·html 보고서에서 한 항목으로 묶습니다. 0이면 묶지 않고, None 이면 기본값(10)입니다.
     """
     domains = split_ids(domains, upper=False)
@@ -90,6 +98,7 @@ def run(
             "shapes_format": shapes_fmt,
             "registry": registry_label,
             "reasoner": reasoner,
+            "cq": cq,
         },
         options={
             "domains": domains,
@@ -105,5 +114,7 @@ def run(
     logic.check(tbox, data_g, report, reasoner=reasoner)
     shacl.check(tbox, data_g, shapes_g, report)
     registry.check(inv, registry_path, report, domains=domains or None, related=related or None)
+    cq_check.check(inv, report, cq, query_field=cq_query_field,
+                   allow_labels=cq_allow_labels, allow_relations=cq_allow_relations)
     report.apply_disable(disable)
     return report

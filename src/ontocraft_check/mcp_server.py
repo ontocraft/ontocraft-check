@@ -26,6 +26,7 @@ INSTRUCTIONS = f"""{TOOL_TITLE} {__version__}: OWL 온톨로지를 검사하고 
 - check_ontology 는 파일 경로나 Turtle 등 본문 문자열을 받습니다. 기본 format=summary 는 짧은 요약입니다.
 - 모델링 함정(Pxx)은 OOPS! 공개 설명을 참고해 다시 구현한 근사 검사입니다. 논리 검사는 OWL 2 RL 수준이라 모순이 없다는 결과가 OWL 2 DL 일관성을 뜻하지 않습니다. 의미 판단이 필요한 함정은 검사하지 않습니다.
 - 등록부 후보(REG01)는 클래스만, 표기만 같은 것입니다. 속성이 개념 용어와 같으면 REG03 입니다. get_term 으로 정의를 읽고 뜻이 같을 때만 skos:exactMatch 를 제안합니다.
+- check_ontology 에 cq(역량 질문 JSON)를 주면 관계·데이터 속성 단위 CQ 커버리지를 셉니다. 닿지 않은 요소는 지워도 된다는 뜻이 아닙니다.
 - 등록부는 공개 분야 사본이고 CC BY 4.0 입니다. 용어를 인용할 때 출처 「OntoCraft 한국 산업 용어 등록부」와 주소를 적습니다."""
 
 
@@ -57,17 +58,27 @@ def build_server():
         use_registry: bool = True,
         format: Literal["summary", "json", "markdown"] = "summary",
         strict_domains: bool = False,
+        cq: str | None = None,
+        cq_query_field: str | None = None,
+        cq_allow_labels: list[str] | None = None,
+        cq_allow_relations: list[str] | None = None,
     ) -> str:
-        """OWL 온톨로지를 모델링 함정, 메타데이터·명명, OWL 2 RL 논리, SHACL, 용어 등록부 대조로 검사합니다.
+        """OWL 온톨로지를 모델링 함정, 메타데이터·명명, OWL 2 RL 논리, SHACL, 용어 등록부 대조, CQ 커버리지(선택)로 검사합니다.
 
         ontology, data(ABox), shapes(SHACL)는 파일 경로나 본문 문자열(Turtle, RDF/XML, JSON-LD, N-Triples)입니다.
         있는 파일 경로면 경로로 읽습니다. shapes 는 data 와 함께 줘야 검증합니다.
         domains: 등록부 분야 id(예: ["maritime"]). 관련 분야(maritime 이면 port, defense)를 함께 봅니다.
         strict_domains: 참이면 관련 분야를 더하지 않습니다. disable: 끌 규칙 id(예: ["P13"]).
         format: summary(짧은 요약), json(전체 보고서), markdown(사람이 읽는 보고서).
+        cq: CQ(역량 질문) JSON 파일 경로나 본문(items[]: id, q, cypher 또는 sparql). 주면 CQ 커버리지를 셉니다.
+        cq_query_field: 질의 필드 이름(기본 cypher, 없으면 sparql).
+        cq_allow_labels, cq_allow_relations: OWL 에 없어도 정상인 라벨·관계 타입(예: ["KG_*", "Concept"]).
+        CQ가 닿지 않는 요소는 지워도 된다는 뜻이 아닙니다(데이터·화면·외부 연계 근거가 있을 수 있음).
         """
         return _guard(T.check_ontology, ontology, data=data, shapes=shapes, domains=domains,
-                      disable=disable, use_registry=use_registry, format=format, strict_domains=strict_domains)
+                      disable=disable, use_registry=use_registry, format=format, strict_domains=strict_domains,
+                      cq=cq, cq_query_field=cq_query_field, cq_allow_labels=cq_allow_labels,
+                      cq_allow_relations=cq_allow_relations)
 
     @server.tool()
     def explain_rule(rule_id: str) -> str:

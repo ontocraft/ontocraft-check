@@ -37,7 +37,8 @@ def hits(report, rule):
 
 
 def test_version():
-    assert __version__ == "0.5.0"
+    major, minor = (int(x) for x in __version__.split(".")[:2])
+    assert (major, minor) >= (0, 5)
 
 
 def test_new_rules_listed_and_explained():

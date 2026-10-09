@@ -1,12 +1,12 @@
 # ontocraft-check
 
-**English summary.** ontocraft-check is an OWL ontology checker by OntoCraft. It reports modelling pitfalls (approximate re-implementations inspired by the public OOPS! pitfall catalogue), metadata and naming issues, OWL 2 RL consistency, SHACL validation, and `skos:exactMatch` candidates against a bundled snapshot of the OntoCraft Korean Industry Term Registry (CC BY 4.0). Reports are written in Korean (Markdown, HTML, JSON). It ships a command-line tool, a Python API, an MCP server for AI agents (`ontocraft-check-mcp`), and a Pyodide web worker. Files never leave your machine. Code is Apache-2.0.
+**English summary.** ontocraft-check is an OWL ontology checker by OntoCraft. It reports modelling pitfalls (approximate re-implementations inspired by the public OOPS! pitfall catalogue), metadata and naming issues, OWL 2 RL consistency, SHACL validation, `skos:exactMatch` candidates against a bundled snapshot of the OntoCraft Korean Industry Term Registry (CC BY 4.0), and competency-question (CQ) coverage: which classes, object properties and data properties your Cypher or SPARQL CQs actually touch. Reports are written in Korean (Markdown, HTML, JSON). It ships a command-line tool, a Python API, an MCP server for AI agents (`ontocraft-check-mcp`), and a Pyodide web worker. Files never leave your machine. Code is Apache-2.0.
 
-OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사해 한국어 보고서를 냅니다. 현재 버전은 0.5.0입니다. 명령행 도구, 파이썬 API, AI 에이전트용 MCP 서버, 브라우저 실행기(Pyodide)가 있습니다. 검사는 모두 이 컴퓨터 안에서 돌고, 파일을 밖으로 보내지 않습니다.
+OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사해 한국어 보고서를 냅니다. 현재 버전은 0.6.0입니다. 명령행 도구, 파이썬 API, AI 에이전트용 MCP 서버, 브라우저 실행기(Pyodide)가 있습니다. 검사는 모두 이 컴퓨터 안에서 돌고, 파일을 밖으로 보내지 않습니다.
 
 ## 1. 무엇을 검사하는지
 
-검사는 네 종류이고 서로 대신하지 않습니다. 여기에 용어 등록부 대조를 더할 수 있습니다. 항목마다 심각도(치명·중요·경미), 규칙 id, 대상 IRI, 설명, 고치는 방법을 적습니다.
+검사는 네 종류이고 서로 대신하지 않습니다. 여기에 용어 등록부 대조와 CQ 커버리지를 더할 수 있습니다. 항목마다 심각도(치명·중요·경미), 규칙 id, 대상 IRI, 설명, 고치는 방법을 적습니다.
 
 | 종류 | 규칙 | 쓰는 라이브러리 |
 |---|---|---|
@@ -15,6 +15,7 @@ OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사�
 | 논리 | LOGIC01 owl:Nothing, LOGIC02 서로소 위반, LOGIC03 sameAs·differentFrom 충돌, LOGIC04 그 밖의 OWL 2 RL 모순, LOGIC05 HermiT(선택) | owlrl, 선택 owlready2 |
 | 데이터 제약 | SHACL 형상 위반. 심각도는 형상의 sh:resultSeverity를 따릅니다 | pyshacl |
 | 용어 등록부 대조(선택) | REG01 skos:exactMatch 후보, REG02 다른 분야에서 같은 이름이 있음, REG03 속성 이름이 개념 용어와 같음 | 표준 라이브러리 |
+| CQ 커버리지(선택) | 클래스·관계·데이터 속성별로 CQ가 닿는지 셈, CQ01 CQ 질의가 쓴 이름이 온톨로지에 없음 | rdflib(SPARQL 파싱), 표준 라이브러리 |
 
 - 모델링 함정과 메타데이터는 온톨로지 파일만 봅니다. 데이터 파일은 논리와 SHACL에만 씁니다.
 - DT01(중요)은 데이터 속성의 rdfs:range에 쓴 데이터 타입이 내장 데이터 타입이 아니고 rdfs:Datatype 선언도 없을 때 냅니다. 내장 데이터 타입은 XSD 전부, rdf:langString, rdf:PlainLiteral, rdf:XMLLiteral, rdf:HTML, rdf:JSON, rdfs:Literal, owl:real, owl:rational입니다. 데이터 속성 제약의 값 자리(owl:someValuesFrom, owl:allValuesFrom, owl:onDataRange)와 owl:onDatatype도 봅니다. 예를 들어 geo:wktLiteral을 range로 16곳에서 쓰고 선언이 없으면 한 항목에 쓰인 곳 수(detail.count)를 적습니다. OWL 2 DL 도구가 거부하는 결함이라 중요로 둡니다. 고치는 방법은 `geo:wktLiteral a rdfs:Datatype .` 한 줄입니다. 객체 속성이나 rdf:Property의 range는 지금처럼 P34·P34-EXT가 맡습니다.
@@ -25,6 +26,39 @@ OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사�
 - 등록부 용어는 대부분 개념(클래스 성격)입니다. 그래서 객체 속성이나 데이터 속성이 개념 용어와 표기가 같으면 후보로 내지 않고 REG03으로 따로 적습니다. 예를 들어 객체 속성 commandedBy의 @ko 레이블이 「선장」이면 사람 용어 「선장」과 맞추지 않습니다. 관계 이름은 동사구로 짓고, 개념과의 연결은 그 속성의 range 클래스에서 합니다.
 - 등록부 용어에 선택 필드 `kind`(class, property, relation)가 있으면 같은 종류끼리만 REG01로 맞춥니다. property·relation 용어는 속성과 맞추고 클래스와는 맞추지 않습니다. 지금 내장 사본에는 이 필드가 없습니다.
 - 등록부는 패키지에 넣은 사본(`--registry builtin`)이나 같은 형식의 폴더를 씁니다. 기본값은 대조하지 않는 것입니다.
+
+### 1-1. CQ 커버리지
+
+CQ(Competency Question, 역량 질문)는 온톨로지가 답해야 할 질문입니다. `--cq`로 CQ 목록 JSON을 주면 각 질의(Cypher 또는 SPARQL)가 어느 클래스, 객체 속성(관계), 데이터 속성에 닿는지 셉니다. 클래스 단위를 넘어 관계와 데이터 속성 단위로 보는 것이 목적입니다. 과설계한 요소를 검토할 때 입력으로 씁니다.
+
+```bash
+ontocraft-check maritime.ttl --cq cq_catalog.json \
+  --cq-allow-labels 'KG_*,Concept' \
+  --cq-allow-relations BROADER,HAS_LEGAL_DEFINITION,HAS_LEGAL_BASIS,ANALYZES \
+  --format html --out cq-report.html
+```
+
+- 입력은 JSON입니다. 최상위 `items[]`(또는 목록 자체)에 CQ마다 `id`, `q`(질문), 질의 필드를 둡니다. 질의 필드는 `cypher`, 없으면 `sparql`입니다. `--cq-query-field`로 다른 이름을 줄 수 있고, 그 이름에 sparql이 들어가거나 질의가 SELECT·PREFIX로 시작하면 SPARQL로 읽습니다. 마크다운 표는 읽지 않습니다.
+- `--cq-allow-labels`와 `--cq-allow-relations`는 OWL에 없어도 정상인 라벨과 관계 타입입니다. 끝의 `*`는 접두 와일드카드입니다(`KG_*`).
+- 보고서에는 요약(CQ 수, 파싱 성공·실패, 종류별 「CQ가 닿음 n / 전체 m」), 요소별 표(닿는 CQ id와 개수), CQ별 표(닿는 클래스·관계·속성), CQ가 닿지 않는 요소 목록, 파싱하지 못한 CQ가 들어갑니다. 큰 표는 접어 둡니다. JSON의 `cq`에 같은 내용이 있습니다.
+- CQ01(정보)은 CQ 질의가 쓴 라벨, 관계 타입, 속성 가운데 온톨로지에도 허용 목록에도 없는 것입니다. 질의와 설계가 어긋난 후보입니다.
+
+이름은 다음 규칙으로 맞춥니다.
+
+| 질의의 이름 | 맞추는 온톨로지 요소 |
+|---|---|
+| 관계 타입(ARRIVED_AT) | 객체 속성의 rdfs:label@en. 그 레이블로 맞는 속성이 없으면 IRI 로컬 이름을 SCREAMING_SNAKE로 바꾼 이름(arrivedAt은 ARRIVED_AT) |
+| 노드 라벨(Vessel) | 클래스의 IRI 로컬 이름이나 rdfs:label@en(대소문자 구별) |
+| 속성 접근(v.draft, {unlocode: 'KRPUS'}) | 변수 라벨의 클래스에서 rdfs:subClassOf를 한 단계씩 올라가며, 그 클래스가 주인인 데이터 속성 가운데 이름이 같은 것. 가장 가까운 단계의 것만 셉니다 |
+
+- 데이터 속성의 주인은 rdfs:domain(owl:unionOf 구성원 포함)과 로컬 이름 「클래스_속성」의 앞쪽 클래스입니다(Vessel_draft의 주인은 Vessel). 이름은 rdfs:label@en, 로컬 이름, 「클래스_속성」의 뒤쪽입니다. domain이 없는 데이터 속성은 어느 클래스에서도 찾지 못했을 때 마지막으로 맞춥니다.
+- 변수에 라벨이 없으면((x), YIELD로 받은 변수, 목록 변수) 그 이름을 가진 데이터 속성 모두를 「모호」로 셉니다. 모호한 접근은 「닿음」에 넣지 않고 따로 셉니다.
+- 하위 클래스에만 있는 속성을 상위 라벨로 읽으면 CQ01로 내고, 하위 클래스의 속성 이름을 참고로 적습니다.
+- 관계 변수의 속성(r.since)은 OWL에 데이터 속성으로 없어 세지 않고 CQ별 표에만 적습니다.
+- Cypher는 가벼운 정규식 파서로 읽습니다. MATCH 패턴의 (v:Label), [:TYPE], [r:TYPE|OTHER], 가변 길이 [:TYPE*1..3], 변수.속성, {속성: 값}, WHERE v:Label을 봅니다. 문자열 리터럴과 주석 안은 보지 않습니다. 괄호가 맞지 않거나 MATCH 패턴이 없으면 파싱 실패로 목록에 적습니다.
+- SPARQL은 rdflib으로 파싱해 질의에 쓰인 IRI를 모읍니다. 온톨로지 파일의 접두어를 미리 넣으므로 PREFIX를 생략한 질의도 읽습니다. 우리 네임스페이스의 IRI가 선언되지 않았으면 CQ01입니다.
+
+CQ가 닿지 않음은 지워도 된다는 뜻이 아닙니다. 데이터 적재, 화면, 외부 연계, 표준 대응처럼 CQ 밖의 근거가 있을 수 있습니다. 또 CQ를 모두 덮어도 질문이 업무에 맞는지는 판정하지 못합니다. 두 문장은 보고서에도 그대로 적습니다.
 
 규칙의 세부 정의는 MCP 도구 `explain_rule`이나 소스의 `src/ontocraft_check/rules.py`에 있습니다.
 
@@ -52,6 +86,7 @@ ontocraft-check 온톨로지.ttl --data 데이터.ttl --shapes shapes.ttl --form
 ontocraft-check 온톨로지.ttl --registry builtin --domains maritime,port
 ontocraft-check 온톨로지.ttl --registry builtin --domains maritime --strict-domains
 ontocraft-check 온톨로지.ttl --disable P13,P22 --fail-on important
+ontocraft-check 온톨로지.ttl --cq cq.json --cq-allow-labels 'KG_*'
 ```
 
 - 입력은 Turtle, RDF/XML(.owl, .rdf), JSON-LD, N-Triples입니다. 확장자로 형식을 추정하고, 실패하면 다른 형식을 차례로 시도합니다.
@@ -64,6 +99,7 @@ ontocraft-check 온톨로지.ttl --disable P13,P22 --fail-on important
 - `--strict-domains`를 주면 관련 분야를 더하지 않고 고른 분야만 봅니다. 해사 온톨로지라도 항만 용어를 따로 보고 싶을 때 씁니다. 처음부터 두 분야를 보려면 `--domains maritime,port`처럼 직접 고릅니다.
 - `--disable`은 끌 규칙 id입니다. 끈 규칙은 보고서 머리에 적고 요약과 종료 코드에서 뺍니다. 속성 그래프(LPG) 기반 설계처럼 역관계를 일부러 두지 않으면 P13을 끕니다.
 - `--group-over N`은 같은 규칙의 항목이 N개를 넘으면 md·html 보고서에서 한 항목으로 묶습니다(기본 10, 0이면 묶지 않음). JSON의 `findings`는 묶지 않습니다.
+- `--cq`, `--cq-query-field`, `--cq-allow-labels`, `--cq-allow-relations`는 CQ 커버리지 선택지입니다(1-1절).
 - `--reasoner hermit`은 실행 가능한 Java와 owlready2(`pip install "ontocraft-check[hermit]"`)가 있을 때만 HermiT 만족불가 검사를 더합니다. 없으면 보고서에 건너뜀으로 적습니다.
 
 ## 4. 파이썬
@@ -73,7 +109,9 @@ from ontocraft_check.runner import run
 from ontocraft_check.render import render
 
 report = run("온톨로지.ttl", data="데이터.ttl", shapes="shapes.ttl",
-             registry_dir="builtin", domains=["maritime"], disable=["P13"])
+             registry_dir="builtin", domains=["maritime"], disable=["P13"],
+             cq="cq.json", cq_allow_labels=["KG_*"])
+# report.cq 에 CQ 커버리지(coverage, elements, per_cq, unreached, unresolved)가 담깁니다.
 # 관련 분야를 더하지 않으려면 strict_domains=True 를 줍니다.
 print(report.summary())
 open("보고서.md", "w", encoding="utf-8").write(render(report, "md"))
@@ -87,7 +125,7 @@ open("보고서.md", "w", encoding="utf-8").write(render(report, "md"))
 
 | 도구 | 하는 일 |
 |---|---|
-| `check_ontology` | ontology, data, shapes(파일 경로나 Turtle 등 본문), domains, strict_domains(기본 거짓), disable, use_registry(기본 참), format(summary, json, markdown)을 받아 검사합니다. summary는 종류별 개수, 치명·중요 항목 상위 20개, 건너뛴 검사, 이 도구로 말할 수 없는 것을 담습니다 |
+| `check_ontology` | ontology, data, shapes(파일 경로나 Turtle 등 본문), domains, strict_domains(기본 거짓), disable, use_registry(기본 참), format(summary, json, markdown)을 받아 검사합니다. cq(CQ JSON 경로나 본문), cq_query_field, cq_allow_labels, cq_allow_relations를 주면 CQ 커버리지를 더하고 summary에 cq_coverage를 싣습니다. summary는 종류별 개수, 치명·중요 항목 상위 20개, 건너뛴 검사, 이 도구로 말할 수 없는 것을 담습니다 |
 | `explain_rule` | 규칙의 뜻, 심각도, 고치는 법 |
 | `list_rules` | 규칙 목록 |
 | `search_terms` | 내장 등록부에서 한국어 표제어·동의어, 영어, id로 찾아 id, ko, en, definition, uri, domain을 돌려줍니다 |
@@ -116,7 +154,7 @@ PyPI에 올리기 전에는 `--from` 값을 `ontocraft-check[mcp] @ git+https://
 
 ## 6. 브라우저 실행
 
-설치 없이 검사하려면 브라우저 실행 화면(https://ontocraft.com/tools/ontocheck)을 엽니다. 브라우저 안의 Pyodide가 이 패키지의 wheel을 돌리므로 파일이 서버로 가지 않습니다. 참고 구현은 `web/ontocraft-check-worker.js`와 `web/demo.html`입니다. worker 메시지 형식은 파일 머리의 주석에 있고, `registry`에 문자열 `"builtin"`을 주면 wheel에 든 등록부 사본과 대조합니다. `strict_domains: true`를 주면 관련 분야를 더하지 않습니다. 이 값은 참일 때만 run()에 넘기므로 0.3 wheel을 쓰는 화면도 그대로 돕니다.
+설치 없이 검사하려면 브라우저 실행 화면(https://ontocraft.com/tools/ontocheck)을 엽니다. 브라우저 안의 Pyodide가 이 패키지의 wheel을 돌리므로 파일이 서버로 가지 않습니다. 참고 구현은 `web/ontocraft-check-worker.js`와 `web/demo.html`입니다. worker 메시지 형식은 파일 머리의 주석에 있고, `registry`에 문자열 `"builtin"`을 주면 wheel에 든 등록부 사본과 대조합니다. `strict_domains: true`를 주면 관련 분야를 더하지 않습니다. 0.6.0부터 `cq`(파일 {name, text}), `cq_query_field`, `cq_allow_labels`, `cq_allow_relations`를 받습니다. CQ 선택지도 값을 줄 때만 run()에 넘기므로 0.5 wheel을 쓰는 화면도 그대로 돕니다. 이 값은 참일 때만 run()에 넘기므로 0.3 wheel을 쓰는 화면도 그대로 돕니다.
 
 ## 7. 내장 용어 등록부
 
@@ -139,11 +177,12 @@ PyPI에 올리기 전에는 `--from` 값을 `ontocraft-check[mcp] @ git+https://
 - 관련 분야 표는 사람이 정한 짧은 목록입니다. 관련 분야로 더한 후보는 고른 분야의 후보보다 뜻이 어긋날 가능성이 큽니다. 등록부에 kind가 없으므로, 클래스가 사건이나 관계를 뜻하더라도 개념 용어와 REG01로 맞춥니다.
 - LBL01·LBL02는 공백만 정규화하고 대소문자는 구별합니다. 「Port」@en과 「port」@en은 다른 레이블로 봅니다. 레이블이 같아도 뜻이 같은지는 보지 않습니다.
 - DT01은 이름 있는 데이터 타입만 봅니다. owl:imports로 가져온 어휘에 선언이 있어도 따라가지 않으므로, 이 파일에 선언을 두어야 풀립니다. 데이터 속성의 range가 클래스로 선언된 이름이면 DT01로 내지 않습니다.
+- CQ 커버리지는 질의 문장에 쓰인 이름만 봅니다. 질의가 실제로 결과를 내는지, 질문이 업무에 맞는지는 판정하지 않습니다. Cypher 파서는 정규식 근사라서 문자열 안의 라벨(labels(n) 비교 목록)이나 동적 라벨, APOC 호출 안의 이름은 놓칩니다. 같은 이름의 변수를 목록 식 안에서 다시 쓰면 바깥 변수의 라벨로 읽기도 합니다.
 - 등록부 대조는 표기만 비교합니다. 후보를 넣기 전에 정의를 읽고 뜻이 같은지 사람이 확인해야 합니다. 내장 사본은 스냅샷 날짜 이후의 등록부 변경을 담지 않습니다.
 
 ## 9. 앞으로
 
-- 대칭(owl:SymmetricProperty)·추이(owl:TransitiveProperty) 속성 후보 제안을 검토합니다. 넣는다면 정보 수준의 제안으로 두고 기본으로 끕니다. 0.5.0에는 넣지 않았습니다.
+- 대칭(owl:SymmetricProperty)·추이(owl:TransitiveProperty) 속성 후보 제안을 검토합니다. 넣는다면 정보 수준의 제안으로 두고 기본으로 끕니다. 0.6.0에도 넣지 않았습니다.
 
 ## 10. OOPS! 고지
 
@@ -172,6 +211,13 @@ uv build
 mcp가 없으면 MCP 시험은 건너뜁니다. 환경 변수 `ONTOCRAFT_REGISTRY_DIR`에 정본 등록부 폴더를 주면 그 폴더로 대조하는 시험 하나가 더 돕니다. GitHub Actions가 파이썬 3.11과 3.12에서 시험을 돌립니다.
 
 ## 13. 변경 기록
+
+### 0.6.0 (2026-10-09)
+
+- CQ 커버리지를 더했습니다(`--cq`, `--cq-query-field`, `--cq-allow-labels`, `--cq-allow-relations`). CQ 목록 JSON의 Cypher·SPARQL 질의가 클래스, 객체 속성, 데이터 속성 각각에 닿는지 세고, 요소별 표, CQ별 표, 닿지 않는 요소 목록을 md·html·json에 냅니다. 보고서에 「CQ가 닿지 않음은 지워도 된다는 뜻이 아닙니다」와 「CQ를 모두 덮어도 질문이 업무에 맞는지는 판정하지 못합니다」를 적습니다.
+- 새 정보 규칙 CQ01(CQ 질의가 쓴 이름이 온톨로지에 없음)을 더했습니다. `explain_rule`과 `list_rules`에 있습니다.
+- MCP `check_ontology`와 브라우저 실행기가 CQ 입력을 받습니다. 값을 줄 때만 넘기므로 예전 화면과 wheel도 그대로 돕니다.
+- `--cq`를 주지 않으면 보고서의 절 번호와 기존 규칙의 결과는 0.5.0과 같습니다.
 
 ### 0.5.0 (2026-10-09)
 

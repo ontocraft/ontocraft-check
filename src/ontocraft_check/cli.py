@@ -18,12 +18,16 @@ from .runner import DEFAULT_GROUP_OVER, run
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog="ontocraft-check",
-        description="OWL 온톨로지를 모델링 함정, 메타데이터·명명, OWL 2 RL 논리, SHACL, 용어 등록부 대조로 검사하고 한국어 보고서를 냅니다.",
+        description="OWL 온톨로지를 모델링 함정, 메타데이터·명명, OWL 2 RL 논리, SHACL, 용어 등록부 대조, CQ 커버리지로 검사하고 한국어 보고서를 냅니다.",
     )
     p.add_argument("ontology", help="온톨로지 파일(Turtle, RDF/XML .owl/.rdf, JSON-LD, N-Triples)")
     p.add_argument("--data", help="데이터(ABox) 파일. 논리 검사와 SHACL 검증에 씁니다")
     p.add_argument("--shapes", help="SHACL 형상 파일. --data와 함께 줘야 검증합니다")
     p.add_argument("--registry", help="용어 등록부 폴더(분야별 <분야>.json). builtin 을 주면 패키지에 넣은 OntoCraft 한국 산업 용어 등록부 공개 분야 사본과 대조합니다. 주지 않으면 대조하지 않습니다")
+    p.add_argument("--cq", help="CQ(역량 질문) JSON 파일(최상위 items[]: id, q, cypher 또는 sparql). 주면 CQ 커버리지 절과 정보 항목 CQ01을 냅니다")
+    p.add_argument("--cq-query-field", help="CQ 질의 필드 이름(기본: cypher, 없으면 sparql). 이름에 sparql이 들어가거나 질의가 SELECT·PREFIX로 시작하면 SPARQL로 읽습니다")
+    p.add_argument("--cq-allow-labels", help="OWL에 없어도 정상인 노드 라벨(쉼표로 구분, 끝의 * 와일드카드, 예: KG_*,Concept)")
+    p.add_argument("--cq-allow-relations", help="OWL에 없어도 정상인 관계 타입(쉼표로 구분, 예: BROADER,HAS_LEGAL_BASIS)")
     p.add_argument("--format", choices=("md", "html", "json"), default="md", help="보고서 형식(기본 md)")
     p.add_argument("--out", help="보고서를 쓸 파일. 없으면 표준 출력")
     p.add_argument(
@@ -75,6 +79,10 @@ def main(argv: list[str] | None = None) -> int:
             disable=args.disable,
             group_over=args.group_over,
             strict_domains=args.strict_domains,
+            cq=args.cq,
+            cq_query_field=args.cq_query_field,
+            cq_allow_labels=args.cq_allow_labels,
+            cq_allow_relations=args.cq_allow_relations,
         )
     except LoadError as exc:
         print(f"ontocraft-check: {exc}", file=sys.stderr)

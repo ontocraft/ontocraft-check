@@ -10,6 +10,7 @@ import json
 from collections import OrderedDict
 
 from . import TOOL_NAME, TOOL_TITLE, __version__
+from .checks.cq import CANNOT_SAY_CQ, KIND_KO, KINDS, NOT_DELETE_NOTE, NOT_FIT_NOTE
 from .checks.logic import LIMIT_NOTE
 from .model import CATEGORIES, CATEGORY_KO, SEVERITIES, SEVERITY_KO, Report
 
@@ -52,6 +53,7 @@ RULE_TITLES = OrderedDict([
     ("REG01", "등록부 skos:exactMatch 후보"),
     ("REG02", "다른 분야에서 같은 이름이 있음(뜻이 다를 수 있음)"),
     ("REG03", "속성 이름이 개념 용어와 같음"),
+    ("CQ01", "CQ 질의가 쓴 이름이 온톨로지에 없음"),
 ])
 
 CANNOT_SAY = [
@@ -200,7 +202,7 @@ def build_blocks(report: Report) -> list:
     b.append(("h2", "2. 결과 요약"))
     summ = report.summary()
     rows = []
-    for cat in CATEGORIES:
+    for cat in _shown(report):
         status = "실행" if _ran(report, cat) else "건너뜀"
         c = summ[cat]
         rows.append([CATEGORY_KO[cat], status] + [str(c[sev]) for sev in SEVERITIES])
@@ -212,8 +214,11 @@ def build_blocks(report: Report) -> list:
     else:
         b.append(("p", "건너뛴 검사가 없습니다."))
 
-    for n, cat in enumerate(CATEGORIES, start=3):
+    shown = _shown(report)
+    for n, cat in enumerate(shown, start=3):
         b.append(("h2", f"{n}. {CATEGORY_KO[cat]}"))
+        if cat == "cq":
+            _cq_blocks(report, b, n)
         if cat == "pitfall":
             b.append(("p", OOPS_NOTE + " 검사 범위는 온톨로지 파일입니다."))
         if cat == "logic":
@@ -263,9 +268,88 @@ def build_blocks(report: Report) -> list:
             else:
                 b.append(("table", head, [[SEVERITY_KO[f.severity], f.rule, f.target, f.message, f.fix] for f in fs]))
 
-    b.append(("h2", f"{len(CATEGORIES) + 3}. 이 보고서로 말할 수 없는 것"))
-    b.append(("ul", CANNOT_SAY))
+    b.append(("h2", f"{len(shown) + 3}. 이 보고서로 말할 수 없는 것"))
+    b.append(("ul", CANNOT_SAY + (CANNOT_SAY_CQ if report.cq else [])))
     return b
+
+
+def _shown(report: Report) -> list[str]:
+    """보고서에 절로 낼 검사 종류입니다. CQ 커버리지는 --cq 를 줬을 때만 냅니다(0.5 보고서와 절 번호를 같게 둡니다)."""
+    return [c for c in CATEGORIES if c != "cq" or report.cq is not None]
+
+
+def _ids(ids: list[str], limit: int = 12) -> str:
+    if not ids:
+        return ""
+    more = f" 외 {len(ids) - limit}건" if len(ids) > limit else ""
+    return ", ".join(ids[:limit]) + more
+
+
+def _cq_blocks(report: Report, b: list, n: int) -> None:
+    cq = report.cq
+    limit = _group_over(report)
+    b.append(("p", f"CQ(역량 질문) 파일 {cq['source']}의 질의가 온톨로지의 어느 요소에 닿는지 셉니다. "
+                   f"질의 필드는 {cq['query_field']}입니다. 정보 검사이며 심각도가 없습니다."))
+    b.append(("p", "이름 맞추기 규칙은 이렇습니다. Cypher 관계 타입은 객체 속성의 @en 레이블과, 없으면 로컬 이름을 "
+                   "SCREAMING_SNAKE로 바꾼 이름과 맞춥니다. 노드 라벨은 클래스 로컬 이름이나 @en 레이블과 맞춥니다. "
+                   "속성 접근은 변수의 라벨 클래스에서 rdfs:subClassOf를 따라 올라가며 그 클래스가 주인인 데이터 속성"
+                   "(rdfs:domain 또는 「클래스_속성」 이름)을 찾습니다. 라벨이 없는 변수의 속성 접근은 「모호」로 따로 셉니다."))
+    rows = [["CQ 수", str(cq["total"])],
+            ["파싱 성공", str(cq["parsed"])],
+            ["파싱 실패", str(len(cq["failed"]))],
+            ["닿는 요소가 없는 CQ", str(len(cq["no_touch"]))]]
+    for kind in KINDS:
+        c = cq["coverage"][kind]
+        extra = f", 모호한 접근만 있음 {c['ambiguous_only']}" if kind == "data_property" else ""
+        rows.append([f"{c['name']}: CQ가 닿음 / 전체", f"{c['touched']} / {c['total']}{extra}"])
+    rows.append(["CQ01(온톨로지에 없는 이름)", str(len(cq["unresolved"]))])
+    rows.append(["허용 라벨", ", ".join(cq["allow_labels"]) or "(없음)"])
+    rows.append(["허용 관계", ", ".join(cq["allow_relations"]) or "(없음)"])
+    b.append(("table", ["항목", "값"], rows))
+    b.append(("p", NOT_FIT_NOTE))
+
+    def table(title, head, rws):
+        if limit and len(rws) > limit:
+            b.append(("details_table", f"{title} {len(rws)}행 보기", head, rws))
+        else:
+            b.append(("table", head, rws))
+
+    b.append(("h3", f"{n}.1 요소별 표"))
+    rws = [[e["short"], e["kind_ko"], f"{_ids(e['cq'])} ({e['count']})" if e["cq"] else "(없음)",
+            f"{_ids(e['ambiguous_cq'])} ({len(e['ambiguous_cq'])})" if e["ambiguous_cq"] else ""]
+           for e in cq["elements"]]
+    if rws:
+        table("요소별 표", ["요소", "종류", "닿는 CQ(개수)", "모호하게 닿는 CQ(개수)"], rws)
+    else:
+        b.append(("p", "CQ가 닿은 요소가 없습니다."))
+
+    b.append(("h3", f"{n}.2 CQ별 표"))
+    rws = [[r["id"], r["q"], ", ".join(r["classes"]), ", ".join(r["object_properties"]),
+            ", ".join(r["data_properties"]), ", ".join(r["unresolved"] + [f"모호 {x}" for x in r["ambiguous"]])]
+           for r in cq["per_cq"] if r["parsed"]]
+    table("CQ별 표", ["CQ", "질문", "클래스", "관계", "데이터 속성", "맞추지 못함·모호"], rws)
+
+    b.append(("h3", f"{n}.3 CQ가 닿지 않는 요소"))
+    b.append(("p", NOT_DELETE_NOTE))
+    for kind in KINDS:
+        items = cq["unreached"][kind]
+        title = f"{KIND_KO[kind]} {len(items)}개"
+        lines = [x["short"] + (f" (모호한 접근: {_ids(x['ambiguous_cq'], 6)})" if x["ambiguous_cq"] else "")
+                 for x in items]
+        if not lines:
+            b.append(("p", f"{KIND_KO[kind]}: 모두 CQ가 닿았습니다."))
+        elif limit and len(lines) > limit:
+            b.append(("details", title + " 보기", lines))
+        else:
+            b.append(("p", title + ": " + ", ".join(lines)))
+
+    b.append(("h3", f"{n}.4 파싱하지 못한 CQ"))
+    if cq["failed"]:
+        b.append(("table", ["CQ", "질문", "이유"], [[x["id"], x["q"], x["reason"]] for x in cq["failed"]]))
+    else:
+        b.append(("p", "모든 CQ를 파싱했습니다."))
+    if cq["no_touch"]:
+        b.append(("p", "파싱했지만 온톨로지 요소에 확실히 닿지 않은 CQ: " + ", ".join(cq["no_touch"]) + "."))
 
 
 def _ran(report: Report, cat: str) -> bool:
@@ -293,6 +377,11 @@ def to_markdown(report: Report) -> str:
         elif kind == "details":
             items = "\n".join(f"- {_md_cell(x)}" for x in blk[2])
             out.append(f"<details><summary>{html.escape(blk[1])}</summary>\n\n{items}\n\n</details>\n")
+        elif kind == "details_table":
+            head, rows = blk[2], blk[3]
+            lines = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
+            lines += ["| " + " | ".join(_md_cell(c) for c in r) + " |" for r in rows]
+            out.append(f"<details><summary>{html.escape(blk[1])}</summary>\n\n" + "\n".join(lines) + "\n\n</details>\n")
         elif kind == "table":
             head, rows = blk[1], blk[2]
             lines = ["| " + " | ".join(head) + " |", "|" + "---|" * len(head)]
@@ -328,11 +417,11 @@ def to_html(report: Report) -> str:
         elif kind == "details":
             out.append(f"<details><summary>{e(blk[1])}</summary><ul>"
                        + "".join(f"<li>{e(x)}</li>" for x in blk[2]) + "</ul></details>")
-        elif kind == "table":
-            head, rows = blk[1], blk[2]
-            t = ["<table><thead><tr>" + "".join(f"<th>{e(h)}</th>" for h in head) + "</tr></thead><tbody>"]
+        elif kind in ("table", "details_table"):
+            head, rows = (blk[1], blk[2]) if kind == "table" else (blk[2], blk[3])
+            t = ([f"<details><summary>{e(blk[1])}</summary>"] if kind == "details_table" else []) + ["<table><thead><tr>" + "".join(f"<th>{e(h)}</th>" for h in head) + "</tr></thead><tbody>"]
             t += ["<tr>" + "".join(f"<td>{e(str(c))}</td>" for c in r) + "</tr>" for r in rows]
-            t.append("</tbody></table>")
+            t.append("</tbody></table>" + ("</details>" if kind == "details_table" else ""))
             out.append("".join(t))
     out.append("</body></html>")
     return "\n".join(out) + "\n"
@@ -353,12 +442,14 @@ def to_dict(report: Report) -> dict:
         "summary": {
             cat: {"name": CATEGORY_KO[cat], "status": "ran" if _ran(report, cat) else "skipped", **report.summary()[cat]}
             for cat in CATEGORIES
+            if cat != "cq" or report.cq is not None
         },
         "skipped": [k.to_dict() for k in report.skipped],
         "rules": {k: v for k, v in RULE_TITLES.items()},
         "findings": [f.to_dict() for f in report.findings],
         "grouped": grouped_summary(report),
-        "cannot_say": CANNOT_SAY,
+        "cannot_say": CANNOT_SAY + (CANNOT_SAY_CQ if report.cq else []),
+        **({"cq": report.cq} if report.cq is not None else {}),
     }
 
 

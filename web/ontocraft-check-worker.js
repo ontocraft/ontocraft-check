@@ -1,9 +1,15 @@
 // ontocraft-check 브라우저 실행기(Web Worker). 파일은 브라우저 밖으로 나가지 않습니다.
 // 쓰는 쪽: new Worker("ontocraft-check-worker.js")
-//   postMessage({ontology, data, shapes, registry, wheel, domains, disable, group_over, strict_domains})
+//   postMessage({ontology, data, shapes, registry, wheel, domains, disable, group_over, strict_domains,
+//                cq, cq_query_field, cq_allow_labels, cq_allow_relations})
 //   → 진행 중 {stage: "running"}, 끝나면 {ok: true, json, html} 또는 {ok: false, error}
 // ontology·data·shapes 는 파일 내용(문자열)과 이름 {name, text}, registry 는 {파일이름: 내용} 객체입니다.
 //
+// 0.6.0: CQ 커버리지를 받습니다. cq 는 CQ JSON 파일 {name, text}(최상위 items[]: id, q, cypher 또는 sparql),
+//   cq_query_field 는 질의 필드 이름(문자열), cq_allow_labels·cq_allow_relations 는 문자열 배열입니다.
+//   값을 줄 때만 run() 에 넘기므로, 이 필드를 쓰지 않는 화면과 0.5 wheel 도 그대로 돕니다.
+//   cq 를 주면 json 에 cq(커버리지, 요소별·CQ별 표, 닿지 않는 요소)가 늘고, 정보 항목 rule "CQ01" 이 나옵니다.
+//   wheel 은 ontocraft_check-0.6.0-py3-none-any.whl 입니다.
 // 0.5.0: 새 규칙(DT01, LBL01, LBL02)은 run() 결과에 그대로 담기므로 메시지 형식은 같습니다.
 // 0.4.0: strict_domains(참·거짓)를 받습니다. 참이면 domains 에 관련 분야(maritime 이면 port 등)를 더하지 않습니다.
 //   값이 true 일 때만 run() 에 넘기므로, 이 필드를 쓰지 않는 화면과 0.3 wheel 도 그대로 돕니다.
@@ -47,6 +53,7 @@ self.onmessage = async (e) => {
     try { fs.mkdir("/work"); } catch (_) {}
     const put = (f, p) => { if (!f) return null; const path = "/work/" + p + "-" + f.name.replace(/[^\w.-]/g, "_"); fs.writeFile(path, f.text); return path; };
     const o = put(m.ontology, "o"), d = put(m.data, "d"), s = put(m.shapes, "s");
+    const cq = m.cq && m.cq.text ? put({ name: "cq.json", text: m.cq.text }, "c") : null;
     let reg = null;
     if (m.registry === "builtin") {
       reg = "builtin";
@@ -59,12 +66,16 @@ self.onmessage = async (e) => {
     }
     const groupOver = Number.isInteger(m.group_over) && m.group_over >= 0 ? m.group_over : null;
     const strict = m.strict_domains === true ? true : null;  // 거짓이나 없음이면 넘기지 않습니다(기본값과 같음)
-    py.globals.set("args", py.toPy({ o, d, s, reg, domains: ids(m.domains), disable: ids(m.disable), group_over: groupOver, strict_domains: strict }));
+    py.globals.set("args", py.toPy({ o, d, s, reg, domains: ids(m.domains), disable: ids(m.disable), group_over: groupOver, strict_domains: strict,
+      cq, cq_query_field: typeof m.cq_query_field === "string" && m.cq_query_field ? m.cq_query_field : null,
+      cq_allow_labels: ids(m.cq_allow_labels), cq_allow_relations: ids(m.cq_allow_relations) }));
     const out = py.runPython(`
 from ontocraft_check.runner import run
 from ontocraft_check.render import render
 # 값을 준 선택지만 넘깁니다. 그래서 새 필드를 쓰지 않는 화면도 그대로 돕니다(배포 순서가 엇갈려도 깨지지 않게).
 kw = {k: args[k] for k in ("domains", "disable", "group_over", "strict_domains") if args[k] is not None and args[k] != []}  # group_over=0(묶지 않음)도 넘김
+# 0.6: CQ 선택지도 값을 줄 때만 넘깁니다.
+kw.update({k: args[k] for k in ("cq", "cq_query_field", "cq_allow_labels", "cq_allow_relations") if args[k] is not None and args[k] != []})
 r = run(args["o"], data=args["d"], shapes=args["s"], registry_dir=args["reg"], **kw)
 [render(r, "json"), render(r, "html")]
 `).toJs();
