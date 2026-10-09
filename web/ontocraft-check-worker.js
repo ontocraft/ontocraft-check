@@ -4,10 +4,11 @@
 //   → 진행 중 {stage: "running"}, 끝나면 {ok: true, json, html} 또는 {ok: false, error}
 // ontology·data·shapes 는 파일 내용(문자열)과 이름 {name, text}, registry 는 {파일이름: 내용} 객체입니다.
 //
+// 0.5.0: 새 규칙(DT01, LBL01, LBL02)은 run() 결과에 그대로 담기므로 메시지 형식은 같습니다.
 // 0.4.0: strict_domains(참·거짓)를 받습니다. 참이면 domains 에 관련 분야(maritime 이면 port 등)를 더하지 않습니다.
 //   값이 true 일 때만 run() 에 넘기므로, 이 필드를 쓰지 않는 화면과 0.3 wheel 도 그대로 돕니다.
 //   json.options 에 related_domains(더한 분야), strict_domains 가 늘었고, 속성이 개념 용어와 같으면 rule "REG03" 입니다.
-//   wheel 은 ontocraft_check-0.4.0-py3-none-any.whl 입니다.
+//   wheel 은 ontocraft_check-0.5.0-py3-none-any.whl 입니다.
 //
 // 0.3.0: 패키지 이름이 ontocheck 에서 ontocraft-check(import ontocraft_check)로 바뀌었습니다.
 //   wheel 은 ontocraft_check-0.3.0-py3-none-any.whl 이고, 0.2 이하의 ontocheck wheel 은 이 worker 로 돌지 않습니다.

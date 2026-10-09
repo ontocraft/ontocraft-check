@@ -23,6 +23,7 @@ EXPECTED = [
     ("P35", "weight"),
     ("P35-EXT", "note"),
     ("P41", "https://example.org/bad"),
+    ("LBL01", "hasEngine"),  # 0.5.0: 클래스 Engine 과 range 없는 객체 속성 hasEngine 이 둘 다 「엔진」
 ]
 
 

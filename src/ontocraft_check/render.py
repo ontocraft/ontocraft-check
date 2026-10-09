@@ -16,7 +16,8 @@ from .model import CATEGORIES, CATEGORY_KO, SEVERITIES, SEVERITY_KO, Report
 OOPS_NOTE = (
     "모델링 함정 절에서 OOPS! 함정 번호(Pxx)를 쓰는 규칙은 OOPS! Pxx의 정의를 따라 다시 구현한 근사 검사이며 "
     "OOPS! 자체의 결과가 아닙니다. OOPS! 코드는 보지도 옮기지도 않았고, 공개 함정 목록"
-    "(https://oops.linkeddata.es/catalogue.jsp)의 설명 수준만 참고했습니다."
+    "(https://oops.linkeddata.es/catalogue.jsp)의 설명 수준만 참고했습니다. "
+    "DT01, LBL01, LBL02는 OOPS! 번호가 아닌 이 도구의 규칙입니다."
 )
 
 RULE_TITLES = OrderedDict([
@@ -29,10 +30,13 @@ RULE_TITLES = OrderedDict([
     ("P19", "도메인·레인지가 둘 이상"),
     ("P22", "클래스 이름 표기법 불일치"),
     ("P32", "같은 레이블을 가진 클래스"),
+    ("LBL01", "종류가 다른 요소의 같은 레이블"),
+    ("LBL02", "같은 레이블을 가진 객체 속성"),
     ("P34", "선언되지 않은 클래스"),
     ("P35", "선언되지 않은 속성"),
     ("P34-EXT", "외부 어휘 선언 없음(클래스)"),
     ("P35-EXT", "외부 어휘 선언 없음(속성)"),
+    ("DT01", "선언되지 않은 데이터 타입"),
     ("P38", "owl:Ontology 선언 없음"),
     ("P41", "라이선스 없음"),
     ("META01", "버전 정보 없음"),

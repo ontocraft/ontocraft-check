@@ -40,6 +40,17 @@ _INFO = {
     "P32": ("pitfall", "minor",
             "서로 다른 클래스가 같은 레이블을 가집니다.",
             "같은 개념이면 하나로 합치거나 owl:equivalentClass 로 잇고, 다른 개념이면 레이블을 구별합니다."),
+    "LBL01": ("pitfall", "minor",
+              "종류가 다른 요소(클래스, 객체 속성, 데이터 속성, 주석 속성)가 같은 언어에서 같은 rdfs:label(공백 정규화 후)을 씁니다. "
+              "레이블만 보고는 클래스인지 속성인지 가릴 수 없습니다. 클래스끼리는 P32, 객체 속성끼리는 LBL02가 맡고, "
+              "데이터 속성끼리는 클래스마다 속성을 따로 두는 설계가 흔해 내지 않습니다. "
+              "속성의 rdfs:range가 같은 레이블의 클래스이면(genre의 range가 Genre, 둘 다 「장르」) range 이름을 그대로 쓴 관계로 보고 뺍니다. "
+              "심각도는 경미입니다. 추론과 OWL 2 DL 적합성에는 영향이 없고 사람이 읽을 때만 헷갈리기 때문입니다.",
+              "관계 이름은 동사구로(입항함, 정박함), 클래스 이름은 명사로(입항, 정박) 짓습니다."),
+    "LBL02": ("pitfall", "minor",
+              "객체 속성 둘 이상이 같은 언어에서 같은 rdfs:label을 씁니다. 관계 이름이 겹쳐 구분이 어렵습니다. "
+              "owl:equivalentProperty로 이은 속성끼리는 내지 않습니다.",
+              "뜻이 같으면 하나로 합치거나 owl:equivalentProperty로 잇습니다. 뜻이 다르면 관계 이름을 동사구로 구별되게 고칩니다."),
     "P34": ("pitfall", "important",
             "우리 네임스페이스의 이름이 클래스 자리에 쓰였지만 owl:Class 로 선언되지 않았습니다.",
             "owl:Class 선언과 레이블을 추가합니다. 오타라면 선언된 클래스 이름으로 고칩니다."),
@@ -52,6 +63,11 @@ _INFO = {
     "P35-EXT": ("pitfall", "minor",
                 "외부 어휘의 속성을 쓰면서 이 파일에 종류 선언이 없습니다. RDF 로는 문제가 없지만 OWL 2 DL 도구는 선언을 요구합니다.",
                 "owl:imports 로 외부 어휘를 가져오거나 쓰는 항목만 owl:AnnotationProperty 등으로 선언합니다."),
+    "DT01": ("pitfall", "important",
+             "데이터 속성의 rdfs:range(또는 데이터 속성 제약의 값 자리)에 쓰인 IRI가 내장 데이터 타입(XSD, rdf:langString, "
+             "rdf:PlainLiteral, rdf:XMLLiteral, rdf:HTML, rdf:JSON, rdfs:Literal, owl:real, owl:rational)이 아니고 "
+             "이 파일에 rdfs:Datatype 선언도 없습니다. OWL 2 DL 도구가 거부하는 결함입니다. 데이터 속성이 아닌 속성의 range는 P34·P34-EXT가 맡습니다.",
+             "선언 한 줄로 고칩니다(예: geo:wktLiteral a rdfs:Datatype .). 오타라면 내장 데이터 타입으로 고칩니다."),
     "P38": ("pitfall", "important",
             "owl:Ontology 선언이 없습니다. 온톨로지 IRI, 버전, 라이선스를 적을 자리가 없습니다.",
             "<온톨로지 IRI> a owl:Ontology ; rdfs:label ... ; owl:versionInfo ... ; dcterms:license <...> . 를 추가합니다."),

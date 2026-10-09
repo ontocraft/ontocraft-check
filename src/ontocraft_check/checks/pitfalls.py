@@ -22,6 +22,7 @@ from ..graph import (
     namespace_of,
     ontology_iri,
     rdf_list,
+    short,
     STANDARD_NS,
 )
 from ..model import Finding, Report
@@ -121,7 +122,9 @@ def check(inv: Inventory, report: Report) -> None:
     _p13(inv, report)
     _p22(inv, report)
     _p32(inv, report)
+    _lbl(inv, report)
     _p34_p35(inv, report)
+    _dt01(inv, report)
     _p38_p41(inv, report)
     report.ran.append("pitfall")
 
@@ -339,6 +342,106 @@ def _p32(inv: Inventory, report: Report) -> None:
             ))
 
 
+# 레이블 겹침(LBL01·LBL02)에서 쓰는 요소 종류입니다. rdf:Property 로만 선언한 속성은 종류를 알 수 없어 뺍니다.
+KIND_KO = {
+    "class": "클래스",
+    "object": "객체 속성",
+    "data": "데이터 속성",
+    "annotation": "주석 속성",
+}
+
+
+def _kind_of(inv: Inventory, x) -> str | None:
+    if x in inv.classes:
+        return "class"
+    if x in inv.object_props:
+        return "object"
+    if x in inv.data_props:
+        return "data"
+    if x in inv.annotation_props:
+        return "annotation"
+    return None
+
+
+def norm_label(text: str) -> str:
+    """앞뒤 공백을 지우고 안쪽의 연속 공백을 하나로 줄입니다."""
+    return " ".join(str(text).split())
+
+
+def _equivalent_groups(g, pred) -> dict:
+    """pred(owl:equivalentProperty 등)로 이어진 이름 있는 노드를 같은 묶음 대표로 모읍니다."""
+    parent = {}
+
+    def find(x):
+        parent.setdefault(x, x)
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    for s, o in g.subject_objects(pred):
+        if _named(s) and _named(o):
+            parent[find(s)] = find(o)
+    return {x: find(x) for x in parent}
+
+
+def _ranges(g, p) -> set:
+    """속성의 rdfs:range 클래스입니다. owl:unionOf 로 묶은 range 는 그 구성원을 꺼냅니다."""
+    out = set()
+    for r in g.objects(p, RDFS.range):
+        out.add(r)
+        for head in g.objects(r, OWL.unionOf):
+            out.update(rdf_list(g, head))
+    return out
+
+
+def _lbl(inv: Inventory, report: Report) -> None:
+    """종류가 다른 요소의 같은 레이블(LBL01)과 객체 속성끼리의 같은 레이블(LBL02)입니다.
+
+    경계: 클래스끼리는 P32 가 맡습니다. 데이터 속성끼리는 내지 않습니다(클래스마다 속성을 따로 두는 설계가 흔함).
+    속성의 rdfs:range 가 같은 레이블의 클래스이면 그 속성은 LBL01 에서 뺍니다(range 이름을 그대로 쓴 관계).
+    """
+    g = inv.graph
+    groups = defaultdict(set)
+    for x in inv.classes | inv.object_props | inv.data_props | inv.annotation_props:
+        for lit in g.objects(x, RDFS.label):
+            if isinstance(lit, Literal):
+                text = norm_label(lit)
+                if text:
+                    groups[(text, (lit.language or "").lower())].add(x)
+    eq = _equivalent_groups(g, OWL.equivalentProperty)
+    for (text, lang), members in sorted(groups.items()):
+        if len(members) < 2:
+            continue
+        shown = f"「{text}」{'@' + lang if lang else ''}"
+        kinds = {m: _kind_of(inv, m) for m in members}
+        classes = {m for m in members if kinds[m] == "class"}
+        # 속성의 range 가 같은 레이블의 클래스이면(genre → Genre 「장르」) range 이름을 그대로 쓴 관계로 보고 뺍니다.
+        range_named = {m for m in members if kinds[m] != "class" and _ranges(g, m) & classes}
+        cross = members - range_named
+        if len({kinds[m] for m in cross}) > 1:
+            ms = sorted(cross, key=lambda m: (list(KIND_KO).index(kinds[m]), str(m)))
+            parts = ", ".join(f"{local_name(str(m))}({KIND_KO[kinds[m]]})" for m in ms)
+            report.add(Finding(
+                CAT, "LBL01", "minor", ", ".join(str(m) for m in ms),
+                f"종류가 다른 요소 {len(ms)}개가 같은 레이블 {shown}를 씁니다: {parts}. "
+                "화면이나 질의 도우미에서 레이블만 보고는 클래스인지 속성인지 가릴 수 없습니다.",
+                "관계 이름은 동사구로(입항함, 정박함), 클래스 이름은 명사로(입항, 정박) 짓습니다. "
+                "데이터 속성은 「흘수 값」처럼 값이라는 것이 드러나게 짓습니다.",
+                {"label": text, "lang": lang, "members": [str(m) for m in ms],
+                 "kinds": {str(m): kinds[m] for m in ms}},
+            ))
+        props = sorted((m for m in members if kinds[m] == "object"), key=str)
+        if len(props) > 1 and len({eq.get(p, p) for p in props}) > 1:
+            report.add(Finding(
+                CAT, "LBL02", "minor", ", ".join(str(p) for p in props),
+                f"객체 속성 {len(props)}개가 같은 레이블 {shown}를 씁니다. 관계 이름이 겹쳐 구분이 어렵습니다.",
+                "뜻이 같으면 하나로 합치거나 owl:equivalentProperty로 잇습니다. 뜻이 다르면 관계 이름을 동사구로 구별되게 고칩니다"
+                "(예: 「소속함」과 「~에 속함」 대신 「조직에 소속함」, 「상위 부품에 속함」).",
+                {"label": text, "lang": lang, "members": [str(p) for p in props]},
+            ))
+
+
 def _p34_p35(inv: Inventory, report: Report) -> None:
     g = inv.graph
     declared_any = inv.classes | inv.declared_props
@@ -375,6 +478,62 @@ def _p34_p35(inv: Inventory, report: Report) -> None:
             ))
 
 
+XSD_NS = "http://www.w3.org/2001/XMLSchema#"
+# XSD 이름공간 밖의 내장 데이터 타입입니다(OWL 2 데이터 타입 맵과 RDF 1.1·1.2 의 rdf 데이터 타입).
+BUILTIN_DATATYPES = {
+    str(RDF.langString), str(RDF.PlainLiteral), str(RDF.XMLLiteral), str(RDF.HTML),
+    str(RDF) + "JSON", str(RDF) + "dirLangString",
+    str(RDFS.Literal), str(OWL) + "real", str(OWL) + "rational",
+}
+
+
+def is_builtin_datatype(x) -> bool:
+    return isinstance(x, URIRef) and (str(x).startswith(XSD_NS) or str(x) in BUILTIN_DATATYPES)
+
+
+def datatype_usage(inv: Inventory) -> dict:
+    """데이터 속성의 값 자리에 쓰인 이름 있는 데이터 타입 -> 쓰인 곳(속성 IRI, 자리) 목록입니다.
+
+    자리는 rdfs:range, 데이터 속성 제약의 owl:someValuesFrom·owl:allValuesFrom·owl:onDataRange,
+    그리고 데이터 타입 제한의 owl:onDatatype 입니다. 데이터 속성이 아닌 속성의 range 는 보지 않습니다(P34·P34-EXT 가 맡음).
+    """
+    g = inv.graph
+    uses = defaultdict(list)
+    for p in inv.data_props:
+        for o in g.objects(p, RDFS.range):
+            uses[o].append((str(p), "rdfs:range"))
+    for r in set(g.subjects(OWL.onProperty, None)):
+        prop = g.value(r, OWL.onProperty)
+        if prop not in inv.data_props:
+            continue
+        for pred, name in ((OWL.someValuesFrom, "owl:someValuesFrom"), (OWL.allValuesFrom, "owl:allValuesFrom"),
+                           (OWL.onDataRange, "owl:onDataRange")):
+            v = g.value(r, pred)
+            if v is not None:
+                uses[v].append((str(prop), name))
+    for node, base in g.subject_objects(OWL.onDatatype):
+        uses[base].append(("", "owl:onDatatype"))
+    return {k: v for k, v in uses.items() if isinstance(k, URIRef)}
+
+
+def _dt01(inv: Inventory, report: Report) -> None:
+    g = inv.graph
+    for dt, places in sorted(datatype_usage(inv).items(), key=lambda kv: str(kv[0])):
+        if is_builtin_datatype(dt) or (dt, RDF.type, RDFS.Datatype) in g:
+            continue
+        if dt in inv.classes:
+            continue  # 클래스로 선언된 이름입니다. 데이터 타입 선언이 빠진 경우와 다른 문제라 여기서 내지 않습니다.
+        name = short(dt, g)
+        props = sorted({p for p, _ in places if p})
+        report.add(Finding(
+            CAT, "DT01", "important", str(dt),
+            f"데이터 타입 {name}의 선언이 없습니다. 데이터 속성의 값 자리에 {len(places)}곳 쓰였고, 내장 데이터 타입(XSD, rdf:langString, "
+            "rdfs:Literal, owl:real 등)이 아니며 이 파일에 rdfs:Datatype 선언도 없습니다. OWL 2 DL 도구는 이 온톨로지를 거부합니다.",
+            f"선언 한 줄로 고칩니다(예: {name} a rdfs:Datatype .). 오타라면 xsd:string 같은 내장 데이터 타입으로 고칩니다.",
+            {"count": len(places), "properties": props, "places": [{"property": p, "position": w} for p, w in places]},
+        ))
+
+
 def _is_own(inv: Inventory, x) -> bool:
     iri = str(x)
     if inv.own_ns:
@@ -401,4 +560,4 @@ def _p38_p41(inv: Inventory, report: Report) -> None:
     ))
 
 
-__all__ = ["check", "class_usage", "property_usage", "strongly_connected", "name_style", "count_disjoint_axioms"]
+__all__ = ["check", "datatype_usage", "is_builtin_datatype", "norm_label", "class_usage", "property_usage", "strongly_connected", "name_style", "count_disjoint_axioms"]

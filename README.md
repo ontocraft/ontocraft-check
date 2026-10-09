@@ -2,7 +2,7 @@
 
 **English summary.** ontocraft-check is an OWL ontology checker by OntoCraft. It reports modelling pitfalls (approximate re-implementations inspired by the public OOPS! pitfall catalogue), metadata and naming issues, OWL 2 RL consistency, SHACL validation, and `skos:exactMatch` candidates against a bundled snapshot of the OntoCraft Korean Industry Term Registry (CC BY 4.0). Reports are written in Korean (Markdown, HTML, JSON). It ships a command-line tool, a Python API, an MCP server for AI agents (`ontocraft-check-mcp`), and a Pyodide web worker. Files never leave your machine. Code is Apache-2.0.
 
-OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사해 한국어 보고서를 냅니다. 현재 버전은 0.4.0입니다. 명령행 도구, 파이썬 API, AI 에이전트용 MCP 서버, 브라우저 실행기(Pyodide)가 있습니다. 검사는 모두 이 컴퓨터 안에서 돌고, 파일을 밖으로 보내지 않습니다.
+OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사해 한국어 보고서를 냅니다. 현재 버전은 0.5.0입니다. 명령행 도구, 파이썬 API, AI 에이전트용 MCP 서버, 브라우저 실행기(Pyodide)가 있습니다. 검사는 모두 이 컴퓨터 안에서 돌고, 파일을 밖으로 보내지 않습니다.
 
 ## 1. 무엇을 검사하는지
 
@@ -10,13 +10,17 @@ OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사�
 
 | 종류 | 규칙 | 쓰는 라이브러리 |
 |---|---|---|
-| 모델링 함정 | P04, P06, P08, P10, P11, P13, P19, P22, P32, P34, P35, P34-EXT, P35-EXT, P38, P41 | rdflib |
+| 모델링 함정 | P04, P06, P08, P10, P11, P13, P19, P22, P32, P34, P35, P34-EXT, P35-EXT, P38, P41, DT01 선언되지 않은 데이터 타입, LBL01 종류가 다른 요소의 같은 레이블, LBL02 같은 레이블을 가진 객체 속성 | rdflib |
 | 메타데이터·명명 | META01 버전, META02 @ko 없음, META03 @en 없음, META04 레이블 없음 | rdflib |
 | 논리 | LOGIC01 owl:Nothing, LOGIC02 서로소 위반, LOGIC03 sameAs·differentFrom 충돌, LOGIC04 그 밖의 OWL 2 RL 모순, LOGIC05 HermiT(선택) | owlrl, 선택 owlready2 |
 | 데이터 제약 | SHACL 형상 위반. 심각도는 형상의 sh:resultSeverity를 따릅니다 | pyshacl |
 | 용어 등록부 대조(선택) | REG01 skos:exactMatch 후보, REG02 다른 분야에서 같은 이름이 있음, REG03 속성 이름이 개념 용어와 같음 | 표준 라이브러리 |
 
 - 모델링 함정과 메타데이터는 온톨로지 파일만 봅니다. 데이터 파일은 논리와 SHACL에만 씁니다.
+- DT01(중요)은 데이터 속성의 rdfs:range에 쓴 데이터 타입이 내장 데이터 타입이 아니고 rdfs:Datatype 선언도 없을 때 냅니다. 내장 데이터 타입은 XSD 전부, rdf:langString, rdf:PlainLiteral, rdf:XMLLiteral, rdf:HTML, rdf:JSON, rdfs:Literal, owl:real, owl:rational입니다. 데이터 속성 제약의 값 자리(owl:someValuesFrom, owl:allValuesFrom, owl:onDataRange)와 owl:onDatatype도 봅니다. 예를 들어 geo:wktLiteral을 range로 16곳에서 쓰고 선언이 없으면 한 항목에 쓰인 곳 수(detail.count)를 적습니다. OWL 2 DL 도구가 거부하는 결함이라 중요로 둡니다. 고치는 방법은 `geo:wktLiteral a rdfs:Datatype .` 한 줄입니다. 객체 속성이나 rdf:Property의 range는 지금처럼 P34·P34-EXT가 맡습니다.
+- LBL01(경미)은 같은 언어 태그에서 같은 rdfs:label(공백 정규화 후)을 가진 요소의 종류(클래스, 객체 속성, 데이터 속성, 주석 속성)가 다를 때 냅니다. 예를 들어 클래스 PortCall과 객체 속성 arrivedAt이 둘 다 「입항」이면 레이블만 보고는 클래스인지 속성인지 가릴 수 없습니다. 관계 이름은 동사구로(입항함, 정박함) 짓기를 권합니다. 추론과 OWL 2 DL 적합성에는 영향이 없어 경미로 둡니다.
+- LBL01의 경계는 이렇습니다. 클래스끼리는 P32가 맡습니다. 데이터 속성끼리는 내지 않습니다. 클래스마다 속성을 따로 두는 설계(Vessel_draft와 ModelShip_draft가 둘 다 「흘수」)가 흔하기 때문입니다. 속성의 rdfs:range가 같은 레이블의 클래스이면(genre의 range가 Genre이고 둘 다 「장르」) range 이름을 그대로 쓴 관계로 보고 뺍니다.
+- LBL02(경미)는 객체 속성 둘 이상이 같은 레이블을 쓸 때 냅니다(memberOf와 belongsTo가 둘 다 「소속」). 관계 이름이 겹쳐 구분이 어렵습니다. owl:equivalentProperty로 이은 속성끼리는 내지 않습니다.
 - 용어 등록부 대조는 클래스의 @ko 레이블(없으면 로컬 이름)이 등록부 용어의 표제어나 동의어와 표기가 같을 때 후보(REG01)를 냅니다. 표제어와 같으면 일치 신뢰도 높음, 동의어로만 맞으면 낮음입니다. 심각도가 없는 정보 항목이라 종료 코드에 영향을 주지 않습니다.
 - 등록부 용어는 대부분 개념(클래스 성격)입니다. 그래서 객체 속성이나 데이터 속성이 개념 용어와 표기가 같으면 후보로 내지 않고 REG03으로 따로 적습니다. 예를 들어 객체 속성 commandedBy의 @ko 레이블이 「선장」이면 사람 용어 「선장」과 맞추지 않습니다. 관계 이름은 동사구로 짓고, 개념과의 연결은 그 속성의 range 클래스에서 합니다.
 - 등록부 용어에 선택 필드 `kind`(class, property, relation)가 있으면 같은 종류끼리만 REG01로 맞춥니다. property·relation 용어는 속성과 맞추고 클래스와는 맞추지 않습니다. 지금 내장 사본에는 이 필드가 없습니다.
@@ -133,13 +137,19 @@ PyPI에 올리기 전에는 `--from` 값을 `ontocraft-check[mcp] @ git+https://
 - owl:imports를 따라가지 않습니다. 온톨로지 파일 하나만 봅니다.
 - SHACL 검증은 형상이 표현한 조건만큼만 말합니다.
 - 관련 분야 표는 사람이 정한 짧은 목록입니다. 관련 분야로 더한 후보는 고른 분야의 후보보다 뜻이 어긋날 가능성이 큽니다. 등록부에 kind가 없으므로, 클래스가 사건이나 관계를 뜻하더라도 개념 용어와 REG01로 맞춥니다.
+- LBL01·LBL02는 공백만 정규화하고 대소문자는 구별합니다. 「Port」@en과 「port」@en은 다른 레이블로 봅니다. 레이블이 같아도 뜻이 같은지는 보지 않습니다.
+- DT01은 이름 있는 데이터 타입만 봅니다. owl:imports로 가져온 어휘에 선언이 있어도 따라가지 않으므로, 이 파일에 선언을 두어야 풀립니다. 데이터 속성의 range가 클래스로 선언된 이름이면 DT01로 내지 않습니다.
 - 등록부 대조는 표기만 비교합니다. 후보를 넣기 전에 정의를 읽고 뜻이 같은지 사람이 확인해야 합니다. 내장 사본은 스냅샷 날짜 이후의 등록부 변경을 담지 않습니다.
 
-## 9. OOPS! 고지
+## 9. 앞으로
 
-Pxx 번호는 OOPS!(OntOlogy Pitfall Scanner!) 함정 목록(https://oops.linkeddata.es/catalogue.jsp)의 번호를 따릅니다. OOPS!의 코드는 보지도 옮기지도 않았고, 공개 함정 목록의 설명 수준만 참고했습니다. 이 도구의 결과는 OOPS! 자체의 결과가 아닙니다.
+- 대칭(owl:SymmetricProperty)·추이(owl:TransitiveProperty) 속성 후보 제안을 검토합니다. 넣는다면 정보 수준의 제안으로 두고 기본으로 끕니다. 0.5.0에는 넣지 않았습니다.
 
-## 10. 의존성과 라이선스
+## 10. OOPS! 고지
+
+Pxx 번호는 OOPS!(OntOlogy Pitfall Scanner!) 함정 목록(https://oops.linkeddata.es/catalogue.jsp)의 번호를 따릅니다. DT01, LBL01, LBL02는 OOPS! 번호가 아닌 이 도구의 규칙입니다. OOPS!의 코드는 보지도 옮기지도 않았고, 공개 함정 목록의 설명 수준만 참고했습니다. 이 도구의 결과는 OOPS! 자체의 결과가 아닙니다.
+
+## 11. 의존성과 라이선스
 
 | 패키지 | 라이선스 | 쓰는 곳 |
 |---|---|---|
@@ -151,7 +161,7 @@ Pxx 번호는 OOPS!(OntOlogy Pitfall Scanner!) 함정 목록(https://oops.linked
 
 코드는 Apache-2.0입니다(Copyright 2026 OntoCraft). 전문은 `LICENSE`, 고지는 `NOTICE`에 있습니다. 내장 용어 등록부 데이터는 CC BY 4.0입니다.
 
-## 11. 개발
+## 12. 개발
 
 ```bash
 uv sync --extra mcp
@@ -161,7 +171,14 @@ uv build
 
 mcp가 없으면 MCP 시험은 건너뜁니다. 환경 변수 `ONTOCRAFT_REGISTRY_DIR`에 정본 등록부 폴더를 주면 그 폴더로 대조하는 시험 하나가 더 돕니다. GitHub Actions가 파이썬 3.11과 3.12에서 시험을 돌립니다.
 
-## 12. 변경 기록
+## 13. 변경 기록
+
+### 0.5.0 (2026-10-09)
+
+- 새 규칙 DT01(중요, 선언되지 않은 데이터 타입)을 더했습니다. 데이터 속성의 값 자리에 쓴 데이터 타입이 내장도 아니고 rdfs:Datatype 선언도 없으면 냅니다. 쓰인 곳 수를 detail.count에 적습니다.
+- 새 규칙 LBL01(경미, 종류가 다른 요소의 같은 레이블)과 LBL02(경미, 같은 레이블을 가진 객체 속성)를 더했습니다. 클래스끼리는 지금처럼 P32가 맡습니다.
+- `explain_rule`과 `list_rules`에 DT01, LBL01, LBL02가 있습니다. 보고서의 OOPS! 고지에 세 규칙이 OOPS! 번호가 아니라고 적습니다.
+- 기존 규칙의 정의와 결과는 0.4.0과 같습니다. 새 규칙 때문에 같은 온톨로지에서도 항목 수가 늘기도 합니다.
 
 ### 0.4.0 (2026-10-09)
 
