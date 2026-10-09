@@ -217,6 +217,8 @@ mcp가 없으면 MCP 시험은 건너뜁니다. 환경 변수 `ONTOCRAFT_REGISTR
 - CQ 커버리지를 더했습니다(`--cq`, `--cq-query-field`, `--cq-allow-labels`, `--cq-allow-relations`). CQ 목록 JSON의 Cypher·SPARQL 질의가 클래스, 객체 속성, 데이터 속성 각각에 닿는지 세고, 요소별 표, CQ별 표, 닿지 않는 요소 목록을 md·html·json에 냅니다. 보고서에 「CQ가 닿지 않음은 지워도 된다는 뜻이 아닙니다」와 「CQ를 모두 덮어도 질문이 업무에 맞는지는 판정하지 못합니다」를 적습니다.
 - 새 정보 규칙 CQ01(CQ 질의가 쓴 이름이 온톨로지에 없음)을 더했습니다. `explain_rule`과 `list_rules`에 있습니다.
 - MCP `check_ontology`와 브라우저 실행기가 CQ 입력을 받습니다. 값을 줄 때만 넘기므로 예전 화면과 wheel도 그대로 돕니다.
+- 라벨 없는 변수의 속성 접근(`MATCH (n) ... n.pagerankScore`)은 계속 「모호」로 셉니다. 그 이름의 데이터 속성이 온톨로지 전체에 하나뿐이면 「후보 1개」로 표시하고 그 속성을 `unique_candidate`에 적습니다. 「닿음」에는 넣지 않고, 요약에 「모호 접근 n개 가운데 후보가 하나뿐인 것 k개」를 냅니다.
+- `labels(n)`를 문자열 목록과 비교하는 꼴(`any(l IN labels(n) WHERE l IN ['Vessel','Port'])`, `'Vessel' IN labels(n)`)은 목록 안의 이름을 n의 라벨로 읽어 닿는 요소로 셉니다. CQ별 표에 「labels() 목록에서 읽음」으로 적습니다. NOT과 none() 안의 비교는 읽지 않습니다.
 - `--cq`를 주지 않으면 보고서의 절 번호와 기존 규칙의 결과는 0.5.0과 같습니다.
 
 ### 0.5.0 (2026-10-09)

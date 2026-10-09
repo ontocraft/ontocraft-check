@@ -111,6 +111,8 @@ def summarize(report) -> dict:
             "coverage": {k: {"touched": v["touched"], "total": v["total"], "ambiguous_only": v["ambiguous_only"]}
                          for k, v in cq["coverage"].items()},
             "unreached_counts": {k: len(v) for k, v in cq["unreached"].items()},
+            "ambiguous_accesses": {k: cq["ambiguous_accesses"][k] for k in ("total", "unique_candidate")},
+            "labels_from_list_cq": [x["cq"] for x in cq["labels_from_list"]],
             "CQ01": len(cq["unresolved"]),
             "CQ01_examples": [{"kind": x["kind"], "name": x["name"], "cq": x["cq"][:5]} for x in cq["unresolved"][:10]],
             "notes": cq["notes"],

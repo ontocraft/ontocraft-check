@@ -16,7 +16,11 @@
    데이터 속성의 이름은 rdfs:label@en, 로컬 이름, 「클래스_속성」의 뒤쪽입니다. domain 이 없는 데이터 속성은
    어느 클래스에서도 찾지 못했을 때 마지막으로 맞춥니다.
    변수에 라벨이 없으면((x), YIELD 로 받은 변수, 목록 변수) 그 이름을 가진 데이터 속성 모두를 「모호」로 셉니다.
-   모호한 접근은 「닿음」에 넣지 않고 따로 셉니다.
+   모호한 접근은 「닿음」에 넣지 않고 따로 셉니다. 그 이름의 데이터 속성이 온톨로지 전체에 하나뿐이면 「후보 1개」로
+   표시하고 그 속성을 unique_candidate 에 적습니다. 이것도 「닿음」에 넣지 않고 사람이 판단하도록 둡니다.
+5. labels(n) 를 리터럴 목록과 비교하는 꼴(any(l IN labels(n) WHERE l IN ['A','B']), [l IN labels(n) WHERE
+   l IN [...]], 'A' IN labels(n), l = 'A')은 목록 안의 이름을 변수 n 의 라벨로 읽습니다. NOT 이나 none() 안의
+   비교는 읽지 않습니다. 이렇게 읽은 라벨은 CQ 별 표의 labels_from_list 에 적습니다.
 4. 관계 변수의 속성(r.since)은 OWL 에 데이터 속성으로 없으므로 세지 않고 CQ 별 표에만 적습니다.
 
 SPARQL 은 rdflib 으로 파싱해 질의 대수에 쓰인 IRI 를 모읍니다. 온톨로지의 접두어를 미리 넣어 두므로 PREFIX 를
@@ -45,8 +49,10 @@ NOT_FIT_NOTE = "CQ를 모두 덮어도 질문이 업무에 맞는지는 판정�
 CANNOT_SAY_CQ = [
     NOT_DELETE_NOTE,
     NOT_FIT_NOTE,
-    "Cypher는 가벼운 정규식 파서로 읽습니다. 문자열 안의 라벨(labels(n) 비교 목록 등)과 동적 라벨은 보지 않습니다. "
-    "라벨이 없는 변수의 속성 접근은 「모호」로 따로 세고 「닿음」에 넣지 않습니다.",
+    "Cypher는 가벼운 정규식 파서로 읽습니다. labels(n)를 문자열 목록과 비교하는 꼴은 목록 안의 이름을 n의 라벨로 읽지만, "
+    "NOT이나 none() 안의 비교, 변수에 담은 목록, 동적 라벨은 보지 않습니다. "
+    "라벨이 없는 변수의 속성 접근은 「모호」로 따로 세고 「닿음」에 넣지 않습니다. 후보가 하나뿐인 모호 접근도 "
+    "「닿음」에 넣지 않습니다. 그 속성을 뜻했는지는 사람이 판단합니다.",
 ]
 
 KIND_KO = {"class": "클래스", "object_property": "관계(객체 속성)", "data_property": "데이터 속성"}
@@ -133,20 +139,21 @@ def _unquote(name: str) -> str:
     return name[1:-1] if name.startswith("`") and name.endswith("`") else name
 
 
-def strip_cypher(text: str) -> str:
-    """문자열 리터럴의 내용과 주석을 지웁니다. 따옴표는 남겨 '' 로 둡니다."""
+def strip_cypher(text: str, keep_strings: bool = False) -> str:
+    """문자열 리터럴의 내용과 주석을 지웁니다. 따옴표는 남겨 '' 로 둡니다. keep_strings 면 주석만 지웁니다."""
     out = []
     i, n = 0, len(text)
     while i < n:
         ch = text[i]
         if ch in ("'", '"'):
             q = ch
+            start = i
             i += 1
             while i < n and text[i] != q:
                 i += 2 if text[i] == "\\" else 1
             if i >= n:
                 raise CypherError("닫히지 않은 문자열 리터럴이 있습니다")
-            out.append(q + q)
+            out.append(text[start:i + 1] if keep_strings else q + q)
             i += 1
         elif ch == "`":
             j = text.find("`", i + 1)
@@ -192,7 +199,8 @@ def parse_cypher(text: str) -> dict:
     """Cypher 에서 노드 라벨, 관계 타입, 변수별 속성 접근을 뽑습니다.
 
     돌려주는 사전: labels(쓰인 라벨), rel_types(쓰인 관계 타입), node_vars{변수: 라벨 집합},
-    rel_vars(관계 변수 집합), accesses[(변수 또는 None, 라벨 집합, 속성 이름)], rel_props[(변수, 속성)].
+    rel_vars(관계 변수 집합), accesses[(변수 또는 None, 라벨 집합, 속성 이름)], rel_props[(변수, 속성)],
+    labels_from_list{변수: labels() 목록에서 읽은 라벨}.
     파싱하지 못하면 CypherError 를 냅니다.
     """
     if not text or not text.strip():
@@ -238,6 +246,14 @@ def parse_cypher(text: str) -> dict:
             node_vars[var].add(lab)
             if lab not in labels:
                 labels.append(lab)
+    from_list: dict[str, list[str]] = {}
+    for var, labs in labels_list_reads(text).items():
+        if var in node_vars and not var.startswith("("):
+            new = [x for x in labs if x not in node_vars[var]]
+            if new:
+                from_list[var] = new
+                node_vars[var].update(new)
+                labels += [x for x in new if x not in labels]
     for m in _ACCESS.finditer(body):
         var, prop = _unquote(m.group(1)), _unquote(m.group(2))
         if var in rel_vars and var not in node_vars:
@@ -257,7 +273,70 @@ def parse_cypher(text: str) -> dict:
             seen.add(key)
             resolved.append((var if var in node_vars else None, labs, prop))
     return {"labels": labels, "rel_types": rel_types, "node_vars": {k: sorted(v) for k, v in node_vars.items()},
-            "rel_vars": sorted(rel_vars), "accesses": resolved, "rel_props": sorted(set(rel_props), key=str)}
+            "rel_vars": sorted(rel_vars), "accesses": resolved, "rel_props": sorted(set(rel_props), key=str),
+            "labels_from_list": from_list}
+
+
+_LABELS_ITER = re.compile(r"(?<![\w$.`])(" + NAME + r")\s+IN\s+labels\s*\(\s*(" + NAME + r")\s*\)\s*WHERE\b", re.I)
+_LIT_IN_LABELS = re.compile(r"(\bNOT\s+)?('(?:[^'\\]|\\.)*'|\"(?:[^\"\\]|\\.)*\")\s+IN\s+labels\s*\(\s*(" + NAME + r")\s*\)", re.I)
+_STR_LIT = re.compile(r"'((?:[^'\\]|\\.)*)'|\"((?:[^\"\\]|\\.)*)\"")
+_NEGATED_HEAD = re.compile(r"(?:\bNOT\s+(?:any|all|single)\s*\(|\bnone\s*\()\s*$", re.I)
+
+
+def _str_items(text: str) -> list[str]:
+    return [m.group(1) if m.group(1) is not None else m.group(2) for m in _STR_LIT.finditer(text)]
+
+
+def _group_end(text: str, start: int) -> int:
+    """start 부터 읽어 둘러싼 괄호가 닫히는 자리(닫는 괄호의 위치)를 돌려줍니다."""
+    depth = 0
+    i, n = start, len(text)
+    while i < n:
+        ch = text[i]
+        if ch in ("'", '"'):
+            j = i + 1
+            while j < n and text[j] != ch:
+                j += 2 if text[j] == "\\" else 1
+            i = j + 1
+            continue
+        if ch in "([{":
+            depth += 1
+        elif ch in ")]}":
+            if depth == 0:
+                return i
+            depth -= 1
+        i += 1
+    return n
+
+
+def labels_list_reads(text: str) -> dict[str, list[str]]:
+    """labels(n) 를 리터럴 목록과 비교하는 꼴에서 {변수: [라벨]} 을 읽습니다. 부정 비교는 읽지 않습니다."""
+    body = strip_cypher(text, keep_strings=True)
+    out: dict[str, list[str]] = defaultdict(list)
+
+    def add(var, labs):
+        for lab in labs:
+            if lab and lab not in out[var]:
+                out[var].append(lab)
+
+    for m in _LABELS_ITER.finditer(body):
+        it, var = _unquote(m.group(1)), _unquote(m.group(2))
+        if _NEGATED_HEAD.search(body[:m.start()]):
+            continue
+        seg = body[m.end():_group_end(body, m.end())]
+        name = re.escape(it)
+        for c in re.finditer(r"(\bNOT\s+)?(?<![\w$.`])" + name + r"\s+IN\s*\[", seg, re.I):
+            if c.group(1):
+                continue
+            end = _group_end(seg, c.end())
+            add(var, _str_items(seg[c.end():end]))
+        for c in re.finditer(r"(\bNOT\s+)?(?<![\w$.`])" + name + r"\s*=\s*('(?:[^'\\]|\\.)*'|\"(?:[^\"\\]|\\.)*\")", seg, re.I):
+            if not c.group(1):
+                add(var, _str_items(c.group(2)))
+    for m in _LIT_IN_LABELS.finditer(body):
+        if not m.group(1) and not _NEGATED_HEAD.search(body[:m.start()]):
+            add(_unquote(m.group(3)), _str_items(m.group(2)))
+    return dict(out)
 
 
 def _is_pattern_context(body: str, m) -> bool:
@@ -451,8 +530,8 @@ def analyze(inv: Inventory, items: list[dict], allow_labels=None, allow_relation
     for it in items:
         cid = it["id"]
         row = {"id": cid, "q": it["q"], "lang": it["lang"], "parsed": True, "classes": [], "object_properties": [],
-               "data_properties": [], "ambiguous": [], "unresolved": [], "relationship_properties": [],
-               "allowed": []}
+               "data_properties": [], "ambiguous": [], "unique_candidate": [], "unresolved": [],
+               "relationship_properties": [], "allowed": [], "labels_from_list": []}
         touched = {k: set() for k in KINDS}
         if it["lang"] == "sparql":
             try:
@@ -488,6 +567,9 @@ def analyze(inv: Inventory, items: list[dict], allow_labels=None, allow_relation
                 per_cq.append(row)
                 continue
             label_classes: dict[str, set] = {}
+            list_labels = {lab for labs in parsed["labels_from_list"].values() for lab in labs}
+            row["labels_from_list"] = [f"{v}:{lab}" for v, labs in sorted(parsed["labels_from_list"].items())
+                                       for lab in labs]
             for lab in parsed["labels"]:
                 cs = idx.classes_for(lab)
                 label_classes[lab] = cs
@@ -496,7 +578,7 @@ def analyze(inv: Inventory, items: list[dict], allow_labels=None, allow_relation
                 elif _allowed(lab, allow_labels):
                     row["allowed"].append(lab)
                 else:
-                    miss("label", lab, cid)
+                    miss("label", lab, cid, "labels() 목록에서 읽음" if lab in list_labels else "")
                     row["unresolved"].append(f"라벨 {lab}")
             for rt in parsed["rel_types"]:
                 ps, how = idx.rels_for(rt)
@@ -521,7 +603,12 @@ def analyze(inv: Inventory, items: list[dict], allow_labels=None, allow_relation
                         for p in cands:
                             if cid not in vague[p]:
                                 vague[p].append(cid)
-                        row["ambiguous"].append(f"{var or '?'}.{prop}({len(cands)}개 후보)")
+                        if len(cands) == 1:
+                            only = short(next(iter(cands)), g)
+                            row["ambiguous"].append(f"{var or '?'}.{prop}(후보 1개: {only})")
+                            row["unique_candidate"].append({"access": f"{var or '?'}.{prop}", "property": only})
+                        else:
+                            row["ambiguous"].append(f"{var or '?'}.{prop}({len(cands)}개 후보)")
                     else:
                         miss("property", f"?.{prop}", cid, "라벨 없는 변수이고, 이 이름의 데이터 속성이 없습니다")
                         row["unresolved"].append(f"속성 ?.{prop}")
@@ -581,6 +668,12 @@ def analyze(inv: Inventory, items: list[dict], allow_labels=None, allow_relation
         "elements": elements,
         "per_cq": per_cq,
         "unreached": unreached,
+        "ambiguous_accesses": {
+            "total": sum(len(r["ambiguous"]) for r in per_cq),
+            "unique_candidate": sum(len(r["unique_candidate"]) for r in per_cq),
+            "unique_candidate_items": [{"cq": r["id"], **u} for r in per_cq for u in r["unique_candidate"]],
+        },
+        "labels_from_list": [{"cq": r["id"], "labels": r["labels_from_list"]} for r in per_cq if r["labels_from_list"]],
         "no_touch": [r["id"] for r in per_cq if r["parsed"] and not (r["classes"] or r["object_properties"] or r["data_properties"])],
         "unresolved": cq01,
         "relation_matched_by_snake": sorted(rel_by_snake_used),

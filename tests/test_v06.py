@@ -274,3 +274,74 @@ def test_mcp_check_ontology_has_cq_args():
     tools = {t.name: t for t in asyncio.run(build_server().list_tools())}
     props = tools["check_ontology"].input_schema["properties"]
     assert {"cq", "cq_query_field", "cq_allow_labels", "cq_allow_relations"} <= set(props)
+
+
+# ---------------------------------------------------------------- 0.6.0 다듬기: 후보 1개, labels() 목록
+
+
+def test_unique_candidate_not_counted_as_touched(onto, tmp_path):
+    items = [
+        {"id": "U1", "q": "후보 하나", "cypher": "MATCH (n) WHERE n.unlocode IS NOT NULL RETURN n.unlocode"},
+        {"id": "U2", "q": "후보 둘", "cypher": "MATCH (x)-[:BERTH_OF]->(y) RETURN x.draft"},
+    ]
+    r = run(onto, cq=cq_file(tmp_path, items))
+    u1 = by_id(r, "U1")
+    assert u1["ambiguous"] == ["n.unlocode(후보 1개: ex:Harbour_unlocode)"]
+    assert u1["unique_candidate"] == [{"access": "n.unlocode", "property": "ex:Harbour_unlocode"}]
+    assert u1["data_properties"] == []
+    assert by_id(r, "U2")["unique_candidate"] == []
+    amb = r.cq["ambiguous_accesses"]
+    assert amb["total"] == 2 and amb["unique_candidate"] == 1
+    assert amb["unique_candidate_items"] == [{"cq": "U1", "access": "n.unlocode", "property": "ex:Harbour_unlocode"}]
+    # 「닿음」에는 넣지 않습니다
+    assert r.cq["coverage"]["data_property"]["touched"] == 0
+    md = render(r, "md")
+    assert "2개 가운데 후보가 하나뿐인 것 1개" in md
+    assert "「닿음」에 넣지 않았습니다" in md
+    summary = json.loads(render(r, "json"))["cq"]["ambiguous_accesses"]
+    assert summary["unique_candidate"] == 1
+
+
+def test_labels_list_any_in(onto, tmp_path):
+    items = [{"id": "L1", "q": "목록",
+              "cypher": "MATCH (n) WHERE any(l IN labels(n) WHERE l IN ['Vessel','Port','Ghost']) RETURN n.draft"}]
+    r = run(onto, cq=cq_file(tmp_path, items))
+    row = by_id(r, "L1")
+    assert row["classes"] == ["ex:Harbour", "ex:Vessel"]
+    assert row["labels_from_list"] == ["n:Vessel", "n:Port", "n:Ghost"]
+    assert row["data_properties"] == ["ex:Vessel_draft"] and row["ambiguous"] == []
+    f = cq01(r)["Ghost"]
+    assert "labels() 목록에서 읽음" in f.message
+    md = render(r, "md")
+    assert "labels() 목록에서 읽음 n:Vessel" in md
+
+
+def test_labels_list_literal_in_and_equals(onto, tmp_path):
+    items = [
+        {"id": "L2", "q": "리터럴", "cypher": "MATCH (n) WHERE 'Berth' IN labels(n) RETURN count(n)"},
+        {"id": "L3", "q": "같음", "cypher": "MATCH (n) WHERE any(l IN labels(n) WHERE l = 'Vessel') RETURN n"},
+        {"id": "L4", "q": "목록 식", "cypher": "MATCH (n) UNWIND [l IN labels(n) WHERE l IN ['Berth']] AS t RETURN t"},
+    ]
+    r = run(onto, cq=cq_file(tmp_path, items))
+    assert by_id(r, "L2")["classes"] == ["ex:Berth"]
+    assert by_id(r, "L3")["classes"] == ["ex:Vessel"]
+    assert by_id(r, "L4")["classes"] == ["ex:Berth"]
+    assert [x["cq"] for x in r.cq["labels_from_list"]] == ["L2", "L3", "L4"]
+    assert r.cq["no_touch"] == []
+
+
+def test_labels_list_negations_ignored():
+    for q in ["MATCH (n) RETURN [l IN labels(n) WHERE NOT l IN ['Vessel']][-1]",
+              "MATCH (n) WHERE none(l IN labels(n) WHERE l IN ['Vessel']) RETURN n",
+              "MATCH (n) WHERE NOT any(l IN labels(n) WHERE l = 'Vessel') RETURN n",
+              "MATCH (n) WHERE NOT 'Vessel' IN labels(n) RETURN n"]:
+        p = parse_cypher(q)
+        assert p["labels_from_list"] == {} and p["labels"] == [], q
+
+
+def test_labels_list_only_known_node_vars():
+    p = parse_cypher("MATCH (n:Vessel) WITH collect(n) AS ns UNWIND ns AS m "
+                     "WHERE 'Port' IN labels(m) RETURN m")
+    assert p["labels_from_list"] == {}
+    p2 = parse_cypher("MATCH (n:Vessel) WHERE 'Port' IN labels(n) RETURN n")
+    assert p2["labels_from_list"] == {"n": ["Port"]} and p2["node_vars"]["n"] == ["Port", "Vessel"]

@@ -293,7 +293,9 @@ def _cq_blocks(report: Report, b: list, n: int) -> None:
     b.append(("p", "이름 맞추기 규칙은 이렇습니다. Cypher 관계 타입은 객체 속성의 @en 레이블과, 없으면 로컬 이름을 "
                    "SCREAMING_SNAKE로 바꾼 이름과 맞춥니다. 노드 라벨은 클래스 로컬 이름이나 @en 레이블과 맞춥니다. "
                    "속성 접근은 변수의 라벨 클래스에서 rdfs:subClassOf를 따라 올라가며 그 클래스가 주인인 데이터 속성"
-                   "(rdfs:domain 또는 「클래스_속성」 이름)을 찾습니다. 라벨이 없는 변수의 속성 접근은 「모호」로 따로 셉니다."))
+                   "(rdfs:domain 또는 「클래스_속성」 이름)을 찾습니다. 라벨이 없는 변수의 속성 접근은 「모호」로 따로 셉니다. "
+                   "labels(n)를 문자열 목록과 비교하는 꼴(l IN [...] 또는 'A' IN labels(n))은 목록 안의 이름을 n의 라벨로 읽고, "
+                   "CQ별 표에 「labels() 목록에서 읽음」으로 적습니다."))
     rows = [["CQ 수", str(cq["total"])],
             ["파싱 성공", str(cq["parsed"])],
             ["파싱 실패", str(len(cq["failed"]))],
@@ -302,10 +304,18 @@ def _cq_blocks(report: Report, b: list, n: int) -> None:
         c = cq["coverage"][kind]
         extra = f", 모호한 접근만 있음 {c['ambiguous_only']}" if kind == "data_property" else ""
         rows.append([f"{c['name']}: CQ가 닿음 / 전체", f"{c['touched']} / {c['total']}{extra}"])
+    amb = cq.get("ambiguous_accesses") or {"total": 0, "unique_candidate": 0}
+    rows.append(["모호 접근", f"{amb['total']}개 가운데 후보가 하나뿐인 것 {amb['unique_candidate']}개"])
+    rows.append(["labels() 목록에서 라벨을 읽은 CQ", str(len(cq.get("labels_from_list") or []))])
     rows.append(["CQ01(온톨로지에 없는 이름)", str(len(cq["unresolved"]))])
     rows.append(["허용 라벨", ", ".join(cq["allow_labels"]) or "(없음)"])
     rows.append(["허용 관계", ", ".join(cq["allow_relations"]) or "(없음)"])
     b.append(("table", ["항목", "값"], rows))
+    if amb["unique_candidate"]:
+        b.append(("p", "「후보가 하나뿐인 모호 접근」은 라벨 없는 변수가 쓴 속성 이름을 가진 데이터 속성이 온톨로지 전체에 "
+                       "하나뿐인 경우입니다. 질의가 그 속성을 뜻했을 가능성이 높지만 라벨로 확인되지 않았으므로 "
+                       "「닿음」에 넣지 않았습니다. CQ별 표의 「후보 1개」 표시를 보고 사람이 판단합니다. 질의에 라벨을 "
+                       "붙이면 「닿음」으로 셉니다."))
     b.append(("p", NOT_FIT_NOTE))
 
     def table(title, head, rws):
@@ -325,9 +335,12 @@ def _cq_blocks(report: Report, b: list, n: int) -> None:
 
     b.append(("h3", f"{n}.2 CQ별 표"))
     rws = [[r["id"], r["q"], ", ".join(r["classes"]), ", ".join(r["object_properties"]),
-            ", ".join(r["data_properties"]), ", ".join(r["unresolved"] + [f"모호 {x}" for x in r["ambiguous"]])]
+            ", ".join(r["data_properties"]),
+            ", ".join(r["unresolved"] + [f"모호 {x}" for x in r["ambiguous"]]
+                      + ([f"labels() 목록에서 읽음 {', '.join(r['labels_from_list'])}"]
+                         if r.get("labels_from_list") else []))]
            for r in cq["per_cq"] if r["parsed"]]
-    table("CQ별 표", ["CQ", "질문", "클래스", "관계", "데이터 속성", "맞추지 못함·모호"], rws)
+    table("CQ별 표", ["CQ", "질문", "클래스", "관계", "데이터 속성", "맞추지 못함·모호·참고"], rws)
 
     b.append(("h3", f"{n}.3 CQ가 닿지 않는 요소"))
     b.append(("p", NOT_DELETE_NOTE))
