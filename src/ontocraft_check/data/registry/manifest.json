@@ -36,8 +36,8 @@
    "name": "반도체",
    "en": "Semiconductors",
    "file": "semiconductor.json",
-   "version": "0.1.1",
-   "terms": 100,
+   "version": "0.2.0",
+   "terms": 125,
    "related": [
     "mfg-ai"
    ]
@@ -47,8 +47,8 @@
    "name": "해양·조선",
    "en": "Maritime and shipbuilding",
    "file": "maritime.json",
-   "version": "0.1.1",
-   "terms": 100,
+   "version": "0.2.0",
+   "terms": 125,
    "related": [
     "defense",
     "port"
@@ -59,8 +59,8 @@
    "name": "항만·물류",
    "en": "Ports and logistics",
    "file": "port.json",
-   "version": "0.1.1",
-   "terms": 100,
+   "version": "0.2.0",
+   "terms": 123,
    "related": [
     "maritime"
    ]
@@ -103,12 +103,12 @@
    "name": "Physical AI",
    "en": "Physical AI",
    "file": "physical-ai.json",
-   "version": "0.1.1",
-   "terms": 100,
+   "version": "0.2.0",
+   "terms": 124,
    "related": [
     "mfg-ai"
    ]
   }
  ],
- "total_terms": 862
+ "total_terms": 959
 }

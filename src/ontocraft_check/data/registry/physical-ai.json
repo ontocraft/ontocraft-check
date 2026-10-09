@@ -14,7 +14,7 @@
   "name": "Physical AI",
   "en": "Physical AI"
  },
- "version": "0.1.1",
+ "version": "0.2.0",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -109,7 +109,8 @@
    "category": "structure",
    "related": [
     "robot-joint",
-    "robot-manipulator"
+    "robot-manipulator",
+    "revolute-joint"
    ],
    "refs": [
     "ISO 8373"
@@ -127,7 +128,9 @@
    "category": "structure",
    "related": [
     "robot-link",
-    "degrees-of-freedom"
+    "degrees-of-freedom",
+    "revolute-joint",
+    "prismatic-joint"
    ],
    "refs": [
     "ISO 8373"
@@ -185,7 +188,8 @@
    "related": [
     "grasp-planning",
     "pick-and-place",
-    "bin-picking"
+    "bin-picking",
+    "tactile-sensor"
    ],
    "example": "ROS 2에서는 그리퍼를 열고 닫는 명령을 control_msgs의 GripperCommand 액션으로 보냅니다."
   },
@@ -201,7 +205,8 @@
    "category": "structure",
    "related": [
     "end-effector",
-    "robot-coordinate-frame"
+    "robot-coordinate-frame",
+    "cartesian-space"
    ],
    "refs": [
     "ISO 8373"
@@ -219,7 +224,8 @@
    "category": "structure",
    "related": [
     "servo-motor",
-    "speed-reducer"
+    "speed-reducer",
+    "strain-wave-gear"
    ]
   },
   {
@@ -235,7 +241,8 @@
    "broader": "robot-actuator",
    "related": [
     "joint-encoder",
-    "speed-reducer"
+    "speed-reducer",
+    "control-cycle"
    ]
   },
   {
@@ -250,7 +257,9 @@
    "category": "structure",
    "related": [
     "servo-motor",
-    "robot-actuator"
+    "robot-actuator",
+    "backlash",
+    "strain-wave-gear"
    ]
   },
   {
@@ -371,7 +380,8 @@
    "broader": "legged-robot",
    "related": [
     "bipedal-locomotion",
-    "whole-body-control"
+    "whole-body-control",
+    "zero-moment-point"
    ]
   },
   {
@@ -386,7 +396,8 @@
    "related": [
     "humanoid-robot",
     "legged-robot",
-    "whole-body-control"
+    "whole-body-control",
+    "zero-moment-point"
    ]
   },
   {
@@ -401,7 +412,8 @@
    "category": "kinematics",
    "related": [
     "homogeneous-transform",
-    "tf-tree"
+    "tf-tree",
+    "dh-parameters"
    ],
    "refs": [
     "ISO 9787"
@@ -420,7 +432,8 @@
    "category": "kinematics",
    "related": [
     "robot-coordinate-frame",
-    "forward-kinematics"
+    "forward-kinematics",
+    "dh-parameters"
    ]
   },
   {
@@ -454,7 +467,9 @@
    "related": [
     "configuration-space",
     "forward-kinematics",
-    "inverse-kinematics"
+    "inverse-kinematics",
+    "prismatic-joint",
+    "cartesian-space"
    ],
    "example": "ROS 2의 sensor_msgs/JointState 메시지는 관절 이름과 함께 관절 공간의 위치, 속도, 힘 값을 담습니다."
   },
@@ -472,7 +487,8 @@
    "related": [
     "inverse-kinematics",
     "homogeneous-transform",
-    "joint-space"
+    "joint-space",
+    "dh-parameters"
    ]
   },
   {
@@ -487,7 +503,8 @@
    "broader": "robot-kinematics",
    "related": [
     "forward-kinematics",
-    "kinematic-singularity"
+    "kinematic-singularity",
+    "cartesian-space"
    ]
   },
   {
@@ -548,7 +565,8 @@
    "category": "kinematics",
    "related": [
     "robot-kinematics",
-    "torque-control"
+    "torque-control",
+    "zero-moment-point"
    ]
   },
   {
@@ -564,7 +582,8 @@
    "related": [
     "path-planning",
     "motion-planning",
-    "position-control"
+    "position-control",
+    "trajectory-generation"
    ],
    "example": "ROS 2의 trajectory_msgs/JointTrajectory 메시지는 각 점에 관절 위치, 속도, 가속도와 출발 후 도달 시각(time_from_start)을 함께 적습니다."
   },
@@ -580,7 +599,8 @@
    "category": "kinematics",
    "related": [
     "pose-accuracy",
-    "tool-center-point"
+    "tool-center-point",
+    "backlash"
    ],
    "refs": [
     "ISO 9283"
@@ -600,7 +620,8 @@
    "related": [
     "pose-repeatability",
     "tool-center-point",
-    "robot-kinematics"
+    "robot-kinematics",
+    "robot-calibration"
    ],
    "refs": [
     "ISO 9283"
@@ -618,7 +639,8 @@
    "category": "control",
    "related": [
     "servo-motor",
-    "feedback-control"
+    "feedback-control",
+    "control-cycle"
    ]
   },
   {
@@ -633,7 +655,9 @@
    "category": "control",
    "related": [
     "pid-control",
-    "joint-encoder"
+    "joint-encoder",
+    "control-cycle",
+    "visual-servoing"
    ]
   },
   {
@@ -665,7 +689,8 @@
    "broader": "motion-control",
    "related": [
     "pid-control",
-    "force-control"
+    "force-control",
+    "admittance-control"
    ]
   },
   {
@@ -696,7 +721,8 @@
    "broader": "motion-control",
    "related": [
     "force-torque-sensor",
-    "impedance-control"
+    "impedance-control",
+    "robot-compliance"
    ]
   },
   {
@@ -712,7 +738,9 @@
    "related": [
     "force-control",
     "torque-control",
-    "force-torque-sensor"
+    "force-torque-sensor",
+    "admittance-control",
+    "robot-compliance"
    ],
    "example": "임피던스 제어기 설정에는 축마다 강성(stiffness)과 감쇠(damping) 값을 적습니다."
   },
@@ -772,7 +800,8 @@
    "category": "control",
    "related": [
     "robot-emergency-stop",
-    "industrial-robot"
+    "industrial-robot",
+    "robot-teaching"
    ],
    "refs": [
     "ISO 10218-1"
@@ -808,7 +837,8 @@
    "related": [
     "point-cloud",
     "six-d-pose-estimation",
-    "hand-eye-calibration"
+    "hand-eye-calibration",
+    "stereo-camera"
    ],
    "example": "깊이 카메라 드라이버는 색 영상, 깊이 영상, 카메라 내부 파라미터(camera_info)를 서로 다른 토픽으로 발행합니다."
   },
@@ -825,7 +855,8 @@
    "category": "perception",
    "related": [
     "point-cloud",
-    "slam"
+    "slam",
+    "occupancy-grid-map"
    ]
   },
   {
@@ -841,7 +872,8 @@
    "related": [
     "sensor-fusion",
     "kalman-filter",
-    "robot-localization"
+    "robot-localization",
+    "odometry"
    ],
    "example": "ROS 2의 sensor_msgs/Imu 메시지는 방향, 각속도, 선가속도와 각 값의 공분산을 담습니다."
   },
@@ -858,7 +890,8 @@
    "category": "perception",
    "related": [
     "servo-motor",
-    "feedback-control"
+    "feedback-control",
+    "odometry"
    ]
   },
   {
@@ -875,7 +908,9 @@
    "related": [
     "force-control",
     "impedance-control",
-    "power-and-force-limiting"
+    "power-and-force-limiting",
+    "tactile-sensor",
+    "admittance-control"
    ],
    "example": "ROS 2에서는 힘 세 성분과 토크 세 성분을 geometry_msgs/WrenchStamped 메시지로 보냅니다."
   },
@@ -891,7 +926,8 @@
    "category": "perception",
    "related": [
     "rgbd-camera",
-    "lidar"
+    "lidar",
+    "stereo-camera"
    ]
   },
   {
@@ -906,7 +942,8 @@
    "category": "perception",
    "related": [
     "kalman-filter",
-    "inertial-measurement-unit"
+    "inertial-measurement-unit",
+    "stereo-camera"
    ]
   },
   {
@@ -941,7 +978,8 @@
    "related": [
     "slam",
     "kalman-filter",
-    "robot-navigation"
+    "robot-navigation",
+    "odometry"
    ],
    "example": "ROS 2 내비게이션에서는 위치 추정 노드가 map 좌표계에서 odom 좌표계로 가는 변환을 계속 고쳐 발행합니다."
   },
@@ -959,7 +997,9 @@
    "related": [
     "lidar",
     "autonomous-mobile-robot",
-    "point-cloud"
+    "point-cloud",
+    "occupancy-grid-map",
+    "odometry"
    ],
    "example": "SLAM으로 만든 지도는 점유 격자 이미지와, 해상도와 원점을 적은 YAML 파일로 저장합니다."
   },
@@ -976,7 +1016,8 @@
    "broader": "robot-perception",
    "related": [
     "robot-pose",
-    "grasp-planning"
+    "grasp-planning",
+    "visual-servoing"
    ]
   },
   {
@@ -992,7 +1033,9 @@
    "related": [
     "homogeneous-transform",
     "robot-coordinate-frame",
-    "rgbd-camera"
+    "rgbd-camera",
+    "robot-calibration",
+    "visual-servoing"
    ],
    "example": "캘리브레이션 결과는 카메라 좌표계와 로봇 플랜지 또는 베이스 사이의 고정 변환으로 저장해 좌표 변환 트리에 넣습니다."
   },
@@ -1008,7 +1051,8 @@
    "category": "planning",
    "related": [
     "configuration-space",
-    "collision-checking"
+    "collision-checking",
+    "trajectory-generation"
    ]
   },
   {
@@ -1025,7 +1069,11 @@
    "related": [
     "robot-trajectory",
     "robot-navigation",
-    "obstacle-avoidance"
+    "obstacle-avoidance",
+    "trajectory-generation",
+    "occupancy-grid-map",
+    "a-star-search",
+    "replanning"
    ],
    "example": "ROS 2 내비게이션은 경로 계획 결과를 자세(PoseStamped)의 나열인 nav_msgs/Path 메시지로 발행합니다."
   },
@@ -1072,7 +1120,8 @@
    "broader": "motion-planning",
    "related": [
     "configuration-space",
-    "collision-checking"
+    "collision-checking",
+    "a-star-search"
    ]
   },
   {
@@ -1086,7 +1135,8 @@
    "category": "planning",
    "related": [
     "path-planning",
-    "lidar"
+    "lidar",
+    "replanning"
    ]
   },
   {
@@ -1119,7 +1169,8 @@
    "broader": "motion-planning",
    "related": [
     "robot-gripper",
-    "six-d-pose-estimation"
+    "six-d-pose-estimation",
+    "tactile-sensor"
    ]
   },
   {
@@ -1165,7 +1216,8 @@
    "category": "planning",
    "related": [
     "motion-planning",
-    "vision-language-action-model"
+    "vision-language-action-model",
+    "replanning"
    ]
   },
   {
@@ -1239,7 +1291,8 @@
    "category": "learning",
    "related": [
     "teleoperation",
-    "imitation-learning"
+    "imitation-learning",
+    "robot-teaching"
    ]
   },
   {
@@ -1254,7 +1307,8 @@
    "broader": "robot-learning",
    "related": [
     "reward-function",
-    "robot-policy"
+    "robot-policy",
+    "reward-hacking"
    ]
   },
   {
@@ -1269,7 +1323,8 @@
    "category": "learning",
    "related": [
     "reinforcement-learning",
-    "robot-policy"
+    "robot-policy",
+    "reward-hacking"
    ],
    "example": "강화 학습 설정 파일에는 보상 항목 이름과 가중치를 나란히 적어 목표 거리 보상과 관절 토크 벌점 같은 항목을 조절합니다."
   },
@@ -1375,7 +1430,8 @@
    "category": "software",
    "related": [
     "contact-model",
-    "robot-simulation"
+    "robot-simulation",
+    "reward-hacking"
    ]
   },
   {
@@ -1405,7 +1461,9 @@
    "category": "software",
    "related": [
     "physics-engine",
-    "sim-to-real"
+    "sim-to-real",
+    "robot-teaching",
+    "hardware-in-the-loop"
    ]
   },
   {
@@ -1436,7 +1494,8 @@
    "category": "software",
    "related": [
     "robot-simulation",
-    "urdf"
+    "urdf",
+    "hardware-in-the-loop"
    ],
    "refs": [
     "ISO 23247"
@@ -1454,7 +1513,8 @@
    "category": "software",
    "related": [
     "ros-node",
-    "ros-topic"
+    "ros-topic",
+    "ros-action"
    ]
   },
   {
@@ -1483,7 +1543,8 @@
    "category": "software",
    "related": [
     "ros-node",
-    "ros-service"
+    "ros-service",
+    "ros-action"
    ]
   },
   {
@@ -1499,7 +1560,8 @@
    "related": [
     "ros-topic",
     "ros-node",
-    "ros-2"
+    "ros-2",
+    "ros-action"
    ],
    "example": "ROS 2의 .srv 파일은 요청 필드와 응답 필드를 --- 줄로 나눠 적습니다."
   },
@@ -1531,7 +1593,8 @@
    "category": "safety",
    "related": [
     "robot-risk-assessment",
-    "collaborative-operation"
+    "collaborative-operation",
+    "performance-level"
    ],
    "refs": [
     "ISO 10218-1",
@@ -1551,7 +1614,8 @@
    "broader": "robot-safety",
    "related": [
     "robot-safeguarded-space",
-    "collaborative-operation"
+    "collaborative-operation",
+    "performance-level"
    ],
    "refs": [
     "ISO 12100",
@@ -1609,7 +1673,9 @@
    "broader": "collaborative-operation",
    "related": [
     "teach-pendant",
-    "safety-rated-monitored-stop"
+    "safety-rated-monitored-stop",
+    "admittance-control",
+    "robot-teaching"
    ],
    "refs": [
     "ISO 10218-1"
@@ -1687,7 +1753,8 @@
    "broader": "robot-safety",
    "related": [
     "teach-pendant",
-    "robot-protective-stop"
+    "robot-protective-stop",
+    "performance-level"
    ],
    "refs": [
     "ISO 13850",
@@ -1711,6 +1778,430 @@
    ],
    "refs": [
     "ISO 10218-2"
+   ]
+  },
+  {
+   "id": "revolute-joint",
+   "ko": "회전 관절",
+   "en": "revolute joint",
+   "alt": [
+    "회전 조인트",
+    "R 관절"
+   ],
+   "definition": "한 축을 중심으로 두 링크가 서로 돌도록 잇는 관절입니다. 관절 변수는 각도이고, 수직 다관절 로봇의 축은 대부분 이 형식입니다.",
+   "category": "structure",
+   "broader": "robot-joint",
+   "related": [
+    "robot-joint",
+    "prismatic-joint",
+    "robot-link"
+   ],
+   "refs": [
+    "ISO 8373"
+   ],
+   "example": "URDF에서는 type=\"revolute\"로 적고 limit의 lower·upper를 라디안으로 줍니다. 한계 없이 계속 도는 바퀴 축은 type=\"continuous\"로 적습니다."
+  },
+  {
+   "id": "prismatic-joint",
+   "ko": "직동 관절",
+   "en": "prismatic joint",
+   "alt": [
+    "직선 관절",
+    "슬라이드 관절",
+    "P 관절"
+   ],
+   "definition": "한 축을 따라 두 링크가 직선으로 미끄러지도록 잇는 관절입니다. 관절 변수는 길이이고, 직교 로봇의 축이나 스카라 로봇의 상하 축에 쓰입니다.",
+   "category": "structure",
+   "broader": "robot-joint",
+   "related": [
+    "robot-joint",
+    "revolute-joint",
+    "joint-space"
+   ],
+   "refs": [
+    "ISO 8373"
+   ],
+   "example": "URDF에서는 type=\"prismatic\"으로 적고 limit의 lower·upper를 미터로 줍니다."
+  },
+  {
+   "id": "backlash",
+   "ko": "백래시",
+   "en": "backlash",
+   "alt": [
+    "백러시",
+    "기어 유격",
+    "유격"
+   ],
+   "definition": "맞물린 기어 이 사이의 틈 때문에 입력 축의 회전 방향이 바뀔 때 출력 축이 바로 따라오지 않는 유격입니다. 감속기를 고를 때 보는 값이고, 관절 위치 오차와 반복 정밀도를 나쁘게 합니다.",
+   "category": "structure",
+   "related": [
+    "speed-reducer",
+    "strain-wave-gear",
+    "pose-repeatability"
+   ]
+  },
+  {
+   "id": "strain-wave-gear",
+   "ko": "파동 기어 감속기",
+   "en": "strain wave gear",
+   "alt": [
+    "하모닉 감속기",
+    "스트레인 웨이브 기어",
+    "파동 기어"
+   ],
+   "definition": "타원형 웨이브 제너레이터가 얇고 휘는 외치차를 변형시켜 바깥 내치차와 일부만 맞물리게 하는 감속기입니다. 작고 가벼우면서 감속비가 크고 백래시가 거의 없어 로봇 관절에 많이 씁니다.",
+   "category": "structure",
+   "broader": "speed-reducer",
+   "related": [
+    "speed-reducer",
+    "backlash",
+    "robot-actuator"
+   ]
+  },
+  {
+   "id": "dh-parameters",
+   "ko": "DH 파라미터",
+   "en": "Denavit-Hartenberg parameters",
+   "alt": [
+    "DH 변수",
+    "D-H 파라미터",
+    "DH 규약"
+   ],
+   "definition": "이웃한 관절 좌표계 사이의 관계를 링크 길이, 링크 비틀림, 링크 오프셋, 관절각 네 값으로 적는 규약입니다. 표 한 장으로 정기구학을 세울 수 있지만 좌표계를 붙이는 방식이 표준형과 수정형으로 나뉘므로, 값을 옮길 때 어느 쪽인지 확인해야 합니다.",
+   "category": "kinematics",
+   "related": [
+    "forward-kinematics",
+    "robot-coordinate-frame",
+    "homogeneous-transform",
+    "robot-calibration"
+   ]
+  },
+  {
+   "id": "cartesian-space",
+   "ko": "직교 공간",
+   "en": "Cartesian space",
+   "alt": [
+    "직교 좌표 공간",
+    "태스크 공간",
+    "task space"
+   ],
+   "definition": "말단의 위치와 자세를 x, y, z와 세 회전으로 나타내는 공간입니다. 관절 공간과 짝을 이루며, 직선 이동 명령이나 힘 제어 목표는 보통 이 공간에서 줍니다.",
+   "category": "kinematics",
+   "related": [
+    "joint-space",
+    "tool-center-point",
+    "inverse-kinematics"
+   ]
+  },
+  {
+   "id": "zero-moment-point",
+   "ko": "ZMP",
+   "en": "zero moment point",
+   "alt": [
+    "영 모멘트 점",
+    "제로 모멘트 포인트"
+   ],
+   "definition": "지면 반력이 만드는 수평 방향 모멘트가 0이 되는 바닥 위의 점입니다. 보행 로봇은 이 점이 발이 닿은 지지 다각형 안에 머물도록 걸음을 계획해 넘어지지 않게 합니다.",
+   "category": "kinematics",
+   "related": [
+    "bipedal-locomotion",
+    "humanoid-robot",
+    "robot-dynamics"
+   ]
+  },
+  {
+   "id": "robot-calibration",
+   "ko": "로봇 캘리브레이션",
+   "en": "robot calibration",
+   "alt": [
+    "로봇 보정",
+    "기구학 보정",
+    "kinematic calibration"
+   ],
+   "definition": "실제 로봇의 링크 길이와 관절 원점 같은 기구학 값을 측정해 제어기의 모델 값을 고치는 일입니다. 반복 정밀도는 그대로 두고 위치 정확도를 높이며, 카메라와 로봇 사이를 맞추는 핸드아이 캘리브레이션과는 대상이 다릅니다.",
+   "category": "kinematics",
+   "related": [
+    "pose-accuracy",
+    "dh-parameters",
+    "hand-eye-calibration"
+   ]
+  },
+  {
+   "id": "trajectory-generation",
+   "ko": "궤적 생성",
+   "en": "trajectory generation",
+   "alt": [
+    "궤적 계획",
+    "trajectory planning",
+    "궤적 보간"
+   ],
+   "definition": "경로 위의 점들에 시간을 붙여 각 순간의 위치, 속도, 가속도를 정하는 일입니다. 경로 계획이 어디로 지나갈지를 정한다면 궤적 생성은 속도와 가속도 한계 안에서 얼마나 빨리 지나갈지를 정합니다.",
+   "category": "planning",
+   "related": [
+    "robot-trajectory",
+    "path-planning",
+    "motion-planning"
+   ]
+  },
+  {
+   "id": "stereo-camera",
+   "ko": "스테레오 카메라",
+   "en": "stereo camera",
+   "alt": [
+    "양안 카메라",
+    "스테레오 비전"
+   ],
+   "definition": "간격을 두고 나란히 놓은 두 카메라의 영상에서 같은 점의 위치 차이인 시차를 구해 거리를 계산하는 카메라입니다. 빛을 쏘지 않는 수동 방식은 실외에서도 쓰기 좋지만, 무늬가 없는 면에서는 거리를 잘 얻지 못합니다.",
+   "category": "perception",
+   "related": [
+    "rgbd-camera",
+    "point-cloud",
+    "sensor-fusion"
+   ]
+  },
+  {
+   "id": "tactile-sensor",
+   "ko": "촉각 센서",
+   "en": "tactile sensor",
+   "alt": [
+    "택타일 센서",
+    "촉각 센서 배열"
+   ],
+   "definition": "손가락이나 그리퍼 표면에 붙여 닿는 위치와 누르는 힘의 분포를 재는 센서입니다. 손목의 힘·토크 센서가 합력 하나를 재는 것과 달리 접촉면의 모양과 미끄러짐을 볼 수 있어 섬세한 파지에 씁니다.",
+   "category": "perception",
+   "related": [
+    "force-torque-sensor",
+    "robot-gripper",
+    "grasp-planning"
+   ]
+  },
+  {
+   "id": "occupancy-grid-map",
+   "ko": "점유 격자 지도",
+   "en": "occupancy grid map",
+   "alt": [
+    "점유 격자",
+    "occupancy grid",
+    "격자 지도"
+   ],
+   "definition": "공간을 같은 크기의 칸으로 나누고 칸마다 물체가 차 있을 확률을 적은 지도입니다. 이동 로봇이 SLAM으로 만들고 경로 계획과 장애물 회피에 그대로 씁니다.",
+   "category": "perception",
+   "related": [
+    "slam",
+    "lidar",
+    "path-planning",
+    "a-star-search"
+   ],
+   "example": "ROS 2의 nav_msgs/OccupancyGrid 메시지는 칸마다 0부터 100까지의 점유 값을 담고, 알 수 없는 칸은 -1로 적습니다."
+  },
+  {
+   "id": "odometry",
+   "ko": "오도메트리",
+   "en": "odometry",
+   "alt": [
+    "주행 거리 측정",
+    "휠 오도메트리",
+    "주행계"
+   ],
+   "definition": "바퀴 회전량이나 연속한 영상, IMU 값을 적분해 출발점에서 얼마나 움직였는지 추정하는 방법입니다. 짧은 거리에서는 매끄럽지만 오차가 계속 쌓이므로 지도나 GPS 같은 외부 기준으로 고쳐 줍니다.",
+   "category": "perception",
+   "related": [
+    "robot-localization",
+    "joint-encoder",
+    "inertial-measurement-unit",
+    "slam"
+   ]
+  },
+  {
+   "id": "admittance-control",
+   "ko": "어드미턴스 제어",
+   "en": "admittance control",
+   "alt": [
+    "어드미턴스 제어기"
+   ],
+   "definition": "측정한 외력을 받아 원하는 질량, 감쇠, 강성 모델에 따라 움직일 위치를 계산하고, 그 위치를 위치 제어로 따라가는 방식입니다. 힘을 받아 위치를 내는 점에서 임피던스 제어와 방향이 반대이며, 위치 제어가 강한 산업용 로봇에 붙이기 쉽습니다.",
+   "category": "control",
+   "related": [
+    "impedance-control",
+    "force-torque-sensor",
+    "position-control",
+    "hand-guiding",
+    "robot-compliance"
+   ]
+  },
+  {
+   "id": "robot-compliance",
+   "ko": "컴플라이언스",
+   "en": "compliance",
+   "alt": [
+    "유연성",
+    "순응성"
+   ],
+   "definition": "외력을 받았을 때 로봇이나 손목이 밀려나며 따라 움직이는 성질로, 강성의 반대 개념입니다. 스프링 같은 기구로 얻는 수동 방식과 임피던스 제어 같은 제어로 얻는 능동 방식이 있고, 끼워 맞춤과 사람과의 접촉에서 충격을 줄입니다.",
+   "category": "control",
+   "related": [
+    "impedance-control",
+    "admittance-control",
+    "force-control"
+   ]
+  },
+  {
+   "id": "control-cycle",
+   "ko": "제어 주기",
+   "en": "control cycle",
+   "alt": [
+    "제어 루프 주기",
+    "샘플링 주기",
+    "control period"
+   ],
+   "definition": "제어기가 센서 값을 읽고 명령을 계산해 구동기에 내보내는 한 번의 반복이 걸리는 시간 간격입니다. 짧을수록 빠른 변화에 대응하지만 계산과 통신이 그 안에 끝나야 하므로, 관절 서보와 동작 계획과 학습 정책은 보통 서로 다른 주기로 돕니다.",
+   "category": "control",
+   "related": [
+    "feedback-control",
+    "motion-control",
+    "servo-motor",
+    "hardware-in-the-loop"
+   ]
+  },
+  {
+   "id": "visual-servoing",
+   "ko": "비주얼 서보잉",
+   "en": "visual servoing",
+   "alt": [
+    "시각 서보",
+    "비전 서보",
+    "시각 서보 제어"
+   ],
+   "definition": "카메라 영상에서 얻은 특징과 목표 특징의 차이를 줄이도록 로봇을 계속 움직이는 피드백 제어입니다. 미리 계산한 목표 자세로 한 번에 가는 방식보다 캘리브레이션 오차에 덜 민감하며, 영상 특징으로 오차를 정하는 방식과 3차원 자세로 정하는 방식이 있습니다.",
+   "category": "control",
+   "related": [
+    "feedback-control",
+    "hand-eye-calibration",
+    "six-d-pose-estimation"
+   ]
+  },
+  {
+   "id": "robot-teaching",
+   "ko": "티칭",
+   "en": "robot teaching",
+   "alt": [
+    "교시",
+    "로봇 교시",
+    "티칭 작업"
+   ],
+   "definition": "로봇이 지날 점과 동작 순서를 사람이 정해 로봇 프로그램에 저장하는 일입니다. 티치 펜던트나 핸드 가이딩으로 실제 로봇을 움직여 점을 찍는 온라인 방식과, 시뮬레이션에서 프로그램을 만드는 오프라인 방식이 있습니다.",
+   "category": "control",
+   "related": [
+    "teach-pendant",
+    "hand-guiding",
+    "robot-simulation",
+    "demonstration-data"
+   ]
+  },
+  {
+   "id": "reward-hacking",
+   "ko": "보상 해킹",
+   "en": "reward hacking",
+   "alt": [
+    "보상 악용",
+    "specification gaming",
+    "명세 게이밍"
+   ],
+   "definition": "강화 학습 정책이 설계자가 의도한 행동 대신 보상 함수의 허점을 파고들어 점수만 높이는 현상입니다. 시뮬레이터의 물리 오류를 이용하는 경우도 있어서 보상 곡선만 보지 않고 실제 동작 영상을 함께 확인합니다.",
+   "category": "learning",
+   "related": [
+    "reward-function",
+    "reinforcement-learning",
+    "physics-engine"
+   ]
+  },
+  {
+   "id": "a-star-search",
+   "ko": "A* 탐색",
+   "en": "A* search",
+   "alt": [
+    "A* 알고리즘",
+    "A 스타",
+    "A-star"
+   ],
+   "definition": "출발점에서 지금까지 온 비용과 목표까지 남은 비용의 추정치를 더한 값이 작은 칸부터 넓혀 가며 최단 경로를 찾는 그래프 탐색입니다. 추정치가 실제 비용을 넘지 않으면 최단 경로를 보장하며, 격자 지도 위 이동 로봇의 전역 경로 계획에 흔히 씁니다.",
+   "category": "planning",
+   "related": [
+    "path-planning",
+    "occupancy-grid-map",
+    "sampling-based-planning"
+   ]
+  },
+  {
+   "id": "replanning",
+   "ko": "재계획",
+   "en": "replanning",
+   "alt": [
+    "리플래닝",
+    "경로 재계획",
+    "동적 재계획"
+   ],
+   "definition": "실행 중 새 장애물이 나타나거나 위치 추정이 어긋나 기존 계획을 따를 수 없을 때 지금 상태에서 계획을 다시 세우는 일입니다. 처음부터 다시 풀지 않고 앞선 탐색 결과를 고쳐 쓰는 증분 탐색을 쓰기도 합니다.",
+   "category": "planning",
+   "related": [
+    "path-planning",
+    "obstacle-avoidance",
+    "task-planning"
+   ]
+  },
+  {
+   "id": "ros-action",
+   "ko": "ROS 액션",
+   "en": "ROS action",
+   "alt": [
+    "ROS 2 액션",
+    "액션 서버",
+    "액션 클라이언트"
+   ],
+   "definition": "목표를 보내면 작업하는 동안 진행 피드백을 받고, 도중에 취소할 수 있으며, 끝나면 결과를 받는 ROS 통신 방식입니다. 한 번 묻고 답하는 서비스와 달리 이동이나 파지처럼 시간이 걸리는 작업에 씁니다.",
+   "category": "software",
+   "related": [
+    "ros-service",
+    "ros-topic",
+    "ros-2"
+   ],
+   "example": "Nav2에서 목표 지점까지 이동시킬 때는 nav2_msgs/action/NavigateToPose 액션으로 목표를 보내고 남은 거리를 피드백으로 받습니다."
+  },
+  {
+   "id": "performance-level",
+   "ko": "안전 성능 수준",
+   "en": "performance level",
+   "alt": [
+    "PL",
+    "성능 수준",
+    "PLr"
+   ],
+   "definition": "기계 제어 시스템의 안전 기능이 위험한 고장 없이 제 역할을 해낼 능력을 PL a부터 e까지 다섯 단계로 나타낸 값입니다. 위험성 평가로 필요한 수준인 PLr을 정하고, 구성 방식과 부품 고장률과 진단 범위로 실제 달성 수준을 확인합니다.",
+   "category": "safety",
+   "related": [
+    "robot-risk-assessment",
+    "robot-safety",
+    "robot-emergency-stop"
+   ],
+   "refs": [
+    "ISO 13849-1"
+   ]
+  },
+  {
+   "id": "hardware-in-the-loop",
+   "ko": "HIL",
+   "en": "hardware-in-the-loop",
+   "alt": [
+    "HILS",
+    "하드웨어 인 더 루프",
+    "HIL 시뮬레이션"
+   ],
+   "definition": "실제 제어기나 구동부 같은 하드웨어를 시뮬레이션한 로봇·환경 모델과 실시간으로 연결해 시험하는 방법입니다. 모두 소프트웨어로 돌리는 시뮬레이션보다 실제 신호와 지연을 확인할 수 있고, 실물 로봇보다 위험한 상황을 안전하게 반복할 수 있습니다.",
+   "category": "software",
+   "related": [
+    "robot-simulation",
+    "robot-digital-twin",
+    "control-cycle"
    ]
   }
  ]

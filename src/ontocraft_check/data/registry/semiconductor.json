@@ -14,7 +14,7 @@
   "name": "반도체",
   "en": "Semiconductors"
  },
- "version": "0.1.1",
+ "version": "0.2.0",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -88,7 +88,8 @@
    "related": [
     "memory-cell",
     "nand-flash",
-    "hbm"
+    "hbm",
+    "dram-refresh"
    ],
    "refs": [
     "JEDEC JESD79"
@@ -142,7 +143,8 @@
    "related": [
     "through-silicon-via",
     "chip-bump",
-    "hybrid-bonding"
+    "hybrid-bonding",
+    "back-grinding"
    ],
    "refs": [
     "JEDEC JESD235"
@@ -160,7 +162,8 @@
    "category": "device",
    "related": [
     "dram",
-    "nand-flash"
+    "nand-flash",
+    "dram-refresh"
    ]
   },
   {
@@ -175,7 +178,8 @@
    "category": "device",
    "related": [
     "memory-cell",
-    "ion-implantation"
+    "ion-implantation",
+    "threshold-voltage"
    ]
   },
   {
@@ -190,7 +194,8 @@
    "category": "device",
    "related": [
     "wafer-die",
-    "wafer-lot"
+    "wafer-lot",
+    "gross-die"
    ],
    "refs": [
     "SEMI M1"
@@ -208,7 +213,8 @@
    "category": "device",
    "related": [
     "semiconductor-wafer",
-    "wafer-map"
+    "wafer-map",
+    "gross-die"
    ]
   },
   {
@@ -290,7 +296,8 @@
    "broader": "front-end-process",
    "related": [
     "diffusion-process",
-    "film-thickness"
+    "film-thickness",
+    "feol"
    ]
   },
   {
@@ -306,7 +313,8 @@
    "broader": "front-end-process",
    "related": [
     "thermal-oxidation",
-    "wafer-anneal"
+    "wafer-anneal",
+    "doping"
    ]
   },
   {
@@ -323,7 +331,8 @@
    "related": [
     "wafer-anneal",
     "mosfet",
-    "photoresist"
+    "photoresist",
+    "feol"
    ]
   },
   {
@@ -357,7 +366,8 @@
    "related": [
     "photoresist",
     "photomask",
-    "overlay-error"
+    "overlay-error",
+    "wafer-rework"
    ]
   },
   {
@@ -437,7 +447,8 @@
    "related": [
     "process-chamber",
     "wafer-etching",
-    "process-gas"
+    "process-gas",
+    "endpoint-detection"
    ]
   },
   {
@@ -453,7 +464,8 @@
    "broader": "front-end-process",
    "related": [
     "film-thickness",
-    "process-gas"
+    "process-gas",
+    "pvd"
    ]
   },
   {
@@ -468,7 +480,8 @@
    "broader": "thin-film-deposition",
    "related": [
     "ald",
-    "process-gas"
+    "process-gas",
+    "pvd"
    ]
   },
   {
@@ -499,7 +512,8 @@
    "broader": "front-end-process",
    "related": [
     "film-thickness",
-    "process-chemical"
+    "process-chemical",
+    "endpoint-detection"
    ]
   },
   {
@@ -516,7 +530,8 @@
    "related": [
     "ultrapure-water",
     "process-chemical",
-    "queue-time-limit"
+    "queue-time-limit",
+    "chemical-delivery-system"
    ]
   },
   {
@@ -548,7 +563,8 @@
    "broader": "back-end-process",
    "related": [
     "test-bin",
-    "wafer-map"
+    "wafer-map",
+    "probe-card"
    ]
   },
   {
@@ -580,7 +596,8 @@
    "related": [
     "wafer-die",
     "wafer-map",
-    "chip-packaging"
+    "chip-packaging",
+    "back-grinding"
    ]
   },
   {
@@ -596,7 +613,8 @@
    "broader": "back-end-process",
    "related": [
     "flip-chip",
-    "chip-bump"
+    "chip-bump",
+    "wire-bonding"
    ]
   },
   {
@@ -612,7 +630,8 @@
    "related": [
     "chip-bump",
     "chip-packaging",
-    "hybrid-bonding"
+    "hybrid-bonding",
+    "wire-bonding"
    ]
   },
   {
@@ -641,7 +660,8 @@
    "category": "back-end",
    "related": [
     "hbm",
-    "chip-bump"
+    "chip-bump",
+    "back-grinding"
    ]
   },
   {
@@ -722,7 +742,8 @@
    "related": [
     "foup",
     "lot-genealogy",
-    "semiconductor-wafer"
+    "semiconductor-wafer",
+    "wafer-start"
    ],
    "refs": [
     "SEMI E90"
@@ -743,7 +764,8 @@
    "related": [
     "fab-recipe",
     "front-end-process",
-    "fab-cycle-time"
+    "fab-cycle-time",
+    "process-step"
    ]
   },
   {
@@ -758,7 +780,8 @@
    "category": "fab-ops",
    "related": [
     "process-tool",
-    "run-to-run-control"
+    "run-to-run-control",
+    "process-step"
    ],
    "refs": [
     "SEMI E42"
@@ -778,7 +801,8 @@
    "related": [
     "fab-cycle-time",
     "lot-dispatching",
-    "wafer-lot"
+    "wafer-lot",
+    "wafer-start"
    ],
    "example": "MES의 재공 현황 화면은 공정 단계별로 대기 중인 로트 수와 웨이퍼 수를 보여 줍니다."
   },
@@ -796,7 +820,8 @@
    "related": [
     "fab-wip",
     "lot-dispatching",
-    "queue-time-limit"
+    "queue-time-limit",
+    "wafer-start"
    ]
   },
   {
@@ -811,7 +836,8 @@
    "category": "fab-ops",
    "related": [
     "lot-dispatching",
-    "fab-cycle-time"
+    "fab-cycle-time",
+    "real-time-dispatching"
    ],
    "example": "MES 로트 기록의 「Q타임 초과」 홀드는 앞 공정 완료 시각과 다음 공정 투입 시각의 차이로 판정합니다."
   },
@@ -846,7 +872,8 @@
    "related": [
     "queue-time-limit",
     "fab-wip",
-    "fab-cycle-time"
+    "fab-cycle-time",
+    "real-time-dispatching"
    ]
   },
   {
@@ -860,7 +887,9 @@
    "category": "fab-ops",
    "related": [
     "wafer-lot",
-    "secs-gem"
+    "secs-gem",
+    "real-time-dispatching",
+    "process-step"
    ],
    "refs": [
     "IEC 62264",
@@ -913,7 +942,8 @@
    "related": [
     "load-port",
     "amhs",
-    "foup"
+    "foup",
+    "stocker"
    ]
   },
   {
@@ -929,7 +959,8 @@
    "related": [
     "wafer-lot",
     "load-port",
-    "amhs"
+    "amhs",
+    "stocker"
    ],
    "refs": [
     "SEMI E47.1"
@@ -966,7 +997,8 @@
    "category": "control",
    "related": [
     "process-chamber",
-    "fab-recipe"
+    "fab-recipe",
+    "process-cooling-water"
    ]
   },
   {
@@ -983,7 +1015,8 @@
    "related": [
     "chamber-matching",
     "process-tool",
-    "lot-genealogy"
+    "lot-genealogy",
+    "chamber-seasoning"
    ],
    "example": "장비 이벤트와 로트 이력에는 웨이퍼마다 어느 챔버에서 처리했는지 챔버 번호가 함께 남습니다."
   },
@@ -998,7 +1031,8 @@
    "category": "control",
    "related": [
     "process-chamber",
-    "fdc"
+    "fdc",
+    "chamber-seasoning"
    ]
   },
   {
@@ -1015,7 +1049,8 @@
    "related": [
     "fab-metrology",
     "statistical-process-control",
-    "process-tool"
+    "process-tool",
+    "fab-particle"
    ]
   },
   {
@@ -1030,7 +1065,8 @@
    "category": "control",
    "related": [
     "fdc",
-    "fab-virtual-metrology"
+    "fab-virtual-metrology",
+    "endpoint-detection"
    ],
    "refs": [
     "SEMI E134"
@@ -1131,7 +1167,8 @@
    "related": [
     "out-of-control",
     "statistical-process-control",
-    "fab-metrology"
+    "fab-metrology",
+    "specification-limit"
    ],
    "refs": [
     "ISO 7870-2"
@@ -1148,7 +1185,8 @@
    "category": "control",
    "related": [
     "spc-control-chart",
-    "lot-hold"
+    "lot-hold",
+    "out-of-spec"
    ],
    "example": "관리도에서 OOC가 뜨면 해당 로트나 장비에 홀드를 거는 조치로 이어지는 경우가 많습니다."
   },
@@ -1163,7 +1201,8 @@
    "category": "quality",
    "related": [
     "die-yield",
-    "yield-management-system"
+    "yield-management-system",
+    "line-yield"
    ]
   },
   {
@@ -1197,7 +1236,8 @@
    "related": [
     "defect-inspection",
     "wafer-map",
-    "semi-failure-analysis"
+    "semi-failure-analysis",
+    "defect-review"
    ],
    "example": "결함 검사 결과에는 결함마다 웨이퍼 위 좌표, 크기, 분류 코드가 남아 웨이퍼 맵 위에 겹쳐 봅니다."
   },
@@ -1213,7 +1253,8 @@
    "category": "quality",
    "related": [
     "wafer-defect",
-    "fab-metrology"
+    "fab-metrology",
+    "defect-review"
    ]
   },
   {
@@ -1229,7 +1270,8 @@
    "related": [
     "critical-dimension",
     "overlay-error",
-    "film-thickness"
+    "film-thickness",
+    "specification-limit"
    ]
   },
   {
@@ -1263,7 +1305,8 @@
    "related": [
     "photolithography",
     "run-to-run-control",
-    "fab-metrology"
+    "fab-metrology",
+    "wafer-rework"
    ],
    "example": "노광 뒤 계측 결과에는 샷과 지점마다 오버레이 X·Y 값이 남고, 웨이퍼 단위 평균과 3σ가 함께 기록됩니다."
   },
@@ -1316,7 +1359,8 @@
    "category": "quality",
    "related": [
     "wafer-map",
-    "wafer-probe-test"
+    "wafer-probe-test",
+    "probe-card"
    ]
   },
   {
@@ -1330,7 +1374,8 @@
    "category": "quality",
    "related": [
     "commonality-analysis",
-    "wafer-defect"
+    "wafer-defect",
+    "defect-review"
    ]
   },
   {
@@ -1373,7 +1418,8 @@
    "category": "utility",
    "related": [
     "cleanroom-class",
-    "fan-filter-unit"
+    "fan-filter-unit",
+    "fab-particle"
    ],
    "refs": [
     "ISO 14644-1"
@@ -1424,7 +1470,9 @@
    "category": "utility",
    "related": [
     "wafer-fab",
-    "point-of-use-abatement"
+    "point-of-use-abatement",
+    "process-cooling-water",
+    "chemical-delivery-system"
    ]
   },
   {
@@ -1439,7 +1487,8 @@
    "category": "utility",
    "related": [
     "wafer-cleaning",
-    "fab-wastewater"
+    "fab-wastewater",
+    "process-cooling-water"
    ],
    "refs": [
     "SEMI F63",
@@ -1507,7 +1556,8 @@
    "related": [
     "wafer-cleaning",
     "chemical-mechanical-polishing",
-    "fab-wastewater"
+    "fab-wastewater",
+    "chemical-delivery-system"
    ],
    "refs": [
     "화학물질관리법"
@@ -1729,6 +1779,414 @@
    "related": [
     "test-bin",
     "wafer-probe-test"
+   ]
+  },
+  {
+   "id": "threshold-voltage",
+   "ko": "문턱전압",
+   "en": "threshold voltage",
+   "alt": [
+    "Vth",
+    "임계 전압"
+   ],
+   "definition": "트랜지스터의 채널이 열려 전류가 흐르기 시작하는 게이트 전압입니다. 도핑 농도와 게이트 산화막 두께에 따라 달라지므로 웨이퍼 테스트와 전기 특성 측정에서 공정 상태를 보는 지표로 씁니다.",
+   "category": "device",
+   "related": [
+    "mosfet",
+    "doping",
+    "ion-implantation"
+   ]
+  },
+  {
+   "id": "gross-die",
+   "ko": "그로스 다이",
+   "en": "gross die",
+   "alt": [
+    "GDPW",
+    "웨이퍼당 다이 수",
+    "넷 다이"
+   ],
+   "definition": "웨이퍼 한 장에 설계상 들어가는 다이의 수입니다. 웨이퍼 지름, 다이 크기, 가장자리 제외 폭으로 정해지며, 여기에 다이 수율을 곱한 값이 양품 다이 수가 됩니다.",
+   "category": "device",
+   "related": [
+    "wafer-die",
+    "die-yield",
+    "semiconductor-wafer",
+    "defect-density"
+   ]
+  },
+  {
+   "id": "dram-refresh",
+   "ko": "리프레시",
+   "en": "refresh",
+   "alt": [
+    "DRAM 리프레시",
+    "재충전"
+   ],
+   "definition": "DRAM 셀의 커패시터에서 전하가 새어 나가기 전에 정해진 주기로 읽고 다시 써서 데이터를 지키는 동작입니다. 비휘발성인 NAND 플래시에는 없는 DRAM 고유의 동작이며 전력 소모와 성능에 영향을 줍니다.",
+   "category": "device",
+   "related": [
+    "dram",
+    "memory-cell"
+   ]
+  },
+  {
+   "id": "feol",
+   "ko": "FEOL",
+   "en": "front end of line",
+   "alt": [
+    "트랜지스터 형성 공정",
+    "프론트 엔드 오브 라인"
+   ],
+   "definition": "전공정 가운데 실리콘 기판 위에 트랜지스터 같은 소자를 만드는 앞부분입니다. 소자 사이를 금속 배선으로 잇는 BEOL과 짝을 이루며, 둘 다 패키징을 뜻하는 후공정과는 다릅니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "beol",
+    "ion-implantation",
+    "thermal-oxidation"
+   ]
+  },
+  {
+   "id": "wet-etching",
+   "ko": "습식 식각",
+   "en": "wet etching",
+   "alt": [
+    "웨트 에치"
+   ],
+   "definition": "약액에 웨이퍼를 담그거나 뿌려 막을 녹여 내는 식각입니다. 모든 방향으로 고르게 깎이는 성질이 있어 미세 패턴보다는 막 전체 제거나 세정에 가까운 단계에 쓰고, 미세 패턴은 건식 식각이 맡습니다.",
+   "category": "front-end",
+   "broader": "wafer-etching",
+   "related": [
+    "dry-etching",
+    "process-chemical",
+    "wafer-cleaning"
+   ]
+  },
+  {
+   "id": "pvd",
+   "ko": "PVD",
+   "en": "physical vapor deposition",
+   "alt": [
+    "물리 기상 증착",
+    "스퍼터링"
+   ],
+   "definition": "고체 재료를 스퍼터링이나 증발로 떼어 내 웨이퍼 위에 막으로 쌓는 증착 방식입니다. 화학 반응으로 막을 만드는 CVD와 달리 재료를 물리적으로 옮기며, 주로 배선과 장벽층 같은 금속막에 씁니다.",
+   "category": "front-end",
+   "broader": "thin-film-deposition",
+   "related": [
+    "cvd",
+    "beol",
+    "thin-film-deposition"
+   ]
+  },
+  {
+   "id": "doping",
+   "ko": "도핑",
+   "en": "doping",
+   "alt": [
+    "불순물 주입",
+    "도펀트 주입"
+   ],
+   "definition": "실리콘에 붕소나 인 같은 불순물을 넣어 전기 전도 성질을 바꾸는 일입니다. 이온주입이나 확산 공정으로 넣고 열처리로 활성화하며, 넣은 양과 깊이가 문턱전압 같은 소자 특성을 정합니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "ion-implantation",
+    "diffusion-process",
+    "threshold-voltage"
+   ]
+  },
+  {
+   "id": "back-grinding",
+   "ko": "백그라인딩",
+   "en": "back grinding",
+   "alt": [
+    "웨이퍼 박화",
+    "BG"
+   ],
+   "definition": "회로가 없는 웨이퍼 뒷면을 갈아 두께를 줄이는 후공정 단계입니다. 다이싱과 패키징 전에 하며, 다이를 여러 층 쌓는 HBM처럼 얇은 칩이 필요할수록 휨과 깨짐 관리가 중요해집니다.",
+   "category": "back-end",
+   "broader": "back-end-process",
+   "related": [
+    "wafer-dicing",
+    "hbm",
+    "through-silicon-via"
+   ]
+  },
+  {
+   "id": "probe-card",
+   "ko": "프로브 카드",
+   "en": "probe card",
+   "alt": [
+    "프로브카드"
+   ],
+   "definition": "웨이퍼 테스트에서 테스터와 다이의 패드를 잇는 바늘 묶음 기판입니다. 제품마다 패드 배치에 맞춰 따로 만들고, 바늘이 닳거나 오염되면 접촉 불량이 테스트 불량처럼 보이므로 사용 횟수와 세정 이력을 관리합니다.",
+   "category": "back-end",
+   "related": [
+    "wafer-probe-test",
+    "test-bin"
+   ]
+  },
+  {
+   "id": "wire-bonding",
+   "ko": "와이어 본딩",
+   "en": "wire bonding",
+   "alt": [
+    "와이어본딩"
+   ],
+   "definition": "칩의 패드와 패키지 기판을 금이나 구리의 가는 선으로 잇는 패키징 방식입니다. 칩을 뒤집어 범프로 바로 붙이는 플립칩보다 연결 수와 속도에서 불리하지만 공정이 단순해 널리 씁니다.",
+   "category": "back-end",
+   "broader": "chip-packaging",
+   "related": [
+    "flip-chip",
+    "chip-packaging"
+   ]
+  },
+  {
+   "id": "wafer-rework",
+   "ko": "재작업",
+   "en": "rework",
+   "alt": [
+    "리워크",
+    "포토 리워크"
+   ],
+   "definition": "검사에서 기준을 벗어난 웨이퍼의 공정을 되돌려 다시 하는 일입니다. 반도체에서는 주로 포토 공정에서 감광액을 벗기고 노광을 다시 하며, 되돌릴 수 없는 식각 뒤에는 할 수 없으므로 판정 시점이 중요합니다.",
+   "category": "fab-ops",
+   "related": [
+    "photolithography",
+    "overlay-error",
+    "out-of-spec"
+   ]
+  },
+  {
+   "id": "wafer-start",
+   "ko": "웨이퍼 투입",
+   "en": "wafer start",
+   "alt": [
+    "웨이퍼 스타트",
+    "WSPM",
+    "투입량"
+   ],
+   "definition": "새 웨이퍼를 공정 흐름의 첫 단계에 넣는 일 또는 일정 기간에 넣은 웨이퍼 수입니다. 팹의 생산 능력을 월 투입 웨이퍼 수로 말하는 경우가 많고, 투입량이 재공과 사이클 타임을 함께 움직입니다.",
+   "category": "fab-ops",
+   "related": [
+    "fab-wip",
+    "fab-cycle-time",
+    "wafer-lot",
+    "line-yield"
+   ]
+  },
+  {
+   "id": "stocker",
+   "ko": "스토커",
+   "en": "stocker",
+   "alt": [
+    "자동 창고",
+    "FOUP 스토커"
+   ],
+   "definition": "팹 안에서 FOUP을 잠시 보관하고 꺼내 주는 자동 창고 장비입니다. OHT와 함께 AMHS를 이루며, 다음 장비가 비기를 기다리는 로트가 머무는 곳이라 재공 위치를 추적할 때 함께 봅니다.",
+   "category": "fab-ops",
+   "broader": "amhs",
+   "related": [
+    "foup",
+    "overhead-hoist-transport",
+    "fab-wip"
+   ]
+  },
+  {
+   "id": "process-step",
+   "ko": "공정 단계",
+   "en": "process step",
+   "alt": [
+    "스텝",
+    "오퍼레이션"
+   ],
+   "definition": "공정 흐름을 이루는 한 단위 작업으로, 어떤 장비 그룹에서 어떤 레시피로 처리할지가 정해진 칸입니다. MES는 로트의 현재 위치를 공정 단계로 기록하고, Q타임 제한도 두 단계 사이에 겁니다.",
+   "category": "fab-ops",
+   "related": [
+    "process-flow",
+    "fab-recipe",
+    "fab-mes"
+   ]
+  },
+  {
+   "id": "real-time-dispatching",
+   "ko": "실시간 디스패칭",
+   "en": "real-time dispatching",
+   "alt": [
+    "RTD"
+   ],
+   "definition": "장비가 비거나 로트가 도착하는 순간마다 MES 상태를 읽어 다음에 처리할 로트를 정해 주는 시스템입니다. 미리 짠 일정표를 따르는 스케줄링과 달리 그 시점의 규칙으로 고르며, Q타임과 우선순위 규칙을 담습니다.",
+   "category": "fab-ops",
+   "broader": "lot-dispatching",
+   "related": [
+    "lot-dispatching",
+    "fab-mes",
+    "queue-time-limit"
+   ]
+  },
+  {
+   "id": "chamber-seasoning",
+   "ko": "시즈닝",
+   "en": "chamber seasoning",
+   "alt": [
+    "챔버 시즈닝",
+    "더미 런"
+   ],
+   "definition": "세정이나 정비를 마친 챔버에 더미 웨이퍼를 흘려 내벽 상태를 안정시키는 작업입니다. 정비 직후 첫 웨이퍼들의 결과가 흔들리는 것을 막기 위해 하며, 끝난 뒤 모니터 웨이퍼로 확인하고 생산을 다시 받습니다.",
+   "category": "control",
+   "related": [
+    "process-chamber",
+    "monitor-wafer",
+    "chamber-matching"
+   ]
+  },
+  {
+   "id": "specification-limit",
+   "ko": "규격 한계",
+   "en": "specification limit",
+   "alt": [
+    "스펙 한계",
+    "USL",
+    "LSL"
+   ],
+   "definition": "제품이나 공정 결과가 받아들여지는 범위의 위아래 끝입니다. 고객 요구나 설계에서 정하므로, 공정의 흩어짐에서 계산하는 관리도의 관리 한계와 다르며 둘을 섞으면 판정이 어긋납니다.",
+   "category": "quality",
+   "related": [
+    "spc-control-chart",
+    "out-of-spec",
+    "fab-metrology"
+   ]
+  },
+  {
+   "id": "out-of-spec",
+   "ko": "규격 이탈",
+   "en": "out of spec",
+   "alt": [
+    "OOS",
+    "스펙 아웃"
+   ],
+   "definition": "측정값이 규격 한계를 벗어난 상태입니다. 관리 한계를 벗어난 OOC는 공정이 흔들린다는 신호이고 규격 이탈은 결과가 받아들일 수 없다는 판정이라, 보통 로트 홀드와 재작업이나 폐기 판단으로 이어집니다.",
+   "category": "quality",
+   "related": [
+    "specification-limit",
+    "out-of-control",
+    "lot-hold",
+    "wafer-rework"
+   ]
+  },
+  {
+   "id": "endpoint-detection",
+   "ko": "종료점 검출",
+   "en": "endpoint detection",
+   "alt": [
+    "EPD",
+    "엔드포인트"
+   ],
+   "definition": "식각이나 CMP를 하는 동안 플라스마 발광이나 표면 반사 같은 신호의 변화를 보고 목표 막이 다 깎인 시점을 찾아 공정을 멈추는 기능입니다. 정해진 시간만큼 처리하는 방식보다 막 두께 차이에 덜 흔들립니다.",
+   "category": "control",
+   "related": [
+    "dry-etching",
+    "chemical-mechanical-polishing",
+    "equipment-trace-data"
+   ]
+  },
+  {
+   "id": "line-yield",
+   "ko": "라인 수율",
+   "en": "line yield",
+   "alt": [
+    "공정 수율",
+    "웨이퍼 수율"
+   ],
+   "definition": "팹에 투입한 웨이퍼 가운데 깨짐이나 폐기 없이 전공정을 마치고 나온 웨이퍼의 비율입니다. 다이 하나하나의 양부를 따지는 다이 수율과 달리 웨이퍼 단위로 세며, 둘을 곱해 전체 수율을 봅니다.",
+   "category": "quality",
+   "broader": "fab-yield",
+   "related": [
+    "die-yield",
+    "fab-yield",
+    "wafer-start"
+   ]
+  },
+  {
+   "id": "defect-review",
+   "ko": "결함 리뷰",
+   "en": "defect review",
+   "alt": [
+    "디펙트 리뷰",
+    "리뷰 SEM"
+   ],
+   "definition": "결함 검사가 찾은 위치 가운데 일부를 전자현미경 같은 고배율 장비로 다시 보고 종류를 가르는 일입니다. 검사는 위치와 수를 빠르게 찾고 리뷰는 원인 추정에 쓸 분류를 만들어 불량 분석으로 넘깁니다.",
+   "category": "quality",
+   "related": [
+    "defect-inspection",
+    "wafer-defect",
+    "semi-failure-analysis"
+   ]
+  },
+  {
+   "id": "fab-particle",
+   "ko": "파티클",
+   "en": "particle",
+   "alt": [
+    "입자 오염",
+    "이물"
+   ],
+   "definition": "웨이퍼나 장비 표면에 붙는 미세한 입자입니다. 패턴을 막거나 끊어 결함이 되므로 클린룸 공기, 장비 부품, 약액과 가스에서 나오는 양을 관리하고, 장비별로 파티클 측정용 웨이퍼를 흘려 확인합니다.",
+   "category": "quality",
+   "related": [
+    "wafer-defect",
+    "fab-cleanroom",
+    "monitor-wafer"
+   ]
+  },
+  {
+   "id": "defect-density",
+   "ko": "결함 밀도",
+   "en": "defect density",
+   "alt": [
+    "D0",
+    "디펙트 덴시티"
+   ],
+   "definition": "웨이퍼의 단위 면적에 있는 치명 결함의 수입니다. 같은 결함 밀도라도 다이 면적이 클수록 다이 수율이 낮아지므로, 수율 모델에서 공정 성숙도를 나타내는 값으로 씁니다.",
+   "category": "quality",
+   "related": [
+    "die-yield",
+    "wafer-defect",
+    "gross-die"
+   ]
+  },
+  {
+   "id": "process-cooling-water",
+   "ko": "공정 냉각수",
+   "en": "process cooling water",
+   "alt": [
+    "PCW",
+    "장비 냉각수"
+   ],
+   "definition": "공정 장비의 챔버, 전원부, 펌프에서 나는 열을 빼기 위해 돌리는 냉각수입니다. 웨이퍼에 닿는 초순수와 달리 장비 안을 순환하며, 공급 온도와 유량이 흔들리면 장비 알람과 공정 변동으로 이어집니다.",
+   "category": "utility",
+   "related": [
+    "sub-fab",
+    "ultrapure-water",
+    "process-tool"
+   ]
+  },
+  {
+   "id": "chemical-delivery-system",
+   "ko": "약액 공급 장치",
+   "en": "chemical delivery system",
+   "alt": [
+    "CDS",
+    "케미컬 공급 장치"
+   ],
+   "definition": "저장 탱크의 공정 케미컬을 정해진 농도와 압력으로 배관을 따라 장비까지 보내는 공급 설비입니다. 주로 서브팹에 두며, 필터와 농도 감시로 약액에서 오는 오염을 막습니다.",
+   "category": "utility",
+   "related": [
+    "process-chemical",
+    "sub-fab",
+    "wafer-cleaning"
    ]
   }
  ]

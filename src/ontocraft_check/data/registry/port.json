@@ -14,7 +14,7 @@
   "name": "항만·물류",
   "en": "Ports and logistics"
  },
- "version": "0.1.1",
+ "version": "0.2.0",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -90,7 +90,9 @@
    "broader": "port-facility",
    "related": [
     "quay-wall",
-    "berth-planning"
+    "berth-planning",
+    "bulk-terminal",
+    "port-pier"
    ]
   },
   {
@@ -106,7 +108,8 @@
    "broader": "port-facility",
    "related": [
     "port-berth",
-    "apron"
+    "apron",
+    "port-pier"
    ]
   },
   {
@@ -122,7 +125,8 @@
    "broader": "port-facility",
    "related": [
     "tos",
-    "port-container-yard"
+    "port-container-yard",
+    "bulk-terminal"
    ]
   },
   {
@@ -185,7 +189,8 @@
    "broader": "port-facility",
    "related": [
     "lcl",
-    "freight-forwarder"
+    "freight-forwarder",
+    "cargo-consolidation"
    ],
    "example": "포워더의 혼재 작업 지시에는 LCL 화물을 넣을 CFS와 작업 일자를 적습니다."
   },
@@ -220,7 +225,8 @@
    "broader": "port-container-yard",
    "related": [
     "reefer-container",
-    "port-container-yard"
+    "port-container-yard",
+    "cold-chain"
    ]
   },
   {
@@ -269,7 +275,9 @@
    "broader": "cargo-handling-equipment",
    "related": [
     "apron",
-    "crane-productivity"
+    "crane-productivity",
+    "crane-allocation",
+    "spreader"
    ]
   },
   {
@@ -285,7 +293,8 @@
    "related": [
     "port-container-yard",
     "yard-tractor",
-    "rehandling"
+    "rehandling",
+    "spreader"
    ]
   },
   {
@@ -335,7 +344,8 @@
    "broader": "cargo-handling-equipment",
    "related": [
     "yard-tractor",
-    "rtgc"
+    "rtgc",
+    "reach-stacker"
    ]
   },
   {
@@ -384,7 +394,8 @@
    "related": [
     "berth-planning",
     "yard-planning",
-    "container-terminal"
+    "container-terminal",
+    "port-digital-twin"
    ]
   },
   {
@@ -400,7 +411,9 @@
    "related": [
     "port-berth",
     "berth-window",
-    "port-eta"
+    "port-eta",
+    "port-digital-twin",
+    "crane-allocation"
    ]
   },
   {
@@ -415,7 +428,8 @@
    "broader": "berth-planning",
    "related": [
     "liner-service",
-    "berth-planning"
+    "berth-planning",
+    "schedule-reliability"
    ]
   },
   {
@@ -462,7 +476,8 @@
    "related": [
     "port-container-yard",
     "yard-planning",
-    "rehandling"
+    "rehandling",
+    "dg-segregation"
    ]
   },
   {
@@ -493,7 +508,8 @@
    "category": "terminal",
    "related": [
     "cargo-handling-equipment",
-    "thc"
+    "thc",
+    "breakbulk-cargo"
    ],
    "refs": [
     "항만운송사업법"
@@ -624,7 +640,8 @@
    "category": "terminal",
    "related": [
     "port-eta",
-    "vessel-turnaround-time"
+    "vessel-turnaround-time",
+    "port-mis"
    ]
   },
   {
@@ -638,7 +655,8 @@
    "category": "terminal",
    "related": [
     "berth-planning",
-    "just-in-time-arrival"
+    "just-in-time-arrival",
+    "schedule-reliability"
    ]
   },
   {
@@ -653,7 +671,10 @@
    "category": "cargo",
    "related": [
     "teu",
-    "container-number"
+    "container-number",
+    "packing-list",
+    "feu",
+    "special-container"
    ],
    "refs": [
     "ISO 668"
@@ -670,7 +691,8 @@
    "category": "cargo",
    "related": [
     "port-throughput",
-    "shipping-container"
+    "shipping-container",
+    "feu"
    ],
    "example": "터미널 실적 보고서는 20피트 컨테이너를 1 TEU, 40피트 컨테이너를 2 TEU로 셉니다."
   },
@@ -687,7 +709,9 @@
    "category": "cargo",
    "broader": "shipping-container",
    "related": [
-    "reefer-plug"
+    "reefer-plug",
+    "special-container",
+    "cold-chain"
    ],
    "example": "선적 요청서에는 냉동 컨테이너의 설정 온도와 환기 조건을 적습니다."
   },
@@ -705,7 +729,8 @@
    "broader": "shipping-container",
    "related": [
     "container-repositioning",
-    "container-detention"
+    "container-detention",
+    "reach-stacker"
    ]
   },
   {
@@ -719,7 +744,8 @@
    "definition": "남는 지역의 공 컨테이너를 수요가 있는 지역으로 옮기는 일입니다. 선사 비용에서 큰 몫을 차지합니다.",
    "category": "cargo",
    "related": [
-    "empty-container"
+    "empty-container",
+    "container-detention"
    ]
   },
   {
@@ -749,7 +775,8 @@
    "category": "cargo",
    "related": [
     "fcl",
-    "cfs"
+    "cfs",
+    "cargo-consolidation"
    ]
   },
   {
@@ -764,7 +791,9 @@
    "category": "cargo",
    "related": [
     "shipping-container",
-    "laytime"
+    "laytime",
+    "breakbulk-cargo",
+    "bulk-terminal"
    ]
   },
   {
@@ -780,7 +809,9 @@
    "category": "cargo",
    "related": [
     "dg-class",
-    "container-stacking"
+    "container-stacking",
+    "un-number",
+    "dg-segregation"
    ],
    "refs": [
     "IMDG Code",
@@ -801,7 +832,9 @@
    "broader": "dangerous-goods",
    "related": [
     "dangerous-goods",
-    "container-stacking"
+    "container-stacking",
+    "un-number",
+    "dg-segregation"
    ],
    "refs": [
     "IMDG Code",
@@ -874,7 +907,9 @@
    "category": "trade",
    "related": [
     "delivery-order",
-    "cargo-manifest"
+    "cargo-manifest",
+    "letter-of-credit",
+    "sea-waybill"
    ],
    "refs": [
     "상법",
@@ -944,7 +979,10 @@
    "category": "trade",
    "related": [
     "cargo-manifest",
-    "hs-code"
+    "hs-code",
+    "certificate-of-origin",
+    "packing-list",
+    "aeo"
    ],
    "refs": [
     "관세법",
@@ -964,7 +1002,10 @@
    "related": [
     "export-declaration",
     "hs-code",
-    "bonded-warehouse"
+    "bonded-warehouse",
+    "certificate-of-origin",
+    "commercial-invoice",
+    "aeo"
    ],
    "refs": [
     "관세법"
@@ -1001,7 +1042,8 @@
    "category": "trade",
    "related": [
     "customs-clearance",
-    "import-declaration"
+    "import-declaration",
+    "certificate-of-origin"
    ],
    "refs": [
     "WCO HS Convention"
@@ -1073,7 +1115,8 @@
    "category": "trade",
    "related": [
     "bill-of-lading",
-    "gate-out"
+    "gate-out",
+    "sea-waybill"
    ]
   },
   {
@@ -1153,7 +1196,8 @@
    "related": [
     "port-call",
     "port-facility",
-    "thc"
+    "thc",
+    "port-mis"
    ],
    "refs": [
     "항만법"
@@ -1216,7 +1260,8 @@
    "category": "contract",
    "related": [
     "container-demurrage",
-    "empty-container"
+    "empty-container",
+    "container-repositioning"
    ]
   },
   {
@@ -1286,7 +1331,8 @@
    "related": [
     "house-bl",
     "master-bl",
-    "cfs"
+    "cfs",
+    "cargo-consolidation"
    ],
    "refs": [
     "물류정책기본법"
@@ -1304,7 +1350,8 @@
    "category": "contract",
    "related": [
     "berth-window",
-    "port-call"
+    "port-call",
+    "schedule-reliability"
    ]
   },
   {
@@ -1319,7 +1366,8 @@
    "category": "inland",
    "related": [
     "bonded-transport",
-    "intermodal-transport"
+    "intermodal-transport",
+    "modal-shift"
    ]
   },
   {
@@ -1334,7 +1382,8 @@
    "category": "inland",
    "related": [
     "icd",
-    "drayage"
+    "drayage",
+    "modal-shift"
    ]
   },
   {
@@ -1351,7 +1400,8 @@
    "broader": "intermodal-transport",
    "related": [
     "gate-in",
-    "truck-turnaround-time"
+    "truck-turnaround-time",
+    "ftl-ltl"
    ]
   },
   {
@@ -1366,7 +1416,8 @@
    "category": "inland",
    "related": [
     "wms",
-    "cross-docking"
+    "cross-docking",
+    "cold-chain"
    ]
   },
   {
@@ -1423,7 +1474,8 @@
    "category": "inland",
    "related": [
     "wms",
-    "cargo-tracking"
+    "cargo-tracking",
+    "ftl-ltl"
    ]
   },
   {
@@ -1499,7 +1551,8 @@
    "category": "metric",
    "related": [
     "sts-crane",
-    "berth-productivity"
+    "berth-productivity",
+    "crane-allocation"
    ]
   },
   {
@@ -1545,7 +1598,8 @@
    "category": "metric",
    "related": [
     "teu",
-    "transshipment"
+    "transshipment",
+    "feu"
    ]
   },
   {
@@ -1560,7 +1614,8 @@
    "category": "digital",
    "related": [
     "automated-container-terminal",
-    "port-community-system"
+    "port-community-system",
+    "port-digital-twin"
    ]
   },
   {
@@ -1576,7 +1631,8 @@
    "broader": "smart-port",
    "related": [
     "logistics-edi",
-    "trade-single-window"
+    "trade-single-window",
+    "port-mis"
    ]
   },
   {
@@ -1591,7 +1647,9 @@
    "category": "digital",
    "related": [
     "customs-clearance",
-    "port-community-system"
+    "port-community-system",
+    "aeo",
+    "port-mis"
    ],
    "refs": [
     "UN/CEFACT Recommendation 33"
@@ -1701,6 +1759,388 @@
    "related": [
     "port-eta",
     "vessel-waiting-time"
+   ]
+  },
+  {
+   "id": "letter-of-credit",
+   "ko": "신용장",
+   "en": "letter of credit",
+   "alt": [
+    "L/C",
+    "LC"
+   ],
+   "definition": "수입자의 거래 은행이 수출자에게, 신용장 조건에 맞는 서류를 내면 대금을 지급하겠다고 약속하는 문서입니다. 은행은 물품이 아니라 선하증권과 상업송장 같은 서류가 조건과 일치하는지를 보고 지급을 결정합니다.",
+   "category": "trade",
+   "related": [
+    "commercial-invoice",
+    "bill-of-lading",
+    "packing-list"
+   ],
+   "refs": [
+    "UCP 600"
+   ]
+  },
+  {
+   "id": "certificate-of-origin",
+   "ko": "원산지증명서",
+   "en": "certificate of origin",
+   "alt": [
+    "C/O"
+   ],
+   "definition": "수출 물품이 어느 나라에서 생산되었는지를 증명하는 서류입니다. 자유무역협정의 협정 관세를 받으려면 협정이 정한 원산지 결정 기준을 충족했음을 이 서류로 보여야 하며, 일반 원산지증명서와 협정용 증명서는 발급 근거가 다릅니다.",
+   "category": "trade",
+   "related": [
+    "customs-clearance",
+    "import-declaration",
+    "hs-code"
+   ]
+  },
+  {
+   "id": "commercial-invoice",
+   "ko": "상업송장",
+   "en": "commercial invoice",
+   "alt": [
+    "인보이스",
+    "C/I"
+   ],
+   "definition": "수출자가 수입자에게 보내는 거래 명세서로, 물품명과 수량, 단가, 총액, 거래 조건을 적습니다. 대금 청구서 구실을 하면서 수입신고 때 과세가격을 정하는 기초 서류로도 쓰입니다.",
+   "category": "trade",
+   "related": [
+    "packing-list",
+    "import-declaration",
+    "letter-of-credit"
+   ]
+  },
+  {
+   "id": "packing-list",
+   "ko": "포장명세서",
+   "en": "packing list",
+   "alt": [
+    "P/L"
+   ],
+   "definition": "화물이 몇 개의 포장으로 나뉘어 있고 포장마다 어떤 물품이 어떤 무게와 부피로 들었는지 적은 서류입니다. 상업송장이 금액을 다룬다면 포장명세서는 물리적 구성을 다루어 검사와 하역, 적재 계획에 쓰입니다.",
+   "category": "trade",
+   "related": [
+    "commercial-invoice",
+    "customs-clearance",
+    "shipping-container",
+    "letter-of-credit"
+   ]
+  },
+  {
+   "id": "aeo",
+   "ko": "AEO",
+   "en": "authorized economic operator",
+   "alt": [
+    "수출입 안전관리 우수업체",
+    "종합인증우수업체"
+   ],
+   "definition": "세관이 법규 준수, 내부 통제, 재무 건전성, 화물 보안 기준을 심사해 공인한 수출입 관련 업체입니다. 공인을 받으면 검사 비율 축소 같은 통관 혜택을 받고, 상호인정약정을 맺은 나라에서도 그 혜택을 인정받습니다.",
+   "category": "trade",
+   "related": [
+    "customs-clearance",
+    "trade-single-window",
+    "import-declaration"
+   ],
+   "refs": [
+    "WCO SAFE Framework of Standards",
+    "관세법"
+   ]
+  },
+  {
+   "id": "sea-waybill",
+   "ko": "해상화물운송장",
+   "en": "sea waybill",
+   "alt": [
+    "SWB"
+   ],
+   "definition": "운송인이 화물을 받았음을 증명하는 운송 서류이지만 선하증권과 달리 유가증권이 아니어서 배서로 넘길 수 없습니다. 수하인은 원본을 내지 않고 신원 확인만으로 화물을 찾을 수 있어 본사와 지사 사이처럼 대금 담보가 필요 없는 거래에 씁니다.",
+   "category": "trade",
+   "related": [
+    "bill-of-lading",
+    "delivery-order"
+   ]
+  },
+  {
+   "id": "feu",
+   "ko": "FEU",
+   "en": "forty-foot equivalent unit",
+   "alt": [
+    "40피트 컨테이너 환산 단위"
+   ],
+   "definition": "40피트 컨테이너 한 개를 기준으로 삼는 물량 단위로, 1FEU는 2TEU에 해당합니다. 해상운임은 FEU 단위로 매기는 경우가 많고, 항만 물동량 통계는 주로 TEU로 집계합니다.",
+   "category": "cargo",
+   "related": [
+    "teu",
+    "shipping-container",
+    "port-throughput"
+   ]
+  },
+  {
+   "id": "special-container",
+   "ko": "특수 컨테이너",
+   "en": "special container",
+   "alt": [
+    "오픈톱 컨테이너",
+    "플랫랙 컨테이너",
+    "탱크 컨테이너"
+   ],
+   "definition": "일반 건화물용 컨테이너로 싣기 어려운 화물을 위해 구조를 바꾼 컨테이너입니다. 지붕이 열리는 오픈톱, 옆벽이 없는 플랫랙, 액체용 탱크 컨테이너가 있으며 규격을 넘는 화물은 야드 장치와 선박 적재 위치를 따로 계획해야 합니다.",
+   "category": "cargo",
+   "broader": "shipping-container",
+   "related": [
+    "shipping-container",
+    "reefer-container",
+    "breakbulk-cargo"
+   ]
+  },
+  {
+   "id": "un-number",
+   "ko": "UN 번호",
+   "en": "UN number",
+   "alt": [
+    "UN No."
+   ],
+   "definition": "국제연합 위험물 운송 전문가위원회가 위험물 물질이나 품목마다 매긴 네 자리 번호입니다. 위험물 등급이 위험의 종류를 나눈다면 UN 번호는 개별 물질을 가리켜 포장, 표시, 서류에서 화물을 식별하는 키로 쓰입니다.",
+   "category": "cargo",
+   "broader": "dangerous-goods",
+   "related": [
+    "dangerous-goods",
+    "dg-class",
+    "dg-segregation"
+   ],
+   "refs": [
+    "UN Recommendations on the Transport of Dangerous Goods",
+    "IMDG Code"
+   ]
+  },
+  {
+   "id": "dg-segregation",
+   "ko": "위험물 격리",
+   "en": "dangerous goods segregation",
+   "alt": [
+    "격리 적재"
+   ],
+   "definition": "서로 반응할 수 있는 위험물을 같은 곳에 두지 않도록 거리나 칸막이로 떼어 놓는 규칙과 그 배치입니다. 등급 조합마다 필요한 격리 수준이 정해져 있어 선박 적재 계획과 야드 장치 위치를 정할 때 함께 검사합니다.",
+   "category": "cargo",
+   "broader": "dangerous-goods",
+   "related": [
+    "dangerous-goods",
+    "dg-class",
+    "container-stacking",
+    "un-number"
+   ],
+   "refs": [
+    "IMDG Code"
+   ]
+  },
+  {
+   "id": "cold-chain",
+   "ko": "콜드체인",
+   "en": "cold chain",
+   "alt": [
+    "저온 유통",
+    "냉장 물류"
+   ],
+   "definition": "식품이나 의약품처럼 온도에 민감한 화물을 생산지에서 소비지까지 정해진 온도 범위 안에서 유지하며 옮기는 물류 체계입니다. 냉동 컨테이너, 저온 창고, 냉장 차량이 이어지고, 구간마다 온도 기록을 남겨 끊김이 없었음을 보입니다.",
+   "category": "inland",
+   "related": [
+    "reefer-container",
+    "reefer-plug",
+    "distribution-center"
+   ]
+  },
+  {
+   "id": "ftl-ltl",
+   "ko": "FTL과 LTL",
+   "en": "full truckload and less than truckload",
+   "alt": [
+    "FTL",
+    "LTL",
+    "트럭 만재 운송",
+    "트럭 혼적 운송"
+   ],
+   "definition": "트럭 운송을 한 화주의 화물로 차 한 대를 채우는 FTL과 여러 화주의 소량 화물을 한 차에 함께 싣는 LTL로 나누는 구분입니다. FTL은 출발지에서 도착지로 바로 가고, LTL은 터미널을 거쳐 나누고 합치는 단계가 있어 시간이 더 걸립니다.",
+   "category": "inland",
+   "related": [
+    "tms",
+    "cargo-consolidation",
+    "drayage",
+    "modal-shift"
+   ]
+  },
+  {
+   "id": "modal-shift",
+   "ko": "모달 시프트",
+   "en": "modal shift",
+   "alt": [
+    "운송 수단 전환"
+   ],
+   "definition": "화물 운송 수단을 도로에서 철도나 연안 해운처럼 탄소 배출과 혼잡이 적은 수단으로 옮기는 일입니다. 복합운송이 여러 수단을 잇는 방식이라면 모달 시프트는 수단별 분담을 바꾸는 정책 방향을 가리킵니다.",
+   "category": "inland",
+   "related": [
+    "intermodal-transport",
+    "icd",
+    "ftl-ltl"
+   ]
+  },
+  {
+   "id": "port-mis",
+   "ko": "Port-MIS",
+   "en": "port management information system",
+   "alt": [
+    "항만운영정보시스템"
+   ],
+   "definition": "선박의 입출항 신고, 항만시설 사용 신청, 항만 사용료 부과를 처리하는 항만 행정 정보 시스템입니다. 터미널 운영 시스템이 한 터미널 안의 작업을 다룬다면 Port-MIS는 항만 당국과 선사, 대리점 사이의 행정 절차를 다룹니다.",
+   "category": "digital",
+   "related": [
+    "port-call",
+    "port-dues",
+    "port-community-system",
+    "trade-single-window"
+   ]
+  },
+  {
+   "id": "port-digital-twin",
+   "ko": "항만 디지털 트윈",
+   "en": "port digital twin",
+   "alt": [
+    "디지털 트윈 항만"
+   ],
+   "definition": "항만의 시설, 장비, 선박, 화물 상태를 실시간 데이터로 가상 공간에 재현한 모델입니다. 선석 배정이나 장비 투입 계획을 실제로 적용하기 전에 모의 실행해 대기 시간과 혼잡을 비교하는 데 씁니다.",
+   "category": "digital",
+   "broader": "smart-port",
+   "related": [
+    "smart-port",
+    "tos",
+    "berth-planning"
+   ]
+  },
+  {
+   "id": "schedule-reliability",
+   "ko": "정시성",
+   "en": "schedule reliability",
+   "alt": [
+    "스케줄 신뢰도",
+    "정시 도착률"
+   ],
+   "definition": "정기선이 공표한 일정대로 항만에 도착했는지를 나타내는 지표로, 정해진 허용 범위 안에 도착한 기항의 비율로 셉니다. 허용 범위를 며칠로 두느냐에 따라 값이 달라지므로 비교할 때는 산정 기준을 함께 봅니다.",
+   "category": "metric",
+   "related": [
+    "liner-service",
+    "port-eta",
+    "berth-window"
+   ]
+  },
+  {
+   "id": "crane-allocation",
+   "ko": "크레인 배정",
+   "en": "crane allocation",
+   "alt": [
+    "QC 배정",
+    "안벽 크레인 배정"
+   ],
+   "definition": "접안한 선박마다 안벽 크레인을 몇 대, 어느 시간대에 붙일지 정하는 계획입니다. 선석 계획과 함께 풀며, 작업량이 많은 베이에 크레인을 더 붙이되 이웃한 크레인끼리 간섭하지 않도록 작업 순서를 짭니다.",
+   "category": "terminal",
+   "broader": "berth-planning",
+   "related": [
+    "sts-crane",
+    "berth-planning",
+    "crane-productivity"
+   ]
+  },
+  {
+   "id": "cargo-consolidation",
+   "ko": "혼재",
+   "en": "consolidation",
+   "alt": [
+    "콘솔",
+    "화물 혼재"
+   ],
+   "definition": "여러 화주의 소량 화물을 모아 한 컨테이너나 한 운송 단위로 합치는 작업입니다. 주로 포워더가 CFS에서 수행하며, 도착지에서 다시 화주별로 나누는 작업은 분류 또는 디콘솔이라고 부릅니다.",
+   "category": "cargo",
+   "related": [
+    "lcl",
+    "cfs",
+    "freight-forwarder",
+    "ftl-ltl"
+   ]
+  },
+  {
+   "id": "breakbulk-cargo",
+   "ko": "브레이크벌크",
+   "en": "breakbulk cargo",
+   "alt": [
+    "재래 화물",
+    "일반 잡화"
+   ],
+   "definition": "컨테이너에 넣지 않고 상자나 묶음, 단품 그대로 하나씩 싣고 내리는 화물입니다. 곡물처럼 퍼서 싣는 벌크 화물과 달리 낱개로 다루며, 플랜트 설비나 철강재처럼 크고 무거운 화물이 많습니다.",
+   "category": "cargo",
+   "related": [
+    "bulk-cargo",
+    "special-container",
+    "cargo-handling"
+   ]
+  },
+  {
+   "id": "bulk-terminal",
+   "ko": "벌크 터미널",
+   "en": "bulk terminal",
+   "alt": [
+    "건화물 부두",
+    "산물 부두"
+   ],
+   "definition": "석탄, 광석, 곡물처럼 포장 없이 대량으로 다루는 화물을 전용 하역 장비로 처리하는 터미널입니다. 컨테이너 터미널이 규격 상자를 다룬다면 벌크 터미널은 언로더와 컨베이어, 사일로나 야적장으로 화물 흐름을 구성합니다.",
+   "category": "facility",
+   "broader": "port-facility",
+   "related": [
+    "bulk-cargo",
+    "container-terminal",
+    "port-berth"
+   ]
+  },
+  {
+   "id": "port-pier",
+   "ko": "잔교",
+   "en": "pier",
+   "alt": [
+    "피어"
+   ],
+   "definition": "해안에서 물 쪽으로 기둥을 박아 세운 상판 구조의 계류 시설입니다. 안벽이 흙을 막는 벽 구조인 것과 달리 잔교 아래로는 물이 통하며, 수심이 깊은 곳까지 뻗어 큰 선박을 접안시키는 데 씁니다.",
+   "category": "facility",
+   "broader": "port-facility",
+   "related": [
+    "quay-wall",
+    "port-berth"
+   ]
+  },
+  {
+   "id": "spreader",
+   "ko": "스프레더",
+   "en": "spreader",
+   "alt": [
+    "컨테이너 스프레더"
+   ],
+   "definition": "크레인에 매달려 컨테이너 윗면 네 모서리의 구멍에 트위스트락을 끼워 잠그고 들어 올리는 장치입니다. 20피트와 40피트에 맞게 길이를 바꾸는 신축형이 많고, 컨테이너 두 개를 한 번에 드는 트윈 리프트형도 있습니다.",
+   "category": "facility",
+   "broader": "cargo-handling-equipment",
+   "related": [
+    "sts-crane",
+    "yard-crane",
+    "reach-stacker"
+   ]
+  },
+  {
+   "id": "reach-stacker",
+   "ko": "리치 스태커",
+   "en": "reach stacker",
+   "definition": "앞쪽으로 뻗는 붐 끝에 스프레더를 단 바퀴식 하역 차량으로, 컨테이너를 들어 여러 단으로 쌓거나 옮깁니다. 야드 크레인보다 설비 투자가 작아 소규모 터미널, 공 컨테이너 장치장, 내륙 기지에서 많이 씁니다.",
+   "category": "facility",
+   "broader": "cargo-handling-equipment",
+   "related": [
+    "spreader",
+    "empty-container",
+    "straddle-carrier"
    ]
   }
  ]
