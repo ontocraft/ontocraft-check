@@ -31,8 +31,8 @@ def triples(report, rule):
 
 
 def test_version():
-    assert __version__ == "0.7.1"
-    assert "ontocraft-check 0.7.1으로 만들었습니다" in render(run(f("clean.ttl")), "md")
+    assert __version__ == "0.7.2"
+    assert "ontocraft-check 0.7.2으로 만들었습니다" in render(run(f("clean.ttl")), "md")
 
 
 def test_all_domains_shows_domain_on_each_candidate():

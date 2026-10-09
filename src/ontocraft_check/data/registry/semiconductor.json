@@ -7,14 +7,14 @@
  "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
  "base_uri": "https://w3id.org/ontocraft/terms/",
  "uri_template": "https://w3id.org/ontocraft/terms/{id}",
- "snapshot": "2026-10-09",
+ "snapshot": "2026-10-10",
  "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
  "domain": {
   "id": "semiconductor",
   "name": "반도체",
   "en": "Semiconductors"
  },
- "version": "0.2.0",
+ "version": "0.2.1",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -119,7 +119,6 @@
    "ko": "3D NAND",
    "en": "3D NAND flash",
    "alt": [
-    "V낸드",
     "수직 적층 낸드"
    ],
    "definition": "NAND 셀을 웨이퍼 위로 여러 층 쌓아 같은 면적에 더 많은 비트를 담는 구조입니다. 층수가 늘수록 깊은 구멍을 뚫고 채우는 공정이 어려워집니다.",
@@ -187,8 +186,7 @@
    "ko": "웨이퍼",
    "en": "wafer",
    "alt": [
-    "실리콘 웨이퍼",
-    "기판"
+    "실리콘 웨이퍼"
    ],
    "definition": "단결정 실리콘을 얇은 원판으로 잘라 연마한 기판입니다. 팹에서 공정과 데이터를 추적하는 기본 단위가 됩니다.",
    "category": "device",
@@ -357,8 +355,7 @@
    "en": "photolithography",
    "alt": [
     "포토",
-    "리소그래피",
-    "노광"
+    "리소그래피"
    ],
    "definition": "감광액을 바른 웨이퍼에 마스크의 회로 무늬를 빛으로 옮기는 공정입니다. 도포, 노광, 현상 단계로 이루어집니다.",
    "category": "front-end",
@@ -438,10 +435,9 @@
    "ko": "건식 식각",
    "en": "dry etching",
    "alt": [
-    "플라스마 식각",
     "드라이 에치"
    ],
-   "definition": "플라스마의 이온과 라디칼로 막을 깎는 식각입니다. 한 방향으로 곧게 깎을 수 있어 미세 무늬에 씁니다.",
+   "definition": "액체 약품 대신 플라스마나 기체 반응물로 막을 깎는 식각입니다. 이온을 함께 쓰는 반응성 이온 식각은 한 방향으로 곧게 깎을 수 있어 미세 무늬에 씁니다.",
    "category": "front-end",
    "broader": "wafer-etching",
    "related": [
@@ -504,8 +500,7 @@
    "ko": "CMP",
    "en": "chemical mechanical polishing",
    "alt": [
-    "화학적 기계 연마",
-    "평탄화"
+    "화학적 기계 연마"
    ],
    "definition": "연마 패드와 슬러리로 웨이퍼 표면을 깎아 평평하게 만드는 공정입니다. 다음 층의 노광 초점을 맞추려면 필요합니다.",
    "category": "front-end",
@@ -521,8 +516,7 @@
    "ko": "세정",
    "en": "wafer cleaning",
    "alt": [
-    "클린",
-    "웨트 세정"
+    "클린"
    ],
    "definition": "공정 사이에 웨이퍼 표면의 입자, 유기물, 금속 오염을 씻어 내는 공정입니다. 전공정에서 가장 자주 반복되는 단계입니다.",
    "category": "front-end",
@@ -572,7 +566,6 @@
    "ko": "리페어",
    "en": "memory redundancy repair",
    "alt": [
-    "레이저 리페어",
     "구제"
    ],
    "definition": "불량 셀이 있는 행이나 열을 미리 만들어 둔 여분 셀로 바꿔 다이를 살리는 작업입니다. 웨이퍼 테스트 결과를 받아 수행합니다.",
@@ -587,7 +580,6 @@
    "ko": "다이싱",
    "en": "wafer dicing",
    "alt": [
-    "소잉",
     "절단"
    ],
    "definition": "웨이퍼를 다이 단위로 자르는 공정입니다. 날로 자르는 방식과 레이저로 자르는 방식이 있고, 자른 뒤에는 웨이퍼 맵에서 양품으로 표시된 다이만 집어 패키징으로 넘깁니다.",
@@ -638,10 +630,6 @@
    "id": "chip-bump",
    "ko": "범프",
    "en": "bump",
-   "alt": [
-    "솔더 범프",
-    "마이크로 범프"
-   ],
    "definition": "다이 표면에 만든 작은 금속 돌기로, 다이와 기판 또는 다이와 다이를 전기적으로 잇습니다.",
    "category": "back-end",
    "related": [
@@ -668,10 +656,6 @@
    "id": "hybrid-bonding",
    "ko": "하이브리드 본딩",
    "en": "hybrid bonding",
-   "alt": [
-    "직접 본딩",
-    "Cu-Cu 본딩"
-   ],
    "definition": "범프 없이 구리 패드와 절연막을 맞붙여 다이나 웨이퍼를 잇는 접합 방식입니다. 접점 간격을 더 좁힐 수 있습니다.",
    "category": "back-end",
    "broader": "chip-packaging",
@@ -707,7 +691,7 @@
    ],
    "definition": "높은 온도와 전압을 걸어 초기에 고장 날 제품을 미리 걸러 내는 시험입니다.",
    "category": "back-end",
-   "broader": "package-test",
+   "broader": "back-end-process",
    "related": [
     "known-good-die",
     "package-test"
@@ -902,7 +886,6 @@
    "en": "lot genealogy",
    "alt": [
     "계보",
-    "트레이서빌리티",
     "웨이퍼 이력"
    ],
    "definition": "로트와 웨이퍼가 어느 장비, 챔버, 레시피, 시각에 처리되었는지 이어 놓은 기록입니다. 수율 문제를 장비로 거슬러 올라갈 때 씁니다.",
@@ -951,8 +934,7 @@
    "ko": "FOUP",
    "en": "front opening unified pod",
    "alt": [
-    "풉",
-    "웨이퍼 캐리어"
+    "풉"
    ],
    "definition": "300mm 웨이퍼를 담아 바깥 공기와 막아 둔 채 옮기는 앞문 달린 밀폐 용기입니다.",
    "category": "fab-ops",
@@ -1024,9 +1006,6 @@
    "id": "chamber-matching",
    "ko": "챔버 매칭",
    "en": "chamber matching",
-   "alt": [
-    "툴 매칭"
-   ],
    "definition": "같은 공정을 맡는 챔버들이 같은 결과를 내도록 조건과 하드웨어를 맞추는 일입니다.",
    "category": "control",
    "related": [
@@ -1041,7 +1020,6 @@
    "en": "monitor wafer",
    "alt": [
     "테스트 웨이퍼",
-    "더미 웨이퍼",
     "MW"
    ],
    "definition": "제품이 아닌 시험용 웨이퍼로, 장비 상태를 점검하거나 공정 결과를 측정하려고 흘립니다.",
@@ -1163,7 +1141,6 @@
    ],
    "definition": "측정값을 시간 순서로 찍고 관리 한계선을 그어 공정이 벗어났는지 보는 그래프입니다.",
    "category": "control",
-   "broader": "statistical-process-control",
    "related": [
     "out-of-control",
     "statistical-process-control",
@@ -1284,10 +1261,10 @@
    ],
    "definition": "패턴에서 소자 특성을 좌우하는 가장 중요한 치수입니다. 주로 선의 폭이나 구멍의 지름을 잽니다.",
    "category": "quality",
-   "broader": "fab-metrology",
    "related": [
     "photolithography",
-    "wafer-etching"
+    "wafer-etching",
+    "fab-metrology"
    ],
    "example": "계측 결과에는 측정 지점마다 CD 값이 남고, 현상 뒤 측정과 식각 뒤 측정을 따로 구분해 적습니다."
   },
@@ -1301,7 +1278,6 @@
    ],
    "definition": "새로 찍은 층의 무늬가 아래 층의 무늬와 어긋난 정도입니다. X와 Y 방향으로 나눠 재며, 어느 층을 기준으로 정렬했는지 함께 알아야 원인을 찾을 수 있습니다.",
    "category": "quality",
-   "broader": "fab-metrology",
    "related": [
     "photolithography",
     "run-to-run-control",
@@ -1320,10 +1296,10 @@
    ],
    "definition": "증착, 산화, 연마 뒤에 남은 막의 두께입니다. 웨이퍼 안의 여러 지점을 재어 평균과 균일도를 봅니다.",
    "category": "quality",
-   "broader": "fab-metrology",
    "related": [
     "thin-film-deposition",
-    "chemical-mechanical-polishing"
+    "chemical-mechanical-polishing",
+    "fab-metrology"
    ],
    "example": "증착 뒤 계측 결과에는 지점별 두께와 함께 웨이퍼 평균과 균일도가 적힙니다."
   },
@@ -1332,7 +1308,6 @@
    "ko": "웨이퍼 맵",
    "en": "wafer map",
    "alt": [
-    "빈 맵",
     "맵"
    ],
    "definition": "다이별 시험 결과나 결함 위치를 웨이퍼 모양 그대로 그린 그림과 그 데이터입니다. 무늬를 보면 원인 공정을 짐작할 수 있습니다.",
@@ -1430,7 +1405,6 @@
    "ko": "청정도 등급",
    "en": "cleanroom class",
    "alt": [
-    "클래스",
     "ISO 등급"
    ],
    "definition": "단위 부피의 공기에 든 크기별 입자 수로 클린룸의 깨끗한 정도를 나눈 등급입니다.",
@@ -1480,8 +1454,7 @@
    "ko": "초순수",
    "en": "ultrapure water",
    "alt": [
-    "UPW",
-    "DI워터"
+    "UPW"
    ],
    "definition": "이온, 유기물, 입자, 용존 가스를 거의 다 걷어 낸 물입니다. 세정과 습식 공정에 대량으로 씁니다.",
    "category": "utility",
@@ -1514,8 +1487,7 @@
    "ko": "특수 가스",
    "en": "specialty gas",
    "alt": [
-    "스페셜티 가스",
-    "특수 고압가스"
+    "스페셜티 가스"
    ],
    "definition": "독성, 가연성, 부식성이 있어 따로 관리하며 소량 공급하는 공정 가스입니다.",
    "category": "utility",
@@ -1620,7 +1592,7 @@
     "분자 오염",
     "가스상 오염"
    ],
-   "definition": "입자가 아니라 산, 염기, 유기물 같은 기체 분자로 클린룸 공기에 섞인 오염입니다. 필터로 걸러지지 않아 따로 감시합니다.",
+   "definition": "입자가 아니라 산, 염기, 유기물 같은 기체 분자로 클린룸 공기에 섞인 오염입니다. HEPA나 ULPA 같은 입자 필터로는 걸러지지 않아 케미컬 필터를 따로 달고 농도를 감시합니다.",
    "category": "utility",
    "related": [
     "fab-cleanroom",
@@ -1650,7 +1622,6 @@
    "ko": "SECS/GEM",
    "en": "SECS/GEM",
    "alt": [
-    "GEM",
     "장비 통신 표준"
    ],
    "definition": "공장 호스트와 장비가 상태, 알람, 레시피, 데이터를 주고받는 메시지 규칙입니다. 메시지 형식, 전송, 장비 동작 모델 규격을 묶어 부릅니다.",
@@ -1750,8 +1721,8 @@
    "ko": "Interface A",
    "en": "Interface A",
    "alt": [
-    "EDA",
-    "장비 데이터 수집 규격"
+    "장비 데이터 수집 규격",
+    "Equipment Data Acquisition"
    ],
    "definition": "SECS/GEM과 별도로 장비의 대량 센서 데이터를 고속으로 꺼내 가는 통로를 정한 규격 묶음입니다.",
    "category": "standard",
@@ -1803,8 +1774,7 @@
    "en": "gross die",
    "alt": [
     "GDPW",
-    "웨이퍼당 다이 수",
-    "넷 다이"
+    "웨이퍼당 다이 수"
    ],
    "definition": "웨이퍼 한 장에 설계상 들어가는 다이의 수입니다. 웨이퍼 지름, 다이 크기, 가장자리 제외 폭으로 정해지며, 여기에 다이 수율을 곱한 값이 양품 다이 수가 됩니다.",
    "category": "device",
@@ -1868,8 +1838,7 @@
    "ko": "PVD",
    "en": "physical vapor deposition",
    "alt": [
-    "물리 기상 증착",
-    "스퍼터링"
+    "물리 기상 증착"
    ],
    "definition": "고체 재료를 스퍼터링이나 증발로 떼어 내 웨이퍼 위에 막으로 쌓는 증착 방식입니다. 화학 반응으로 막을 만드는 CVD와 달리 재료를 물리적으로 옮기며, 주로 배선과 장벽층 같은 금속막에 씁니다.",
    "category": "front-end",
@@ -2019,7 +1988,6 @@
    ],
    "definition": "장비가 비거나 로트가 도착하는 순간마다 MES 상태를 읽어 다음에 처리할 로트를 정해 주는 시스템입니다. 미리 짠 일정표를 따르는 스케줄링과 달리 그 시점의 규칙으로 고르며, Q타임과 우선순위 규칙을 담습니다.",
    "category": "fab-ops",
-   "broader": "lot-dispatching",
    "related": [
     "lot-dispatching",
     "fab-mes",
@@ -2047,9 +2015,7 @@
    "ko": "규격 한계",
    "en": "specification limit",
    "alt": [
-    "스펙 한계",
-    "USL",
-    "LSL"
+    "스펙 한계"
    ],
    "definition": "제품이나 공정 결과가 받아들여지는 범위의 위아래 끝입니다. 고객 요구나 설계에서 정하므로, 공정의 흩어짐에서 계산하는 관리도의 관리 한계와 다르며 둘을 섞으면 판정이 어긋납니다.",
    "category": "quality",

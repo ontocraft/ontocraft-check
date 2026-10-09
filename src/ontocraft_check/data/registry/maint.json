@@ -7,14 +7,14 @@
  "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
  "base_uri": "https://w3id.org/ontocraft/terms/",
  "uri_template": "https://w3id.org/ontocraft/terms/{id}",
- "snapshot": "2026-10-09",
+ "snapshot": "2026-10-10",
  "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
  "domain": {
   "id": "maint",
   "name": "설비 보전·신뢰성",
   "en": "Equipment maintenance and reliability"
  },
- "version": "0.2.4",
+ "version": "0.2.5",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -361,9 +361,6 @@
    "id": "failure-cause",
    "ko": "고장 원인",
    "en": "failure cause",
-   "alt": [
-    "근본 원인 후보"
-   ],
    "definition": "고장으로 이어진 설계, 제작, 설치, 운전, 보전 쪽의 사정입니다. 원인을 고쳐야 같은 고장이 되풀이되지 않습니다.",
    "category": "failure",
    "related": [
@@ -385,10 +382,11 @@
    ],
    "definition": "고장 모드가 아이템, 상위 시스템, 안전, 생산에 미치는 결과입니다. FMEA에서 심각도를 매기는 근거가 되고, 같은 고장 모드라도 운전 조건과 중복 구성에 따라 영향이 달라집니다.",
    "category": "failure",
-   "broader": "failure",
    "related": [
     "severity",
-    "fmea"
+    "fmea",
+    "failure",
+    "failure-mode"
    ],
    "refs": [
     "IEC 60812"
@@ -419,10 +417,11 @@
    "en": "functional failure",
    "definition": "아이템이 사용자가 정한 성능 기준을 만족하지 못하는 상태입니다. 완전히 멈추지 않아도 기준 아래로 떨어지면 기능 고장입니다.",
    "category": "failure",
-   "broader": "failure",
    "related": [
     "rcm",
-    "partial-failure"
+    "partial-failure",
+    "failure",
+    "fault"
    ],
    "refs": [
     "SAE JA1011"
@@ -526,9 +525,6 @@
    "id": "complete-failure",
    "ko": "완전 고장",
    "en": "complete failure",
-   "alt": [
-    "치명 고장"
-   ],
    "definition": "아이템이 요구된 기능을 전혀 수행하지 못하게 된 고장입니다. 설비가 멈추거나 기동하지 못하는 경우이며, 부분 고장과 나눠 기록하면 정지 시간과 고장 영향을 따로 볼 수 있습니다.",
    "category": "failure",
    "broader": "failure",
@@ -602,7 +598,6 @@
    "ko": "예방보전",
    "en": "preventive maintenance",
    "alt": [
-    "PM",
     "예방정비"
    ],
    "definition": "고장이 나기 전에 정해진 기준에 따라 하는 보전입니다. 기준은 시간, 사용량, 상태 가운데 하나입니다.",
@@ -859,7 +854,7 @@
    "alt": [
     "캘리브레이션"
    ],
-   "definition": "측정 기기의 지시값을 기준값과 비교해 오차를 확인하고 조정하는 활동입니다.",
+   "definition": "측정 기기의 지시값을 기준값과 비교해 둘 사이의 관계와 측정 불확도를 확인하는 활동입니다. 오차를 줄이려고 기기를 맞추는 조정은 교정 결과를 보고 따로 하는 작업입니다.",
    "category": "strategy",
    "broader": "maintenance",
    "related": [
@@ -867,7 +862,8 @@
     "condition-monitoring"
    ],
    "refs": [
-    "ISO/IEC 17025"
+    "ISO/IEC 17025",
+    "JCGM 200 (VIM)"
    ],
    "example": "교정 성적서에는 기준기 값과 계기 지시값, 조정 전후 오차를 적습니다."
   },
@@ -899,7 +895,7 @@
     "TA",
     "정기 보수"
    ],
-   "definition": "공장이나 큰 공정 구역을 계획적으로 세우고 여러 설비를 한꺼번에 정비하는 기간입니다.",
+   "definition": "공장이나 큰 공정 구역을 계획적으로 세우고, 그 정지 기간에 여러 설비를 한꺼번에 정비하는 대규모 계획보전입니다.",
    "category": "strategy",
    "broader": "planned-maintenance",
    "related": [
@@ -971,8 +967,6 @@
    "ko": "에너지 격리",
    "en": "energy isolation",
    "alt": [
-    "잠금 표지",
-    "LOTO",
     "격리"
    ],
    "definition": "정비 중 설비가 갑자기 움직이거나 매체가 새지 않도록 전기, 압력, 유체 에너지를 끊고 잠그는 조치입니다.",
@@ -1674,9 +1668,6 @@
    "id": "pareto-analysis",
    "ko": "파레토 분석",
    "en": "Pareto analysis",
-   "alt": [
-    "ABC 분석"
-   ],
    "definition": "고장이나 손실을 원인별로 크기 순서로 늘어놓아 적은 원인이 큰 몫을 차지하는지 보는 분석입니다.",
    "category": "analysis",
    "related": [
@@ -1779,7 +1770,8 @@
     "rbi"
    ],
    "refs": [
-    "ISO 29821"
+    "ISO 29821",
+    "ISO 16810"
    ],
    "example": "배관 두께 측정 기록은 같은 측정점의 초음파 두께 값을 회차별로 쌓아 감육 속도를 봅니다."
   },

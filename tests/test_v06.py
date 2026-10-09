@@ -59,7 +59,7 @@ def cq01(report):
 
 
 def test_version_and_rule():
-    assert __version__ == "0.7.1"
+    assert __version__ == "0.7.2"
     assert "CQ01" in RULE_TITLES
     info = rule_info("cq01")
     assert info["category"] == "cq" and info["severity"] == "info"

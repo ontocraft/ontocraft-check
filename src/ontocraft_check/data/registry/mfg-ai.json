@@ -7,14 +7,14 @@
  "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
  "base_uri": "https://w3id.org/ontocraft/terms/",
  "uri_template": "https://w3id.org/ontocraft/terms/{id}",
- "snapshot": "2026-10-09",
+ "snapshot": "2026-10-10",
  "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
  "domain": {
   "id": "mfg-ai",
   "name": "제조 AI",
   "en": "Manufacturing AI"
  },
- "version": "0.1.2",
+ "version": "0.1.3",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -80,8 +80,6 @@
    "ko": "ISA-95 계층",
    "en": "ISA-95 hierarchy",
    "alt": [
-    "퍼듀 모델",
-    "자동화 피라미드",
     "레벨 0~4"
    ],
    "definition": "공장의 시스템을 센서와 설비(레벨 0~2), 제조 운영(레벨 3), 경영 계획(레벨 4)으로 나눈 기준 구조입니다. 어느 시스템이 어떤 데이터를 맡는지 정할 때 씁니다.",
@@ -287,9 +285,7 @@
    "ko": "생산 오더",
    "en": "production order",
    "alt": [
-    "작업 지시",
-    "제조 오더",
-    "워크 오더"
+    "제조 오더"
    ],
    "definition": "어떤 제품을 얼마나, 언제까지, 어느 라인에서 만들지 현장에 내리는 지시 단위입니다. 실적, 자재, 품질 기록이 이 번호로 묶입니다.",
    "category": "system",
@@ -517,7 +513,6 @@
    ],
    "definition": "입력과 결과 사이의 관계 자체가 바뀌는 현상입니다. 같은 공정 조건에서도 불량이 다르게 나오기 시작하면 모델을 다시 학습해야 합니다.",
    "category": "data",
-   "broader": "data-drift",
    "related": [
     "model-retraining",
     "data-drift",
@@ -581,7 +576,6 @@
    ],
    "definition": "영상이나 신호에서 결함이 있는지와 그 위치를 찾아내는 일입니다. 결함의 유형을 나누는 불량 분류보다 앞 단계이며, 영상에서는 위치를 상자나 픽셀 영역으로 표시합니다.",
    "category": "quality",
-   "broader": "vision-inspection",
    "related": [
     "defect-classification",
     "anomaly-detection",
@@ -599,10 +593,10 @@
    ],
    "definition": "찾아낸 불량을 스크래치, 찍힘, 이물 같은 유형으로 나누는 일입니다. 유형별로 원인 공정이 달라 대책을 고르는 근거가 됩니다.",
    "category": "quality",
-   "broader": "vision-inspection",
    "related": [
     "defect-detection",
-    "data-labeling"
+    "data-labeling",
+    "vision-inspection"
    ]
   },
   {
@@ -625,12 +619,10 @@
    "ko": "이상 점수",
    "en": "anomaly score",
    "alt": [
-    "이상도",
-    "재구성 오차"
+    "이상도"
    ],
    "definition": "관측 하나가 정상에서 얼마나 벗어났는지 나타내는 수치입니다. 어디서 경보를 낼지는 오경보 비용을 보고 정합니다.",
    "category": "quality",
-   "broader": "anomaly-detection",
    "related": [
     "anomaly-detection",
     "overkill",
@@ -686,7 +678,6 @@
    ],
    "definition": "실제 불량이 적을 때 그래픽, 생성 모델, 시뮬레이션으로 만든 불량 영상이나 신호입니다. 실제 데이터로 성능을 다시 확인해야 합니다.",
    "category": "quality",
-   "broader": "data-augmentation",
    "related": [
     "class-imbalance",
     "data-augmentation",
@@ -729,12 +720,10 @@
    "ko": "관리도",
    "en": "control chart",
    "alt": [
-    "컨트롤 차트",
-    "X-bar R 관리도"
+    "컨트롤 차트"
    ],
    "definition": "측정값을 시간 순으로 그리고 관리 한계를 그어 우연 변동과 이상 변동을 나누는 그래프입니다.",
    "category": "quality",
-   "broader": "spc",
    "related": [
     "anomaly-detection",
     "spc"
@@ -749,9 +738,7 @@
    "ko": "다변량 공정관리",
    "en": "multivariate statistical process control",
    "alt": [
-    "MSPC",
-    "다변량 관리도",
-    "T² 관리도"
+    "MSPC"
    ],
    "definition": "여러 변수를 한꺼번에 보아 변수 사이의 관계가 깨지는 이상을 찾는 공정 감시 방법입니다.",
    "category": "quality",
@@ -767,8 +754,7 @@
    "en": "process parameter",
    "alt": [
     "공정 변수",
-    "공정 조건",
-    "운전 조건"
+    "공정 조건"
    ],
    "definition": "온도, 압력, 속도, 시간처럼 공정 결과에 영향을 주며 조정할 수 있는 조건입니다.",
    "category": "process",
@@ -854,7 +840,6 @@
    ],
    "definition": "적은 실험으로 여러 인자의 영향을 가려내도록 실험 조건의 조합을 미리 짜는 방법입니다.",
    "category": "process",
-   "broader": "process-parameter-optimization",
    "related": [
     "process-parameter-optimization",
     "bayesian-optimization"
@@ -872,7 +857,6 @@
    ],
    "definition": "지금까지의 실험 결과로 다음에 시험할 조건을 고르며 적은 시도로 최적점에 다가가는 방법입니다. 실험 한 번이 비싼 공정에 맞습니다.",
    "category": "process",
-   "broader": "process-parameter-optimization",
    "related": [
     "surrogate-model",
     "process-parameter-optimization",
@@ -899,8 +883,7 @@
    "ko": "디지털 트윈",
    "en": "digital twin",
    "alt": [
-    "디지털쌍둥이",
-    "가상 공장"
+    "디지털쌍둥이"
    ],
    "definition": "실제 설비나 공정의 상태를 데이터로 계속 받아 가상 모델에 반영하고, 그 모델로 감시와 예측을 하는 구성입니다. 실물과 데이터가 이어져 있다는 점이 단순 시뮬레이션과 다릅니다.",
    "category": "process",
@@ -932,13 +915,10 @@
    "ko": "이산사건 시뮬레이션",
    "en": "discrete event simulation",
    "alt": [
-    "DES",
-    "물류 시뮬레이션",
-    "라인 시뮬레이션"
+    "DES"
    ],
    "definition": "작업 시작, 완료, 고장 같은 사건이 일어나는 시점만 따라가며 라인과 물류의 흐름을 모사하는 방법입니다. 병목과 재공을 미리 볼 때 씁니다.",
    "category": "process",
-   "broader": "process-simulation",
    "related": [
     "production-bottleneck",
     "process-simulation",
@@ -969,7 +949,6 @@
    ],
    "definition": "과거 판매와 시장 정보로 앞으로의 제품 수요를 추정하는 일입니다. 생산 계획의 출발점입니다.",
    "category": "planning",
-   "broader": "production-planning",
    "related": [
     "production-planning",
     "mps"
@@ -1014,7 +993,6 @@
    "en": "capacity planning",
    "alt": [
     "능력 계획",
-    "CRP",
     "캐파 계획"
    ],
    "definition": "계획한 생산량을 설비와 인력으로 감당할 수 있는지 따지고 부족분을 맞추는 일입니다.",
@@ -1169,10 +1147,6 @@
    "id": "mfg-ai-agent",
    "ko": "제조 AI 에이전트",
    "en": "manufacturing AI agent",
-   "alt": [
-    "AI 에이전트",
-    "에이전트"
-   ],
    "definition": "언어 모델이 목표에 맞춰 데이터 조회, 계산, 문서 작성 같은 도구를 골라 쓰며 여러 단계 업무를 처리하는 프로그램입니다. 설비를 직접 조작하는 결정은 사람에게 남깁니다.",
    "category": "llm",
    "related": [
@@ -1186,7 +1160,6 @@
    "en": "work instruction",
    "alt": [
     "작업 지도서",
-    "SOP",
     "표준 작업서"
    ],
    "definition": "작업자가 한 공정을 어떤 순서와 기준으로 해야 하는지 적은 문서입니다. 매뉴얼 RAG의 주요 검색 대상입니다.",
@@ -1359,11 +1332,6 @@
    "id": "precision-recall",
    "ko": "정밀도와 재현율",
    "en": "precision and recall",
-   "alt": [
-    "정밀도",
-    "재현율",
-    "검출률"
-   ],
    "definition": "불량이라고 판정한 것 가운데 진짜 불량의 비율이 정밀도이고, 진짜 불량 가운데 잡아낸 비율이 재현율입니다. 과검과 미검을 각각 보여 줍니다.",
    "category": "ops",
    "related": [
@@ -1405,14 +1373,8 @@
    "id": "feature-attribution",
    "ko": "특징 기여도",
    "en": "feature attribution",
-   "alt": [
-    "변수 중요도",
-    "SHAP 값",
-    "히트맵"
-   ],
    "definition": "예측 하나에 각 입력 변수나 영상 영역이 얼마나 기여했는지 나타낸 값입니다.",
    "category": "ops",
-   "broader": "explainable-ai",
    "related": [
     "feature-extraction",
     "explainable-ai"
@@ -1490,7 +1452,6 @@
    "ko": "제조 데이터 거버넌스",
    "en": "manufacturing data governance",
    "alt": [
-    "데이터 거버넌스",
     "데이터 관리 체계"
    ],
    "definition": "제조 데이터의 주인, 품질 기준, 접근 권한, 보관 기간을 정하고 지키게 하는 조직의 규칙과 역할입니다.",
@@ -1604,7 +1565,6 @@
    "ko": "산업 통신 프로토콜",
    "en": "industrial communication protocol",
    "alt": [
-    "필드버스",
     "산업용 프로토콜"
    ],
    "definition": "설비, 제어기, 상위 시스템이 데이터를 주고받는 방식을 정한 통신 규약입니다. 같은 공장 안에서도 여러 프로토콜이 섞여 있어 변환이 필요합니다.",
@@ -1615,7 +1575,9 @@
     "mqtt"
    ],
    "refs": [
-    "IEC 61158"
+    "IEC 61158",
+    "IEC 62541",
+    "ISO/IEC 20922"
    ]
   },
   {

@@ -7,14 +7,14 @@
  "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
  "base_uri": "https://w3id.org/ontocraft/terms/",
  "uri_template": "https://w3id.org/ontocraft/terms/{id}",
- "snapshot": "2026-10-09",
+ "snapshot": "2026-10-10",
  "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
  "domain": {
   "id": "maritime",
   "name": "해양·조선",
   "en": "Maritime and shipbuilding"
  },
- "version": "0.2.0",
+ "version": "0.2.1",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -344,7 +344,6 @@
    "ko": "화물창",
    "en": "cargo hold",
    "alt": [
-    "홀드",
     "선창"
    ],
    "definition": "화물을 싣도록 선체 안에 격벽으로 나누어 만든 공간입니다. 액체 화물을 담는 화물탱크와 달리 마른 화물이나 컨테이너를 싣는 곳을 가리키며, 도면과 적하 계획에서는 번호를 붙여 하나씩 구별합니다.",
@@ -768,9 +767,6 @@
    "id": "class-survey",
    "ko": "선급검사",
    "en": "class survey",
-   "alt": [
-    "입급검사"
-   ],
    "definition": "선급 등급을 주거나 유지하려고 선급이 자체 규칙에 따라 하는 검사입니다.",
    "category": "class",
    "broader": "ship-survey",
@@ -784,9 +780,6 @@
    "id": "statutory-survey",
    "ko": "법정검사",
    "en": "statutory survey",
-   "alt": [
-    "국제협약 검사"
-   ],
    "definition": "기국 법령과 국제협약에 따라 받아야 하는 검사입니다. 기국 정부가 직접 하거나 인정한 선급이 대신합니다.",
    "category": "class",
    "broader": "ship-survey",
@@ -821,8 +814,7 @@
    "ko": "갱신검사",
    "en": "renewal survey",
    "alt": [
-    "정기검사",
-    "특별검사"
+    "정기검사"
    ],
    "definition": "증서 유효 기간이 끝나기 전에 새 증서를 받으려고 선체와 설비를 넓고 깊게 확인하는 검사입니다.",
    "category": "class",
@@ -1025,11 +1017,11 @@
    ],
    "definition": "선사와 선박이 안전 운항과 오염 방지를 위한 안전관리체제를 세우고 운영하도록 요구하는 국제규약입니다.",
    "category": "regulation",
-   "broader": "solas",
    "related": [
     "seafarer",
     "ship-master",
-    "marine-casualty"
+    "marine-casualty",
+    "solas"
    ],
    "refs": [
     "IMO ISM Code"
@@ -1063,11 +1055,11 @@
    ],
    "definition": "이미 운항 중인 선박의 설계상 에너지 효율을 계산해 기준과 비교하는 지수입니다. 기준에 못 미치면 기관 출력 제한 같은 조치를 합니다.",
    "category": "regulation",
-   "broader": "marpol",
    "related": [
     "cii",
     "main-engine",
-    "eedi"
+    "eedi",
+    "marpol"
    ],
    "refs": [
     "IMO MARPOL Annex VI"
@@ -1082,10 +1074,10 @@
    ],
    "definition": "선박이 한 해 동안 실제로 운항하며 낸 이산화탄소를 운송 실적으로 나눈 지표입니다. 결과에 따라 등급이 매겨집니다.",
    "category": "regulation",
-   "broader": "marpol",
    "related": [
     "eexi",
-    "imo-dcs"
+    "imo-dcs",
+    "marpol"
    ],
    "refs": [
     "IMO MARPOL Annex VI"
@@ -1097,8 +1089,7 @@
    "ko": "배출규제해역",
    "en": "emission control area",
    "alt": [
-    "ECA",
-    "SECA"
+    "ECA"
    ],
    "definition": "선박 배기가스의 황산화물이나 질소산화물 배출을 일반 해역보다 엄격하게 제한하는 지정 해역입니다.",
    "category": "regulation",
@@ -1151,8 +1142,7 @@
    "ko": "선박 등록",
    "en": "ship registration",
    "alt": [
-    "선적 등록",
-    "선박 등기"
+    "선적 등록"
    ],
    "definition": "선박을 기국의 선박원부에 올려 국적과 소유 관계를 공적으로 확정하는 절차입니다.",
    "category": "regulation",
@@ -1237,8 +1227,7 @@
    "ko": "선원",
    "en": "seafarer",
    "alt": [
-    "승무원",
-    "해기사"
+    "승무원"
    ],
    "definition": "선박에 고용되어 승선해 일하는 사람입니다. 직무에 따라 항해, 기관, 통신, 조리 부서로 나뉩니다.",
    "category": "operation",
@@ -1528,8 +1517,7 @@
    "ko": "EPC 계약",
    "en": "engineering, procurement and construction contract",
    "alt": [
-    "설계·조달·시공 계약",
-    "턴키 계약"
+    "설계·조달·시공 계약"
    ],
    "definition": "한 계약자가 설계, 자재 조달, 건조와 설치를 함께 맡아 정해진 설비를 완성해 넘기는 계약 방식입니다.",
    "category": "offshore",

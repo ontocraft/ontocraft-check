@@ -7,14 +7,14 @@
  "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
  "base_uri": "https://w3id.org/ontocraft/terms/",
  "uri_template": "https://w3id.org/ontocraft/terms/{id}",
- "snapshot": "2026-10-09",
+ "snapshot": "2026-10-10",
  "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
  "domain": {
   "id": "onto",
   "name": "온톨로지 공학",
   "en": "Ontology engineering"
  },
- "version": "0.1.1",
+ "version": "0.1.2",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -266,7 +266,7 @@
    "id": "rdfs",
    "ko": "RDF Schema",
    "en": "RDFS",
-   "definition": "클래스, 하위 클래스, 정의역·치역을 선언하는 기본 어휘입니다. 하위 클래스 전이와 정의역·치역에 따른 함의만 정하며, 서로소나 기수 같은 제약은 표현하지 못해 OWL이 맡습니다.",
+   "definition": "클래스, 하위 클래스, 속성, 하위 속성, 정의역·치역을 선언하는 기본 어휘입니다. 하위 클래스와 하위 속성의 전이, 하위 속성의 상속, 정의역·치역에 따른 타입 함의를 정하지만, 서로소나 기수 같은 제약은 표현하지 못해 OWL이 맡습니다.",
    "category": "languages",
    "related": [
     "owl-2",
@@ -278,7 +278,7 @@
    "id": "entailment",
    "ko": "함의(추론)",
    "en": "Entailment",
-   "definition": "명시된 트리플에서 규칙에 따라 새 트리플을 끌어내는 일입니다. 저장소가 함의를 계산하는지에 따라 같은 SPARQL 질의의 결과 수가 달라지므로, 질의 전에 추론 설정을 확인해야 합니다.",
+   "definition": "그래프 A를 참으로 만드는 모든 해석이 그래프 B도 참으로 만들 때 A가 B를 함의한다고 하는 의미론적 관계입니다. 규칙으로 새 트리플을 끌어내는 추론은 이 관계를 계산하는 방법입니다. 저장소가 함의를 계산하는지에 따라 같은 SPARQL 질의의 결과 수가 달라지므로, 질의 전에 추론 설정을 확인해야 합니다.",
    "category": "languages",
    "related": [
     "reasoner",

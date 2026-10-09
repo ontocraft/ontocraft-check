@@ -7,14 +7,14 @@
  "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
  "base_uri": "https://w3id.org/ontocraft/terms/",
  "uri_template": "https://w3id.org/ontocraft/terms/{id}",
- "snapshot": "2026-10-09",
+ "snapshot": "2026-10-10",
  "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
  "domain": {
   "id": "port",
   "name": "항만·물류",
   "en": "Ports and logistics"
  },
- "version": "0.2.0",
+ "version": "0.2.1",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -73,8 +73,7 @@
     "container-terminal"
    ],
    "refs": [
-    "항만법",
-    "IMO ISPS Code"
+    "항만법"
    ]
   },
   {
@@ -267,8 +266,7 @@
    "alt": [
     "STS",
     "컨테이너 크레인",
-    "C/C",
-    "갠트리 크레인"
+    "C/C"
    ],
    "definition": "안벽 레일 위를 다니며 컨테이너선에서 컨테이너를 내리고 싣는 대형 크레인입니다. 터미널 처리 능력을 가장 크게 좌우합니다.",
    "category": "facility",
@@ -285,7 +283,8 @@
    "ko": "야드 크레인",
    "en": "yard crane",
    "alt": [
-    "장치장 크레인"
+    "장치장 크레인",
+    "트랜스퍼 크레인"
    ],
    "definition": "야드 블록에서 컨테이너를 쌓고 꺼내는 크레인입니다. 바퀴로 블록 사이를 옮겨 다니는 타이어식과 고정 레일 위를 달리는 레일식으로 나뉩니다.",
    "category": "facility",
@@ -303,8 +302,7 @@
    "en": "rubber-tyred gantry crane",
    "alt": [
     "RTGC",
-    "RTG",
-    "트랜스퍼 크레인"
+    "RTG"
    ],
    "definition": "고무 타이어 바퀴로 움직이는 야드 크레인입니다. 블록 사이를 옮겨 다닐 수 있습니다.",
    "category": "facility",
@@ -320,8 +318,7 @@
    "en": "rail-mounted gantry crane",
    "alt": [
     "RMGC",
-    "RMG",
-    "ARMGC"
+    "RMG"
    ],
    "definition": "고정 레일 위를 움직이는 야드 크레인입니다. 자동화 터미널에서 많이 씁니다.",
    "category": "facility",
@@ -425,7 +422,6 @@
    ],
    "definition": "정기선 서비스에 매주 같은 요일과 시간대로 미리 약속해 둔 선석 사용 시간입니다.",
    "category": "terminal",
-   "broader": "berth-planning",
    "related": [
     "liner-service",
     "berth-planning",
@@ -437,7 +433,6 @@
    "ko": "양적하 계획",
    "en": "loading and discharging plan",
    "alt": [
-    "작업 계획",
     "선적 계획"
    ],
    "definition": "한 선박에서 내릴 컨테이너와 실을 컨테이너의 순서와 위치를 정한 계획입니다. 선사가 보낸 적재 정보를 바탕으로 터미널이 세웁니다.",
@@ -472,7 +467,6 @@
    ],
    "definition": "컨테이너를 야드에 단을 쌓아 보관하는 일입니다. 무게, 목적항, 선적 순서로 쌓는 위치를 정합니다.",
    "category": "terminal",
-   "broader": "yard-planning",
    "related": [
     "port-container-yard",
     "yard-planning",
@@ -815,7 +809,8 @@
    ],
    "refs": [
     "IMDG Code",
-    "위험물안전관리법"
+    "선박안전법",
+    "위험물 선박운송 및 저장규칙"
    ],
    "example": "선적 요청서와 적하목록에는 위험물마다 UN 번호와 위험물 등급을 적습니다."
   },
@@ -829,7 +824,6 @@
    ],
    "definition": "위험물을 성질에 따라 아홉 가지로 나눈 분류입니다. 등급마다 표지와 격리 규칙이 다릅니다.",
    "category": "cargo",
-   "broader": "dangerous-goods",
    "related": [
     "dangerous-goods",
     "container-stacking",
@@ -863,8 +857,7 @@
    "ko": "컨테이너 번호",
    "en": "container number",
    "alt": [
-    "박스 번호",
-    "BIC 코드"
+    "박스 번호"
    ],
    "definition": "소유자 코드, 일련번호, 검증 숫자로 이루어져 컨테이너 하나를 세계에서 하나로 식별하는 번호입니다.",
    "category": "cargo",
@@ -1035,8 +1028,7 @@
    "en": "HS code",
    "alt": [
     "품목분류번호",
-    "세번",
-    "HSK"
+    "세번"
    ],
    "definition": "국제 협약에 따라 물품을 숫자로 분류한 번호입니다. 관세율과 수출입 요건을 정하는 기준이 됩니다.",
    "category": "trade",
@@ -1176,10 +1168,10 @@
    ],
    "definition": "컨테이너가 터미널에서 하역되고 이동하는 비용을 화주에게 받는 요금입니다.",
    "category": "contract",
-   "broader": "freight-surcharge",
    "related": [
     "cargo-handling",
-    "ocean-freight"
+    "ocean-freight",
+    "freight-surcharge"
    ],
    "example": "운임 청구서에는 해상운임, 유류할증료, THC가 항목별로 따로 적힙니다."
   },
@@ -1187,10 +1179,6 @@
    "id": "port-dues",
    "ko": "항만시설 사용료",
    "en": "port dues",
-   "alt": [
-    "입항료",
-    "정박료"
-   ],
    "definition": "선박과 화물이 항만시설을 쓴 대가로 항만 관리자에게 내는 요금입니다. 선박에 물리는 입항료, 접안료, 정박료와 화물에 물리는 화물료로 나뉘며, 터미널 운영사가 받는 THC와는 다른 요금입니다.",
    "category": "contract",
    "related": [
@@ -1373,7 +1361,7 @@
   {
    "id": "intermodal-transport",
    "ko": "복합운송",
-   "en": "intermodal transport",
+   "en": "multimodal transport",
    "alt": [
     "멀티모달",
     "연계 운송"
@@ -1628,11 +1616,11 @@
    ],
    "definition": "선사, 터미널, 포워더, 운송사, 세관이 항만 물류 정보를 한곳에서 주고받는 공동 정보 시스템입니다.",
    "category": "digital",
-   "broader": "smart-port",
    "related": [
     "logistics-edi",
     "trade-single-window",
-    "port-mis"
+    "port-mis",
+    "smart-port"
    ]
   },
   {
@@ -1682,10 +1670,10 @@
    ],
    "definition": "선박의 칸마다 어떤 컨테이너가 실렸는지 선사와 터미널이 주고받는 EDI 메시지입니다.",
    "category": "digital",
-   "broader": "logistics-edi",
    "related": [
     "load-discharge-plan",
-    "codeco"
+    "codeco",
+    "logistics-edi"
    ],
    "refs": [
     "UN/EDIFACT",
@@ -1702,10 +1690,10 @@
    ],
    "definition": "터미널이 컨테이너 반입과 반출 사실을 선사에 알리는 EDI 메시지입니다.",
    "category": "digital",
-   "broader": "logistics-edi",
    "related": [
     "gate-in",
-    "gate-out"
+    "gate-out",
+    "logistics-edi"
    ],
    "refs": [
     "UN/EDIFACT",
@@ -1880,11 +1868,6 @@
    "id": "special-container",
    "ko": "특수 컨테이너",
    "en": "special container",
-   "alt": [
-    "오픈톱 컨테이너",
-    "플랫랙 컨테이너",
-    "탱크 컨테이너"
-   ],
    "definition": "일반 건화물용 컨테이너로 싣기 어려운 화물을 위해 구조를 바꾼 컨테이너입니다. 지붕이 열리는 오픈톱, 옆벽이 없는 플랫랙, 액체용 탱크 컨테이너가 있으며 규격을 넘는 화물은 야드 장치와 선박 적재 위치를 따로 계획해야 합니다.",
    "category": "cargo",
    "broader": "shipping-container",
@@ -1903,7 +1886,6 @@
    ],
    "definition": "국제연합 위험물 운송 전문가위원회가 위험물 물질이나 품목마다 매긴 네 자리 번호입니다. 위험물 등급이 위험의 종류를 나눈다면 UN 번호는 개별 물질을 가리켜 포장, 표시, 서류에서 화물을 식별하는 키로 쓰입니다.",
    "category": "cargo",
-   "broader": "dangerous-goods",
    "related": [
     "dangerous-goods",
     "dg-class",
@@ -1923,7 +1905,6 @@
    ],
    "definition": "서로 반응할 수 있는 위험물을 같은 곳에 두지 않도록 거리나 칸막이로 떼어 놓는 규칙과 그 배치입니다. 등급 조합마다 필요한 격리 수준이 정해져 있어 선박 적재 계획과 야드 장치 위치를 정할 때 함께 검사합니다.",
    "category": "cargo",
-   "broader": "dangerous-goods",
    "related": [
     "dangerous-goods",
     "dg-class",
@@ -2009,7 +1990,6 @@
    ],
    "definition": "항만의 시설, 장비, 선박, 화물 상태를 실시간 데이터로 가상 공간에 재현한 모델입니다. 선석 배정이나 장비 투입 계획을 실제로 적용하기 전에 모의 실행해 대기 시간과 혼잡을 비교하는 데 씁니다.",
    "category": "digital",
-   "broader": "smart-port",
    "related": [
     "smart-port",
     "tos",
@@ -2042,7 +2022,6 @@
    ],
    "definition": "접안한 선박마다 안벽 크레인을 몇 대, 어느 시간대에 붙일지 정하는 계획입니다. 선석 계획과 함께 풀며, 작업량이 많은 베이에 크레인을 더 붙이되 이웃한 크레인끼리 간섭하지 않도록 작업 순서를 짭니다.",
    "category": "terminal",
-   "broader": "berth-planning",
    "related": [
     "sts-crane",
     "berth-planning",

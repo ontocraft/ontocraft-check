@@ -7,14 +7,14 @@
  "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
  "base_uri": "https://w3id.org/ontocraft/terms/",
  "uri_template": "https://w3id.org/ontocraft/terms/{id}",
- "snapshot": "2026-10-09",
+ "snapshot": "2026-10-10",
  "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
  "domain": {
   "id": "physical-ai",
   "name": "Physical AI",
   "en": "Physical AI"
  },
- "version": "0.2.0",
+ "version": "0.2.1",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -102,7 +102,6 @@
    "ko": "링크",
    "en": "link",
    "alt": [
-    "암",
     "링크 부재"
    ],
    "definition": "관절과 관절 사이를 잇는 단단한 몸체입니다. 링크의 길이와 질량이 로봇의 도달 범위와 동역학을 정합니다.",
@@ -121,8 +120,7 @@
    "ko": "관절",
    "en": "joint",
    "alt": [
-    "조인트",
-    "축"
+    "조인트"
    ],
    "definition": "두 링크를 이어 서로 움직일 수 있게 하는 부분입니다. 관절 하나가 보통 자유도 하나를 줍니다.",
    "category": "structure",
@@ -160,8 +158,7 @@
    "en": "end effector",
    "alt": [
     "말단 장치",
-    "EOAT",
-    "툴"
+    "EOAT"
    ],
    "definition": "매니퓰레이터 끝에 달려 실제로 일을 하는 장치입니다. 그리퍼, 용접 토치, 흡착 패드, 드라이버 등이 있습니다.",
    "category": "structure",
@@ -178,9 +175,7 @@
    "ko": "그리퍼",
    "en": "gripper",
    "alt": [
-    "집게",
-    "로봇 핸드",
-    "핸드"
+    "집게"
    ],
    "definition": "물체를 잡고 놓는 엔드 이펙터입니다. 손가락형, 흡착형, 자석형 등이 있고 물체 모양과 무게에 맞춰 고릅니다.",
    "category": "structure",
@@ -268,7 +263,6 @@
    "en": "workspace",
    "alt": [
     "작업 영역",
-    "도달 범위",
     "워크스페이스"
    ],
    "definition": "엔드 이펙터가 닿을 수 있는 공간 전체입니다. 링크 길이와 관절 가동 범위가 정합니다.",
@@ -355,8 +349,7 @@
    "en": "legged robot",
    "alt": [
     "다리 로봇",
-    "족형 로봇",
-    "4족 보행 로봇"
+    "족형 로봇"
    ],
    "definition": "바퀴 대신 다리로 걷는 로봇입니다. 계단이나 거친 땅을 지날 수 있지만 균형 제어가 어렵습니다.",
    "category": "structure",
@@ -424,8 +417,6 @@
    "ko": "동차 변환",
    "en": "homogeneous transformation",
    "alt": [
-    "변환 행렬",
-    "좌표 변환",
     "4x4 변환 행렬"
    ],
    "definition": "회전과 이동을 한 행렬에 묶어 한 좌표계의 값을 다른 좌표계로 옮기는 계산입니다. 여러 변환을 곱해 이어 붙일 수 있습니다.",
@@ -533,10 +524,10 @@
    ],
    "definition": "관절 속도와 엔드 이펙터 속도 사이의 관계를 나타내는 행렬입니다. 힘 제어와 특이점 판단에도 씁니다.",
    "category": "kinematics",
-   "broader": "robot-kinematics",
    "related": [
     "kinematic-singularity",
-    "force-control"
+    "force-control",
+    "robot-kinematics"
    ]
   },
   {
@@ -612,8 +603,7 @@
    "ko": "위치 정확도",
    "en": "pose accuracy",
    "alt": [
-    "절대 정확도",
-    "절대 정밀도"
+    "절대 정확도"
    ],
    "definition": "지령한 자세와 실제로 도착한 자세가 얼마나 가까운지 나타냅니다. 반복 정밀도보다 보통 나쁘며 캘리브레이션으로 개선합니다.",
    "category": "kinematics",
@@ -698,7 +688,6 @@
    "ko": "토크 제어",
    "en": "torque control",
    "alt": [
-    "전류 제어",
     "힘 지령 제어"
    ],
    "definition": "관절 모터가 내는 토크를 직접 지령하는 제어입니다. 동역학 모델과 함께 써서 부드러운 접촉과 빠른 동작을 만듭니다.",
@@ -848,8 +837,7 @@
    "en": "LiDAR",
    "alt": [
     "레이저 스캐너",
-    "LIDAR",
-    "레이저 거리 센서"
+    "LIDAR"
    ],
    "definition": "레이저를 쏘아 되돌아오는 시간으로 주변까지의 거리를 재는 센서입니다. 이동 로봇의 지도 작성과 장애물 감지에 씁니다.",
    "category": "perception",
@@ -864,8 +852,7 @@
    "ko": "관성 측정 장치",
    "en": "inertial measurement unit",
    "alt": [
-    "IMU",
-    "관성 센서"
+    "IMU"
    ],
    "definition": "가속도계와 자이로로 몸체의 가속도와 회전 속도를 재는 센서입니다. 짧은 시간의 자세 변화를 빠르게 알려 주지만 오래 적분하면 오차가 쌓입니다.",
    "category": "perception",
@@ -900,8 +887,7 @@
    "en": "force/torque sensor",
    "alt": [
     "F/T 센서",
-    "6축 힘 센서",
-    "힘 센서"
+    "6축 힘 센서"
    ],
    "definition": "손목이나 관절에 달아 세 방향의 힘과 세 축의 토크를 재는 센서입니다. 힘 제어와 충돌 감지에 씁니다.",
    "category": "perception",
@@ -951,17 +937,15 @@
    "ko": "칼만 필터",
    "en": "Kalman filter",
    "alt": [
-    "KF",
-    "확장 칼만 필터",
-    "EKF"
+    "KF"
    ],
    "definition": "예측 모델과 잡음이 섞인 측정을 불확실성의 크기에 따라 섞어 상태를 추정하는 방법입니다.",
    "category": "perception",
-   "broader": "sensor-fusion",
    "related": [
     "robot-localization",
     "inertial-measurement-unit",
-    "slam"
+    "slam",
+    "sensor-fusion"
    ],
    "example": "위치 추정 필터의 설정 파일에는 공정 잡음 공분산과 측정 잡음 공분산 행렬을 적습니다."
   },
@@ -993,7 +977,6 @@
    ],
    "definition": "모르는 공간을 다니며 지도를 만드는 동시에 그 지도 안의 자기 위치를 추정하는 기법입니다.",
    "category": "perception",
-   "broader": "robot-localization",
    "related": [
     "lidar",
     "autonomous-mobile-robot",
@@ -1097,8 +1080,7 @@
    "ko": "충돌 검사",
    "en": "collision checking",
    "alt": [
-    "간섭 검사",
-    "충돌 감지"
+    "간섭 검사"
    ],
    "definition": "주어진 자세나 경로에서 로봇이 자기 몸이나 주변 물체와 부딪히는지 계산하는 일입니다.",
    "category": "planning",
@@ -1111,10 +1093,6 @@
    "id": "sampling-based-planning",
    "ko": "샘플링 기반 계획",
    "en": "sampling-based planning",
-   "alt": [
-    "RRT",
-    "PRM"
-   ],
    "definition": "형상 공간에서 무작위로 점을 뽑아 충돌 없는 점끼리 이어 길을 찾는 계획 방식입니다. 관절이 많을 때 씁니다.",
    "category": "planning",
    "broader": "motion-planning",
@@ -1143,10 +1121,6 @@
    "id": "robot-navigation",
    "ko": "내비게이션",
    "en": "navigation",
-   "alt": [
-    "자율 주행",
-    "주행"
-   ],
    "definition": "이동 로봇이 위치 추정, 경로 계획, 장애물 회피를 엮어 목적지까지 가는 기능 전체입니다.",
    "category": "planning",
    "related": [
@@ -1160,17 +1134,16 @@
    "ko": "파지 계획",
    "en": "grasp planning",
    "alt": [
-    "그래스핑",
     "파지점 계산",
     "그립 계획"
    ],
    "definition": "물체를 어디를 어떤 방향으로 잡을지 정하는 일입니다. 물체 자세, 그리퍼 모양, 미끄러짐을 함께 고려합니다.",
    "category": "planning",
-   "broader": "motion-planning",
    "related": [
     "robot-gripper",
     "six-d-pose-estimation",
-    "tactile-sensor"
+    "tactile-sensor",
+    "motion-planning"
    ]
   },
   {
@@ -1178,8 +1151,7 @@
    "ko": "픽앤플레이스",
    "en": "pick and place",
    "alt": [
-    "집어 놓기",
-    "피킹"
+    "집어 놓기"
    ],
    "definition": "물체를 집어 정해진 위치에 놓는 작업입니다. 인지, 파지 계획, 동작 계획을 모두 거칩니다.",
    "category": "planning",
@@ -1316,7 +1288,6 @@
    "ko": "보상 함수",
    "en": "reward function",
    "alt": [
-    "보상 설계",
     "리워드"
    ],
    "definition": "강화 학습에서 행동의 결과가 얼마나 좋은지 점수로 매기는 함수입니다. 목표 달성, 에너지 사용, 충돌 같은 항목에 가중치를 붙여 더하는 형태가 많고, 잘못 설계하면 정책이 의도하지 않은 지름길을 배웁니다.",
@@ -1439,8 +1410,7 @@
    "ko": "접촉 모델",
    "en": "contact model",
    "alt": [
-    "접촉 역학 모델",
-    "마찰 모델"
+    "접촉 역학 모델"
    ],
    "definition": "물체끼리 닿을 때의 힘과 마찰을 물리 엔진이 계산하는 방식입니다. 집기와 걷기의 시뮬레이션 품질을 크게 좌우합니다.",
    "category": "software",
@@ -1486,10 +1456,6 @@
    "id": "robot-digital-twin",
    "ko": "로봇 디지털 트윈",
    "en": "robot digital twin",
-   "alt": [
-    "디지털 트윈",
-    "디지털트윈"
-   ],
    "definition": "실제 로봇이나 셀의 상태를 데이터로 받아 가상 모델에 계속 반영하는 쌍둥이 모델입니다. 모니터링, 시험, 변경 검토에 씁니다.",
    "category": "software",
    "related": [
@@ -1536,8 +1502,7 @@
    "ko": "토픽",
    "en": "topic",
    "alt": [
-    "ROS 토픽",
-    "발행·구독"
+    "ROS 토픽"
    ],
    "definition": "노드끼리 메시지를 발행하고 구독하는 이름 붙은 통로입니다. 센서 값처럼 계속 흐르는 데이터를 보냅니다.",
    "category": "software",
@@ -1606,7 +1571,6 @@
    "ko": "로봇 위험성 평가",
    "en": "robot risk assessment",
    "alt": [
-    "위험성 평가",
     "리스크 어세스먼트"
    ],
    "definition": "로봇 셀의 위험 요인을 찾고 위험의 크기를 따져 줄이는 대책을 정하는 절차입니다.",
@@ -1665,7 +1629,6 @@
    "ko": "핸드 가이딩",
    "en": "hand guiding",
    "alt": [
-    "직접 교시",
     "손 안내"
    ],
    "definition": "작업자가 로봇을 손으로 잡고 끌어 움직이는 협동 운전 방식입니다. 교시에도 씁니다.",
@@ -2000,7 +1963,6 @@
    "en": "odometry",
    "alt": [
     "주행 거리 측정",
-    "휠 오도메트리",
     "주행계"
    ],
    "definition": "바퀴 회전량이나 연속한 영상, IMU 값을 적분해 출발점에서 얼마나 움직였는지 추정하는 방법입니다. 짧은 거리에서는 매끄럽지만 오차가 계속 쌓이므로 지도나 GPS 같은 외부 기준으로 고쳐 줍니다.",
@@ -2103,9 +2065,7 @@
    "ko": "보상 해킹",
    "en": "reward hacking",
    "alt": [
-    "보상 악용",
-    "specification gaming",
-    "명세 게이밍"
+    "보상 악용"
    ],
    "definition": "강화 학습 정책이 설계자가 의도한 행동 대신 보상 함수의 허점을 파고들어 점수만 높이는 현상입니다. 시뮬레이터의 물리 오류를 이용하는 경우도 있어서 보상 곡선만 보지 않고 실제 동작 영상을 함께 확인합니다.",
    "category": "learning",
@@ -2154,9 +2114,7 @@
    "ko": "ROS 액션",
    "en": "ROS action",
    "alt": [
-    "ROS 2 액션",
-    "액션 서버",
-    "액션 클라이언트"
+    "ROS 2 액션"
    ],
    "definition": "목표를 보내면 작업하는 동안 진행 피드백을 받고, 도중에 취소할 수 있으며, 끝나면 결과를 받는 ROS 통신 방식입니다. 한 번 묻고 답하는 서비스와 달리 이동이나 파지처럼 시간이 걸리는 작업에 씁니다.",
    "category": "software",
@@ -2173,8 +2131,7 @@
    "en": "performance level",
    "alt": [
     "PL",
-    "성능 수준",
-    "PLr"
+    "성능 수준"
    ],
    "definition": "기계 제어 시스템의 안전 기능이 위험한 고장 없이 제 역할을 해낼 능력을 PL a부터 e까지 다섯 단계로 나타낸 값입니다. 위험성 평가로 필요한 수준인 PLr을 정하고, 구성 방식과 부품 고장률과 진단 범위로 실제 달성 수준을 확인합니다.",
    "category": "safety",

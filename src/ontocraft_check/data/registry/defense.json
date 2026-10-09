@@ -7,14 +7,14 @@
  "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
  "base_uri": "https://w3id.org/ontocraft/terms/",
  "uri_template": "https://w3id.org/ontocraft/terms/{id}",
- "snapshot": "2026-10-09",
+ "snapshot": "2026-10-10",
  "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
  "domain": {
   "id": "defense",
   "name": "방산",
   "en": "Defense industry"
  },
- "version": "0.1.1",
+ "version": "0.1.2",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -418,11 +418,11 @@
    ],
    "definition": "획득이 결정된 장비와 물자를 계약을 통해 실제로 사들이는 일입니다. 획득이 무엇을 확보할지 정하는 일이라면 조달은 계약, 납품, 검사로 물자를 받아 내는 집행입니다.",
    "category": "acquisition",
-   "broader": "defense-acquisition",
    "related": [
     "defense-contract",
     "defense-rfp",
-    "acceptance-inspection"
+    "acceptance-inspection",
+    "defense-acquisition"
    ],
    "refs": [
     "방위사업법"
@@ -664,7 +664,6 @@
    "ko": "지휘통제·통신 무기체계",
    "en": "command, control and communications system",
    "alt": [
-    "C4I",
     "지휘통제통신"
    ],
    "definition": "지휘관이 상황을 파악하고 명령을 전달하는 데 쓰는 지휘통제 장비와 통신 장비를 묶은 무기체계 분류입니다.",
@@ -982,7 +981,6 @@
    "ko": "초도품 검사",
    "en": "first article inspection",
    "alt": [
-    "초도품",
     "FAI"
    ],
    "definition": "양산에 들어가 처음 만든 제품이 규격과 기술 자료대로 만들어졌는지 확인하는 검사입니다.",
@@ -1016,8 +1014,7 @@
    "ko": "종합군수지원",
    "en": "integrated logistics support",
    "alt": [
-    "ILS",
-    "군수지원"
+    "ILS"
    ],
    "definition": "무기체계를 배치한 뒤 수명 내내 운용하고 정비할 수 있도록 정비, 보급, 교육, 자료, 시설 같은 지원 요소를 개발 단계부터 함께 계획하는 활동입니다.",
    "category": "ils",
@@ -1084,8 +1081,7 @@
    "ko": "부대 정비",
    "en": "organizational maintenance",
    "alt": [
-    "부대정비",
-    "운용자 정비"
+    "부대정비"
    ],
    "definition": "장비를 운용하는 부대가 점검, 청소, 간단한 교환처럼 직접 하는 정비입니다.",
    "category": "ils",
@@ -1310,8 +1306,7 @@
    "ko": "전투용 적합 판정",
    "en": "combat suitability determination",
    "alt": [
-    "전투용 적합",
-    "전투용 부적합"
+    "전투용 적합"
    ],
    "definition": "시험평가 결과를 종합해 무기체계를 전투에 쓸 수 있는지 공식으로 결정하는 일입니다. 적합 판정이 양산으로 넘어가는 조건이 됩니다.",
    "category": "test",
@@ -1333,10 +1328,10 @@
    ],
    "definition": "고온, 저온, 진동, 충격, 습도처럼 운용 중 겪을 환경을 재현해 장비가 견디는지 확인하는 시험입니다.",
    "category": "test",
-   "broader": "developmental-test",
    "related": [
     "military-standard",
-    "emc-test"
+    "emc-test",
+    "developmental-test"
    ],
    "refs": [
     "MIL-STD-810"
@@ -1353,10 +1348,10 @@
    ],
    "definition": "장비가 내는 전자파가 다른 장비를 방해하지 않고, 주변 전자파에도 제대로 동작하는지 확인하는 시험입니다.",
    "category": "test",
-   "broader": "developmental-test",
    "related": [
     "environmental-test",
-    "military-standard"
+    "military-standard",
+    "developmental-test"
    ],
    "refs": [
     "MIL-STD-461"
@@ -1449,7 +1444,6 @@
    "ko": "비밀",
    "en": "classified information",
    "alt": [
-    "군사기밀",
     "비밀 자료"
    ],
    "definition": "누설되면 국가 안보에 해가 될 수 있어 법령에 따라 등급을 매기고 보호하는 정보입니다.",
@@ -1665,10 +1659,6 @@
    "id": "core-technology-rnd",
    "ko": "핵심기술 연구개발",
    "en": "core technology development",
-   "alt": [
-    "핵심기술",
-    "국방 핵심기술"
-   ],
    "definition": "앞으로의 무기체계에 필요하지만 아직 확보하지 못한 기술을 미리 개발하는 연구입니다.",
    "category": "rnd",
    "broader": "defense-rnd",
@@ -1747,11 +1737,6 @@
    "id": "civil-military-technology",
    "ko": "민군기술협력",
    "en": "civil-military technology cooperation",
-   "alt": [
-    "민군겸용기술",
-    "스핀온",
-    "스핀오프"
-   ],
    "definition": "민간 기술을 국방에 쓰거나 국방 기술을 민간에 넘기고, 양쪽에 함께 쓸 기술을 공동 개발하는 일입니다.",
    "category": "rnd",
    "related": [

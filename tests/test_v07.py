@@ -1,4 +1,4 @@
-"""0.7.1: 등록부 영어 대조와 @ko 0개 구분, --ignore-names, ONTOFLOW CQ 형식·프로필."""
+"""0.7.2: 등록부 영어 대조와 @ko 0개 구분, --ignore-names, ONTOFLOW CQ 형식·프로필."""
 
 import asyncio
 import json
@@ -27,7 +27,7 @@ def short(x):
 
 
 def test_version():
-    assert __version__ == "0.7.1"
+    assert __version__ == "0.7.2"
 
 
 # 1. 등록부: @ko 0개 구분과 영어 대조

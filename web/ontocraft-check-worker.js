@@ -12,7 +12,7 @@
 //   cq_format: "auto"(기본) | "default" | "ontoflow". cq_profile: "default"(기본) | "ontoflow".
 //   cq_base: ontoflow 프로필의 기준 IRI 틀(예: "https://ontocraft.com/ontology/{project}/").
 //   json.options 에 ignore_names(패턴별 건수), registry_match 가 늘고, json.cq 에 format, profile, manual, iri_rule 이 늡니다.
-//   wheel 은 ontocraft_check-0.7.1-py3-none-any.whl 입니다.
+//   wheel 은 ontocraft_check-0.7.2-py3-none-any.whl 입니다.
 // 0.6.0: CQ 커버리지를 받습니다. cq 는 CQ JSON 파일 {name, text}(최상위 items[]: id, q, cypher 또는 sparql),
 //   cq_query_field 는 질의 필드 이름(문자열), cq_allow_labels·cq_allow_relations 는 문자열 배열입니다.
 //   값을 줄 때만 run() 에 넘기므로, 이 필드를 쓰지 않는 화면과 0.5 wheel 도 그대로 돕니다.

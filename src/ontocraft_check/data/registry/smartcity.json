@@ -7,14 +7,14 @@
  "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
  "base_uri": "https://w3id.org/ontocraft/terms/",
  "uri_template": "https://w3id.org/ontocraft/terms/{id}",
- "snapshot": "2026-10-09",
+ "snapshot": "2026-10-10",
  "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
  "domain": {
   "id": "smartcity",
   "name": "스마트시티",
   "en": "Smart city"
  },
- "version": "0.1.1",
+ "version": "0.1.2",
  "updated": "2026-10-09",
  "categories": [
   {
@@ -86,7 +86,6 @@
    ],
    "definition": "도시 데이터와 기반시설을 엮어 시민이나 관리 기관에 제공하는 서비스 한 가지입니다. 실시간 신호 제어, 침수 경보, 버스 도착 안내가 그 예입니다.",
    "category": "platform",
-   "broader": "smart-city",
    "related": [
     "integrated-operation-center",
     "city-data-platform",
@@ -121,19 +120,16 @@
    ],
    "definition": "방범, 교통, 재난, 시설 관리처럼 따로 운영되던 정보시스템을 하나의 운영 화면과 연계 규칙으로 묶는 소프트웨어입니다. 통합운영센터가 이 위에서 일합니다.",
    "category": "platform",
-   "broader": "city-data-platform",
    "related": [
     "integrated-operation-center",
-    "emergency-service-linkage"
+    "emergency-service-linkage",
+    "city-data-platform"
    ]
   },
   {
    "id": "context-broker",
    "ko": "컨텍스트 브로커",
    "en": "context broker",
-   "alt": [
-    "브로커"
-   ],
    "definition": "도시 대상의 현재 상태를 엔터티 단위로 받아 두고, 조회하거나 구독한 쪽에 바뀐 값을 알려 주는 중계 소프트웨어입니다.",
    "category": "platform",
    "broader": "city-data-platform",
@@ -182,7 +178,6 @@
    "ko": "상황판",
    "en": "situation board",
    "alt": [
-    "대시보드",
     "관제 화면",
     "상황 지도"
    ],
@@ -246,10 +241,6 @@
    "id": "sensor-observation",
    "ko": "관측",
    "en": "observation",
-   "alt": [
-    "관측값",
-    "측정값"
-   ],
    "definition": "센서 하나가 한 시각에 한 대상의 한 항목을 잰 기록 한 건입니다. 값이 바뀌면 이전 기록을 고치지 않고 새 관측을 더합니다.",
    "category": "sensing",
    "related": [
@@ -284,9 +275,7 @@
    "ko": "저전력 광역 통신망",
    "en": "low-power wide-area network",
    "alt": [
-    "LPWAN",
-    "LoRaWAN",
-    "NB-IoT"
+    "LPWAN"
    ],
    "definition": "적은 전력으로 넓은 범위에 작은 데이터를 보내는 무선 통신 방식입니다. 배터리로 오래 버텨야 하는 도시 센서에 많이 씁니다.",
    "category": "sensing",
@@ -314,10 +303,6 @@
    "id": "air-quality-sensor",
    "ko": "대기질 센서",
    "en": "air quality sensor",
-   "alt": [
-    "미세먼지 센서",
-    "간이 측정기"
-   ],
    "definition": "미세먼지, 오존, 이산화질소 같은 대기 오염 물질의 농도를 재는 센서입니다. 간이 측정기 값은 공식 측정망 값과 구분해 다룹니다.",
    "category": "sensing",
    "broader": "city-iot-sensor",
@@ -333,9 +318,7 @@
    "ko": "대기질 지수",
    "en": "air quality index",
    "alt": [
-    "AQI",
-    "통합대기환경지수",
-    "CAI"
+    "AQI"
    ],
    "definition": "여러 오염 물질의 농도를 하나의 숫자와 등급으로 바꿔 시민이 대기 상태를 알아보기 쉽게 만든 지표입니다.",
    "category": "sensing",
@@ -380,8 +363,7 @@
    "ko": "지능형 검침 인프라",
    "en": "advanced metering infrastructure",
    "alt": [
-    "AMI",
-    "원격검침 시스템"
+    "AMI"
    ],
    "definition": "스마트 미터, 통신망, 수집 서버를 묶어 사용량을 자동으로 모으고 관리하는 체계입니다.",
    "category": "sensing",
@@ -395,9 +377,7 @@
    "ko": "지능형 영상 분석",
    "en": "video analytics",
    "alt": [
-    "지능형 CCTV",
-    "영상 분석",
-    "선별 관제"
+    "영상 분석"
    ],
    "definition": "CCTV 영상에서 사람, 차량, 쓰러짐, 배회 같은 사건을 자동으로 찾아 관제요원에게 알리는 기능입니다. 관제요원이 볼 화면을 줄이는 데 씁니다.",
    "category": "sensing",
@@ -411,9 +391,7 @@
    "ko": "결측",
    "en": "missing data",
    "alt": [
-    "데이터 결측",
-    "통신 두절",
-    "무응답"
+    "데이터 결측"
    ],
    "definition": "센서가 값을 보내야 할 시각에 값이 오지 않은 상태입니다. 값이 0인 관측과 구분해 기록해야 고장과 정상 상태를 가를 수 있습니다.",
    "category": "sensing",
@@ -469,10 +447,10 @@
    ],
    "definition": "교차로의 신호 순서와 시간을 정해 차와 보행자의 흐름을 나누는 일입니다. 시간대별 고정 계획이나 실시간 교통량에 따라 바꿉니다.",
    "category": "mobility",
-   "broader": "its",
    "related": [
     "traffic-signal",
-    "signal-phase"
+    "signal-phase",
+    "its"
    ]
   },
   {
@@ -495,9 +473,7 @@
    "ko": "실시간 신호 제어",
    "en": "adaptive signal control",
    "alt": [
-    "감응 신호",
-    "적응형 신호 제어",
-    "스마트 교차로"
+    "적응형 신호 제어"
    ],
    "definition": "검지기나 영상으로 잰 교통량에 맞춰 신호 시간을 자동으로 바꾸는 신호 제어 방식입니다.",
    "category": "mobility",
@@ -513,7 +489,6 @@
    "en": "vehicle detector",
    "alt": [
     "검지기",
-    "루프 검지기",
     "VDS"
    ],
    "definition": "도로를 지나는 차량의 수, 속도, 점유를 재는 센서입니다. 노면 아래 루프, 영상, 레이더 방식이 있습니다.",
@@ -577,12 +552,12 @@
     "유고",
     "교통 사고·고장"
    ],
-   "definition": "사고, 고장 차량, 낙하물, 공사처럼 예정 없이 도로 용량을 줄이는 상황입니다.",
+   "definition": "사고, 고장 차량, 낙하물처럼 예정 없이 도로 용량을 줄이는 상황입니다. 미리 계획한 도로 공사나 행사는 따로 다룹니다.",
    "category": "mobility",
-   "broader": "city-incident",
    "related": [
     "traffic-speed",
-    "its"
+    "its",
+    "city-incident"
    ]
   },
   {
@@ -607,8 +582,7 @@
    "ko": "버스정보시스템",
    "en": "bus information system",
    "alt": [
-    "BIS",
-    "버스 도착 안내"
+    "BIS"
    ],
    "definition": "버스의 위치를 모아 정류장과 앱에 도착 예정 시간을 알려 주는 시스템입니다.",
    "category": "mobility",
@@ -669,10 +643,6 @@
    "id": "personal-mobility",
    "ko": "개인형 이동장치",
    "en": "personal mobility device",
-   "alt": [
-    "PM",
-    "전동킥보드"
-   ],
    "definition": "한 사람이 타는 작은 전동 이동수단입니다. 전동킥보드, 전동 이륜 평행차가 그 예입니다.",
    "category": "mobility",
    "related": [
@@ -702,10 +672,6 @@
    "id": "ev-charging",
    "ko": "전기차 충전 인프라",
    "en": "EV charging infrastructure",
-   "alt": [
-    "충전소",
-    "충전기"
-   ],
    "definition": "전기차에 전력을 공급하는 충전기와 그 설치 장소, 운영 시스템입니다. 충전기 상태와 이용 기록이 도시 데이터로 모입니다.",
    "category": "mobility",
    "related": [
@@ -719,8 +685,7 @@
    "en": "incident",
    "alt": [
     "상황",
-    "사고·이상",
-    "이벤트"
+    "사고·이상"
    ],
    "definition": "통합운영센터가 대응 대상으로 등록한 일 한 건입니다. 유형, 심각도, 발생 장소, 시작 시각을 갖고, 종료될 때까지 처리 과정을 남깁니다.",
    "category": "safety",
@@ -734,7 +699,6 @@
    "ko": "알림",
    "en": "alert",
    "alt": [
-    "경보",
     "이벤트 알림"
    ],
    "definition": "센서나 시스템이 정한 조건을 넘었다고 자동으로 낸 신호입니다. 관제요원이 확인해 사건으로 등록하기 전 단계입니다.",
@@ -749,8 +713,6 @@
    "ko": "CCTV",
    "en": "closed-circuit television",
    "alt": [
-    "방범 카메라",
-    "영상정보처리기기",
     "폐쇄회로 텔레비전"
    ],
    "definition": "공공장소에 고정해 영상을 찍고 정해진 곳으로만 보내는 카메라입니다. 설치 목적, 장소, 촬영 범위를 안내해야 합니다.",
@@ -818,9 +780,6 @@
    "id": "city-disaster",
    "ko": "재난",
    "en": "disaster",
-   "alt": [
-    "재해"
-   ],
    "definition": "사람의 생명과 재산, 도시 기능에 큰 피해를 주거나 줄 수 있는 일입니다. 자연재난과 사회재난으로 나눕니다.",
    "category": "safety",
    "related": [
@@ -835,9 +794,6 @@
    "id": "natural-disaster",
    "ko": "자연재난",
    "en": "natural disaster",
-   "alt": [
-    "자연재해"
-   ],
    "definition": "태풍, 호우, 폭염, 지진처럼 자연 현상으로 생기는 재난입니다. 사람의 활동이나 시설에서 비롯되는 사회재난과 구분해 재난 유형을 기록합니다.",
    "category": "safety",
    "broader": "city-disaster",
@@ -855,9 +811,6 @@
    "id": "social-disaster",
    "ko": "사회재난",
    "en": "social disaster",
-   "alt": [
-    "인적 재난"
-   ],
    "definition": "화재, 붕괴, 교통사고, 기반시설 마비, 감염병 확산처럼 사람의 활동이나 시설에서 비롯되는 재난입니다.",
    "category": "safety",
    "broader": "city-disaster",
@@ -892,8 +845,7 @@
    "ko": "위기경보",
    "en": "crisis alert level",
    "alt": [
-    "위기경보 단계",
-    "관심·주의·경계·심각"
+    "위기경보 단계"
    ],
    "definition": "재난 위험의 정도에 따라 관심, 주의, 경계, 심각 네 단계로 발령하는 경보입니다. 단계마다 기관의 대응 체계가 달라집니다.",
    "category": "safety",
@@ -910,8 +862,7 @@
    "ko": "재난문자",
    "en": "emergency alert text",
    "alt": [
-    "긴급재난문자",
-    "CBS"
+    "긴급재난문자"
    ],
    "definition": "재난이 났거나 날 우려가 있을 때 특정 지역의 휴대전화에 한꺼번에 보내는 안내 문자입니다.",
    "category": "safety",
@@ -956,8 +907,7 @@
    "en": "urban infrastructure",
    "alt": [
     "기반시설",
-    "인프라",
-    "SOC"
+    "인프라"
    ],
    "definition": "도로, 상하수도, 전력, 통신, 공원처럼 도시 생활과 경제 활동을 받쳐 주는 공공 시설입니다.",
    "category": "infra",
@@ -992,8 +942,7 @@
    "ko": "시설물 안전점검",
    "en": "facility safety inspection",
    "alt": [
-    "안전점검",
-    "정기안전점검"
+    "안전점검"
    ],
    "definition": "경험 있는 기술자가 눈과 간단한 장비로 시설물의 결함과 위험 요인을 살피는 일입니다.",
    "category": "infra",
@@ -1014,7 +963,6 @@
    ],
    "definition": "점검으로 알기 어려운 결함의 원인과 정도를 조사, 측정, 시험으로 밝히고 보수와 보강 방법을 내는 일입니다.",
    "category": "infra",
-   "broader": "facility-safety-inspection",
    "related": [
     "facility-safety-grade",
     "facility-safety-inspection"
@@ -1132,8 +1080,7 @@
    "ko": "상수도 관망",
    "en": "water supply network",
    "alt": [
-    "상수관망",
-    "급수 관로"
+    "상수관망"
    ],
    "definition": "정수장에서 만든 물을 배수지를 거쳐 가정과 건물로 보내는 관의 연결망입니다. 누수와 수압이 주요 관리 대상입니다.",
    "category": "infra",
@@ -1220,8 +1167,7 @@
    "en": "coordinate reference system",
    "alt": [
     "좌표참조체계",
-    "CRS",
-    "EPSG 코드"
+    "CRS"
    ],
    "definition": "지구 위 위치를 숫자 좌표로 나타내는 기준입니다. 서로 다른 좌표계 데이터를 겹치려면 먼저 변환해야 합니다.",
    "category": "spatial",
@@ -1237,10 +1183,6 @@
    "id": "administrative-district",
    "ko": "행정구역",
    "en": "administrative district",
-   "alt": [
-    "시군구",
-    "읍면동"
-   ],
    "definition": "행정을 나눠 맡기 위해 정한 땅의 구역입니다. 도시 통계와 서비스 대상 범위를 정하는 기본 단위입니다.",
    "category": "spatial",
    "related": [
@@ -1255,9 +1197,6 @@
    "id": "legal-dong",
    "ko": "법정동",
    "en": "legal dong",
-   "alt": [
-    "법정동 코드"
-   ],
    "definition": "법률로 정한 동과 리의 이름과 경계입니다. 지번 주소와 토지 기록이 이 단위를 따르고 잘 바뀌지 않습니다.",
    "category": "spatial",
    "broader": "administrative-district",
@@ -1270,9 +1209,6 @@
    "id": "admin-dong",
    "ko": "행정동",
    "en": "administrative dong",
-   "alt": [
-    "행정동 코드"
-   ],
    "definition": "주민센터 업무를 나눠 맡기 위해 정한 동입니다. 인구 변화에 따라 나뉘거나 합쳐지므로 법정동과 경계가 다를 수 있습니다.",
    "category": "spatial",
    "broader": "administrative-district",
@@ -1287,7 +1223,6 @@
    "ko": "지번 주소",
    "en": "lot number address",
    "alt": [
-    "지번",
     "구주소"
    ],
    "definition": "토지에 매긴 번호인 지번으로 위치를 나타내는 주소입니다. 토지 거래와 지적 기록에서 지금도 씁니다.",
@@ -1327,21 +1262,18 @@
     "PNU",
     "필지 코드"
    ],
-   "definition": "토지 한 필지를 전국에서 하나로 가리키도록 행정구역 코드와 지번을 이어 붙인 번호입니다. 여러 토지 데이터를 잇는 키로 씁니다.",
+   "definition": "토지 한 필지를 전국에서 하나로 가리키도록 법정동 코드 10자리에 산 여부 1자리와 본번·부번을 이어 붙인 19자리 번호입니다. 여러 토지 데이터를 잇는 키로 씁니다.",
    "category": "spatial",
    "related": [
     "lot-number-address",
-    "cadastral-map"
+    "cadastral-map",
+    "legal-dong"
    ]
   },
   {
    "id": "cadastral-map",
    "ko": "지적도",
    "en": "cadastral map",
-   "alt": [
-    "연속지적도",
-    "지적"
-   ],
    "definition": "필지마다 경계, 지번, 지목을 그린 공적 도면입니다. 도시 공간 데이터의 땅 경계 기준으로 씁니다.",
    "category": "spatial",
    "broader": "spatial-information",
@@ -1475,10 +1407,6 @@
    "id": "city-data-model",
    "ko": "도시 데이터 모델",
    "en": "city data model",
-   "alt": [
-    "도시 온톨로지",
-    "공통 데이터 모델"
-   ],
    "definition": "도시 대상과 그 속성, 관계를 어떤 이름과 형식으로 적을지 정한 약속입니다. 기관이 달라도 같은 뜻으로 데이터를 읽게 해 줍니다.",
    "category": "standard",
    "related": [
@@ -1570,15 +1498,14 @@
    "ko": "개방 데이터",
    "en": "open data",
    "alt": [
-    "오픈데이터",
-    "데이터 개방"
+    "오픈데이터"
    ],
    "definition": "누구나 자유롭게 받아 쓰고 다시 나눌 수 있도록 공개한 데이터입니다. 기계가 읽을 수 있는 형식과 이용 조건을 함께 밝힙니다.",
    "category": "data",
-   "broader": "public-data",
    "related": [
     "city-open-api",
-    "public-data-portal"
+    "public-data-portal",
+    "public-data"
    ]
   },
   {
@@ -1608,10 +1535,10 @@
    ],
    "definition": "외부 개발자가 신청한 뒤 정해진 주소와 형식으로 데이터를 받아 갈 수 있게 공개한 프로그램 인터페이스입니다.",
    "category": "data",
-   "broader": "open-data",
    "related": [
     "public-data-portal",
-    "context-broker"
+    "context-broker",
+    "open-data"
    ]
   },
   {
@@ -1619,8 +1546,7 @@
    "ko": "개인정보",
    "en": "personal information",
    "alt": [
-    "개인 정보",
-    "PII"
+    "개인 정보"
    ],
    "definition": "살아 있는 개인을 알아볼 수 있는 정보입니다. 다른 정보와 쉽게 합쳐 알아볼 수 있는 정보도 포함합니다.",
    "category": "data",
@@ -1655,8 +1581,7 @@
    "ko": "익명처리",
    "en": "anonymization",
    "alt": [
-    "익명화",
-    "비식별 조치"
+    "익명화"
    ],
    "definition": "어떤 정보를 합쳐도 더는 개인을 알아볼 수 없도록 처리하는 일입니다. 익명처리를 마친 정보는 개인정보로 보지 않습니다.",
    "category": "data",
@@ -1705,9 +1630,6 @@
    "id": "city-data-quality",
    "ko": "데이터 품질",
    "en": "data quality",
-   "alt": [
-    "품질 관리"
-   ],
    "definition": "데이터가 정확하고 빠짐없으며 제때 들어오고 서로 어긋나지 않는 정도입니다. 결측률, 지연, 중복 같은 지표로 잽니다.",
    "category": "data",
    "related": [
