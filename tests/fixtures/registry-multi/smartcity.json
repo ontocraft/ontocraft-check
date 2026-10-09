@@ -1,0 +1,3 @@
+{"domain": {"id": "smartcity", "name": "스마트시티"}, "terms": [
+ {"id": "city-iot-sensor", "ko": "도시 IoT 센서", "alt": ["센서", "IoT 센서"]},
+ {"id": "sensor-observation", "ko": "관측", "alt": ["관측값"]}]}

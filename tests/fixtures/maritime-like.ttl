@@ -1,0 +1,12 @@
+@prefix ex: <https://example.org/flux#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://example.org/flux> a owl:Ontology .
+ex:Vessel a owl:Class ; rdfs:label "선박"@ko .
+ex:Tanker a owl:Class ; rdfs:label "탱커"@ko .
+ex:Measurement a owl:Class ; rdfs:label "측정"@ko .
+ex:Service a owl:Class ; rdfs:label "서비스"@ko .
+ex:Sensor a owl:Class ; rdfs:label "센서"@ko .
+ex:Observation a owl:Class ; rdfs:label "관측"@ko .
+ex:ContainerCargo a owl:Class ; rdfs:label "컨테이너"@ko .

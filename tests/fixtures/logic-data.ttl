@@ -1,0 +1,12 @@
+@prefix ex:  <https://example.org/logic#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# 서로소 위반: 고양이이면서 강아지(하위 클래스 추론으로 개)
+ex:tom a ex:Cat , ex:Puppy .
+# owl:Nothing
+ex:ghost a ex:Impossible .
+# 함수 속성으로 sameAs 가 추론되는데 differentFrom 이 선언됨
+ex:kit ex:mother ex:m1 , ex:m2 .
+ex:m1 owl:differentFrom ex:m2 .
+# 비반사 속성을 자기 자신에게 씀(owlrl 이 따로 보고)
+ex:rex ex:hates ex:rex .

@@ -1,0 +1,42 @@
+@prefix ex:   <https://example.org/bad#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# 함정을 일부러 넣은 온톨로지입니다. 라이선스(P41)와 버전(META01)도 없습니다.
+<https://example.org/bad> a owl:Ontology ; rdfs:label "함정 예시"@ko .
+
+skos:definition a owl:AnnotationProperty .
+
+ex:Vehicle a owl:Class ; rdfs:label "탈것"@ko , "Vehicle"@en ;
+    skos:definition "사람이나 물건을 옮기는 것입니다."@ko .
+ex:Car a owl:Class ; rdfs:subClassOf ex:Vehicle ; rdfs:label "자동차"@ko , "Car"@en ;
+    skos:definition "바퀴 넷 달린 탈것입니다."@ko .
+# P06 순환
+ex:Engine a owl:Class ; rdfs:subClassOf ex:Motor ; rdfs:label "엔진"@ko , "Engine"@en ;
+    skos:definition "동력을 만드는 부품입니다."@ko .
+ex:Motor a owl:Class ; rdfs:subClassOf ex:Engine ; rdfs:label "모터"@ko , "Motor"@en ;
+    skos:definition "동력을 만드는 부품입니다."@ko .
+# P04 연결 없음, P08 정의 없음
+ex:Orphan a owl:Class ; rdfs:label "외톨이"@ko , "Orphan"@en .
+# P22 snake_case, P32 같은 레이블("자동차"@ko)
+ex:sports_car a owl:Class ; rdfs:subClassOf ex:Car ; rdfs:label "자동차"@ko , "Sports car"@en ;
+    skos:definition "빠른 자동차입니다."@ko .
+# META04 레이블 없음
+ex:Truck a owl:Class ; rdfs:subClassOf ex:Vehicle ; skos:definition "짐을 싣는 탈것입니다."@ko .
+# P11 레인지 없음, P13 역관계 없음
+ex:hasEngine a owl:ObjectProperty ; rdfs:label "엔진"@ko , "has engine"@en ;
+    skos:definition "탈것에 달린 엔진입니다."@ko ; rdfs:domain ex:Vehicle .
+# P19 도메인 둘, P34 선언 안 된 우리 클래스(ex:Boat), P34-EXT skos:Concept
+ex:maker a owl:ObjectProperty ; rdfs:label "제조사"@ko , "maker"@en ;
+    skos:definition "만든 회사입니다."@ko ;
+    rdfs:domain ex:Car , ex:Boat ; rdfs:range skos:Concept ; owl:inverseOf ex:made .
+ex:made a owl:ObjectProperty ; rdfs:label "만든 것"@ko , "made"@en ;
+    skos:definition "회사가 만든 것입니다."@ko ; rdfs:domain skos:Concept ; rdfs:range ex:Vehicle .
+# P04 연결 없는 속성
+ex:loose a owl:DatatypeProperty ; rdfs:label "느슨함"@ko , "loose"@en ;
+    skos:definition "어디에도 안 붙은 속성입니다."@ko .
+# P35 선언 안 된 우리 속성(ex:weight), P35-EXT 외부 어휘(skos:note)
+ex:Car ex:weight "1500" ; skos:note "예시"@ko .

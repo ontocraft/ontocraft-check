@@ -1,0 +1,3 @@
+{"domain": {"id": "maritime", "name": "해양·조선"}, "terms": [
+ {"id": "ship", "ko": "선박", "alt": ["배"]},
+ {"id": "oil-tanker", "ko": "유조선", "alt": ["탱커", "원유운반선"]}]}

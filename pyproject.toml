@@ -1,0 +1,41 @@
+[project]
+name = "ontocraft-check"
+version = "0.3.0"
+description = "OWL 온톨로지 검사 도구: 모델링 함정, 메타데이터, OWL 2 RL 논리, SHACL, 한국 산업 용어 등록부 대조를 한국어 보고서로 냅니다"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+requires-python = ">=3.11"
+authors = [{ name = "OntoCraft" }]
+keywords = ["ontology", "owl", "shacl", "rdf", "linter", "mcp", "korean"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Natural Language :: Korean",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "rdflib>=7.6.0",
+    "owlrl>=7.6.2",
+    "pyshacl>=0.40.1",
+]
+
+[project.optional-dependencies]
+mcp = ["mcp>=2.2.0,<3"]
+hermit = ["owlready2>=0.46"]
+
+[project.urls]
+Homepage = "https://ontocraft.com/tools/ontocheck"
+Repository = "https://github.com/ontocraft/ontocraft-check"
+
+[project.scripts]
+ontocraft-check = "ontocraft_check.cli:main"
+ontocraft-check-mcp = "ontocraft_check.mcp_server:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["uv_build>=0.8,<0.12"]
+build-backend = "uv_build"

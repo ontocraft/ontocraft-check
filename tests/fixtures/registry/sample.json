@@ -1,0 +1,10 @@
+{
+ "registry": "시험용 등록부",
+ "domain": {"id": "sample", "name": "시험", "en": "Sample"},
+ "base_uri": "https://w3id.org/ontocraft/terms/",
+ "terms": [
+  {"id": "person", "ko": "사람", "en": "Person", "alt": ["개인"], "status": "active"},
+  {"id": "org", "ko": "조직", "en": "Organization", "alt": ["단체"], "status": "active"},
+  {"id": "old", "ko": "이름", "en": "Name", "alt": [], "status": "deprecated"}
+ ]
+}

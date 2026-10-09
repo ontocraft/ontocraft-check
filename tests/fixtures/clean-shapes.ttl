@@ -1,0 +1,7 @@
+@prefix ex:  <https://example.org/clean#> .
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:AgentShape a sh:NodeShape ; sh:targetClass ex:Agent ;
+    sh:property [ sh:path ex:name ; sh:minCount 1 ; sh:datatype xsd:string ;
+                  sh:message "행위자에는 이름이 있어야 합니다" ] .

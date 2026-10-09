@@ -1,0 +1,1733 @@
+{
+ "registry": "OntoCraft 한국 산업 용어 등록부",
+ "registry_en": "OntoCraft Korean Industry Term Registry",
+ "publisher": "OntoCraft",
+ "license": "CC BY 4.0",
+ "license_url": "https://creativecommons.org/licenses/by/4.0/",
+ "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
+ "base_uri": "https://w3id.org/ontocraft/terms/",
+ "uri_template": "https://w3id.org/ontocraft/terms/{id}",
+ "snapshot": "2026-10-09",
+ "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
+ "domain": {
+  "id": "smartcity",
+  "name": "스마트시티",
+  "en": "Smart city"
+ },
+ "version": "0.1.1",
+ "updated": "2026-10-09",
+ "categories": [
+  {
+   "id": "platform",
+   "name": "도시 데이터 플랫폼과 운영",
+   "en": "Urban data platform and operations"
+  },
+  {
+   "id": "sensing",
+   "name": "도시 IoT와 관측",
+   "en": "Urban IoT and observation"
+  },
+  {
+   "id": "mobility",
+   "name": "교통과 모빌리티",
+   "en": "Transport and mobility"
+  },
+  {
+   "id": "safety",
+   "name": "공공 안전과 재난",
+   "en": "Public safety and disasters"
+  },
+  {
+   "id": "infra",
+   "name": "도시 인프라와 시설물",
+   "en": "Urban infrastructure and facilities"
+  },
+  {
+   "id": "spatial",
+   "name": "공간정보와 디지털 트윈",
+   "en": "Spatial information and digital twins"
+  },
+  {
+   "id": "standard",
+   "name": "도시 지표와 데이터 표준",
+   "en": "City indicators and data standards"
+  },
+  {
+   "id": "data",
+   "name": "공공데이터와 개인정보",
+   "en": "Public data and privacy"
+  }
+ ],
+ "terms": [
+  {
+   "id": "smart-city",
+   "ko": "스마트시티",
+   "en": "smart city",
+   "alt": [
+    "스마트도시"
+   ],
+   "definition": "정보통신 기술과 도시 데이터로 교통, 안전, 환경, 에너지 같은 도시 서비스를 운영하고 개선하는 도시입니다. 기술보다 서비스를 함께 운영하는 체계를 가리킬 때가 많습니다.",
+   "category": "platform",
+   "related": [
+    "city-data-platform",
+    "smart-city-service"
+   ],
+   "refs": [
+    "스마트도시 조성 및 산업진흥 등에 관한 법률",
+    "ISO 37122"
+   ]
+  },
+  {
+   "id": "smart-city-service",
+   "ko": "스마트시티 서비스",
+   "en": "smart city service",
+   "alt": [
+    "스마트도시서비스"
+   ],
+   "definition": "도시 데이터와 기반시설을 엮어 시민이나 관리 기관에 제공하는 서비스 한 가지입니다. 실시간 신호 제어, 침수 경보, 버스 도착 안내가 그 예입니다.",
+   "category": "platform",
+   "broader": "smart-city",
+   "related": [
+    "integrated-operation-center",
+    "city-data-platform",
+    "smart-city"
+   ],
+   "refs": [
+    "스마트도시 조성 및 산업진흥 등에 관한 법률"
+   ]
+  },
+  {
+   "id": "city-data-platform",
+   "ko": "도시 데이터 플랫폼",
+   "en": "urban data platform",
+   "alt": [
+    "데이터 허브",
+    "도시 데이터 허브"
+   ],
+   "definition": "여러 기관과 시스템이 만든 도시 데이터를 모아 같은 형식으로 저장하고, 서비스와 분석에 내어 주는 공용 기반입니다.",
+   "category": "platform",
+   "related": [
+    "context-broker",
+    "city-source-system",
+    "city-data-model"
+   ]
+  },
+  {
+   "id": "smartcity-integrated-platform",
+   "ko": "스마트시티 통합플랫폼",
+   "en": "smart city integrated platform",
+   "alt": [
+    "통합플랫폼"
+   ],
+   "definition": "방범, 교통, 재난, 시설 관리처럼 따로 운영되던 정보시스템을 하나의 운영 화면과 연계 규칙으로 묶는 소프트웨어입니다. 통합운영센터가 이 위에서 일합니다.",
+   "category": "platform",
+   "broader": "city-data-platform",
+   "related": [
+    "integrated-operation-center",
+    "emergency-service-linkage"
+   ]
+  },
+  {
+   "id": "context-broker",
+   "ko": "컨텍스트 브로커",
+   "en": "context broker",
+   "alt": [
+    "브로커"
+   ],
+   "definition": "도시 대상의 현재 상태를 엔터티 단위로 받아 두고, 조회하거나 구독한 쪽에 바뀐 값을 알려 주는 중계 소프트웨어입니다.",
+   "category": "platform",
+   "broader": "city-data-platform",
+   "related": [
+    "ngsi-ld",
+    "fiware"
+   ],
+   "refs": [
+    "ETSI GS CIM 009"
+   ]
+  },
+  {
+   "id": "integrated-operation-center",
+   "ko": "통합운영센터",
+   "en": "integrated operation center",
+   "alt": [
+    "통합관제센터",
+    "도시통합운영센터",
+    "IOC"
+   ],
+   "definition": "도시의 CCTV, 센서, 교통, 재난 정보를 한곳에서 지켜보며 상황을 접수하고 관계 기관과 함께 대응하는 조직과 시설입니다.",
+   "category": "platform",
+   "related": [
+    "control-room-operator",
+    "situation-board",
+    "city-incident"
+   ]
+  },
+  {
+   "id": "control-room-operator",
+   "ko": "관제요원",
+   "en": "control room operator",
+   "alt": [
+    "관제원",
+    "모니터링 요원"
+   ],
+   "definition": "통합운영센터에서 영상과 알림을 보고 상황을 판단하며, 관계 기관에 알리거나 조치를 요청하는 사람입니다.",
+   "category": "platform",
+   "related": [
+    "integrated-operation-center",
+    "city-alert"
+   ]
+  },
+  {
+   "id": "situation-board",
+   "ko": "상황판",
+   "en": "situation board",
+   "alt": [
+    "대시보드",
+    "관제 화면",
+    "상황 지도"
+   ],
+   "definition": "현재 진행 중인 사건, 센서 값, 영상, 자원 위치를 지도와 표로 한 화면에 모아 보여 주는 운영 화면입니다.",
+   "category": "platform",
+   "related": [
+    "integrated-operation-center",
+    "gis"
+   ]
+  },
+  {
+   "id": "city-source-system",
+   "ko": "원천 시스템",
+   "en": "source system",
+   "alt": [
+    "원천",
+    "소스 시스템",
+    "업무 시스템"
+   ],
+   "definition": "도시 데이터 플랫폼에 관측, 사건, 대장 정보를 보내는 기관별 정보시스템입니다. 같은 대상이라도 원천마다 다른 식별자를 붙일 수 있습니다.",
+   "category": "platform",
+   "related": [
+    "system-linkage",
+    "city-data-platform"
+   ]
+  },
+  {
+   "id": "system-linkage",
+   "ko": "시스템 연계",
+   "en": "system integration link",
+   "alt": [
+    "연계",
+    "인터페이스 연계"
+   ],
+   "definition": "서로 다른 기관의 정보시스템이 정한 형식과 주기로 데이터를 주고받도록 맺은 연결입니다. 연계마다 제공 기관, 항목, 주기, 담당자를 정해 둡니다.",
+   "category": "platform",
+   "related": [
+    "city-source-system",
+    "data-sharing-agreement"
+   ]
+  },
+  {
+   "id": "city-iot-sensor",
+   "ko": "도시 IoT 센서",
+   "en": "urban IoT sensor",
+   "alt": [
+    "센서",
+    "IoT 센서"
+   ],
+   "definition": "도로, 시설, 공기, 물 같은 도시 대상의 상태를 재어 네트워크로 보내는 장치입니다. 센서 자체도 고장이 나는 도시 자산으로 관리합니다.",
+   "category": "sensing",
+   "related": [
+    "sensor-observation",
+    "smart-pole"
+   ],
+   "refs": [
+    "W3C SOSA/SSN"
+   ]
+  },
+  {
+   "id": "sensor-observation",
+   "ko": "관측",
+   "en": "observation",
+   "alt": [
+    "관측값",
+    "측정값"
+   ],
+   "definition": "센서 하나가 한 시각에 한 대상의 한 항목을 잰 기록 한 건입니다. 값이 바뀌면 이전 기록을 고치지 않고 새 관측을 더합니다.",
+   "category": "sensing",
+   "related": [
+    "city-iot-sensor",
+    "observed-property"
+   ],
+   "refs": [
+    "W3C SOSA/SSN"
+   ]
+  },
+  {
+   "id": "observed-property",
+   "ko": "관측 항목",
+   "en": "observed property",
+   "alt": [
+    "측정 항목"
+   ],
+   "definition": "관측이 재는 성질입니다. 미세먼지 농도, 수위, 통과 차량 수처럼 단위와 경보 기준을 함께 정해 둡니다.",
+   "category": "sensing",
+   "related": [
+    "sensor-observation",
+    "city-iot-sensor",
+    "city-alert"
+   ],
+   "refs": [
+    "W3C SOSA/SSN"
+   ],
+   "example": "센서 관측 기록의 항목 열에는 미세먼지 농도, 수위처럼 관측 항목 이름과 단위가 함께 적힙니다."
+  },
+  {
+   "id": "lpwan",
+   "ko": "저전력 광역 통신망",
+   "en": "low-power wide-area network",
+   "alt": [
+    "LPWAN",
+    "LoRaWAN",
+    "NB-IoT"
+   ],
+   "definition": "적은 전력으로 넓은 범위에 작은 데이터를 보내는 무선 통신 방식입니다. 배터리로 오래 버텨야 하는 도시 센서에 많이 씁니다.",
+   "category": "sensing",
+   "related": [
+    "city-iot-sensor",
+    "smart-meter"
+   ]
+  },
+  {
+   "id": "smart-pole",
+   "ko": "스마트폴",
+   "en": "smart pole",
+   "alt": [
+    "지능형 지주",
+    "복합 지주"
+   ],
+   "definition": "가로등이나 신호등 기둥에 CCTV, 센서, 통신 장비를 함께 얹은 지주입니다. 도로 위 장비를 한 기둥으로 모을 때 씁니다.",
+   "category": "sensing",
+   "related": [
+    "smart-streetlight",
+    "city-cctv"
+   ]
+  },
+  {
+   "id": "air-quality-sensor",
+   "ko": "대기질 센서",
+   "en": "air quality sensor",
+   "alt": [
+    "미세먼지 센서",
+    "간이 측정기"
+   ],
+   "definition": "미세먼지, 오존, 이산화질소 같은 대기 오염 물질의 농도를 재는 센서입니다. 간이 측정기 값은 공식 측정망 값과 구분해 다룹니다.",
+   "category": "sensing",
+   "broader": "city-iot-sensor",
+   "related": [
+    "air-quality-index",
+    "city-iot-sensor",
+    "sensor-observation"
+   ],
+   "example": "센서 관측 기록에서는 같은 지점의 값이라도 간이 측정기 값과 공식 측정소 값을 출처 열로 나눠 둡니다."
+  },
+  {
+   "id": "air-quality-index",
+   "ko": "대기질 지수",
+   "en": "air quality index",
+   "alt": [
+    "AQI",
+    "통합대기환경지수",
+    "CAI"
+   ],
+   "definition": "여러 오염 물질의 농도를 하나의 숫자와 등급으로 바꿔 시민이 대기 상태를 알아보기 쉽게 만든 지표입니다.",
+   "category": "sensing",
+   "related": [
+    "air-quality-sensor",
+    "city-indicator"
+   ]
+  },
+  {
+   "id": "water-level-sensor",
+   "ko": "수위 센서",
+   "en": "water level sensor",
+   "alt": [
+    "수위계"
+   ],
+   "definition": "하천, 저류지, 하수관로의 물 높이를 재는 센서입니다. 침수 위험을 미리 알리는 근거로 씁니다.",
+   "category": "sensing",
+   "broader": "city-iot-sensor",
+   "related": [
+    "urban-flooding",
+    "stormwater-pump-station"
+   ]
+  },
+  {
+   "id": "smart-meter",
+   "ko": "스마트 미터",
+   "en": "smart meter",
+   "alt": [
+    "원격 검침기",
+    "지능형 계량기"
+   ],
+   "definition": "전기, 수도, 가스 사용량을 일정한 간격으로 재어 원격으로 보내는 계량기입니다.",
+   "category": "sensing",
+   "broader": "city-iot-sensor",
+   "related": [
+    "ami",
+    "water-supply-network"
+   ]
+  },
+  {
+   "id": "ami",
+   "ko": "지능형 검침 인프라",
+   "en": "advanced metering infrastructure",
+   "alt": [
+    "AMI",
+    "원격검침 시스템"
+   ],
+   "definition": "스마트 미터, 통신망, 수집 서버를 묶어 사용량을 자동으로 모으고 관리하는 체계입니다.",
+   "category": "sensing",
+   "related": [
+    "smart-meter",
+    "smart-grid"
+   ]
+  },
+  {
+   "id": "cctv-video-analytics",
+   "ko": "지능형 영상 분석",
+   "en": "video analytics",
+   "alt": [
+    "지능형 CCTV",
+    "영상 분석",
+    "선별 관제"
+   ],
+   "definition": "CCTV 영상에서 사람, 차량, 쓰러짐, 배회 같은 사건을 자동으로 찾아 관제요원에게 알리는 기능입니다. 관제요원이 볼 화면을 줄이는 데 씁니다.",
+   "category": "sensing",
+   "related": [
+    "city-cctv",
+    "city-alert"
+   ]
+  },
+  {
+   "id": "sensor-missing-data",
+   "ko": "결측",
+   "en": "missing data",
+   "alt": [
+    "데이터 결측",
+    "통신 두절",
+    "무응답"
+   ],
+   "definition": "센서가 값을 보내야 할 시각에 값이 오지 않은 상태입니다. 값이 0인 관측과 구분해 기록해야 고장과 정상 상태를 가를 수 있습니다.",
+   "category": "sensing",
+   "related": [
+    "sensor-observation",
+    "city-data-quality"
+   ]
+  },
+  {
+   "id": "its",
+   "ko": "지능형 교통체계",
+   "en": "intelligent transport systems",
+   "alt": [
+    "ITS",
+    "지능형교통시스템"
+   ],
+   "definition": "도로와 차량에 검지, 통신, 제어 기술을 붙여 교통 정보를 모으고 신호와 안내를 조정하는 체계입니다.",
+   "category": "mobility",
+   "related": [
+    "traffic-signal-control",
+    "vehicle-detector"
+   ],
+   "refs": [
+    "국가통합교통체계효율화법",
+    "ISO 14813-1"
+   ]
+  },
+  {
+   "id": "traffic-signal",
+   "ko": "신호등",
+   "en": "traffic signal",
+   "alt": [
+    "교통신호기",
+    "신호기"
+   ],
+   "definition": "교차로나 횡단보도에서 차와 보행자에게 통행 순서를 알리는 장치입니다. 신호 제어기가 등화 순서와 시간을 정합니다.",
+   "category": "mobility",
+   "related": [
+    "traffic-signal-control",
+    "signal-phase"
+   ],
+   "refs": [
+    "도로교통법"
+   ]
+  },
+  {
+   "id": "traffic-signal-control",
+   "ko": "교통 신호 제어",
+   "en": "traffic signal control",
+   "alt": [
+    "신호 제어",
+    "신호 운영"
+   ],
+   "definition": "교차로의 신호 순서와 시간을 정해 차와 보행자의 흐름을 나누는 일입니다. 시간대별 고정 계획이나 실시간 교통량에 따라 바꿉니다.",
+   "category": "mobility",
+   "broader": "its",
+   "related": [
+    "traffic-signal",
+    "signal-phase"
+   ]
+  },
+  {
+   "id": "signal-phase",
+   "ko": "신호 현시",
+   "en": "signal phase",
+   "alt": [
+    "현시",
+    "페이즈"
+   ],
+   "definition": "한 신호 주기 안에서 같은 시간에 함께 통행권을 받는 이동 방향의 묶음입니다.",
+   "category": "mobility",
+   "related": [
+    "traffic-signal-control",
+    "traffic-signal"
+   ]
+  },
+  {
+   "id": "adaptive-signal-control",
+   "ko": "실시간 신호 제어",
+   "en": "adaptive signal control",
+   "alt": [
+    "감응 신호",
+    "적응형 신호 제어",
+    "스마트 교차로"
+   ],
+   "definition": "검지기나 영상으로 잰 교통량에 맞춰 신호 시간을 자동으로 바꾸는 신호 제어 방식입니다.",
+   "category": "mobility",
+   "broader": "traffic-signal-control",
+   "related": [
+    "vehicle-detector",
+    "traffic-volume"
+   ]
+  },
+  {
+   "id": "vehicle-detector",
+   "ko": "차량 검지기",
+   "en": "vehicle detector",
+   "alt": [
+    "검지기",
+    "루프 검지기",
+    "VDS"
+   ],
+   "definition": "도로를 지나는 차량의 수, 속도, 점유를 재는 센서입니다. 노면 아래 루프, 영상, 레이더 방식이 있습니다.",
+   "category": "mobility",
+   "broader": "city-iot-sensor",
+   "related": [
+    "traffic-volume",
+    "traffic-speed"
+   ]
+  },
+  {
+   "id": "traffic-volume",
+   "ko": "교통량",
+   "en": "traffic volume",
+   "alt": [
+    "통행량"
+   ],
+   "definition": "정한 시간 동안 도로의 한 지점이나 구간을 지난 차량 수입니다. 차종과 방향을 나눠 집계합니다.",
+   "category": "mobility",
+   "related": [
+    "vehicle-detector",
+    "od-matrix"
+   ]
+  },
+  {
+   "id": "traffic-speed",
+   "ko": "통행 속도",
+   "en": "travel speed",
+   "alt": [
+    "구간 속도",
+    "링크 속도"
+   ],
+   "definition": "도로 구간 하나를 지나는 차량의 평균 속도입니다. 혼잡 정도를 보여 주는 가장 흔한 지표입니다.",
+   "category": "mobility",
+   "related": [
+    "node-link",
+    "traffic-volume"
+   ]
+  },
+  {
+   "id": "node-link",
+   "ko": "노드·링크",
+   "en": "node-link network",
+   "alt": [
+    "표준 노드링크",
+    "노드링크"
+   ],
+   "definition": "교차로 같은 지점을 노드, 노드 사이 도로 구간을 링크로 두어 도로망을 표현하는 방식입니다. 교통 정보를 링크 단위로 붙입니다.",
+   "category": "mobility",
+   "related": [
+    "traffic-speed",
+    "gis"
+   ]
+  },
+  {
+   "id": "traffic-incident",
+   "ko": "교통 돌발 상황",
+   "en": "traffic incident",
+   "alt": [
+    "돌발 상황",
+    "유고",
+    "교통 사고·고장"
+   ],
+   "definition": "사고, 고장 차량, 낙하물, 공사처럼 예정 없이 도로 용량을 줄이는 상황입니다.",
+   "category": "mobility",
+   "broader": "city-incident",
+   "related": [
+    "traffic-speed",
+    "its"
+   ]
+  },
+  {
+   "id": "public-transit",
+   "ko": "대중교통",
+   "en": "public transit",
+   "alt": [
+    "공공교통"
+   ],
+   "definition": "여러 사람이 정해진 노선이나 구역에서 요금을 내고 함께 이용하는 버스, 도시철도 같은 교통수단입니다.",
+   "category": "mobility",
+   "related": [
+    "bis",
+    "transit-card-data"
+   ],
+   "refs": [
+    "대중교통의 육성 및 이용촉진에 관한 법률"
+   ]
+  },
+  {
+   "id": "bis",
+   "ko": "버스정보시스템",
+   "en": "bus information system",
+   "alt": [
+    "BIS",
+    "버스 도착 안내"
+   ],
+   "definition": "버스의 위치를 모아 정류장과 앱에 도착 예정 시간을 알려 주는 시스템입니다.",
+   "category": "mobility",
+   "broader": "its",
+   "related": [
+    "public-transit",
+    "its",
+    "city-open-api"
+   ],
+   "example": "공공데이터 목록의 버스 도착 정보 API는 정류소와 노선 식별자를 받아 도착 예정 시간을 돌려줍니다."
+  },
+  {
+   "id": "transit-card-data",
+   "ko": "교통카드 데이터",
+   "en": "transit smart card data",
+   "alt": [
+    "승하차 데이터",
+    "교통카드 거래 기록"
+   ],
+   "definition": "대중교통 이용자가 카드를 찍을 때마다 남는 승차와 하차 기록입니다. 노선별 이용량과 환승을 분석하는 원자료로 씁니다.",
+   "category": "mobility",
+   "related": [
+    "public-transit",
+    "od-matrix"
+   ]
+  },
+  {
+   "id": "od-matrix",
+   "ko": "기종점 통행량",
+   "en": "origin-destination matrix",
+   "alt": [
+    "OD",
+    "O/D 표",
+    "기종점 표"
+   ],
+   "definition": "출발 구역과 도착 구역 쌍마다 통행 수를 적은 표입니다. 교통 수요를 추정하고 노선을 계획할 때 씁니다.",
+   "category": "mobility",
+   "related": [
+    "transit-card-data",
+    "traffic-volume"
+   ]
+  },
+  {
+   "id": "shared-mobility",
+   "ko": "공유 모빌리티",
+   "en": "shared mobility",
+   "alt": [
+    "공유 교통"
+   ],
+   "definition": "자동차, 자전거, 킥보드 같은 이동수단을 소유하지 않고 필요할 때 빌려 쓰는 방식입니다.",
+   "category": "mobility",
+   "related": [
+    "personal-mobility",
+    "maas"
+   ]
+  },
+  {
+   "id": "personal-mobility",
+   "ko": "개인형 이동장치",
+   "en": "personal mobility device",
+   "alt": [
+    "PM",
+    "전동킥보드"
+   ],
+   "definition": "한 사람이 타는 작은 전동 이동수단입니다. 전동킥보드, 전동 이륜 평행차가 그 예입니다.",
+   "category": "mobility",
+   "related": [
+    "shared-mobility",
+    "maas"
+   ],
+   "refs": [
+    "도로교통법"
+   ]
+  },
+  {
+   "id": "maas",
+   "ko": "통합 모빌리티 서비스",
+   "en": "mobility as a service",
+   "alt": [
+    "MaaS",
+    "서비스형 모빌리티"
+   ],
+   "definition": "여러 교통수단의 경로 검색, 예약, 결제를 한 서비스에서 묶어 제공하는 방식입니다.",
+   "category": "mobility",
+   "related": [
+    "shared-mobility",
+    "public-transit"
+   ]
+  },
+  {
+   "id": "ev-charging",
+   "ko": "전기차 충전 인프라",
+   "en": "EV charging infrastructure",
+   "alt": [
+    "충전소",
+    "충전기"
+   ],
+   "definition": "전기차에 전력을 공급하는 충전기와 그 설치 장소, 운영 시스템입니다. 충전기 상태와 이용 기록이 도시 데이터로 모입니다.",
+   "category": "mobility",
+   "related": [
+    "smart-grid",
+    "power-feeder"
+   ]
+  },
+  {
+   "id": "city-incident",
+   "ko": "사건",
+   "en": "incident",
+   "alt": [
+    "상황",
+    "사고·이상",
+    "이벤트"
+   ],
+   "definition": "통합운영센터가 대응 대상으로 등록한 일 한 건입니다. 유형, 심각도, 발생 장소, 시작 시각을 갖고, 종료될 때까지 처리 과정을 남깁니다.",
+   "category": "safety",
+   "related": [
+    "city-alert",
+    "impact-analysis"
+   ]
+  },
+  {
+   "id": "city-alert",
+   "ko": "알림",
+   "en": "alert",
+   "alt": [
+    "경보",
+    "이벤트 알림"
+   ],
+   "definition": "센서나 시스템이 정한 조건을 넘었다고 자동으로 낸 신호입니다. 관제요원이 확인해 사건으로 등록하기 전 단계입니다.",
+   "category": "safety",
+   "related": [
+    "city-incident",
+    "cctv-video-analytics"
+   ]
+  },
+  {
+   "id": "city-cctv",
+   "ko": "CCTV",
+   "en": "closed-circuit television",
+   "alt": [
+    "방범 카메라",
+    "영상정보처리기기",
+    "폐쇄회로 텔레비전"
+   ],
+   "definition": "공공장소에 고정해 영상을 찍고 정해진 곳으로만 보내는 카메라입니다. 설치 목적, 장소, 촬영 범위를 안내해야 합니다.",
+   "category": "safety",
+   "broader": "city-iot-sensor",
+   "related": [
+    "cctv-video-analytics",
+    "video-access-log"
+   ],
+   "refs": [
+    "개인정보 보호법"
+   ]
+  },
+  {
+   "id": "emergency-service-linkage",
+   "ko": "긴급 기관 연계",
+   "en": "emergency service linkage",
+   "alt": [
+    "112·119 연계",
+    "안전망 연계"
+   ],
+   "definition": "통합운영센터가 경찰, 소방 같은 긴급 기관과 영상, 위치, 상황 정보를 주고받도록 맺은 연계입니다.",
+   "category": "safety",
+   "related": [
+    "smartcity-integrated-platform",
+    "data-sharing-agreement"
+   ]
+  },
+  {
+   "id": "police-112-linkage",
+   "ko": "112 연계",
+   "en": "police 112 linkage",
+   "alt": [
+    "112 긴급 영상 지원",
+    "112 센터 연계"
+   ],
+   "definition": "112 신고가 들어오면 신고 위치 주변 CCTV 영상과 정보를 경찰 상황실에 바로 보내 주는 연계입니다.",
+   "category": "safety",
+   "broader": "emergency-service-linkage",
+   "related": [
+    "city-cctv",
+    "emergency-service-linkage",
+    "fire-119-linkage"
+   ],
+   "example": "관제 이벤트 기록에 112 긴급 영상 지원 요청이 접수되면 신고 위치 주변 CCTV 목록이 함께 붙습니다."
+  },
+  {
+   "id": "fire-119-linkage",
+   "ko": "119 연계",
+   "en": "fire 119 linkage",
+   "alt": [
+    "119 긴급 출동 지원",
+    "119 센터 연계"
+   ],
+   "definition": "119 신고와 출동에 맞춰 현장 주변 영상, 교통, 시설 정보를 소방 상황실과 출동 차량에 보내는 연계입니다.",
+   "category": "safety",
+   "broader": "emergency-service-linkage",
+   "related": [
+    "traffic-signal-control",
+    "emergency-service-linkage",
+    "police-112-linkage"
+   ]
+  },
+  {
+   "id": "city-disaster",
+   "ko": "재난",
+   "en": "disaster",
+   "alt": [
+    "재해"
+   ],
+   "definition": "사람의 생명과 재산, 도시 기능에 큰 피해를 주거나 줄 수 있는 일입니다. 자연재난과 사회재난으로 나눕니다.",
+   "category": "safety",
+   "related": [
+    "crisis-alert-level",
+    "urban-resilience"
+   ],
+   "refs": [
+    "재난 및 안전관리 기본법"
+   ]
+  },
+  {
+   "id": "natural-disaster",
+   "ko": "자연재난",
+   "en": "natural disaster",
+   "alt": [
+    "자연재해"
+   ],
+   "definition": "태풍, 호우, 폭염, 지진처럼 자연 현상으로 생기는 재난입니다. 사람의 활동이나 시설에서 비롯되는 사회재난과 구분해 재난 유형을 기록합니다.",
+   "category": "safety",
+   "broader": "city-disaster",
+   "related": [
+    "urban-flooding",
+    "social-disaster",
+    "city-disaster"
+   ],
+   "refs": [
+    "재난 및 안전관리 기본법"
+   ],
+   "example": "관제 이벤트의 재난 유형 칸에는 호우, 태풍 같은 값이 자연재난의 하위 유형으로 들어갑니다."
+  },
+  {
+   "id": "social-disaster",
+   "ko": "사회재난",
+   "en": "social disaster",
+   "alt": [
+    "인적 재난"
+   ],
+   "definition": "화재, 붕괴, 교통사고, 기반시설 마비, 감염병 확산처럼 사람의 활동이나 시설에서 비롯되는 재난입니다.",
+   "category": "safety",
+   "broader": "city-disaster",
+   "related": [
+    "infrastructure-dependency",
+    "natural-disaster",
+    "city-disaster"
+   ],
+   "refs": [
+    "재난 및 안전관리 기본법"
+   ]
+  },
+  {
+   "id": "urban-flooding",
+   "ko": "도시 침수",
+   "en": "urban flooding",
+   "alt": [
+    "내수 침수",
+    "내수 범람",
+    "도시 홍수"
+   ],
+   "definition": "빗물이 하수관로와 펌프장의 처리 능력을 넘어 도로와 건물 아래층에 고이는 현상입니다.",
+   "category": "safety",
+   "broader": "natural-disaster",
+   "related": [
+    "water-level-sensor",
+    "stormwater-pump-station"
+   ]
+  },
+  {
+   "id": "crisis-alert-level",
+   "ko": "위기경보",
+   "en": "crisis alert level",
+   "alt": [
+    "위기경보 단계",
+    "관심·주의·경계·심각"
+   ],
+   "definition": "재난 위험의 정도에 따라 관심, 주의, 경계, 심각 네 단계로 발령하는 경보입니다. 단계마다 기관의 대응 체계가 달라집니다.",
+   "category": "safety",
+   "related": [
+    "city-disaster",
+    "disaster-text"
+   ],
+   "refs": [
+    "재난 및 안전관리 기본법"
+   ]
+  },
+  {
+   "id": "disaster-text",
+   "ko": "재난문자",
+   "en": "emergency alert text",
+   "alt": [
+    "긴급재난문자",
+    "CBS"
+   ],
+   "definition": "재난이 났거나 날 우려가 있을 때 특정 지역의 휴대전화에 한꺼번에 보내는 안내 문자입니다.",
+   "category": "safety",
+   "related": [
+    "crisis-alert-level",
+    "administrative-district"
+   ]
+  },
+  {
+   "id": "infrastructure-dependency",
+   "ko": "기반시설 의존",
+   "en": "infrastructure dependency",
+   "alt": [
+    "의존 관계",
+    "상호의존성"
+   ],
+   "definition": "한 시설이 다른 시설의 전력, 통신, 배수, 접근 도로에 기대어 동작하는 관계입니다. 한 곳의 고장이 다른 곳으로 번지는 경로가 됩니다.",
+   "category": "safety",
+   "related": [
+    "impact-analysis",
+    "urban-infrastructure"
+   ]
+  },
+  {
+   "id": "impact-analysis",
+   "ko": "영향 분석",
+   "en": "impact analysis",
+   "alt": [
+    "파급 분석",
+    "연쇄 영향 분석"
+   ],
+   "definition": "사건 하나가 의존 관계를 따라 어느 시설과 주민에게 영향을 주는지 찾는 일입니다. 추정한 영향과 확인한 영향을 나눠 적습니다.",
+   "category": "safety",
+   "related": [
+    "infrastructure-dependency",
+    "city-incident"
+   ]
+  },
+  {
+   "id": "urban-infrastructure",
+   "ko": "도시 기반시설",
+   "en": "urban infrastructure",
+   "alt": [
+    "기반시설",
+    "인프라",
+    "SOC"
+   ],
+   "definition": "도로, 상하수도, 전력, 통신, 공원처럼 도시 생활과 경제 활동을 받쳐 주는 공공 시설입니다.",
+   "category": "infra",
+   "related": [
+    "facility-register",
+    "infrastructure-dependency"
+   ],
+   "refs": [
+    "국토의 계획 및 이용에 관한 법률"
+   ]
+  },
+  {
+   "id": "facility-register",
+   "ko": "시설물 대장",
+   "en": "facility register",
+   "alt": [
+    "시설물 관리대장",
+    "관리대장"
+   ],
+   "definition": "시설물 하나마다 위치, 규모, 준공 시기, 관리 주체, 점검 이력을 적은 장부입니다. 도시 자산 데이터의 기준 목록입니다.",
+   "category": "infra",
+   "related": [
+    "urban-infrastructure",
+    "facility-safety-inspection"
+   ],
+   "refs": [
+    "시설물의 안전 및 유지관리에 관한 특별법"
+   ]
+  },
+  {
+   "id": "facility-safety-inspection",
+   "ko": "시설물 안전점검",
+   "en": "facility safety inspection",
+   "alt": [
+    "안전점검",
+    "정기안전점검"
+   ],
+   "definition": "경험 있는 기술자가 눈과 간단한 장비로 시설물의 결함과 위험 요인을 살피는 일입니다.",
+   "category": "infra",
+   "related": [
+    "facility-safety-grade",
+    "facility-register"
+   ],
+   "refs": [
+    "시설물의 안전 및 유지관리에 관한 특별법"
+   ]
+  },
+  {
+   "id": "precision-safety-diagnosis",
+   "ko": "정밀안전진단",
+   "en": "detailed safety diagnosis",
+   "alt": [
+    "정밀진단"
+   ],
+   "definition": "점검으로 알기 어려운 결함의 원인과 정도를 조사, 측정, 시험으로 밝히고 보수와 보강 방법을 내는 일입니다.",
+   "category": "infra",
+   "broader": "facility-safety-inspection",
+   "related": [
+    "facility-safety-grade",
+    "facility-safety-inspection"
+   ],
+   "refs": [
+    "시설물의 안전 및 유지관리에 관한 특별법"
+   ]
+  },
+  {
+   "id": "facility-safety-grade",
+   "ko": "시설물 안전등급",
+   "en": "facility safety grade",
+   "alt": [
+    "안전등급"
+   ],
+   "definition": "점검과 진단 결과로 시설물의 상태를 몇 단계로 매긴 등급입니다. 다음 점검 주기와 보수 우선순위를 정하는 데 씁니다.",
+   "category": "infra",
+   "related": [
+    "facility-safety-inspection",
+    "precision-safety-diagnosis"
+   ],
+   "refs": [
+    "시설물의 안전 및 유지관리에 관한 특별법"
+   ]
+  },
+  {
+   "id": "utility-tunnel",
+   "ko": "공동구",
+   "en": "utility tunnel",
+   "alt": [
+    "지하 공동구",
+    "공동 매설 터널"
+   ],
+   "definition": "전력선, 통신선, 상수도관 같은 여러 지하 시설을 한 터널 안에 함께 넣어 관리하는 시설입니다.",
+   "category": "infra",
+   "broader": "urban-infrastructure",
+   "related": [
+    "underground-utility",
+    "urban-infrastructure"
+   ],
+   "refs": [
+    "국토의 계획 및 이용에 관한 법률"
+   ]
+  },
+  {
+   "id": "underground-utility",
+   "ko": "지하시설물",
+   "en": "underground utility",
+   "alt": [
+    "지하매설물",
+    "매설물"
+   ],
+   "definition": "땅속에 묻힌 상수도관, 하수관, 가스관, 전력선, 통신선, 난방관을 함께 이르는 말입니다.",
+   "category": "infra",
+   "broader": "urban-infrastructure",
+   "related": [
+    "utility-tunnel",
+    "gis"
+   ]
+  },
+  {
+   "id": "smart-streetlight",
+   "ko": "스마트 가로등",
+   "en": "smart streetlight",
+   "alt": [
+    "원격 제어 가로등"
+   ],
+   "definition": "밝기와 점등을 원격으로 조절하고 고장과 전력 사용량을 알려 주는 가로등입니다.",
+   "category": "infra",
+   "broader": "urban-infrastructure",
+   "related": [
+    "smart-pole",
+    "power-feeder"
+   ]
+  },
+  {
+   "id": "stormwater-pump-station",
+   "ko": "빗물펌프장",
+   "en": "stormwater pump station",
+   "alt": [
+    "배수펌프장",
+    "우수펌프장"
+   ],
+   "definition": "저지대에 모인 빗물을 펌프로 하천에 퍼내 침수를 막는 시설입니다. 유입 수위에 따라 펌프를 돌리므로 수위 센서 값과 펌프 가동 기록을 함께 봅니다.",
+   "category": "infra",
+   "broader": "urban-infrastructure",
+   "related": [
+    "urban-flooding",
+    "water-level-sensor",
+    "sewer-network"
+   ],
+   "example": "관제 이벤트의 빗물펌프장 수위 경보는 펌프장 수위 센서 관측이 정한 기준을 넘을 때 생깁니다."
+  },
+  {
+   "id": "sewer-network",
+   "ko": "하수관로",
+   "en": "sewer network",
+   "alt": [
+    "하수관",
+    "하수도관"
+   ],
+   "definition": "빗물과 오수를 모아 처리장이나 하천으로 보내는 관과 맨홀의 연결망입니다.",
+   "category": "infra",
+   "broader": "urban-infrastructure",
+   "related": [
+    "urban-flooding",
+    "underground-utility"
+   ],
+   "refs": [
+    "하수도법"
+   ]
+  },
+  {
+   "id": "water-supply-network",
+   "ko": "상수도 관망",
+   "en": "water supply network",
+   "alt": [
+    "상수관망",
+    "급수 관로"
+   ],
+   "definition": "정수장에서 만든 물을 배수지를 거쳐 가정과 건물로 보내는 관의 연결망입니다. 누수와 수압이 주요 관리 대상입니다.",
+   "category": "infra",
+   "broader": "urban-infrastructure",
+   "related": [
+    "smart-meter",
+    "underground-utility"
+   ],
+   "refs": [
+    "수도법"
+   ]
+  },
+  {
+   "id": "power-feeder",
+   "ko": "배전 선로",
+   "en": "distribution feeder",
+   "alt": [
+    "배전선로",
+    "피더",
+    "D/L"
+   ],
+   "definition": "변전소에서 나와 여러 수용가로 전력을 보내는 선로 한 회선입니다. 정전은 대개 이 단위로 일어나고 복구됩니다.",
+   "category": "infra",
+   "broader": "urban-infrastructure",
+   "related": [
+    "infrastructure-dependency",
+    "smart-grid"
+   ]
+  },
+  {
+   "id": "smart-grid",
+   "ko": "스마트그리드",
+   "en": "smart grid",
+   "alt": [
+    "지능형 전력망"
+   ],
+   "definition": "전력망에 통신과 제어를 더해 공급자와 소비자가 실시간으로 정보를 주고받으며 전력을 효율적으로 쓰는 체계입니다.",
+   "category": "infra",
+   "related": [
+    "ami",
+    "power-feeder",
+    "ev-charging"
+   ],
+   "refs": [
+    "지능형전력망의 구축 및 이용촉진에 관한 법률"
+   ]
+  },
+  {
+   "id": "spatial-information",
+   "ko": "공간정보",
+   "en": "spatial information",
+   "alt": [
+    "지리정보",
+    "공간 데이터"
+   ],
+   "definition": "땅 위와 아래, 공중에 있는 대상의 위치와 그에 딸린 속성을 담은 정보입니다.",
+   "category": "spatial",
+   "related": [
+    "gis",
+    "coordinate-reference-system"
+   ],
+   "refs": [
+    "국가공간정보 기본법"
+   ]
+  },
+  {
+   "id": "gis",
+   "ko": "지리정보시스템",
+   "en": "geographic information system",
+   "alt": [
+    "GIS",
+    "공간정보시스템"
+   ],
+   "definition": "공간정보를 지도 위에 쌓아 저장, 조회, 분석, 표현하는 소프트웨어와 데이터의 묶음입니다.",
+   "category": "spatial",
+   "related": [
+    "spatial-information",
+    "situation-board"
+   ]
+  },
+  {
+   "id": "coordinate-reference-system",
+   "ko": "좌표계",
+   "en": "coordinate reference system",
+   "alt": [
+    "좌표참조체계",
+    "CRS",
+    "EPSG 코드"
+   ],
+   "definition": "지구 위 위치를 숫자 좌표로 나타내는 기준입니다. 서로 다른 좌표계 데이터를 겹치려면 먼저 변환해야 합니다.",
+   "category": "spatial",
+   "related": [
+    "spatial-information",
+    "geocoding"
+   ],
+   "refs": [
+    "ISO 19111"
+   ]
+  },
+  {
+   "id": "administrative-district",
+   "ko": "행정구역",
+   "en": "administrative district",
+   "alt": [
+    "시군구",
+    "읍면동"
+   ],
+   "definition": "행정을 나눠 맡기 위해 정한 땅의 구역입니다. 도시 통계와 서비스 대상 범위를 정하는 기본 단위입니다.",
+   "category": "spatial",
+   "related": [
+    "legal-dong",
+    "admin-dong"
+   ],
+   "refs": [
+    "지방자치법"
+   ]
+  },
+  {
+   "id": "legal-dong",
+   "ko": "법정동",
+   "en": "legal dong",
+   "alt": [
+    "법정동 코드"
+   ],
+   "definition": "법률로 정한 동과 리의 이름과 경계입니다. 지번 주소와 토지 기록이 이 단위를 따르고 잘 바뀌지 않습니다.",
+   "category": "spatial",
+   "broader": "administrative-district",
+   "related": [
+    "admin-dong",
+    "lot-number-address"
+   ]
+  },
+  {
+   "id": "admin-dong",
+   "ko": "행정동",
+   "en": "administrative dong",
+   "alt": [
+    "행정동 코드"
+   ],
+   "definition": "주민센터 업무를 나눠 맡기 위해 정한 동입니다. 인구 변화에 따라 나뉘거나 합쳐지므로 법정동과 경계가 다를 수 있습니다.",
+   "category": "spatial",
+   "broader": "administrative-district",
+   "related": [
+    "legal-dong",
+    "administrative-district"
+   ],
+   "example": "공공데이터 목록에서 인구 통계는 행정동 코드로, 토지 자료는 법정동 코드로 집계된 경우가 많아 둘을 잇는 대응표가 필요합니다."
+  },
+  {
+   "id": "lot-number-address",
+   "ko": "지번 주소",
+   "en": "lot number address",
+   "alt": [
+    "지번",
+    "구주소"
+   ],
+   "definition": "토지에 매긴 번호인 지번으로 위치를 나타내는 주소입니다. 토지 거래와 지적 기록에서 지금도 씁니다.",
+   "category": "spatial",
+   "related": [
+    "road-name-address",
+    "pnu",
+    "cadastral-map"
+   ],
+   "refs": [
+    "공간정보의 구축 및 관리 등에 관한 법률"
+   ]
+  },
+  {
+   "id": "road-name-address",
+   "ko": "도로명주소",
+   "en": "road name address",
+   "alt": [
+    "새주소",
+    "신주소"
+   ],
+   "definition": "도로마다 이름을 붙이고 건물마다 번호를 매겨 도로 이름과 건물 번호로 위치를 나타내는 주소입니다.",
+   "category": "spatial",
+   "related": [
+    "lot-number-address",
+    "geocoding"
+   ],
+   "refs": [
+    "도로명주소법"
+   ]
+  },
+  {
+   "id": "pnu",
+   "ko": "필지고유번호",
+   "en": "parcel unique number",
+   "alt": [
+    "PNU",
+    "필지 코드"
+   ],
+   "definition": "토지 한 필지를 전국에서 하나로 가리키도록 행정구역 코드와 지번을 이어 붙인 번호입니다. 여러 토지 데이터를 잇는 키로 씁니다.",
+   "category": "spatial",
+   "related": [
+    "lot-number-address",
+    "cadastral-map"
+   ]
+  },
+  {
+   "id": "cadastral-map",
+   "ko": "지적도",
+   "en": "cadastral map",
+   "alt": [
+    "연속지적도",
+    "지적"
+   ],
+   "definition": "필지마다 경계, 지번, 지목을 그린 공적 도면입니다. 도시 공간 데이터의 땅 경계 기준으로 씁니다.",
+   "category": "spatial",
+   "broader": "spatial-information",
+   "related": [
+    "pnu",
+    "lot-number-address"
+   ],
+   "refs": [
+    "공간정보의 구축 및 관리 등에 관한 법률"
+   ]
+  },
+  {
+   "id": "geocoding",
+   "ko": "지오코딩",
+   "en": "geocoding",
+   "alt": [
+    "주소 좌표 변환",
+    "주소 매칭"
+   ],
+   "definition": "주소 문자열을 좌표로 바꾸는 일입니다. 반대로 좌표에서 주소를 찾는 일은 역지오코딩이라고 합니다.",
+   "category": "spatial",
+   "related": [
+    "road-name-address",
+    "coordinate-reference-system"
+   ]
+  },
+  {
+   "id": "building-3d-model",
+   "ko": "3차원 건물 모델",
+   "en": "3D building model",
+   "alt": [
+    "3D 건물 모델",
+    "3차원 건물 객체"
+   ],
+   "definition": "건물의 외형과 높이를 입체로 표현하고 용도, 층수 같은 속성을 붙인 공간 데이터입니다. 표현 정밀도를 단계로 나눠 관리합니다.",
+   "category": "spatial",
+   "broader": "spatial-information",
+   "related": [
+    "digital-twin-city",
+    "citygml"
+   ],
+   "refs": [
+    "OGC CityGML"
+   ]
+  },
+  {
+   "id": "digital-twin-city",
+   "ko": "도시 디지털 트윈",
+   "en": "urban digital twin",
+   "alt": [
+    "디지털 트윈 도시",
+    "가상 도시"
+   ],
+   "definition": "도시의 공간, 시설, 실시간 관측을 가상 공간에 옮겨 놓고 현재 상태를 보거나 정책과 사건의 결과를 미리 시험하는 모델입니다.",
+   "category": "spatial",
+   "related": [
+    "building-3d-model",
+    "city-data-platform"
+   ]
+  },
+  {
+   "id": "city-indicator",
+   "ko": "도시 지표",
+   "en": "city indicator",
+   "alt": [
+    "도시 성과 지표",
+    "도시 서비스 지표"
+   ],
+   "definition": "도시 서비스와 삶의 질을 같은 방식으로 재어 해마다, 그리고 도시끼리 비교하려고 정한 측정 항목입니다.",
+   "category": "standard",
+   "related": [
+    "smart-city-indicator",
+    "urban-resilience"
+   ],
+   "refs": [
+    "ISO 37120"
+   ]
+  },
+  {
+   "id": "smart-city-indicator",
+   "ko": "스마트시티 지표",
+   "en": "smart city indicator",
+   "alt": [
+    "스마트도시 지표"
+   ],
+   "definition": "도시가 데이터와 기술을 서비스에 얼마나 쓰는지 재는 도시 지표입니다. 일반 도시 지표와 달리 데이터 개방, 원격 검침, 디지털 행정 서비스처럼 기술 활용을 보는 항목을 묶습니다.",
+   "category": "standard",
+   "broader": "city-indicator",
+   "related": [
+    "smart-city",
+    "city-indicator"
+   ],
+   "refs": [
+    "ISO 37122"
+   ]
+  },
+  {
+   "id": "resilient-city-indicator",
+   "ko": "회복력 도시 지표",
+   "en": "resilient city indicator",
+   "alt": [
+    "회복력 지표"
+   ],
+   "definition": "재난과 충격에 대비하고 견디고 되돌아오는 도시의 능력을 재는 도시 지표입니다.",
+   "category": "standard",
+   "broader": "city-indicator",
+   "related": [
+    "urban-resilience",
+    "city-indicator"
+   ],
+   "refs": [
+    "ISO 37123"
+   ]
+  },
+  {
+   "id": "urban-resilience",
+   "ko": "도시 회복력",
+   "en": "urban resilience",
+   "alt": [
+    "레질리언스",
+    "회복탄력성"
+   ],
+   "definition": "재난이나 기반시설 고장이 생겨도 핵심 기능을 유지하고 빠르게 원래 상태로 돌아오는 도시의 능력입니다.",
+   "category": "standard",
+   "related": [
+    "resilient-city-indicator",
+    "city-disaster"
+   ]
+  },
+  {
+   "id": "city-data-model",
+   "ko": "도시 데이터 모델",
+   "en": "city data model",
+   "alt": [
+    "도시 온톨로지",
+    "공통 데이터 모델"
+   ],
+   "definition": "도시 대상과 그 속성, 관계를 어떤 이름과 형식으로 적을지 정한 약속입니다. 기관이 달라도 같은 뜻으로 데이터를 읽게 해 줍니다.",
+   "category": "standard",
+   "related": [
+    "ngsi-ld",
+    "city-data-platform"
+   ]
+  },
+  {
+   "id": "smart-data-models",
+   "ko": "스마트 데이터 모델",
+   "en": "Smart Data Models",
+   "alt": [
+    "Smart Data Models"
+   ],
+   "definition": "주차장, 대기 측정소, 가로등 같은 도시 대상마다 공개로 정한 엔터티 형식의 모음입니다. NGSI-LD와 함께 씁니다.",
+   "category": "standard",
+   "broader": "city-data-model",
+   "related": [
+    "ngsi-ld",
+    "fiware"
+   ]
+  },
+  {
+   "id": "ngsi-ld",
+   "ko": "NGSI-LD",
+   "en": "NGSI-LD",
+   "alt": [
+    "NGSI-LD API"
+   ],
+   "definition": "도시 대상을 엔터티, 속성, 관계로 나타내고 그 상태를 조회하고 구독하는 공개 API와 정보 모델입니다. 링크드 데이터 형식을 씁니다.",
+   "category": "standard",
+   "related": [
+    "context-broker",
+    "smart-data-models"
+   ],
+   "refs": [
+    "ETSI GS CIM 009"
+   ]
+  },
+  {
+   "id": "fiware",
+   "ko": "FIWARE",
+   "en": "FIWARE",
+   "alt": [
+    "파이웨어"
+   ],
+   "definition": "컨텍스트 브로커를 중심으로 도시 데이터 플랫폼을 꾸릴 수 있게 공개한 오픈소스 구성 요소의 모음입니다.",
+   "category": "standard",
+   "related": [
+    "context-broker",
+    "ngsi-ld"
+   ]
+  },
+  {
+   "id": "citygml",
+   "ko": "CityGML",
+   "en": "CityGML",
+   "definition": "건물, 도로, 지형 같은 도시 대상을 3차원 공간 데이터로 주고받기 위한 공개 데이터 모델입니다.",
+   "category": "standard",
+   "broader": "city-data-model",
+   "related": [
+    "building-3d-model",
+    "digital-twin-city"
+   ],
+   "refs": [
+    "OGC CityGML"
+   ],
+   "example": "도시 디지털 트윈에 건물 모델을 넣을 때 CityGML 파일의 LOD 단계로 표현 정밀도를 확인합니다."
+  },
+  {
+   "id": "public-data",
+   "ko": "공공데이터",
+   "en": "public data",
+   "alt": [
+    "공공 데이터"
+   ],
+   "definition": "공공기관이 업무를 하며 만들거나 얻어 관리하는 데이터입니다. 법이 정한 경우를 빼면 국민에게 제공하는 것이 원칙입니다.",
+   "category": "data",
+   "related": [
+    "open-data",
+    "public-data-portal"
+   ],
+   "refs": [
+    "공공데이터의 제공 및 이용 활성화에 관한 법률"
+   ]
+  },
+  {
+   "id": "open-data",
+   "ko": "개방 데이터",
+   "en": "open data",
+   "alt": [
+    "오픈데이터",
+    "데이터 개방"
+   ],
+   "definition": "누구나 자유롭게 받아 쓰고 다시 나눌 수 있도록 공개한 데이터입니다. 기계가 읽을 수 있는 형식과 이용 조건을 함께 밝힙니다.",
+   "category": "data",
+   "broader": "public-data",
+   "related": [
+    "city-open-api",
+    "public-data-portal"
+   ]
+  },
+  {
+   "id": "public-data-portal",
+   "ko": "공공데이터포털",
+   "en": "public data portal",
+   "alt": [
+    "데이터 포털"
+   ],
+   "definition": "여러 공공기관이 개방한 데이터 목록과 파일, API를 한곳에서 찾고 신청하도록 모은 누리집입니다.",
+   "category": "data",
+   "related": [
+    "open-data",
+    "city-open-api"
+   ],
+   "refs": [
+    "공공데이터의 제공 및 이용 활성화에 관한 법률"
+   ]
+  },
+  {
+   "id": "city-open-api",
+   "ko": "오픈 API",
+   "en": "open API",
+   "alt": [
+    "개방형 API",
+    "Open API"
+   ],
+   "definition": "외부 개발자가 신청한 뒤 정해진 주소와 형식으로 데이터를 받아 갈 수 있게 공개한 프로그램 인터페이스입니다.",
+   "category": "data",
+   "broader": "open-data",
+   "related": [
+    "public-data-portal",
+    "context-broker"
+   ]
+  },
+  {
+   "id": "personal-information",
+   "ko": "개인정보",
+   "en": "personal information",
+   "alt": [
+    "개인 정보",
+    "PII"
+   ],
+   "definition": "살아 있는 개인을 알아볼 수 있는 정보입니다. 다른 정보와 쉽게 합쳐 알아볼 수 있는 정보도 포함합니다.",
+   "category": "data",
+   "related": [
+    "pseudonymous-information",
+    "anonymization"
+   ],
+   "refs": [
+    "개인정보 보호법"
+   ]
+  },
+  {
+   "id": "pseudonymous-information",
+   "ko": "가명정보",
+   "en": "pseudonymous information",
+   "alt": [
+    "가명 처리 정보"
+   ],
+   "definition": "추가 정보 없이는 누구인지 알 수 없도록 일부를 지우거나 바꾼 개인정보입니다. 통계, 연구, 공익 기록 목적에 정한 절차를 거쳐 씁니다.",
+   "category": "data",
+   "broader": "personal-information",
+   "related": [
+    "anonymization",
+    "personal-information"
+   ],
+   "refs": [
+    "개인정보 보호법"
+   ]
+  },
+  {
+   "id": "anonymization",
+   "ko": "익명처리",
+   "en": "anonymization",
+   "alt": [
+    "익명화",
+    "비식별 조치"
+   ],
+   "definition": "어떤 정보를 합쳐도 더는 개인을 알아볼 수 없도록 처리하는 일입니다. 익명처리를 마친 정보는 개인정보로 보지 않습니다.",
+   "category": "data",
+   "related": [
+    "pseudonymous-information",
+    "personal-information"
+   ],
+   "refs": [
+    "개인정보 보호법"
+   ]
+  },
+  {
+   "id": "video-access-log",
+   "ko": "영상 열람 기록",
+   "en": "video access log",
+   "alt": [
+    "열람 대장",
+    "반출 기록"
+   ],
+   "definition": "누가 어떤 목적으로 언제 CCTV 영상을 보거나 내보냈는지 적은 기록입니다. 영상 이용이 목적 안에 있었는지 확인하는 근거입니다.",
+   "category": "data",
+   "related": [
+    "city-cctv",
+    "data-sharing-agreement"
+   ],
+   "refs": [
+    "개인정보 보호법"
+   ]
+  },
+  {
+   "id": "data-sharing-agreement",
+   "ko": "연계 협약",
+   "en": "data sharing agreement",
+   "alt": [
+    "정보 제공 협약",
+    "데이터 공유 협약"
+   ],
+   "definition": "기관끼리 어떤 데이터를 어떤 목적과 기간으로 주고받을지 정한 약정입니다. 영상 연계는 협약의 목적 안에서만 열람합니다.",
+   "category": "data",
+   "related": [
+    "system-linkage",
+    "video-access-log"
+   ]
+  },
+  {
+   "id": "city-data-quality",
+   "ko": "데이터 품질",
+   "en": "data quality",
+   "alt": [
+    "품질 관리"
+   ],
+   "definition": "데이터가 정확하고 빠짐없으며 제때 들어오고 서로 어긋나지 않는 정도입니다. 결측률, 지연, 중복 같은 지표로 잽니다.",
+   "category": "data",
+   "related": [
+    "sensor-missing-data",
+    "city-data-governance"
+   ]
+  },
+  {
+   "id": "city-data-governance",
+   "ko": "데이터 거버넌스",
+   "en": "data governance",
+   "alt": [
+    "데이터 관리 체계"
+   ],
+   "definition": "데이터의 소유자, 표준, 품질 기준, 접근 권한, 개방 여부를 누가 어떻게 정하고 지키는지 정한 체계입니다.",
+   "category": "data",
+   "related": [
+    "city-data-quality",
+    "data-sharing-agreement"
+   ]
+  }
+ ]
+}

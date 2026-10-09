@@ -1,0 +1,5 @@
+@prefix ex:  <https://example.org/clean#> .
+
+# 형상 위반: 이름 없는 사람, 이름이 숫자인 단체
+ex:park a ex:Person .
+ex:beta a ex:Organization ; ex:name 42 .

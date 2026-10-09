@@ -1,0 +1,7 @@
+@prefix ex:  <https://example.org/clean#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+ex:kim a ex:Person ; ex:name "김" ; ex:memberOf ex:acme ; ex:knows ex:lee .
+ex:lee a ex:Person ; ex:name "이" .
+ex:acme a ex:Organization ; ex:name "에이크미" .
+ex:kim owl:differentFrom ex:lee .

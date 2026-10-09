@@ -1,0 +1,1913 @@
+{
+ "registry": "OntoCraft 한국 산업 용어 등록부",
+ "registry_en": "OntoCraft Korean Industry Term Registry",
+ "publisher": "OntoCraft",
+ "license": "CC BY 4.0",
+ "license_url": "https://creativecommons.org/licenses/by/4.0/",
+ "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
+ "base_uri": "https://w3id.org/ontocraft/terms/",
+ "uri_template": "https://w3id.org/ontocraft/terms/{id}",
+ "snapshot": "2026-10-09",
+ "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
+ "domain": {
+  "id": "maint",
+  "name": "설비 보전·신뢰성",
+  "en": "Equipment maintenance and reliability"
+ },
+ "version": "0.2.2",
+ "updated": "2026-10-09",
+ "categories": [
+  {
+   "id": "item",
+   "name": "아이템과 설비 구조",
+   "en": "Items and equipment structure"
+  },
+  {
+   "id": "failure",
+   "name": "고장과 결함",
+   "en": "Failures and faults"
+  },
+  {
+   "id": "strategy",
+   "name": "보전 방식",
+   "en": "Maintenance strategies"
+  },
+  {
+   "id": "work",
+   "name": "보전 작업과 기록",
+   "en": "Maintenance work and records"
+  },
+  {
+   "id": "metric",
+   "name": "신뢰성 지표",
+   "en": "Reliability metrics"
+  },
+  {
+   "id": "analysis",
+   "name": "분석 기법",
+   "en": "Analysis methods"
+  },
+  {
+   "id": "monitoring",
+   "name": "상태 감시",
+   "en": "Condition monitoring"
+  }
+ ],
+ "terms": [
+  {
+   "id": "item",
+   "ko": "아이템",
+   "en": "item",
+   "alt": [
+    "품목"
+   ],
+   "definition": "보전과 신뢰성 분석에서 따로 떼어 다룰 수 있는 대상을 모두 가리키는 말입니다. 부품 하나일 수도 있고 설비 한 대나 시스템 전체일 수도 있습니다.",
+   "category": "item",
+   "related": [
+    "equipment-unit",
+    "maintainable-item"
+   ],
+   "refs": [
+    "IEC 60050-192",
+    "EN 13306"
+   ]
+  },
+  {
+   "id": "asset",
+   "ko": "자산",
+   "en": "asset",
+   "alt": [
+    "물적 자산"
+   ],
+   "definition": "조직에 가치를 주거나 줄 수 있어 관리하는 대상입니다. 설비 보전에서는 주로 설비, 건물, 배관 같은 물적 자산을 뜻합니다.",
+   "category": "item",
+   "related": [
+    "equipment-unit",
+    "equipment-register"
+   ],
+   "refs": [
+    "ISO 55000"
+   ]
+  },
+  {
+   "id": "equipment-unit",
+   "ko": "설비 단위",
+   "en": "equipment unit",
+   "alt": [
+    "설비",
+    "장비"
+   ],
+   "definition": "펌프, 압축기, 열교환기처럼 하나의 기능을 맡는 설비 한 대입니다. 고장과 정비 기록을 모으는 기본 단위로 씁니다.",
+   "category": "item",
+   "broader": "item",
+   "related": [
+    "subunit",
+    "equipment-tag"
+   ],
+   "refs": [
+    "ISO 14224"
+   ]
+  },
+  {
+   "id": "subunit",
+   "ko": "하위 단위",
+   "en": "subunit",
+   "alt": [
+    "서브유닛"
+   ],
+   "definition": "설비 단위 안에서 동력 전달, 윤활, 제어처럼 하나의 하위 기능을 맡는 부분입니다.",
+   "category": "item",
+   "broader": "equipment-unit",
+   "related": [
+    "maintainable-item",
+    "equipment-unit",
+    "equipment-hierarchy"
+   ],
+   "refs": [
+    "ISO 14224"
+   ]
+  },
+  {
+   "id": "maintainable-item",
+   "ko": "보전 가능 아이템",
+   "en": "maintainable item",
+   "alt": [
+    "보전 단위"
+   ],
+   "definition": "정비 작업에서 한 번에 고치거나 바꾸는 가장 작은 단위입니다. 베어링, 씰, 임펠러 같은 부품이 여기에 해당합니다.",
+   "category": "item",
+   "broader": "subunit",
+   "related": [
+    "spare-part",
+    "subunit",
+    "equipment-hierarchy"
+   ],
+   "refs": [
+    "ISO 14224"
+   ]
+  },
+  {
+   "id": "spare-part",
+   "ko": "예비품",
+   "en": "spare part",
+   "alt": [
+    "스페어",
+    "예비 부품"
+   ],
+   "definition": "고장이나 계획 정비 때 바꿔 끼우려고 미리 보관하는 부품입니다. 설비 중요도와 조달 기간을 보고 어떤 부품을 몇 개 둘지 정합니다.",
+   "category": "item",
+   "broader": "item",
+   "related": [
+    "maintainable-item",
+    "spare-requirement",
+    "criticality"
+   ],
+   "refs": [
+    "EN 13306"
+   ],
+   "example": "작업 지시의 부품 칸에는 사용한 예비품의 품목 번호와 수량을 적어 재고에서 뺍니다."
+  },
+  {
+   "id": "equipment-tag",
+   "ko": "설비 태그",
+   "en": "equipment tag",
+   "alt": [
+    "태그 번호",
+    "기기 번호"
+   ],
+   "definition": "설비 하나하나에 붙이는 고유 식별 번호입니다. 도면, 정비 이력, 센서 데이터를 같은 설비로 묶는 열쇠가 됩니다.",
+   "category": "item",
+   "related": [
+    "equipment-unit",
+    "equipment-register"
+   ],
+   "refs": [
+    "ISO 14224",
+    "IEC 81346"
+   ]
+  },
+  {
+   "id": "equipment-hierarchy",
+   "ko": "설비 계층",
+   "en": "equipment hierarchy",
+   "alt": [
+    "설비 분류 체계",
+    "택소노미"
+   ],
+   "definition": "공장, 공정 구역, 시스템, 설비 단위, 하위 단위, 보전 가능 아이템으로 내려가는 포함 관계의 구조입니다.",
+   "category": "item",
+   "related": [
+    "equipment-unit",
+    "subunit"
+   ],
+   "refs": [
+    "ISO 14224"
+   ]
+  },
+  {
+   "id": "equipment-register",
+   "ko": "설비 대장",
+   "en": "equipment register",
+   "alt": [
+    "자산 대장",
+    "설비 목록"
+   ],
+   "definition": "설비 태그마다 형식, 제조사, 설치일, 위치, 주요 사양을 적은 목록입니다.",
+   "category": "item",
+   "related": [
+    "equipment-tag",
+    "asset"
+   ],
+   "refs": [
+    "ISO 55000"
+   ]
+  },
+  {
+   "id": "criticality",
+   "ko": "설비 중요도",
+   "en": "equipment criticality",
+   "alt": [
+    "설비 등급",
+    "중요도 등급"
+   ],
+   "definition": "설비가 고장 났을 때 안전, 환경, 생산, 비용에 미치는 영향의 크기에 따라 매긴 등급입니다. 보전 방식과 예비품 수준을 정하는 기준이 됩니다.",
+   "category": "item",
+   "related": [
+    "risk-assessment",
+    "rcm"
+   ],
+   "refs": [
+    "ISO 14224"
+   ]
+  },
+  {
+   "id": "redundancy",
+   "ko": "중복 구성",
+   "en": "redundancy",
+   "alt": [
+    "리던던시",
+    "예비 계열"
+   ],
+   "definition": "같은 기능을 하는 아이템을 둘 이상 두어 하나가 고장 나도 기능이 유지되게 하는 구성입니다.",
+   "category": "item",
+   "related": [
+    "availability",
+    "common-cause-failure"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "operating-context",
+   "ko": "운전 조건",
+   "en": "operating context",
+   "alt": [
+    "운전 환경",
+    "사용 조건"
+   ],
+   "definition": "설비가 놓인 환경과 운전 방식입니다. 부하, 온도, 운전 시간, 매체가 같은 형식의 설비라도 고장 양상을 다르게 만듭니다.",
+   "category": "item",
+   "related": [
+    "rcm",
+    "failure-mechanism"
+   ],
+   "refs": [
+    "SAE JA1011"
+   ]
+  },
+  {
+   "id": "failure",
+   "ko": "고장",
+   "en": "failure",
+   "alt": [
+    "기능 상실"
+   ],
+   "definition": "아이템이 요구된 기능을 수행하는 능력을 잃는 사건입니다. 고장은 사건이고, 그 뒤 아이템이 놓인 상태는 결함입니다.",
+   "category": "failure",
+   "related": [
+    "fault",
+    "failure-mode"
+   ],
+   "refs": [
+    "IEC 60050-192",
+    "ISO 14224"
+   ]
+  },
+  {
+   "id": "fault",
+   "ko": "결함",
+   "en": "fault",
+   "alt": [
+    "결함 상태",
+    "폴트"
+   ],
+   "definition": "아이템이 요구된 기능을 수행하지 못하는 상태입니다. 고장의 결과로 생기기도 하고 설계·제작 단계부터 있기도 합니다.",
+   "category": "failure",
+   "related": [
+    "failure",
+    "hidden-failure",
+    "functional-failure"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ],
+   "example": "고장 보고의 「예비 펌프 기동 시험 실패」는 시험 전부터 있던 결함을 시험으로 찾은 경우입니다."
+  },
+  {
+   "id": "failure-mode",
+   "ko": "고장 모드",
+   "en": "failure mode",
+   "alt": [
+    "고장 형태",
+    "고장 유형"
+   ],
+   "definition": "고장이 겉으로 드러나는 방식입니다. 누설, 기동 불가, 과열, 진동 과다처럼 관찰할 수 있는 말로 적습니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "failure-mechanism",
+    "failure-cause",
+    "fmea"
+   ],
+   "refs": [
+    "ISO 14224",
+    "IEC 60812"
+   ],
+   "example": "고장 보고의 고장 모드 칸에는 「씰 누설」, 「기동 불가」처럼 관찰한 현상을 적고 원인은 따로 적습니다."
+  },
+  {
+   "id": "failure-mechanism",
+   "ko": "고장 메커니즘",
+   "en": "failure mechanism",
+   "alt": [
+    "고장 기구"
+   ],
+   "definition": "고장을 일으키는 물리적, 화학적, 그 밖의 과정입니다. 피로, 부식, 마모, 과열이 대표적입니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "failure-mode",
+    "degradation"
+   ],
+   "refs": [
+    "ISO 14224",
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "failure-cause",
+   "ko": "고장 원인",
+   "en": "failure cause",
+   "alt": [
+    "근본 원인 후보"
+   ],
+   "definition": "고장으로 이어진 설계, 제작, 설치, 운전, 보전 쪽의 사정입니다. 원인을 고쳐야 같은 고장이 되풀이되지 않습니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "rca",
+    "failure-mechanism"
+   ],
+   "refs": [
+    "ISO 14224",
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "failure-effect",
+   "ko": "고장 영향",
+   "en": "failure effect",
+   "alt": [
+    "고장 결과"
+   ],
+   "definition": "고장 모드가 아이템, 상위 시스템, 안전, 생산에 미치는 결과입니다. FMEA에서 심각도를 매기는 근거가 되고, 같은 고장 모드라도 운전 조건과 중복 구성에 따라 영향이 달라집니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "severity",
+    "fmea"
+   ],
+   "refs": [
+    "IEC 60812"
+   ]
+  },
+  {
+   "id": "hidden-failure",
+   "ko": "잠재 고장",
+   "en": "hidden failure",
+   "alt": [
+    "숨은 고장",
+    "은폐 고장"
+   ],
+   "definition": "평소 운전 중에는 드러나지 않는 고장입니다. 안전밸브나 예비 펌프처럼 필요할 때만 작동하는 기능에서 생기며 시험해야 찾을 수 있습니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "inspection",
+    "rcm"
+   ],
+   "refs": [
+    "SAE JA1011"
+   ]
+  },
+  {
+   "id": "functional-failure",
+   "ko": "기능 고장",
+   "en": "functional failure",
+   "definition": "아이템이 사용자가 정한 성능 기준을 만족하지 못하는 상태입니다. 완전히 멈추지 않아도 기준 아래로 떨어지면 기능 고장입니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "rcm",
+    "partial-failure"
+   ],
+   "refs": [
+    "SAE JA1011"
+   ]
+  },
+  {
+   "id": "random-failure",
+   "ko": "우발 고장",
+   "en": "random failure",
+   "alt": [
+    "랜덤 고장"
+   ],
+   "definition": "사용 기간과 관계없이 거의 일정한 비율로 생기는 고장입니다. 시간 기준 교체로는 줄이기 어렵습니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "bathtub-curve",
+    "failure-rate"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "wear-out-failure",
+   "ko": "마모 고장",
+   "en": "wear-out failure",
+   "alt": [
+    "노화 고장"
+   ],
+   "definition": "사용 시간이 길어질수록 열화가 쌓여 고장 확률이 커지는 고장입니다. 피로, 부식, 마모처럼 시간이 쌓이는 고장 메커니즘에서 나오므로 시간기준보전이나 상태기반보전으로 미리 막을 수 있습니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "bathtub-curve",
+    "degradation",
+    "time-based-maintenance"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "early-failure",
+   "ko": "초기 고장",
+   "en": "early failure",
+   "alt": [
+    "유아 사망 고장"
+   ],
+   "definition": "설치나 수리 직후에 제작·조립·설치 결함 때문에 많이 생기는 고장입니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "bathtub-curve",
+    "random-failure",
+    "wear-out-failure"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "common-cause-failure",
+   "ko": "공통 원인 고장",
+   "en": "common cause failure",
+   "alt": [
+    "CCF"
+   ],
+   "definition": "하나의 원인 때문에 여러 아이템이 함께 고장 나는 것입니다. 중복 구성의 효과를 없앱니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "redundancy",
+    "fta"
+   ],
+   "refs": [
+    "IEC 61508",
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "partial-failure",
+   "ko": "부분 고장",
+   "en": "partial failure",
+   "alt": [
+    "성능 저하 고장"
+   ],
+   "definition": "아이템이 기능의 일부만 잃거나 성능이 줄어든 고장입니다. 설비는 계속 돌지만 유량, 압력, 속도 같은 성능이 기준에 못 미치는 경우가 여기에 들어갑니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "functional-failure",
+    "complete-failure"
+   ],
+   "refs": [
+    "ISO 14224"
+   ],
+   "example": "고장 보고에 「토출 압력 저하, 운전은 계속」으로 적힌 펌프 고장은 부분 고장으로 분류합니다."
+  },
+  {
+   "id": "complete-failure",
+   "ko": "완전 고장",
+   "en": "complete failure",
+   "alt": [
+    "치명 고장"
+   ],
+   "definition": "아이템이 요구된 기능을 전혀 수행하지 못하게 된 고장입니다. 설비가 멈추거나 기동하지 못하는 경우이며, 부분 고장과 나눠 기록하면 정지 시간과 고장 영향을 따로 볼 수 있습니다.",
+   "category": "failure",
+   "broader": "failure",
+   "related": [
+    "partial-failure",
+    "downtime"
+   ],
+   "refs": [
+    "ISO 14224"
+   ],
+   "example": "고장 보고에 「기동 불가」로 적힌 고장은 완전 고장으로 분류합니다."
+  },
+  {
+   "id": "detection-method",
+   "ko": "고장 탐지 방법",
+   "en": "detection method",
+   "alt": [
+    "발견 방법"
+   ],
+   "definition": "고장을 어떻게 알게 되었는지를 적는 분류입니다. 정기 점검, 상태 감시, 운전 중 관찰, 시험, 생산 중단 같은 값이 있습니다.",
+   "category": "failure",
+   "related": [
+    "condition-monitoring",
+    "detection"
+   ],
+   "refs": [
+    "ISO 14224"
+   ]
+  },
+  {
+   "id": "failure-symptom",
+   "ko": "고장 징후",
+   "en": "failure symptom",
+   "alt": [
+    "이상 징후",
+    "전조"
+   ],
+   "definition": "고장이 나기 전이나 나는 동안 관찰되는 이상입니다. 소음, 진동, 온도 상승, 압력 변화가 대표적입니다.",
+   "category": "failure",
+   "related": [
+    "potential-failure",
+    "condition-monitoring"
+   ],
+   "refs": [
+    "ISO 17359"
+   ],
+   "example": "정비 일지의 「모터 쪽 소음이 커짐, 만지면 뜨거움」은 고장 징후 두 가지를 적은 것입니다."
+  },
+  {
+   "id": "maintenance",
+   "ko": "보전",
+   "en": "maintenance",
+   "alt": [
+    "정비",
+    "유지보수",
+    "보수"
+   ],
+   "definition": "아이템이 요구된 기능을 유지하거나 되찾도록 하는 기술적, 관리적 활동 전체입니다. 현장에서는 정비와 보수를 같은 뜻으로 많이 씁니다.",
+   "category": "strategy",
+   "related": [
+    "preventive-maintenance",
+    "corrective-maintenance"
+   ],
+   "refs": [
+    "EN 13306",
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "preventive-maintenance",
+   "ko": "예방보전",
+   "en": "preventive maintenance",
+   "alt": [
+    "PM",
+    "예방정비"
+   ],
+   "definition": "고장이 나기 전에 정해진 기준에 따라 하는 보전입니다. 기준은 시간, 사용량, 상태 가운데 하나입니다.",
+   "category": "strategy",
+   "broader": "maintenance",
+   "related": [
+    "time-based-maintenance",
+    "condition-based-maintenance"
+   ],
+   "refs": [
+    "EN 13306"
+   ]
+  },
+  {
+   "id": "corrective-maintenance",
+   "ko": "사후보전",
+   "en": "corrective maintenance",
+   "alt": [
+    "CM",
+    "고장 정비",
+    "BM",
+    "고장 수리"
+   ],
+   "definition": "고장이 확인된 뒤 아이템을 다시 기능하게 만드는 보전입니다. 고장 직후 바로 하는 긴급보전과 일정을 잡아 하는 계획 사후보전으로 나뉘며, 고장 영향이 작은 설비에는 일부러 이 방식을 고르기도 합니다.",
+   "category": "strategy",
+   "broader": "maintenance",
+   "related": [
+    "emergency-maintenance",
+    "mttr",
+    "failure-report"
+   ],
+   "refs": [
+    "EN 13306"
+   ],
+   "example": "작업 지시 가운데 고장 보고와 이어진 수리 작업은 작업 유형을 사후보전으로 둡니다."
+  },
+  {
+   "id": "time-based-maintenance",
+   "ko": "시간기준보전",
+   "en": "time-based maintenance",
+   "alt": [
+    "TBM",
+    "정기보전"
+   ],
+   "definition": "달력 시간이나 운전 시간이 정해진 값에 이르면 하는 예방보전입니다. 설비 상태와 관계없이 주기가 되면 작업하므로 사용 시간에 따라 고장이 늘어나는 마모 고장에 맞고 우발 고장에는 효과가 작습니다.",
+   "category": "strategy",
+   "broader": "preventive-maintenance",
+   "related": [
+    "wear-out-failure",
+    "overhaul",
+    "preventive-maintenance"
+   ],
+   "refs": [
+    "EN 13306"
+   ],
+   "example": "작업 지시에 「운전 시간 도달에 따른 정기 교체」로 적힌 작업은 시간기준보전입니다."
+  },
+  {
+   "id": "condition-based-maintenance",
+   "ko": "상태기반보전",
+   "en": "condition-based maintenance",
+   "alt": [
+    "CBM",
+    "상태감시보전"
+   ],
+   "definition": "설비 상태를 측정해 열화가 기준을 넘을 때 하는 예방보전입니다. 진동, 온도, 오일 상태 같은 측정값으로 작업 시점을 정하므로 시간기준보전보다 불필요한 분해를 줄일 수 있습니다.",
+   "category": "strategy",
+   "broader": "preventive-maintenance",
+   "related": [
+    "condition-monitoring",
+    "pf-interval",
+    "alarm-threshold"
+   ],
+   "refs": [
+    "EN 13306",
+    "ISO 17359"
+   ],
+   "example": "상태 감시 데이터에서 진동이 주의 경보를 넘어 베어링 교체 작업 지시를 냈다면 상태기반보전입니다."
+  },
+  {
+   "id": "predictive-maintenance",
+   "ko": "예지보전",
+   "en": "predictive maintenance",
+   "alt": [
+    "PdM",
+    "예측정비"
+   ],
+   "definition": "상태 측정값의 추세로 고장 시점을 미리 추정해 그 전에 하는 상태기반보전입니다.",
+   "category": "strategy",
+   "broader": "condition-based-maintenance",
+   "related": [
+    "rul",
+    "condition-monitoring"
+   ],
+   "refs": [
+    "EN 13306",
+    "ISO 13381-1"
+   ]
+  },
+  {
+   "id": "improvement-maintenance",
+   "ko": "개량보전",
+   "en": "improvement maintenance",
+   "alt": [
+    "개선보전",
+    "CM(개량)"
+   ],
+   "definition": "같은 고장이 되풀이되지 않도록 설비의 설계나 부품을 바꾸는 보전입니다. 부품을 같은 것으로 바꾸는 수리와 달리 재질이나 구조를 바꾸며, 근본 원인 분석의 결과로 무엇을 바꿀지 정합니다.",
+   "category": "strategy",
+   "broader": "maintenance",
+   "related": [
+    "rca",
+    "failure-cause",
+    "maintenance-prevention"
+   ],
+   "refs": [
+    "EN 13306"
+   ]
+  },
+  {
+   "id": "maintenance-prevention",
+   "ko": "보전예방",
+   "en": "maintenance prevention",
+   "alt": [
+    "MP"
+   ],
+   "definition": "새 설비를 설계하거나 고를 때 과거 고장과 보전 기록을 반영해 보전이 덜 필요하게 만드는 활동입니다.",
+   "category": "strategy",
+   "related": [
+    "improvement-maintenance",
+    "maintenance-history"
+   ],
+   "refs": [
+    "EN 13306"
+   ]
+  },
+  {
+   "id": "autonomous-maintenance",
+   "ko": "자주보전",
+   "en": "autonomous maintenance",
+   "alt": [
+    "AM",
+    "운전자 보전"
+   ],
+   "definition": "운전자가 청소, 급유, 조임, 일상 점검을 스스로 하는 보전입니다. TPM 활동의 한 축입니다.",
+   "category": "strategy",
+   "broader": "maintenance",
+   "related": [
+    "inspection",
+    "lubrication"
+   ],
+   "refs": [
+    "JIPM TPM"
+   ]
+  },
+  {
+   "id": "planned-maintenance",
+   "ko": "계획보전",
+   "en": "planned maintenance",
+   "alt": [
+    "계획 정비"
+   ],
+   "definition": "작업 내용, 인력, 부품, 시간을 미리 정해 두고 하는 보전입니다. 예방보전과 미리 계획한 사후보전을 모두 포함합니다.",
+   "category": "strategy",
+   "broader": "maintenance",
+   "related": [
+    "maintenance-plan",
+    "work-package"
+   ],
+   "refs": [
+    "EN 13306"
+   ]
+  },
+  {
+   "id": "emergency-maintenance",
+   "ko": "긴급보전",
+   "en": "emergency maintenance",
+   "alt": [
+    "돌발 정비",
+    "긴급 정비"
+   ],
+   "definition": "안전이나 생산에 큰 영향을 막으려고 고장 직후 바로 하는 사후보전입니다.",
+   "category": "strategy",
+   "broader": "corrective-maintenance",
+   "related": [
+    "work-request",
+    "corrective-maintenance",
+    "downtime"
+   ],
+   "refs": [
+    "EN 13306"
+   ],
+   "example": "작업 요청에 우선순위 「긴급」이 붙으면 계획 일정을 기다리지 않고 바로 작업 지시를 냅니다."
+  },
+  {
+   "id": "opportunistic-maintenance",
+   "ko": "기회보전",
+   "en": "opportunistic maintenance",
+   "alt": [
+    "기회 정비"
+   ],
+   "definition": "다른 작업이나 정지 기간을 이용해 앞당겨 하는 보전입니다. 대정비나 다른 설비의 고장 정지 때 주기가 가까운 작업을 함께 해서 정지 횟수를 줄이는 데 씁니다.",
+   "category": "strategy",
+   "broader": "maintenance",
+   "related": [
+    "turnaround",
+    "planned-maintenance"
+   ],
+   "refs": [
+    "EN 13306"
+   ],
+   "example": "작업 지시에 「대정비 기간 중 함께 수행」이라고 적힌 앞당긴 교체 작업이 기회보전입니다."
+  },
+  {
+   "id": "inspection",
+   "ko": "점검",
+   "en": "inspection",
+   "alt": [
+    "검사",
+    "순회 점검"
+   ],
+   "definition": "아이템의 상태를 보거나 재거나 시험해 기준과 맞는지 확인하는 활동입니다.",
+   "category": "strategy",
+   "broader": "maintenance",
+   "related": [
+    "checklist",
+    "hidden-failure"
+   ],
+   "refs": [
+    "EN 13306"
+   ]
+  },
+  {
+   "id": "overhaul",
+   "ko": "오버홀",
+   "en": "overhaul",
+   "alt": [
+    "분해 정비",
+    "완전 정비"
+   ],
+   "definition": "설비를 분해해 검사하고 마모 부품을 바꿔 원래 성능에 가깝게 되돌리는 큰 정비입니다.",
+   "category": "strategy",
+   "broader": "maintenance",
+   "related": [
+    "time-based-maintenance",
+    "turnaround"
+   ],
+   "refs": [
+    "EN 13306"
+   ]
+  },
+  {
+   "id": "calibration",
+   "ko": "교정",
+   "en": "calibration",
+   "alt": [
+    "캘리브레이션"
+   ],
+   "definition": "측정 기기의 지시값을 기준값과 비교해 오차를 확인하고 조정하는 활동입니다.",
+   "category": "strategy",
+   "broader": "maintenance",
+   "related": [
+    "inspection",
+    "condition-monitoring"
+   ],
+   "refs": [
+    "ISO/IEC 17025"
+   ],
+   "example": "교정 성적서에는 기준기 값과 계기 지시값, 조정 전후 오차를 적습니다."
+  },
+  {
+   "id": "lubrication",
+   "ko": "윤활",
+   "en": "lubrication",
+   "alt": [
+    "급유",
+    "급지"
+   ],
+   "definition": "마찰 면에 윤활유나 그리스를 공급해 마모와 발열을 줄이는 보전 작업입니다.",
+   "category": "strategy",
+   "broader": "maintenance",
+   "related": [
+    "oil-analysis",
+    "autonomous-maintenance"
+   ],
+   "refs": [
+    "EN 13306"
+   ]
+  },
+  {
+   "id": "turnaround",
+   "ko": "대정비",
+   "en": "turnaround",
+   "alt": [
+    "셧다운 정비",
+    "TA",
+    "정기 보수"
+   ],
+   "definition": "공장이나 큰 공정 구역을 계획적으로 세우고 여러 설비를 한꺼번에 정비하는 기간입니다.",
+   "category": "strategy",
+   "broader": "planned-maintenance",
+   "related": [
+    "overhaul",
+    "opportunistic-maintenance"
+   ],
+   "refs": [
+    "EN 13306"
+   ]
+  },
+  {
+   "id": "work-request",
+   "ko": "작업 요청",
+   "en": "work request",
+   "alt": [
+    "정비 요청",
+    "WR",
+    "작업 의뢰"
+   ],
+   "definition": "운전이나 점검에서 이상을 발견한 사람이 보전 부서에 작업을 요청하는 기록입니다.",
+   "category": "work",
+   "related": [
+    "work-order",
+    "failure-report"
+   ],
+   "refs": [
+    "EN 13460"
+   ]
+  },
+  {
+   "id": "work-order",
+   "ko": "작업 지시",
+   "en": "work order",
+   "alt": [
+    "WO",
+    "작업 오더"
+   ],
+   "definition": "승인된 보전 작업의 내용, 담당, 부품, 일정을 정해 내리는 지시 기록입니다. 비용과 시간이 이 기록에 모입니다.",
+   "category": "work",
+   "related": [
+    "work-request",
+    "work-package"
+   ],
+   "refs": [
+    "EN 13460"
+   ]
+  },
+  {
+   "id": "permit-to-work",
+   "ko": "작업 허가",
+   "en": "permit to work",
+   "alt": [
+    "작업허가제",
+    "PTW"
+   ],
+   "definition": "위험 작업을 시작하기 전에 격리, 가스 측정, 보호 조치를 확인하고 서면으로 허락하는 절차입니다.",
+   "category": "work",
+   "related": [
+    "work-order",
+    "isolation"
+   ],
+   "refs": [
+    "KOSHA 지침",
+    "HSE HSG250"
+   ]
+  },
+  {
+   "id": "isolation",
+   "ko": "에너지 격리",
+   "en": "energy isolation",
+   "alt": [
+    "잠금 표지",
+    "LOTO",
+    "격리"
+   ],
+   "definition": "정비 중 설비가 갑자기 움직이거나 매체가 새지 않도록 전기, 압력, 유체 에너지를 끊고 잠그는 조치입니다.",
+   "category": "work",
+   "related": [
+    "permit-to-work",
+    "work-package"
+   ],
+   "refs": [
+    "KOSHA 지침",
+    "OSHA 1910.147"
+   ],
+   "example": "작업 허가서에는 내린 차단기와 잠근 밸브, 잠금 장치 번호를 적는 에너지 격리 칸이 있습니다."
+  },
+  {
+   "id": "maintenance-history",
+   "ko": "정비 이력",
+   "en": "maintenance history",
+   "alt": [
+    "설비 이력",
+    "보전 이력"
+   ],
+   "definition": "설비 태그별로 쌓인 고장, 작업, 부품 교체, 점검 결과의 시간 순서 기록입니다.",
+   "category": "work",
+   "related": [
+    "equipment-tag",
+    "work-order"
+   ],
+   "refs": [
+    "ISO 14224"
+   ]
+  },
+  {
+   "id": "failure-report",
+   "ko": "고장 보고",
+   "en": "failure report",
+   "alt": [
+    "고장 기록",
+    "고장 신고서"
+   ],
+   "definition": "고장 하나에 대해 발생 시각, 고장 모드, 탐지 방법, 영향, 조치를 적은 기록입니다.",
+   "category": "work",
+   "related": [
+    "failure-mode",
+    "detection-method"
+   ],
+   "refs": [
+    "ISO 14224"
+   ]
+  },
+  {
+   "id": "maintenance-log",
+   "ko": "정비 일지",
+   "en": "maintenance log",
+   "alt": [
+    "작업 일지",
+    "보전 일지"
+   ],
+   "definition": "정비 담당자가 그날 한 작업과 발견한 내용을 자유롭게 적는 기록입니다. 고장 이력 분석의 원자료가 되지만 표현이 사람마다 다릅니다.",
+   "category": "work",
+   "related": [
+    "maintenance-history",
+    "failure-report"
+   ]
+  },
+  {
+   "id": "checklist",
+   "ko": "점검표",
+   "en": "checklist",
+   "alt": [
+    "체크리스트",
+    "점검 시트"
+   ],
+   "definition": "점검 항목, 기준값, 결과를 적도록 미리 만들어 둔 양식입니다. 자주보전과 정기 점검에서 쓰며, 결과가 항목별 값으로 남아 자유롭게 쓰는 정비 일지보다 집계하기 쉽습니다.",
+   "category": "work",
+   "related": [
+    "inspection",
+    "autonomous-maintenance",
+    "maintenance-log"
+   ],
+   "example": "일상 점검표에는 「오일 레벨 정상 여부」, 「이음부 누설 유무」처럼 항목마다 결과를 적는 칸이 있습니다."
+  },
+  {
+   "id": "maintenance-plan",
+   "ko": "보전 계획",
+   "en": "maintenance plan",
+   "alt": [
+    "정비 계획"
+   ],
+   "definition": "설비별로 어떤 보전을 어떤 주기와 방법으로 할지 정한 계획입니다. 고장 모드마다 고른 보전 방식을 작업 목록과 주기로 정리한 것이며, 계획보전의 작업 지시가 이 계획에서 만들어집니다.",
+   "category": "work",
+   "related": [
+    "planned-maintenance",
+    "rcm",
+    "work-order"
+   ],
+   "refs": [
+    "EN 13306"
+   ]
+  },
+  {
+   "id": "work-package",
+   "ko": "작업 패키지",
+   "en": "work package",
+   "alt": [
+    "작업 묶음",
+    "잡 플랜"
+   ],
+   "definition": "한 번의 보전 작업에 필요한 절차, 도구, 부품, 인력, 안전 조치를 묶은 단위입니다.",
+   "category": "work",
+   "related": [
+    "work-order",
+    "planned-maintenance"
+   ],
+   "refs": [
+    "EN 13460"
+   ]
+  },
+  {
+   "id": "spare-requirement",
+   "ko": "예비품 소요",
+   "en": "spare parts requirement",
+   "alt": [
+    "부품 소요"
+   ],
+   "definition": "보전 계획과 고장률로 계산한 예비품의 필요 수량입니다. 예비품이 모자라면 지원 지연이 길어지고 남으면 재고 비용이 늘어나므로 설비 중요도와 함께 따집니다.",
+   "category": "work",
+   "related": [
+    "spare-part",
+    "failure-rate",
+    "logistic-delay",
+    "criticality"
+   ],
+   "refs": [
+    "IEC 60300-3-12"
+   ]
+  },
+  {
+   "id": "active-repair-time",
+   "ko": "실 수리 시간",
+   "en": "active repair time",
+   "alt": [
+    "순수 수리 시간"
+   ],
+   "definition": "고장 진단, 분해, 교체, 조립, 시험처럼 손으로 작업한 시간입니다. 부품이나 허가를 기다린 지원 지연 시간은 빼고 세며, 보전도를 평가하는 기본 자료가 됩니다.",
+   "category": "work",
+   "related": [
+    "mttr",
+    "logistic-delay",
+    "maintainability"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ],
+   "example": "작업 지시에 「부품 대기」로 기록된 시간은 실 수리 시간에서 빼고 지원 지연으로 셉니다."
+  },
+  {
+   "id": "logistic-delay",
+   "ko": "지원 지연 시간",
+   "en": "logistic delay",
+   "alt": [
+    "대기 시간",
+    "물류 지연"
+   ],
+   "definition": "부품, 인력, 허가를 기다리느라 수리를 시작하거나 이어 가지 못한 시간입니다.",
+   "category": "work",
+   "related": [
+    "active-repair-time",
+    "downtime"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "maintenance-cost",
+   "ko": "보전 비용",
+   "en": "maintenance cost",
+   "alt": [
+    "정비비"
+   ],
+   "definition": "보전 작업에 든 인건비, 부품비, 외주비, 장비비의 합계입니다. 생산 손실은 따로 셉니다.",
+   "category": "work",
+   "related": [
+    "work-order",
+    "downtime"
+   ],
+   "refs": [
+    "EN 15341"
+   ],
+   "example": "작업 지시를 닫을 때 인건비, 부품비, 외주비를 입력하면 설비별 보전 비용이 집계됩니다."
+  },
+  {
+   "id": "reliability",
+   "ko": "신뢰도",
+   "en": "reliability",
+   "alt": [
+    "신뢰성"
+   ],
+   "definition": "아이템이 정해진 조건에서 정해진 기간 동안 고장 없이 기능할 확률입니다. 성질을 말할 때는 신뢰성이라고 합니다.",
+   "category": "metric",
+   "related": [
+    "failure-rate",
+    "mtbf"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "failure-rate",
+   "ko": "고장률",
+   "en": "failure rate",
+   "alt": [
+    "λ",
+    "람다"
+   ],
+   "definition": "단위 시간당 고장이 생기는 정도입니다. 보통 같은 형식 설비의 전체 운전 시간으로 고장 건수를 나눠 추정합니다.",
+   "category": "metric",
+   "related": [
+    "reliability",
+    "mtbf"
+   ],
+   "refs": [
+    "IEC 60050-192",
+    "ISO 14224"
+   ]
+  },
+  {
+   "id": "mtbf",
+   "ko": "평균고장간격",
+   "en": "mean time between failures",
+   "alt": [
+    "MTBF"
+   ],
+   "definition": "수리하며 쓰는 아이템에서 고장과 다음 고장 사이 운전 시간의 평균입니다.",
+   "category": "metric",
+   "related": [
+    "failure-rate",
+    "mttr"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "mttr",
+   "ko": "평균수리시간",
+   "en": "mean time to restoration",
+   "alt": [
+    "MTTR",
+    "평균 복구 시간"
+   ],
+   "definition": "고장에서 다시 기능하게 될 때까지 걸린 시간의 평균입니다. 실 수리 시간만 셀지 지원 지연을 넣을지 먼저 정해야 비교할 수 있습니다.",
+   "category": "metric",
+   "related": [
+    "active-repair-time",
+    "logistic-delay"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "mttf",
+   "ko": "평균고장시간",
+   "en": "mean time to failure",
+   "alt": [
+    "MTTF"
+   ],
+   "definition": "수리하지 않고 바꾸는 아이템이 처음 고장 날 때까지 운전 시간의 평균입니다.",
+   "category": "metric",
+   "related": [
+    "mtbf",
+    "failure-rate",
+    "reliability"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "availability",
+   "ko": "가용도",
+   "en": "availability",
+   "alt": [
+    "가용성"
+   ],
+   "definition": "아이템이 필요할 때 기능할 수 있는 상태에 있을 확률 또는 시간 비율입니다.",
+   "category": "metric",
+   "related": [
+    "inherent-availability",
+    "operational-availability"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "inherent-availability",
+   "ko": "고유 가용도",
+   "en": "inherent availability",
+   "alt": [
+    "Ai"
+   ],
+   "definition": "고장과 실 수리 시간만 고려해 MTBF를 MTBF와 MTTR의 합으로 나눈 가용도입니다. 설계가 줄 수 있는 상한입니다.",
+   "category": "metric",
+   "broader": "availability",
+   "related": [
+    "mtbf",
+    "mttr"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "operational-availability",
+   "ko": "운용 가용도",
+   "en": "operational availability",
+   "alt": [
+    "Ao"
+   ],
+   "definition": "예방보전 정지와 지원 지연까지 넣은 실제 운전 가용도입니다. 고유 가용도와 달리 부품 조달, 인력 대기, 계획 정지에 쓴 시간까지 빼고 계산하므로 현장에서 실제로 얻는 값에 가깝습니다.",
+   "category": "metric",
+   "broader": "availability",
+   "related": [
+    "logistic-delay",
+    "downtime",
+    "inherent-availability"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "maintainability",
+   "ko": "보전도",
+   "en": "maintainability",
+   "alt": [
+    "보전성",
+    "정비성"
+   ],
+   "definition": "정해진 조건과 자원으로 보전할 때 아이템이 정해진 시간 안에 다시 기능하게 될 확률입니다. 성질을 말할 때는 보전성이라고 합니다.",
+   "category": "metric",
+   "related": [
+    "mttr",
+    "active-repair-time"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "uptime-ratio",
+   "ko": "가동률",
+   "en": "operating rate",
+   "alt": [
+    "설비 가동률"
+   ],
+   "definition": "계획한 시간 가운데 설비가 실제로 운전한 시간의 비율입니다. 회사마다 분모를 다르게 잡아 숫자를 비교할 때는 정의부터 확인합니다.",
+   "category": "metric",
+   "related": [
+    "oee",
+    "downtime"
+   ],
+   "refs": [
+    "ISO 22400-2"
+   ]
+  },
+  {
+   "id": "oee",
+   "ko": "설비종합효율",
+   "en": "overall equipment effectiveness",
+   "alt": [
+    "OEE"
+   ],
+   "definition": "가동 시간 비율, 성능 비율, 양품 비율을 곱한 값입니다. 정지, 속도 저하, 불량으로 잃은 몫을 한 숫자로 보여 줍니다.",
+   "category": "metric",
+   "related": [
+    "uptime-ratio",
+    "downtime"
+   ],
+   "refs": [
+    "ISO 22400-2"
+   ]
+  },
+  {
+   "id": "downtime",
+   "ko": "정지 시간",
+   "en": "downtime",
+   "alt": [
+    "다운타임",
+    "비가동 시간"
+   ],
+   "definition": "아이템이 기능할 수 없는 상태로 있었던 시간입니다. 계획 정지와 비계획 정지를 나눠 셉니다.",
+   "category": "metric",
+   "related": [
+    "availability",
+    "logistic-delay"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ],
+   "example": "고장 보고에서 설비가 멈춘 시각과 다시 운전을 시작한 시각의 차이를 정지 시간으로 셉니다."
+  },
+  {
+   "id": "b10-life",
+   "ko": "B10 수명",
+   "en": "B10 life",
+   "alt": [
+    "L10 수명"
+   ],
+   "definition": "같은 아이템 가운데 10%가 고장 날 때까지의 운전 시간입니다. 베어링 수명에서 많이 씁니다.",
+   "category": "metric",
+   "related": [
+    "weibull",
+    "reliability"
+   ],
+   "refs": [
+    "ISO 281"
+   ]
+  },
+  {
+   "id": "bathtub-curve",
+   "ko": "욕조 곡선",
+   "en": "bathtub curve",
+   "alt": [
+    "고장률 곡선"
+   ],
+   "definition": "초기 고장, 우발 고장, 마모 고장 구간을 시간 순서로 이어 그린 고장률 곡선입니다. 모든 설비가 이 모양을 따르지는 않습니다.",
+   "category": "metric",
+   "related": [
+    "early-failure",
+    "random-failure",
+    "wear-out-failure"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "weibull",
+   "ko": "와이블 분석",
+   "en": "Weibull analysis",
+   "alt": [
+    "와이블 분포"
+   ],
+   "definition": "고장 시간 자료에 와이블 분포를 맞춰 고장 양상과 수명을 추정하는 분석입니다. 형상 모수가 1보다 작으면 초기 고장, 1에 가까우면 우발 고장, 1보다 크면 마모 고장 쪽으로 읽습니다.",
+   "category": "metric",
+   "related": [
+    "bathtub-curve",
+    "b10-life"
+   ],
+   "refs": [
+    "IEC 61649"
+   ]
+  },
+  {
+   "id": "fmea",
+   "ko": "고장 모드 영향 분석",
+   "en": "failure mode and effects analysis",
+   "alt": [
+    "FMEA"
+   ],
+   "definition": "아이템별로 일어날 수 있는 고장 모드와 그 영향, 원인, 현재 관리 방법을 표로 정리해 위험한 것부터 조치하는 분석입니다.",
+   "category": "analysis",
+   "related": [
+    "failure-mode",
+    "rpn",
+    "action-priority"
+   ],
+   "refs": [
+    "IEC 60812",
+    "AIAG-VDA FMEA"
+   ]
+  },
+  {
+   "id": "fmeca",
+   "ko": "고장 모드 영향 치명도 분석",
+   "en": "failure mode, effects and criticality analysis",
+   "alt": [
+    "FMECA"
+   ],
+   "definition": "FMEA에 고장 모드별 치명도 평가를 더한 분석입니다. 고장 모드마다 심각도와 발생 가능성을 함께 따져 치명도 순위를 매기며, 국방과 항공 분야에서 오래 써 왔습니다.",
+   "category": "analysis",
+   "broader": "fmea",
+   "related": [
+    "criticality",
+    "severity",
+    "fmea",
+    "failure-mode"
+   ],
+   "refs": [
+    "IEC 60812"
+   ]
+  },
+  {
+   "id": "severity",
+   "ko": "심각도",
+   "en": "severity",
+   "alt": [
+    "S"
+   ],
+   "definition": "FMEA에서 고장 영향이 얼마나 심각한지 매긴 점수입니다. 고장 영향이 안전, 환경, 생산, 품질에 얼마나 큰지에 따라 매기며, 점수표는 회사나 표준마다 다릅니다.",
+   "category": "analysis",
+   "related": [
+    "failure-effect",
+    "rpn",
+    "action-priority"
+   ],
+   "refs": [
+    "IEC 60812",
+    "AIAG-VDA FMEA"
+   ],
+   "example": "FMEA 표의 심각도 칸에는 고장 영향 칸에 적은 결과를 점수표에 맞춰 매긴 숫자를 적습니다."
+  },
+  {
+   "id": "occurrence",
+   "ko": "발생도",
+   "en": "occurrence",
+   "alt": [
+    "O"
+   ],
+   "definition": "FMEA에서 고장 원인이 얼마나 자주 생길지 매긴 점수입니다. 현재의 예방 관리를 고려해 매기며, 고장 이력이나 고장률 자료가 있으면 그것을 근거로 씁니다.",
+   "category": "analysis",
+   "related": [
+    "failure-cause",
+    "rpn",
+    "failure-rate"
+   ],
+   "refs": [
+    "IEC 60812",
+    "AIAG-VDA FMEA"
+   ]
+  },
+  {
+   "id": "detection",
+   "ko": "검출도",
+   "en": "detection",
+   "alt": [
+    "D"
+   ],
+   "definition": "FMEA에서 고장이나 원인을 고객이나 다음 공정에 닿기 전에 찾아낼 수 있는 정도를 매긴 점수입니다. 점수가 높을수록 찾기 어렵다는 뜻입니다.",
+   "category": "analysis",
+   "related": [
+    "detection-method",
+    "rpn"
+   ],
+   "refs": [
+    "IEC 60812",
+    "AIAG-VDA FMEA"
+   ]
+  },
+  {
+   "id": "rpn",
+   "ko": "위험 우선순위 수",
+   "en": "risk priority number",
+   "alt": [
+    "RPN"
+   ],
+   "definition": "심각도, 발생도, 검출도를 곱한 값입니다. 곱셈이라 서로 다른 위험이 같은 숫자가 되는 한계가 있습니다.",
+   "category": "analysis",
+   "related": [
+    "severity",
+    "occurrence",
+    "detection",
+    "action-priority"
+   ],
+   "refs": [
+    "IEC 60812"
+   ]
+  },
+  {
+   "id": "action-priority",
+   "ko": "조치 우선순위",
+   "en": "action priority",
+   "alt": [
+    "AP"
+   ],
+   "definition": "심각도, 발생도, 검출도의 조합표로 높음, 중간, 낮음을 정하는 방식입니다. 심각도를 먼저 보도록 RPN을 대신해 쓰입니다.",
+   "category": "analysis",
+   "related": [
+    "rpn",
+    "severity"
+   ],
+   "refs": [
+    "AIAG-VDA FMEA"
+   ]
+  },
+  {
+   "id": "fta",
+   "ko": "고장 나무 분석",
+   "en": "fault tree analysis",
+   "alt": [
+    "FTA",
+    "결함수 분석"
+   ],
+   "definition": "원하지 않는 최상위 사건에서 시작해 그 원인이 되는 사건들을 논리 게이트로 아래로 펼쳐 가는 분석입니다.",
+   "category": "analysis",
+   "related": [
+    "common-cause-failure",
+    "rca"
+   ],
+   "refs": [
+    "IEC 61025"
+   ]
+  },
+  {
+   "id": "rca",
+   "ko": "근본 원인 분석",
+   "en": "root cause analysis",
+   "alt": [
+    "RCA"
+   ],
+   "definition": "고장의 직접 원인 뒤에 있는 관리, 설계, 절차 쪽 원인을 찾아 재발을 막는 분석입니다.",
+   "category": "analysis",
+   "related": [
+    "failure-cause",
+    "improvement-maintenance"
+   ],
+   "refs": [
+    "IEC 62740"
+   ]
+  },
+  {
+   "id": "rcm",
+   "ko": "신뢰성 중심 보전",
+   "en": "reliability-centered maintenance",
+   "alt": [
+    "RCM"
+   ],
+   "definition": "설비 기능과 고장 모드, 그 결과에서 출발해 고장 모드마다 알맞은 보전 방식을 고르는 방법입니다.",
+   "category": "analysis",
+   "related": [
+    "functional-failure",
+    "hidden-failure",
+    "maintenance-plan"
+   ],
+   "refs": [
+    "SAE JA1011",
+    "IEC 60300-3-11"
+   ]
+  },
+  {
+   "id": "rbi",
+   "ko": "위험 기반 검사",
+   "en": "risk-based inspection",
+   "alt": [
+    "RBI"
+   ],
+   "definition": "압력 설비와 배관을 고장 확률과 결과로 나눠 위험이 큰 곳부터 검사 주기와 방법을 정하는 방법입니다.",
+   "category": "analysis",
+   "related": [
+    "inspection",
+    "criticality"
+   ],
+   "refs": [
+    "API 580",
+    "API 581"
+   ]
+  },
+  {
+   "id": "risk-assessment",
+   "ko": "위험성 평가",
+   "en": "risk assessment",
+   "alt": [
+    "리스크 평가"
+   ],
+   "definition": "위험 요인을 찾고 가능성과 결과로 위험 크기를 정해 줄일 대책을 정하는 절차입니다.",
+   "category": "analysis",
+   "related": [
+    "criticality",
+    "hazop"
+   ],
+   "refs": [
+    "ISO 31000",
+    "산업안전보건법"
+   ]
+  },
+  {
+   "id": "hazop",
+   "ko": "위험과 운전 분석",
+   "en": "hazard and operability study",
+   "alt": [
+    "HAZOP"
+   ],
+   "definition": "공정 설계 의도에 「없음」, 「많음」 같은 안내어를 붙여 벗어나는 경우를 찾고 위험과 운전 문제를 검토하는 방법입니다.",
+   "category": "analysis",
+   "related": [
+    "risk-assessment",
+    "fmea"
+   ],
+   "refs": [
+    "IEC 61882"
+   ]
+  },
+  {
+   "id": "pareto-analysis",
+   "ko": "파레토 분석",
+   "en": "Pareto analysis",
+   "alt": [
+    "ABC 분석"
+   ],
+   "definition": "고장이나 손실을 원인별로 크기 순서로 늘어놓아 적은 원인이 큰 몫을 차지하는지 보는 분석입니다.",
+   "category": "analysis",
+   "related": [
+    "failure-report",
+    "rca"
+   ]
+  },
+  {
+   "id": "condition-monitoring",
+   "ko": "상태 감시",
+   "en": "condition monitoring",
+   "alt": [
+    "CM(상태)",
+    "설비 상태 감시"
+   ],
+   "definition": "설비 상태를 나타내는 값을 주기적이거나 연속으로 재서 변화를 지켜보는 활동입니다.",
+   "category": "monitoring",
+   "related": [
+    "condition-based-maintenance",
+    "alarm-threshold"
+   ],
+   "refs": [
+    "ISO 17359"
+   ]
+  },
+  {
+   "id": "vibration-analysis",
+   "ko": "진동 분석",
+   "en": "vibration analysis",
+   "alt": [
+    "진동 진단"
+   ],
+   "definition": "회전 설비의 진동 크기와 주파수 성분으로 불평형, 축 정렬 불량, 베어링 손상을 찾는 방법입니다.",
+   "category": "monitoring",
+   "broader": "condition-monitoring",
+   "related": [
+    "failure-symptom",
+    "condition-monitoring",
+    "alarm-threshold",
+    "motor-current-analysis"
+   ],
+   "refs": [
+    "ISO 10816",
+    "ISO 20816"
+   ],
+   "example": "상태 감시 데이터의 진동 스펙트럼에서 회전 주파수 성분이 커지면 불평형을 먼저 의심합니다."
+  },
+  {
+   "id": "thermography",
+   "ko": "열화상 진단",
+   "en": "infrared thermography",
+   "alt": [
+    "적외선 열화상"
+   ],
+   "definition": "적외선 카메라로 표면 온도 분포를 찍어 접촉 불량, 단열 손상, 과열을 찾는 방법입니다.",
+   "category": "monitoring",
+   "broader": "condition-monitoring",
+   "related": [
+    "failure-symptom",
+    "condition-monitoring",
+    "inspection"
+   ],
+   "refs": [
+    "ISO 18434-1"
+   ],
+   "example": "열화상 점검 보고에는 주변보다 뜨거운 단자나 접점의 사진과 측정 온도를 함께 남깁니다."
+  },
+  {
+   "id": "oil-analysis",
+   "ko": "오일 분석",
+   "en": "oil analysis",
+   "alt": [
+    "윤활유 분석"
+   ],
+   "definition": "윤활유의 점도, 오염, 마모 입자를 분석해 윤활유 상태와 기계 내부 마모를 판단하는 방법입니다.",
+   "category": "monitoring",
+   "broader": "condition-monitoring",
+   "related": [
+    "lubrication",
+    "degradation"
+   ],
+   "refs": [
+    "ISO 14830-1"
+   ],
+   "example": "오일 분석 결과지의 「철 마모 입자 증가」는 기계 내부 마모가 진행 중이라는 징후로 읽습니다."
+  },
+  {
+   "id": "ultrasonic-inspection",
+   "ko": "초음파 진단",
+   "en": "ultrasonic testing",
+   "alt": [
+    "초음파 검사",
+    "UT"
+   ],
+   "definition": "초음파로 내부 결함이나 두께 감소, 누설음, 베어링 마찰음을 찾는 방법입니다.",
+   "category": "monitoring",
+   "broader": "condition-monitoring",
+   "related": [
+    "inspection",
+    "condition-monitoring",
+    "rbi"
+   ],
+   "refs": [
+    "ISO 29821"
+   ],
+   "example": "배관 두께 측정 기록은 같은 측정점의 초음파 두께 값을 회차별로 쌓아 감육 속도를 봅니다."
+  },
+  {
+   "id": "motor-current-analysis",
+   "ko": "전류 신호 분석",
+   "en": "motor current signature analysis",
+   "alt": [
+    "MCSA"
+   ],
+   "definition": "전동기 전류의 주파수 성분으로 회전자 결함과 부하 쪽 이상을 찾는 방법입니다.",
+   "category": "monitoring",
+   "broader": "condition-monitoring",
+   "related": [
+    "failure-symptom",
+    "condition-monitoring",
+    "vibration-analysis"
+   ],
+   "refs": [
+    "ISO 20958"
+   ]
+  },
+  {
+   "id": "alarm-threshold",
+   "ko": "경보 임계값",
+   "en": "alarm threshold",
+   "alt": [
+    "알람 기준",
+    "경보 한계"
+   ],
+   "definition": "감시 값이 넘으면 경보를 내도록 정한 값입니다. 보통 주의와 위험 두 단계로 둡니다.",
+   "category": "monitoring",
+   "related": [
+    "condition-monitoring",
+    "potential-failure"
+   ],
+   "refs": [
+    "ISO 17359"
+   ]
+  },
+  {
+   "id": "degradation",
+   "ko": "열화",
+   "en": "degradation",
+   "alt": [
+    "성능 저하",
+    "노후화"
+   ],
+   "definition": "사용과 환경 때문에 아이템의 성질이나 성능이 시간에 따라 나빠지는 것입니다.",
+   "category": "monitoring",
+   "related": [
+    "failure-mechanism",
+    "wear-out-failure"
+   ],
+   "refs": [
+    "IEC 60050-192"
+   ]
+  },
+  {
+   "id": "potential-failure",
+   "ko": "잠재적 고장 시점",
+   "en": "potential failure",
+   "alt": [
+    "P 지점"
+   ],
+   "definition": "고장이 진행 중임을 측정으로 처음 알아챌 수 있는 시점입니다. P-F 곡선의 P 지점이며, 진동 증가나 온도 상승처럼 측정으로 열화를 처음 확인한 때를 가리킵니다.",
+   "category": "monitoring",
+   "related": [
+    "pf-interval",
+    "failure-symptom",
+    "condition-monitoring"
+   ],
+   "refs": [
+    "SAE JA1011"
+   ],
+   "example": "상태 감시 데이터에서 진동이 처음 주의 경보를 넘은 시각을 잠재적 고장 시점으로 기록합니다."
+  },
+  {
+   "id": "pf-interval",
+   "ko": "P-F 간격",
+   "en": "P-F interval",
+   "alt": [
+    "PF 인터벌"
+   ],
+   "definition": "잠재적 고장을 처음 알아챈 시점부터 기능 고장에 이르기까지의 시간입니다. 점검 주기는 이 간격보다 짧아야 합니다.",
+   "category": "monitoring",
+   "related": [
+    "potential-failure",
+    "functional-failure",
+    "condition-based-maintenance"
+   ],
+   "refs": [
+    "SAE JA1011"
+   ]
+  },
+  {
+   "id": "rul",
+   "ko": "잔존 유효 수명",
+   "en": "remaining useful life",
+   "alt": [
+    "RUL",
+    "잔여 수명"
+   ],
+   "definition": "지금 상태에서 아이템이 기능 고장에 이를 때까지 남은 운전 시간의 추정값입니다.",
+   "category": "monitoring",
+   "related": [
+    "predictive-maintenance",
+    "degradation"
+   ],
+   "refs": [
+    "ISO 13381-1"
+   ]
+  },
+  {
+   "id": "health-index",
+   "ko": "건전성 지수",
+   "en": "health index",
+   "alt": [
+    "설비 건전성 지수",
+    "HI"
+   ],
+   "definition": "여러 감시 값과 점검 결과를 하나로 합쳐 설비 상태를 나타낸 점수입니다. 만드는 방법이 회사마다 달라 계산식을 함께 적어야 합니다.",
+   "category": "monitoring",
+   "related": [
+    "condition-monitoring",
+    "criticality"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1829 @@
+{
+ "registry": "OntoCraft 한국 산업 용어 등록부",
+ "registry_en": "OntoCraft Korean Industry Term Registry",
+ "publisher": "OntoCraft",
+ "license": "CC BY 4.0",
+ "license_url": "https://creativecommons.org/licenses/by/4.0/",
+ "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
+ "base_uri": "https://w3id.org/ontocraft/terms/",
+ "uri_template": "https://w3id.org/ontocraft/terms/{id}",
+ "snapshot": "2026-10-09",
+ "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
+ "domain": {
+  "id": "defense",
+  "name": "방산",
+  "en": "Defense industry"
+ },
+ "version": "0.1.1",
+ "updated": "2026-10-09",
+ "categories": [
+  {
+   "id": "process",
+   "name": "사업 절차",
+   "en": "Acquisition program process"
+  },
+  {
+   "id": "acquisition",
+   "name": "획득과 계약",
+   "en": "Acquisition and contracting"
+  },
+  {
+   "id": "weapon",
+   "name": "무기체계 분류",
+   "en": "Weapon system classification"
+  },
+  {
+   "id": "quality",
+   "name": "품질보증과 규격",
+   "en": "Quality assurance and specifications"
+  },
+  {
+   "id": "ils",
+   "name": "종합군수지원과 수명주기",
+   "en": "Integrated logistics support and life cycle"
+  },
+  {
+   "id": "test",
+   "name": "시험평가",
+   "en": "Test and evaluation"
+  },
+  {
+   "id": "security",
+   "name": "방산 보안과 수출 관리",
+   "en": "Defense security and export control"
+  },
+  {
+   "id": "rnd",
+   "name": "국방 연구개발",
+   "en": "Defense research and development"
+  }
+ ],
+ "terms": [
+  {
+   "id": "force-improvement-program",
+   "ko": "방위력 개선 사업",
+   "en": "force improvement program",
+   "alt": [
+    "방위력개선사업",
+    "전력증강 사업"
+   ],
+   "definition": "군의 전력을 새로 갖추거나 기존 전력을 크게 개선하려고 무기체계를 구매하거나 연구개발하는 사업입니다. 소요 제기부터 전력화까지 정해진 단계를 밟습니다.",
+   "category": "process",
+   "related": [
+    "program-phase",
+    "weapon-system"
+   ],
+   "refs": [
+    "방위사업법",
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "military-requirement",
+   "ko": "소요",
+   "en": "military requirement",
+   "alt": [
+    "군 소요",
+    "무기체계 소요"
+   ],
+   "definition": "군이 임무를 해내려고 갖춰야 한다고 판단한 전력의 내용입니다. 무엇을, 언제까지, 얼마나 확보할지를 담습니다.",
+   "category": "process",
+   "related": [
+    "requirement-proposal",
+    "required-operational-capability"
+   ],
+   "refs": [
+    "방위사업법",
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "requirement-proposal",
+   "ko": "소요 제기",
+   "en": "requirement proposal",
+   "alt": [
+    "소요제기"
+   ],
+   "definition": "각 군이나 관련 부서가 필요한 전력을 문서로 정리해 확보를 요청하는 일입니다. 방위력 개선 사업의 첫 단계입니다.",
+   "category": "process",
+   "broader": "program-phase",
+   "related": [
+    "military-requirement",
+    "requirement-decision"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "requirement-decision",
+   "ko": "소요 결정",
+   "en": "requirement decision",
+   "alt": [
+    "소요결정"
+   ],
+   "definition": "제기된 소요를 검토해 확보할 대상과 시기, 수량을 공식으로 확정하는 일입니다. 결정된 소요가 이후 사업 추진의 기준이 됩니다.",
+   "category": "process",
+   "broader": "program-phase",
+   "related": [
+    "requirement-proposal",
+    "required-operational-capability"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "required-operational-capability",
+   "ko": "작전운용성능",
+   "en": "required operational capability",
+   "alt": [
+    "ROC",
+    "작전 운용 성능"
+   ],
+   "definition": "무기체계가 갖춰야 할 핵심 성능과 운용 조건을 군이 정한 요구입니다. 개발 목표와 시험평가 기준이 여기서 나옵니다.",
+   "category": "process",
+   "related": [
+    "military-requirement",
+    "defense-test-evaluation"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "program-phase",
+   "ko": "사업 단계",
+   "en": "program phase",
+   "alt": [
+    "획득 단계",
+    "사업 추진 단계"
+   ],
+   "definition": "방위력 개선 사업을 소요, 연구, 개발, 생산, 배치처럼 순서대로 나눈 구간입니다. 단계마다 산출물과 다음 단계로 넘어가는 조건이 있습니다.",
+   "category": "process",
+   "related": [
+    "force-improvement-program",
+    "defense-design-review",
+    "combat-suitability-decision"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ],
+   "example": "사업 일정표는 탐색개발, 체계개발, 양산처럼 사업 단계별로 착수와 종료 시점을 적습니다."
+  },
+  {
+   "id": "preliminary-study",
+   "ko": "선행연구",
+   "en": "preliminary study",
+   "alt": [
+    "선행 연구"
+   ],
+   "definition": "사업을 시작하기 전에 획득 방법, 기술 수준, 비용, 일정을 조사해 사업 추진 방향을 정하는 연구입니다.",
+   "category": "process",
+   "broader": "program-phase",
+   "related": [
+    "requirement-decision",
+    "exploratory-development",
+    "technology-readiness-level"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ],
+   "example": "선행연구 결과에는 연구개발과 구매 가운데 어느 획득 방법이 나은지 비교한 내용이 담깁니다."
+  },
+  {
+   "id": "exploratory-development",
+   "ko": "탐색개발",
+   "en": "exploratory development",
+   "alt": [
+    "탐색 개발"
+   ],
+   "definition": "체계개발에 앞서 핵심 구성품과 기술을 시험 제작해 개발 가능성과 위험을 확인하는 단계입니다.",
+   "category": "process",
+   "broader": "program-phase",
+   "related": [
+    "system-development",
+    "technology-readiness-level"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "system-development",
+   "ko": "체계개발",
+   "en": "system development",
+   "alt": [
+    "체계 개발",
+    "EMD"
+   ],
+   "definition": "무기체계 전체를 설계하고 시제를 만들어 시험평가까지 거치는 개발 단계입니다. 양산에 쓸 기술 자료도 이 단계에서 만듭니다.",
+   "category": "process",
+   "broader": "program-phase",
+   "related": [
+    "exploratory-development",
+    "defense-prototype",
+    "technical-data-package"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "mass-production",
+   "ko": "양산",
+   "en": "mass production",
+   "alt": [
+    "양산 사업",
+    "생산"
+   ],
+   "definition": "개발을 마치고 전투용 적합 판정을 받은 무기체계를 필요한 수량만큼 생산하는 단계입니다.",
+   "category": "process",
+   "broader": "program-phase",
+   "related": [
+    "combat-suitability-decision",
+    "first-article-inspection"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "fielding",
+   "ko": "전력화",
+   "en": "fielding",
+   "alt": [
+    "전력화 배치",
+    "실전 배치"
+   ],
+   "definition": "획득한 무기체계를 부대에 배치하고 운용과 정비 지원 체계까지 갖춰 실제 전력으로 쓰게 하는 일입니다.",
+   "category": "process",
+   "broader": "program-phase",
+   "related": [
+    "post-fielding-evaluation",
+    "integrated-logistics-support"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "performance-improvement",
+   "ko": "성능개량",
+   "en": "performance improvement",
+   "alt": [
+    "성능 개량",
+    "개량 사업"
+   ],
+   "definition": "이미 운용 중인 무기체계의 성능을 높이거나 수명을 늘리려고 구성품이나 소프트웨어를 바꾸는 사업입니다.",
+   "category": "process",
+   "broader": "force-improvement-program",
+   "related": [
+    "diminishing-manufacturing-sources",
+    "configuration-management",
+    "total-lifecycle-management"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "defense-design-review",
+   "ko": "설계 검토",
+   "en": "design review",
+   "alt": [
+    "설계검토",
+    "기술 검토"
+   ],
+   "definition": "개발 중인 체계의 요구 조건과 설계가 목표를 만족하는지 정해진 시점마다 점검하는 공식 회의입니다.",
+   "category": "process",
+   "related": [
+    "system-development",
+    "configuration-management"
+   ]
+  },
+  {
+   "id": "preliminary-design-review",
+   "ko": "기본설계검토",
+   "en": "preliminary design review",
+   "alt": [
+    "PDR"
+   ],
+   "definition": "체계와 구성품의 기본 설계가 요구 조건을 만족하는지 확인하고 상세 설계로 넘어갈지 판단하는 검토입니다.",
+   "category": "process",
+   "broader": "defense-design-review",
+   "related": [
+    "critical-design-review",
+    "system-development",
+    "configuration-management"
+   ]
+  },
+  {
+   "id": "critical-design-review",
+   "ko": "상세설계검토",
+   "en": "critical design review",
+   "alt": [
+    "CDR"
+   ],
+   "definition": "상세 설계가 끝났는지, 시제 제작에 들어가도 되는지 판단하는 설계 검토입니다.",
+   "category": "process",
+   "broader": "defense-design-review",
+   "related": [
+    "preliminary-design-review",
+    "defense-prototype"
+   ]
+  },
+  {
+   "id": "defense-acquisition",
+   "ko": "국방 획득",
+   "en": "defense acquisition",
+   "alt": [
+    "획득"
+   ],
+   "definition": "군이 쓸 무기체계와 전력지원체계를 연구개발이나 구매로 확보하는 활동 전체입니다.",
+   "category": "acquisition",
+   "related": [
+    "force-improvement-program",
+    "defense-procurement"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "development-acquisition",
+   "ko": "연구개발 획득",
+   "en": "acquisition by development",
+   "alt": [
+    "연구개발 사업"
+   ],
+   "definition": "필요한 무기체계를 국내에서 새로 개발해 확보하는 획득 방법입니다. 구매 획득과 달리 탐색개발과 체계개발, 시험평가를 거친 뒤 양산으로 넘어갑니다.",
+   "category": "acquisition",
+   "broader": "defense-acquisition",
+   "related": [
+    "weapon-system-rnd",
+    "purchase-acquisition",
+    "preliminary-study"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "purchase-acquisition",
+   "ko": "구매 획득",
+   "en": "acquisition by purchase",
+   "alt": [
+    "구매 사업"
+   ],
+   "definition": "이미 만들어진 장비를 국내외에서 사들여 확보하는 획득 방법입니다. 연구개발 획득과 달리 개발 단계를 거치지 않고 시험평가와 계약으로 장비를 들여옵니다.",
+   "category": "acquisition",
+   "broader": "defense-acquisition",
+   "related": [
+    "development-acquisition",
+    "preliminary-study",
+    "defense-contract"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "overseas-purchase",
+   "ko": "국외 구매",
+   "en": "overseas purchase",
+   "alt": [
+    "국외구매",
+    "해외 구매"
+   ],
+   "definition": "외국 정부나 업체로부터 장비를 사들이는 구매 방식입니다. 절충교역 조건이 함께 붙는 경우가 많습니다.",
+   "category": "acquisition",
+   "broader": "purchase-acquisition",
+   "related": [
+    "defense-offset",
+    "defense-rfp",
+    "end-user-certificate"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "defense-procurement",
+   "ko": "국방 조달",
+   "en": "defense procurement",
+   "alt": [
+    "군수 조달",
+    "군수품 조달"
+   ],
+   "definition": "획득이 결정된 장비와 물자를 계약을 통해 실제로 사들이는 일입니다. 획득이 무엇을 확보할지 정하는 일이라면 조달은 계약, 납품, 검사로 물자를 받아 내는 집행입니다.",
+   "category": "acquisition",
+   "broader": "defense-acquisition",
+   "related": [
+    "defense-contract",
+    "defense-rfp",
+    "acceptance-inspection"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "defense-rfp",
+   "ko": "제안요청서",
+   "en": "request for proposal",
+   "alt": [
+    "RFP"
+   ],
+   "definition": "발주하는 쪽이 사업 범위, 요구 성능, 평가 기준을 적어 업체에게 제안서를 내라고 보내는 문서입니다.",
+   "category": "acquisition",
+   "related": [
+    "required-operational-capability",
+    "defense-contract",
+    "defense-procurement"
+   ]
+  },
+  {
+   "id": "defense-contract",
+   "ko": "국방 계약",
+   "en": "defense contract",
+   "alt": [
+    "군수 계약",
+    "방산 계약"
+   ],
+   "definition": "국가가 장비, 물자, 용역을 얻으려고 업체와 맺는 계약입니다. 가격을 정하는 방식에 따라 여러 종류로 나눕니다.",
+   "category": "acquisition",
+   "related": [
+    "defense-procurement",
+    "defense-cost-accounting"
+   ],
+   "refs": [
+    "방위사업법",
+    "국가를 당사자로 하는 계약에 관한 법률"
+   ]
+  },
+  {
+   "id": "fixed-price-contract",
+   "ko": "확정 계약",
+   "en": "fixed-price contract",
+   "alt": [
+    "확정가 계약",
+    "확정계약"
+   ],
+   "definition": "계약할 때 가격을 확정하고 이후 실제 원가와 관계없이 그 가격으로 정산하는 계약입니다.",
+   "category": "acquisition",
+   "broader": "defense-contract",
+   "related": [
+    "provisional-price-contract",
+    "defense-cost-accounting",
+    "delay-penalty"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "provisional-price-contract",
+   "ko": "개산 계약",
+   "en": "provisional price contract",
+   "alt": [
+    "개산계약"
+   ],
+   "definition": "계약할 때 가격을 미리 정하기 어려워 대략의 가격으로 계약하고, 이행 뒤 실제 원가를 따져 가격을 확정하는 계약입니다.",
+   "category": "acquisition",
+   "broader": "defense-contract",
+   "related": [
+    "fixed-price-contract",
+    "defense-cost-accounting"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "defense-cost-accounting",
+   "ko": "방산 원가",
+   "en": "defense cost accounting",
+   "alt": [
+    "방산원가",
+    "원가계산"
+   ],
+   "definition": "방산물자의 가격을 정하려고 재료비, 노무비, 경비, 이윤을 정해진 규칙에 따라 계산하는 일입니다.",
+   "category": "acquisition",
+   "related": [
+    "defense-material",
+    "provisional-price-contract"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "delay-penalty",
+   "ko": "지체상금",
+   "en": "liquidated damages for delay",
+   "alt": [
+    "지연배상금"
+   ],
+   "definition": "업체가 계약한 납기를 넘겼을 때 늦어진 날수에 따라 내야 하는 돈입니다.",
+   "category": "acquisition",
+   "related": [
+    "defense-contract",
+    "acceptance-inspection"
+   ],
+   "refs": [
+    "국가를 당사자로 하는 계약에 관한 법률"
+   ],
+   "example": "납품이 계약 납기보다 늦으면 계약 부서는 늦어진 날수를 세어 지체상금을 계산합니다."
+  },
+  {
+   "id": "defense-offset",
+   "ko": "절충교역",
+   "en": "offset",
+   "alt": [
+    "오프셋",
+    "산업협력"
+   ],
+   "definition": "국외에서 무기를 살 때 판매국 업체에게 기술 이전, 부품 수출, 공동 생산 같은 반대 급부를 요구하는 거래입니다.",
+   "category": "acquisition",
+   "related": [
+    "overseas-purchase",
+    "localization"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "defense-material",
+   "ko": "방산물자",
+   "en": "designated defense material",
+   "alt": [
+    "방산 물자"
+   ],
+   "definition": "군수품 가운데 안정적인 조달을 위해 법에 따라 지정된 물자입니다. 원가 계산과 생산 관리에 별도 규칙이 붙습니다.",
+   "category": "acquisition",
+   "related": [
+    "defense-contractor",
+    "defense-cost-accounting"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "defense-contractor",
+   "ko": "방산업체",
+   "en": "designated defense contractor",
+   "alt": [
+    "방산 지정업체",
+    "방위산업체"
+   ],
+   "definition": "방산물자를 생산하도록 법에 따라 지정된 업체입니다. 지정을 받으면 방산 원가 계산 규칙과 방산 보안 의무가 함께 적용됩니다.",
+   "category": "acquisition",
+   "related": [
+    "defense-material",
+    "system-integrator",
+    "defense-industry-security"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "system-integrator",
+   "ko": "체계종합업체",
+   "en": "system integrator",
+   "alt": [
+    "체계업체",
+    "체계종합"
+   ],
+   "definition": "여러 구성품을 모아 무기체계 전체를 설계하고 통합해 납품하는 책임을 맡은 업체입니다.",
+   "category": "acquisition",
+   "related": [
+    "system-development",
+    "industry-led-development",
+    "defense-contractor"
+   ]
+  },
+  {
+   "id": "localization",
+   "ko": "국산화",
+   "en": "localization",
+   "alt": [
+    "부품 국산화"
+   ],
+   "definition": "외국에서 들여오던 구성품이나 부품을 국내에서 개발하고 생산하도록 바꾸는 일입니다.",
+   "category": "acquisition",
+   "related": [
+    "defense-offset",
+    "diminishing-manufacturing-sources"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "weapon-system",
+   "ko": "무기체계",
+   "en": "weapon system",
+   "alt": [
+    "무기 체계"
+   ],
+   "definition": "전투에 직접 쓰는 장비와 그 장비를 운용하는 데 필요한 장비, 부품, 소프트웨어를 묶은 전체입니다.",
+   "category": "weapon",
+   "related": [
+    "force-support-system",
+    "force-improvement-program"
+   ],
+   "refs": [
+    "방위사업법",
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "force-support-system",
+   "ko": "전력지원체계",
+   "en": "force support system",
+   "alt": [
+    "전력지원 물자",
+    "비무기체계"
+   ],
+   "definition": "무기체계가 아니면서 군의 운영과 전투 지원에 필요한 장비, 물자, 시설, 정보체계입니다.",
+   "category": "weapon",
+   "related": [
+    "weapon-system",
+    "defense-acquisition"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "c4i-system",
+   "ko": "지휘통제·통신 무기체계",
+   "en": "command, control and communications system",
+   "alt": [
+    "C4I",
+    "지휘통제통신"
+   ],
+   "definition": "지휘관이 상황을 파악하고 명령을 전달하는 데 쓰는 지휘통제 장비와 통신 장비를 묶은 무기체계 분류입니다.",
+   "category": "weapon",
+   "broader": "weapon-system",
+   "related": [
+    "isr-system",
+    "firepower-system"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "isr-system",
+   "ko": "감시·정찰 무기체계",
+   "en": "surveillance and reconnaissance system",
+   "alt": [
+    "ISR",
+    "감시정찰"
+   ],
+   "definition": "레이더, 전자광학 장비, 정찰 수단으로 적과 지형의 정보를 모으는 무기체계 분류입니다.",
+   "category": "weapon",
+   "broader": "weapon-system",
+   "related": [
+    "c4i-system",
+    "firepower-system"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "maneuver-system",
+   "ko": "기동 무기체계",
+   "en": "maneuver system",
+   "alt": [
+    "기동 장비"
+   ],
+   "definition": "병력과 화력을 원하는 곳으로 옮기는 전차, 장갑차, 전술 차량 같은 지상 장비의 분류입니다.",
+   "category": "weapon",
+   "broader": "weapon-system",
+   "related": [
+    "firepower-system",
+    "protection-system"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "naval-system",
+   "ko": "함정 무기체계",
+   "en": "naval vessel system",
+   "alt": [
+    "함정"
+   ],
+   "definition": "수상함, 잠수함, 지원함처럼 바다에서 작전하는 함정과 그 탑재 장비의 분류입니다.",
+   "category": "weapon",
+   "broader": "weapon-system",
+   "related": [
+    "maneuver-system",
+    "aircraft-system"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "aircraft-system",
+   "ko": "항공 무기체계",
+   "en": "aircraft system",
+   "alt": [
+    "항공기",
+    "항공 장비"
+   ],
+   "definition": "고정익기, 회전익기, 무인기처럼 하늘에서 운용하는 항공기와 그 지원 장비의 분류입니다.",
+   "category": "weapon",
+   "broader": "weapon-system",
+   "related": [
+    "naval-system",
+    "maneuver-system"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "firepower-system",
+   "ko": "화력 무기체계",
+   "en": "firepower system",
+   "alt": [
+    "화력"
+   ],
+   "definition": "포, 로켓, 유도무기, 탄약처럼 표적에 타격을 주는 무기의 분류입니다. 감시·정찰 무기체계가 찾은 표적을 지휘통제 무기체계를 거쳐 넘겨받아 타격합니다.",
+   "category": "weapon",
+   "broader": "weapon-system",
+   "related": [
+    "guided-weapon",
+    "military-ammunition",
+    "isr-system",
+    "c4i-system"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "protection-system",
+   "ko": "방호 무기체계",
+   "en": "protection system",
+   "alt": [
+    "방호"
+   ],
+   "definition": "적의 공격이나 화생방 위협으로부터 병력과 시설을 지키는 장비의 분류입니다.",
+   "category": "weapon",
+   "broader": "weapon-system",
+   "related": [
+    "maneuver-system"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "other-weapon-system",
+   "ko": "그 밖의 무기체계",
+   "en": "other weapon systems",
+   "alt": [
+    "기타 무기체계"
+   ],
+   "definition": "앞의 분류에 들지 않는 국방 모델링·시뮬레이션, 사이버 장비 같은 무기체계를 모은 분류입니다.",
+   "category": "weapon",
+   "broader": "weapon-system",
+   "related": [
+    "defense-modeling-simulation"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "guided-weapon",
+   "ko": "유도무기",
+   "en": "guided weapon",
+   "alt": [
+    "유도탄",
+    "미사일"
+   ],
+   "definition": "발사 뒤에도 유도 장치로 비행 경로를 바로잡아 표적을 향해 가는 무기입니다.",
+   "category": "weapon",
+   "broader": "firepower-system",
+   "related": [
+    "military-ammunition",
+    "live-fire-test"
+   ]
+  },
+  {
+   "id": "military-ammunition",
+   "ko": "탄약",
+   "en": "ammunition",
+   "alt": [
+    "탄"
+   ],
+   "definition": "총포에서 쏘거나 터뜨려 효과를 내는 소모성 물자입니다. 저장과 수송에 별도의 안전 관리가 붙습니다.",
+   "category": "weapon",
+   "broader": "firepower-system",
+   "related": [
+    "guided-weapon",
+    "live-fire-test"
+   ]
+  },
+  {
+   "id": "defense-quality-assurance",
+   "ko": "국방 품질보증",
+   "en": "defense quality assurance",
+   "alt": [
+    "품질보증",
+    "QA"
+   ],
+   "definition": "군에 들어가는 장비와 물자가 계약과 규격의 요구를 만족하는지 확인하고 보장하는 활동입니다.",
+   "category": "quality",
+   "related": [
+    "government-quality-assurance",
+    "defense-specification"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "government-quality-assurance",
+   "ko": "정부 품질보증",
+   "en": "government quality assurance",
+   "alt": [
+    "GQA",
+    "정부품질보증"
+   ],
+   "definition": "정부 쪽 품질보증 기관이 업체의 생산과 검사 과정을 점검해 납품 물자의 품질을 확인하는 활동입니다.",
+   "category": "quality",
+   "broader": "defense-quality-assurance",
+   "related": [
+    "acceptance-inspection",
+    "defense-quality-agency"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "defense-specification",
+   "ko": "국방 규격",
+   "en": "defense specification",
+   "alt": [
+    "국방규격",
+    "KDS"
+   ],
+   "definition": "군수품의 성능, 재질, 시험 방법, 포장을 정한 공식 문서입니다. 조달과 검사의 기준이 됩니다.",
+   "category": "quality",
+   "related": [
+    "defense-standard",
+    "technical-data-package"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "defense-standard",
+   "ko": "국방 표준",
+   "en": "defense standard",
+   "alt": [
+    "국방표준"
+   ],
+   "definition": "여러 군수품에 공통으로 적용하는 용어, 절차, 시험 방법을 정해 호환성과 품질을 맞추는 기준입니다.",
+   "category": "quality",
+   "related": [
+    "defense-specification",
+    "military-standard"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "military-standard",
+   "ko": "군사 규격",
+   "en": "military standard",
+   "alt": [
+    "MIL-STD",
+    "MIL-SPEC",
+    "밀스펙"
+   ],
+   "definition": "외국 군이 정해 널리 인용되는 규격과 표준입니다. 국내 국방 규격이 참조하는 경우가 많습니다.",
+   "category": "quality",
+   "related": [
+    "defense-standard",
+    "environmental-test"
+   ]
+  },
+  {
+   "id": "technical-data-package",
+   "ko": "기술자료묶음",
+   "en": "technical data package",
+   "alt": [
+    "TDP",
+    "기술 자료 묶음"
+   ],
+   "definition": "장비를 생산하고 검사하는 데 필요한 도면, 규격, 품질보증 요구를 하나로 묶은 자료입니다. 양산과 정비의 기준 자료가 됩니다.",
+   "category": "quality",
+   "related": [
+    "defense-specification",
+    "configuration-management",
+    "system-development"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "configuration-management",
+   "ko": "형상 관리",
+   "en": "configuration management",
+   "alt": [
+    "형상관리",
+    "CM"
+   ],
+   "definition": "체계의 기능과 물리적 특성을 문서로 정해 두고, 그 변경을 통제하고 기록해 설계와 실물이 어긋나지 않게 하는 활동입니다.",
+   "category": "quality",
+   "related": [
+    "engineering-change-proposal",
+    "technical-data-package",
+    "defense-design-review"
+   ],
+   "example": "형상 관리 대장은 부품마다 승인된 도면의 리비전과 변경 이력을 기록합니다."
+  },
+  {
+   "id": "engineering-change-proposal",
+   "ko": "기술변경제안",
+   "en": "engineering change proposal",
+   "alt": [
+    "ECP",
+    "형상 변경 요청"
+   ],
+   "definition": "승인된 형상을 바꾸려고 변경 내용, 이유, 영향을 정리해 승인을 요청하는 문서입니다.",
+   "category": "quality",
+   "related": [
+    "configuration-management",
+    "technical-data-package"
+   ],
+   "example": "도면의 부품을 바꾸려면 기술변경제안을 올려 승인을 받은 뒤 기술자료묶음을 고칩니다."
+  },
+  {
+   "id": "first-article-inspection",
+   "ko": "초도품 검사",
+   "en": "first article inspection",
+   "alt": [
+    "초도품",
+    "FAI"
+   ],
+   "definition": "양산에 들어가 처음 만든 제품이 규격과 기술 자료대로 만들어졌는지 확인하는 검사입니다.",
+   "category": "quality",
+   "broader": "defense-quality-assurance",
+   "related": [
+    "mass-production",
+    "technical-data-package"
+   ]
+  },
+  {
+   "id": "acceptance-inspection",
+   "ko": "수락 검사",
+   "en": "acceptance inspection",
+   "alt": [
+    "납품 검사",
+    "인수 검사"
+   ],
+   "definition": "업체가 납품하는 물자가 계약 조건을 만족하는지 확인하고 받아들일지 정하는 검사입니다.",
+   "category": "quality",
+   "broader": "defense-quality-assurance",
+   "related": [
+    "government-quality-assurance",
+    "first-article-inspection",
+    "defense-specification"
+   ],
+   "example": "납품 물자는 수락 검사에 합격해야 인수되고 대금 지급 절차로 넘어갑니다."
+  },
+  {
+   "id": "integrated-logistics-support",
+   "ko": "종합군수지원",
+   "en": "integrated logistics support",
+   "alt": [
+    "ILS",
+    "군수지원"
+   ],
+   "definition": "무기체계를 배치한 뒤 수명 내내 운용하고 정비할 수 있도록 정비, 보급, 교육, 자료, 시설 같은 지원 요소를 개발 단계부터 함께 계획하는 활동입니다.",
+   "category": "ils",
+   "related": [
+    "ils-element",
+    "lifecycle-cost",
+    "total-lifecycle-management"
+   ],
+   "refs": [
+    "방위사업법",
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "ils-element",
+   "ko": "종합군수지원 요소",
+   "en": "ILS element",
+   "alt": [
+    "ILS 요소",
+    "군수지원 요소"
+   ],
+   "definition": "종합군수지원을 이루는 정비 계획, 지원 장비, 보급 지원, 기술 교범, 교육훈련, 시설 같은 구성 항목입니다.",
+   "category": "ils",
+   "broader": "integrated-logistics-support",
+   "related": [
+    "logistics-support-analysis",
+    "defense-maintenance-level"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "logistics-support-analysis",
+   "ko": "군수지원분석",
+   "en": "logistics support analysis",
+   "alt": [
+    "LSA"
+   ],
+   "definition": "설계 자료를 바탕으로 정비 작업, 필요한 부품, 인력, 장비를 분석해 군수지원 요소를 정하는 공학 분석입니다.",
+   "category": "ils",
+   "related": [
+    "ils-element",
+    "repair-part"
+   ]
+  },
+  {
+   "id": "defense-maintenance-level",
+   "ko": "정비 단계",
+   "en": "maintenance level",
+   "alt": [
+    "정비 계단",
+    "정비 제대"
+   ],
+   "definition": "정비 능력과 시설에 따라 부대 정비, 야전 정비, 창 정비처럼 나눈 정비 수준입니다.",
+   "category": "ils",
+   "related": [
+    "logistics-support-analysis",
+    "ils-element"
+   ]
+  },
+  {
+   "id": "unit-level-maintenance",
+   "ko": "부대 정비",
+   "en": "organizational maintenance",
+   "alt": [
+    "부대정비",
+    "운용자 정비"
+   ],
+   "definition": "장비를 운용하는 부대가 점검, 청소, 간단한 교환처럼 직접 하는 정비입니다.",
+   "category": "ils",
+   "broader": "defense-maintenance-level",
+   "related": [
+    "field-maintenance",
+    "technical-manual"
+   ]
+  },
+  {
+   "id": "field-maintenance",
+   "ko": "야전 정비",
+   "en": "field maintenance",
+   "alt": [
+    "야전정비"
+   ],
+   "definition": "정비 부대가 구성품 교환과 수리처럼 부대 정비보다 깊은 수준으로 하는 정비입니다.",
+   "category": "ils",
+   "broader": "defense-maintenance-level",
+   "related": [
+    "unit-level-maintenance",
+    "depot-maintenance"
+   ]
+  },
+  {
+   "id": "depot-maintenance",
+   "ko": "창 정비",
+   "en": "depot maintenance",
+   "alt": [
+    "창정비",
+    "정비창 정비"
+   ],
+   "definition": "전문 정비 시설에서 장비를 분해해 점검하고 재생하는 가장 깊은 수준의 정비입니다.",
+   "category": "ils",
+   "broader": "defense-maintenance-level",
+   "related": [
+    "field-maintenance",
+    "unit-level-maintenance"
+   ]
+  },
+  {
+   "id": "repair-part",
+   "ko": "수리부속",
+   "en": "repair part",
+   "alt": [
+    "수리 부속",
+    "정비 부품"
+   ],
+   "definition": "정비할 때 바꿔 끼우려고 확보하는 부품입니다. 소요량 산정과 재고 관리의 대상입니다.",
+   "category": "ils",
+   "related": [
+    "national-stock-number",
+    "logistics-support-analysis",
+    "diminishing-manufacturing-sources"
+   ],
+   "example": "정비 지시서는 작업마다 쓸 수리부속의 품목과 수량을 적습니다."
+  },
+  {
+   "id": "technical-manual",
+   "ko": "기술교범",
+   "en": "technical manual",
+   "alt": [
+    "교범",
+    "TM",
+    "기술 교범"
+   ],
+   "definition": "장비의 운용, 점검, 정비 절차를 적은 공식 문서입니다. 전자 형태로 만든 것을 전자식 기술교범이라 부릅니다.",
+   "category": "ils",
+   "broader": "ils-element",
+   "related": [
+    "unit-level-maintenance",
+    "technical-data-package"
+   ],
+   "example": "정비 요원은 기술교범의 점검 절차 순서대로 장비를 점검하고 결과를 기록합니다."
+  },
+  {
+   "id": "national-stock-number",
+   "ko": "재고번호",
+   "en": "national stock number",
+   "alt": [
+    "NSN",
+    "국가재고번호"
+   ],
+   "definition": "목록화로 군수품 품목마다 붙인 고유 번호입니다. 서로 다른 부품 번호를 같은 품목으로 묶는 열쇠가 됩니다.",
+   "category": "ils",
+   "related": [
+    "repair-part",
+    "technical-data-package"
+   ],
+   "refs": [
+    "NATO Codification System"
+   ],
+   "example": "보급 청구서에는 부품 번호와 함께 재고번호를 적어 창고에서 같은 품목을 찾게 합니다."
+  },
+  {
+   "id": "lifecycle-cost",
+   "ko": "수명주기비용",
+   "en": "life cycle cost",
+   "alt": [
+    "LCC",
+    "총수명주기비용"
+   ],
+   "definition": "무기체계를 연구개발하고 생산하고 운용, 정비하다가 도태할 때까지 드는 비용 전체입니다.",
+   "category": "ils",
+   "related": [
+    "total-lifecycle-management",
+    "defense-cost-accounting",
+    "logistics-support-analysis"
+   ],
+   "example": "대안 비교 자료는 구매 가격만이 아니라 운용과 정비 비용까지 더한 수명주기비용으로 대안을 견줍니다."
+  },
+  {
+   "id": "total-lifecycle-management",
+   "ko": "총수명주기관리",
+   "en": "total life cycle systems management",
+   "alt": [
+    "수명주기관리",
+    "TLCSM"
+   ],
+   "definition": "무기체계의 획득부터 운용, 도태까지 성능과 비용, 지원을 한 흐름으로 관리하는 방식입니다.",
+   "category": "ils",
+   "related": [
+    "lifecycle-cost",
+    "integrated-logistics-support"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "diminishing-manufacturing-sources",
+   "ko": "부품 단종 관리",
+   "en": "diminishing manufacturing sources",
+   "alt": [
+    "DMSMS",
+    "단종 관리"
+   ],
+   "definition": "부품 생산이 끊겨 구하기 어려워지는 문제를 미리 찾아 대체품, 재고 확보, 재설계로 대응하는 일입니다.",
+   "category": "ils",
+   "related": [
+    "repair-part",
+    "performance-improvement"
+   ]
+  },
+  {
+   "id": "defense-test-evaluation",
+   "ko": "시험평가",
+   "en": "test and evaluation",
+   "alt": [
+    "T&E",
+    "시험 평가"
+   ],
+   "definition": "개발하거나 구매하려는 무기체계가 요구 성능과 운용 조건을 만족하는지 시험하고 판단하는 활동입니다.",
+   "category": "test",
+   "related": [
+    "required-operational-capability",
+    "combat-suitability-decision"
+   ],
+   "refs": [
+    "방위사업법",
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "developmental-test",
+   "ko": "개발시험평가",
+   "en": "developmental test and evaluation",
+   "alt": [
+    "DT&E",
+    "개발 시험평가"
+   ],
+   "definition": "개발 주관 쪽이 설계가 기술 요구 조건을 만족하는지 확인하는 시험평가입니다.",
+   "category": "test",
+   "broader": "defense-test-evaluation",
+   "related": [
+    "operational-test",
+    "system-development"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "operational-test",
+   "ko": "운용시험평가",
+   "en": "operational test and evaluation",
+   "alt": [
+    "OT&E",
+    "운용 시험평가"
+   ],
+   "definition": "실제 운용할 군이 작전 환경에 가까운 조건에서 운용 효과와 적합성을 확인하는 시험평가입니다.",
+   "category": "test",
+   "broader": "defense-test-evaluation",
+   "related": [
+    "developmental-test",
+    "required-operational-capability"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "test-evaluation-master-plan",
+   "ko": "시험평가기본계획",
+   "en": "test and evaluation master plan",
+   "alt": [
+    "TEMP"
+   ],
+   "definition": "사업 전체에 걸친 시험평가의 목적, 항목, 일정, 자원을 정한 기본 계획입니다.",
+   "category": "test",
+   "related": [
+    "defense-test-evaluation",
+    "developmental-test",
+    "operational-test"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "combat-suitability-decision",
+   "ko": "전투용 적합 판정",
+   "en": "combat suitability determination",
+   "alt": [
+    "전투용 적합",
+    "전투용 부적합"
+   ],
+   "definition": "시험평가 결과를 종합해 무기체계를 전투에 쓸 수 있는지 공식으로 결정하는 일입니다. 적합 판정이 양산으로 넘어가는 조건이 됩니다.",
+   "category": "test",
+   "related": [
+    "defense-test-evaluation",
+    "mass-production"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "environmental-test",
+   "ko": "환경 시험",
+   "en": "environmental test",
+   "alt": [
+    "군 환경시험",
+    "환경시험"
+   ],
+   "definition": "고온, 저온, 진동, 충격, 습도처럼 운용 중 겪을 환경을 재현해 장비가 견디는지 확인하는 시험입니다.",
+   "category": "test",
+   "broader": "developmental-test",
+   "related": [
+    "military-standard",
+    "emc-test"
+   ],
+   "refs": [
+    "MIL-STD-810"
+   ],
+   "example": "시험 성적서에는 고온, 저온, 진동 같은 환경 시험 항목별로 적용 규격과 합격 여부를 적습니다."
+  },
+  {
+   "id": "emc-test",
+   "ko": "전자기 적합성 시험",
+   "en": "electromagnetic compatibility test",
+   "alt": [
+    "EMI/EMC 시험",
+    "EMC 시험"
+   ],
+   "definition": "장비가 내는 전자파가 다른 장비를 방해하지 않고, 주변 전자파에도 제대로 동작하는지 확인하는 시험입니다.",
+   "category": "test",
+   "broader": "developmental-test",
+   "related": [
+    "environmental-test",
+    "military-standard"
+   ],
+   "refs": [
+    "MIL-STD-461"
+   ]
+  },
+  {
+   "id": "live-fire-test",
+   "ko": "실사격 시험",
+   "en": "live fire test",
+   "alt": [
+    "실사격"
+   ],
+   "definition": "실제 탄을 쏘아 무기의 성능과 표적에 대한 효과, 안전성을 확인하는 시험입니다.",
+   "category": "test",
+   "broader": "defense-test-evaluation",
+   "related": [
+    "guided-weapon",
+    "military-ammunition"
+   ]
+  },
+  {
+   "id": "post-fielding-evaluation",
+   "ko": "전력화 평가",
+   "en": "post-fielding evaluation",
+   "alt": [
+    "전력화평가"
+   ],
+   "definition": "배치를 마친 무기체계가 실제 부대에서 기대한 전력 효과를 내는지, 지원 요소가 갖춰졌는지 확인하는 평가입니다.",
+   "category": "test",
+   "related": [
+    "fielding",
+    "integrated-logistics-support"
+   ],
+   "refs": [
+    "국방전력발전업무훈령"
+   ]
+  },
+  {
+   "id": "defense-modeling-simulation",
+   "ko": "국방 모델링·시뮬레이션",
+   "en": "defense modeling and simulation",
+   "alt": [
+    "국방 M&S",
+    "M&S"
+   ],
+   "definition": "무기체계와 작전을 컴퓨터 모델로 만들어 분석, 시험, 훈련에 쓰는 기법입니다. 실물 시험을 줄이거나 보완하는 데 씁니다.",
+   "category": "test",
+   "related": [
+    "defense-test-evaluation",
+    "other-weapon-system"
+   ]
+  },
+  {
+   "id": "defense-industry-security",
+   "ko": "방산 보안",
+   "en": "defense industry security",
+   "alt": [
+    "방위산업 보안",
+    "방산보안"
+   ],
+   "definition": "방산업체와 관련 기관이 다루는 비밀, 기술, 시설을 유출과 침해로부터 지키는 활동입니다.",
+   "category": "security",
+   "related": [
+    "defense-industrial-technology",
+    "classified-information"
+   ],
+   "refs": [
+    "방위산업기술 보호법"
+   ]
+  },
+  {
+   "id": "defense-industrial-technology",
+   "ko": "방위산업기술",
+   "en": "defense industrial technology",
+   "alt": [
+    "방산기술"
+   ],
+   "definition": "방위산업과 관련된 기술 가운데 국가 안보를 위해 보호가 필요하다고 법에 따라 지정한 기술입니다.",
+   "category": "security",
+   "related": [
+    "defense-industry-security",
+    "export-control"
+   ],
+   "refs": [
+    "방위산업기술 보호법"
+   ]
+  },
+  {
+   "id": "classified-information",
+   "ko": "비밀",
+   "en": "classified information",
+   "alt": [
+    "군사기밀",
+    "비밀 자료"
+   ],
+   "definition": "누설되면 국가 안보에 해가 될 수 있어 법령에 따라 등급을 매기고 보호하는 정보입니다.",
+   "category": "security",
+   "related": [
+    "security-clearance",
+    "defense-security-classification"
+   ],
+   "refs": [
+    "군사기밀 보호법",
+    "보안업무규정"
+   ]
+  },
+  {
+   "id": "defense-security-classification",
+   "ko": "비밀 등급",
+   "en": "security classification",
+   "alt": [
+    "보안 등급",
+    "비밀 분류"
+   ],
+   "definition": "비밀이 누설되었을 때의 피해 정도에 따라 정보에 매기는 등급입니다. 등급에 따라 취급 인원과 보관 방법이 달라집니다.",
+   "category": "security",
+   "related": [
+    "classified-information",
+    "security-clearance"
+   ],
+   "refs": [
+    "보안업무규정"
+   ]
+  },
+  {
+   "id": "security-clearance",
+   "ko": "비밀취급인가",
+   "en": "security clearance",
+   "alt": [
+    "비밀취급 인가",
+    "보안 인가"
+   ],
+   "definition": "신원 조사를 거친 사람에게 정해진 등급까지 비밀을 다룰 수 있도록 주는 허가입니다.",
+   "category": "security",
+   "related": [
+    "classified-information",
+    "defense-security-classification"
+   ],
+   "refs": [
+    "보안업무규정"
+   ]
+  },
+  {
+   "id": "supply-chain-security",
+   "ko": "공급망 보안",
+   "en": "supply chain security",
+   "alt": [
+    "공급망보안"
+   ],
+   "definition": "부품과 소프트웨어가 설계, 생산, 납품 과정에서 위조되거나 변조되지 않도록 관리하는 활동입니다.",
+   "category": "security",
+   "broader": "defense-industry-security",
+   "related": [
+    "diminishing-manufacturing-sources",
+    "acceptance-inspection"
+   ],
+   "example": "입고 검사에서 부품의 제조사 증명서와 유통 이력을 확인해 위조품이 들어오지 않게 합니다."
+  },
+  {
+   "id": "defense-export",
+   "ko": "방산 수출",
+   "en": "defense export",
+   "alt": [
+    "방산수출",
+    "방산물자 수출"
+   ],
+   "definition": "방산물자와 국방 기술을 외국 정부나 업체에 파는 일입니다. 정부의 허가를 받아야 합니다.",
+   "category": "security",
+   "related": [
+    "defense-export-license",
+    "export-control",
+    "end-user-certificate"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "defense-export-license",
+   "ko": "수출 허가",
+   "en": "export license",
+   "alt": [
+    "수출허가",
+    "수출 승인"
+   ],
+   "definition": "방산물자나 통제 대상 품목을 외국에 내보내기 전에 정부로부터 받아야 하는 허가입니다.",
+   "category": "security",
+   "related": [
+    "defense-export",
+    "export-control"
+   ],
+   "refs": [
+    "방위사업법",
+    "대외무역법"
+   ]
+  },
+  {
+   "id": "export-control",
+   "ko": "수출 통제",
+   "en": "export control",
+   "alt": [
+    "수출통제",
+    "전략물자 관리"
+   ],
+   "definition": "무기나 무기 개발에 쓰일 수 있는 물품과 기술이 허가 없이 국외로 나가지 않도록 관리하는 제도입니다.",
+   "category": "security",
+   "related": [
+    "strategic-items",
+    "dual-use-item",
+    "end-user-certificate"
+   ],
+   "refs": [
+    "대외무역법",
+    "바세나르 체제"
+   ]
+  },
+  {
+   "id": "strategic-items",
+   "ko": "전략물자",
+   "en": "strategic items",
+   "alt": [
+    "전략 물자"
+   ],
+   "definition": "국제 수출통제 체제에 따라 수출을 통제하는 물품과 기술입니다. 군용 품목과 이중용도 품목을 모두 포함합니다.",
+   "category": "security",
+   "related": [
+    "export-control",
+    "dual-use-item"
+   ],
+   "refs": [
+    "대외무역법"
+   ]
+  },
+  {
+   "id": "dual-use-item",
+   "ko": "이중용도 품목",
+   "en": "dual-use item",
+   "alt": [
+    "이중용도",
+    "민군겸용 품목"
+   ],
+   "definition": "민간 용도로 만들었지만 군사 용도로도 쓰일 수 있는 물품이나 기술입니다.",
+   "category": "security",
+   "broader": "strategic-items",
+   "related": [
+    "civil-military-technology",
+    "export-control"
+   ],
+   "refs": [
+    "바세나르 체제"
+   ],
+   "example": "수출 담당자는 출하 전에 품목이 이중용도 품목에 해당하는지 판정을 받습니다."
+  },
+  {
+   "id": "end-user-certificate",
+   "ko": "최종사용자증명서",
+   "en": "end-user certificate",
+   "alt": [
+    "EUC",
+    "최종 사용자 확인서"
+   ],
+   "definition": "수출한 물품을 누가 어떤 용도로 쓸지 수입하는 쪽이 밝히고 재수출하지 않겠다고 약속하는 문서입니다.",
+   "category": "security",
+   "related": [
+    "defense-export-license",
+    "export-control"
+   ]
+  },
+  {
+   "id": "defense-rnd",
+   "ko": "국방 연구개발",
+   "en": "defense research and development",
+   "alt": [
+    "국방 R&D",
+    "국방연구개발"
+   ],
+   "definition": "국방에 필요한 기술과 무기체계를 얻으려고 하는 연구와 개발 활동 전체입니다.",
+   "category": "rnd",
+   "related": [
+    "weapon-system-rnd",
+    "core-technology-rnd"
+   ],
+   "refs": [
+    "국방과학기술혁신 촉진법"
+   ]
+  },
+  {
+   "id": "weapon-system-rnd",
+   "ko": "무기체계 연구개발",
+   "en": "weapon system development",
+   "alt": [
+    "체계 연구개발"
+   ],
+   "definition": "특정 무기체계를 탐색개발과 체계개발을 거쳐 실제로 만들어 내는 연구개발입니다.",
+   "category": "rnd",
+   "broader": "defense-rnd",
+   "related": [
+    "development-acquisition",
+    "system-development"
+   ],
+   "refs": [
+    "방위사업법"
+   ]
+  },
+  {
+   "id": "core-technology-rnd",
+   "ko": "핵심기술 연구개발",
+   "en": "core technology development",
+   "alt": [
+    "핵심기술",
+    "국방 핵심기술"
+   ],
+   "definition": "앞으로의 무기체계에 필요하지만 아직 확보하지 못한 기술을 미리 개발하는 연구입니다.",
+   "category": "rnd",
+   "broader": "defense-rnd",
+   "related": [
+    "technology-readiness-level",
+    "weapon-system-rnd"
+   ],
+   "refs": [
+    "국방과학기술혁신 촉진법"
+   ]
+  },
+  {
+   "id": "government-led-development",
+   "ko": "정부 주관 연구개발",
+   "en": "government-led development",
+   "alt": [
+    "연구기관 주관 개발"
+   ],
+   "definition": "국방 연구개발 기관이 개발을 주관하고 업체가 시제 제작에 참여하는 연구개발 방식입니다.",
+   "category": "rnd",
+   "broader": "weapon-system-rnd",
+   "related": [
+    "industry-led-development",
+    "defense-research-institute"
+   ]
+  },
+  {
+   "id": "industry-led-development",
+   "ko": "업체 주관 연구개발",
+   "en": "industry-led development",
+   "alt": [
+    "업체주관 개발"
+   ],
+   "definition": "업체가 설계와 시제 제작을 주관하고 정부가 관리와 시험평가를 맡는 연구개발 방식입니다.",
+   "category": "rnd",
+   "broader": "weapon-system-rnd",
+   "related": [
+    "government-led-development",
+    "system-integrator"
+   ]
+  },
+  {
+   "id": "defense-prototype",
+   "ko": "시제",
+   "en": "prototype",
+   "alt": [
+    "시제품",
+    "시제기",
+    "시작품"
+   ],
+   "definition": "개발 단계에서 설계를 확인하고 시험평가에 쓰려고 만드는 견본입니다. 양산품과 달리 시험 결과에 따라 설계가 바뀔 수 있습니다.",
+   "category": "rnd",
+   "related": [
+    "system-development",
+    "critical-design-review"
+   ]
+  },
+  {
+   "id": "technology-readiness-level",
+   "ko": "기술성숙도",
+   "en": "technology readiness level",
+   "alt": [
+    "TRL",
+    "기술준비수준"
+   ],
+   "definition": "어떤 기술이 기초 원리 확인부터 실제 운용 검증까지 어느 단계에 와 있는지 나타내는 등급입니다.",
+   "category": "rnd",
+   "related": [
+    "exploratory-development",
+    "core-technology-rnd",
+    "preliminary-study"
+   ],
+   "example": "과제 제안서는 핵심 기술마다 현재 기술성숙도와 목표 기술성숙도를 적습니다."
+  },
+  {
+   "id": "civil-military-technology",
+   "ko": "민군기술협력",
+   "en": "civil-military technology cooperation",
+   "alt": [
+    "민군겸용기술",
+    "스핀온",
+    "스핀오프"
+   ],
+   "definition": "민간 기술을 국방에 쓰거나 국방 기술을 민간에 넘기고, 양쪽에 함께 쓸 기술을 공동 개발하는 일입니다.",
+   "category": "rnd",
+   "related": [
+    "dual-use-item",
+    "core-technology-rnd"
+   ],
+   "refs": [
+    "민·군기술협력사업 촉진법"
+   ]
+  },
+  {
+   "id": "defense-research-institute",
+   "ko": "국방 연구개발 기관",
+   "en": "defense research institute",
+   "alt": [
+    "국방 연구소"
+   ],
+   "definition": "국가가 세워 무기체계와 핵심기술 연구개발을 맡기는 기관의 유형입니다. 정부 주관 연구개발에서 개발을 주관하는 쪽이 이 유형의 기관입니다.",
+   "category": "rnd",
+   "broader": "defense-organization-type",
+   "related": [
+    "government-led-development",
+    "core-technology-rnd"
+   ],
+   "refs": [
+    "국방과학기술혁신 촉진법"
+   ]
+  },
+  {
+   "id": "defense-technology-planning-agency",
+   "ko": "국방기술 기획·관리 기관",
+   "en": "defense technology planning agency",
+   "alt": [
+    "기술기획 전문기관"
+   ],
+   "definition": "국방 연구개발 과제를 기획하고 평가하며 성과를 관리하는 일을 맡는 기관의 유형입니다.",
+   "category": "rnd",
+   "broader": "defense-organization-type",
+   "related": [
+    "core-technology-rnd",
+    "defense-research-institute"
+   ]
+  },
+  {
+   "id": "defense-quality-agency",
+   "ko": "국방 품질보증 기관",
+   "en": "defense quality assurance agency",
+   "alt": [
+    "품질보증 전문기관"
+   ],
+   "definition": "정부를 대신해 군수품의 품질보증과 검사를 맡는 전문 기관의 유형입니다. 업체가 스스로 하는 품질관리와 달리 사는 쪽인 정부 편에서 품질을 확인합니다.",
+   "category": "rnd",
+   "broader": "defense-organization-type",
+   "related": [
+    "government-quality-assurance",
+    "acceptance-inspection",
+    "defense-quality-assurance"
+   ]
+  },
+  {
+   "id": "defense-organization-type",
+   "ko": "국방 연구개발 기관 유형",
+   "en": "defense R&D organization type",
+   "alt": [
+    "국방 연구 주체"
+   ],
+   "definition": "국방 연구개발과 획득에 참여하는 기관을 맡은 역할에 따라 나눈 유형입니다.",
+   "category": "rnd",
+   "related": [
+    "defense-rnd",
+    "defense-acquisition"
+   ]
+  }
+ ]
+}

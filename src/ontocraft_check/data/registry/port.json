@@ -1,0 +1,1707 @@
+{
+ "registry": "OntoCraft 한국 산업 용어 등록부",
+ "registry_en": "OntoCraft Korean Industry Term Registry",
+ "publisher": "OntoCraft",
+ "license": "CC BY 4.0",
+ "license_url": "https://creativecommons.org/licenses/by/4.0/",
+ "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
+ "base_uri": "https://w3id.org/ontocraft/terms/",
+ "uri_template": "https://w3id.org/ontocraft/terms/{id}",
+ "snapshot": "2026-10-09",
+ "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
+ "domain": {
+  "id": "port",
+  "name": "항만·물류",
+  "en": "Ports and logistics"
+ },
+ "version": "0.1.1",
+ "updated": "2026-10-09",
+ "categories": [
+  {
+   "id": "facility",
+   "name": "항만 시설과 하역 장비",
+   "en": "Port facilities and handling equipment"
+  },
+  {
+   "id": "terminal",
+   "name": "터미널 운영",
+   "en": "Terminal operations"
+  },
+  {
+   "id": "cargo",
+   "name": "컨테이너와 화물",
+   "en": "Containers and cargo"
+  },
+  {
+   "id": "trade",
+   "name": "무역·통관 서류",
+   "en": "Trade and customs documents"
+  },
+  {
+   "id": "contract",
+   "name": "운송 계약과 비용",
+   "en": "Shipping contracts and charges"
+  },
+  {
+   "id": "inland",
+   "name": "내륙 물류와 창고",
+   "en": "Inland logistics and warehousing"
+  },
+  {
+   "id": "metric",
+   "name": "물류 지표",
+   "en": "Logistics metrics"
+  },
+  {
+   "id": "digital",
+   "name": "항만 디지털화",
+   "en": "Port digitalization"
+  }
+ ],
+ "terms": [
+  {
+   "id": "port-facility",
+   "ko": "항만시설",
+   "en": "port facility",
+   "alt": [
+    "항만 인프라"
+   ],
+   "definition": "선박이 드나들고 화물과 여객을 처리하려고 항만에 갖춘 시설을 통틀어 이르는 말입니다. 수역 시설, 계류 시설, 하역 시설, 보관 시설이 여기에 듭니다.",
+   "category": "facility",
+   "related": [
+    "port-berth",
+    "container-terminal"
+   ],
+   "refs": [
+    "항만법",
+    "IMO ISPS Code"
+   ]
+  },
+  {
+   "id": "port-berth",
+   "ko": "선석",
+   "en": "berth",
+   "alt": [
+    "접안 위치",
+    "버스"
+   ],
+   "definition": "선박 한 척이 안벽에 붙어 하역할 수 있도록 나눈 자리입니다. 선석 계획과 생산성 지표의 기본 단위로 씁니다.",
+   "category": "facility",
+   "broader": "port-facility",
+   "related": [
+    "quay-wall",
+    "berth-planning"
+   ]
+  },
+  {
+   "id": "quay-wall",
+   "ko": "안벽",
+   "en": "quay wall",
+   "alt": [
+    "부두 벽",
+    "케이"
+   ],
+   "definition": "선박이 옆으로 붙어 계류하도록 바다 쪽에 수직으로 쌓은 구조물입니다. 안벽 위에 안벽 크레인이 다니는 레일을 둡니다.",
+   "category": "facility",
+   "broader": "port-facility",
+   "related": [
+    "port-berth",
+    "apron"
+   ]
+  },
+  {
+   "id": "container-terminal",
+   "ko": "컨테이너 터미널",
+   "en": "container terminal",
+   "alt": [
+    "컨테이너 부두",
+    "CT"
+   ],
+   "definition": "컨테이너 선박의 하역, 보관, 반출입을 한곳에서 처리하는 항만 구역입니다. 안벽, 에이프런, 야드, 게이트로 나뉩니다.",
+   "category": "facility",
+   "broader": "port-facility",
+   "related": [
+    "tos",
+    "port-container-yard"
+   ]
+  },
+  {
+   "id": "apron",
+   "ko": "에이프런",
+   "en": "apron",
+   "alt": [
+    "안벽 작업장"
+   ],
+   "definition": "안벽과 야드 사이에서 안벽 크레인이 컨테이너를 내리고 싣는 띠 모양의 작업 공간입니다.",
+   "category": "facility",
+   "broader": "container-terminal",
+   "related": [
+    "quay-wall",
+    "sts-crane"
+   ]
+  },
+  {
+   "id": "port-container-yard",
+   "ko": "컨테이너 야드",
+   "en": "container yard",
+   "alt": [
+    "CY",
+    "장치장"
+   ],
+   "definition": "컨테이너를 선적 전이나 양하 뒤에 쌓아 두는 터미널 안의 보관 구역입니다. 블록, 베이, 열, 단으로 위치를 매깁니다.",
+   "category": "facility",
+   "broader": "container-terminal",
+   "related": [
+    "yard-planning",
+    "container-stacking"
+   ]
+  },
+  {
+   "id": "terminal-gate",
+   "ko": "터미널 게이트",
+   "en": "terminal gate",
+   "alt": [
+    "게이트",
+    "출입문"
+   ],
+   "definition": "트럭이 컨테이너를 터미널로 들이거나 내갈 때 서류와 컨테이너 상태를 확인하는 출입 지점입니다.",
+   "category": "facility",
+   "broader": "container-terminal",
+   "related": [
+    "gate-in",
+    "gate-out"
+   ]
+  },
+  {
+   "id": "cfs",
+   "ko": "CFS",
+   "en": "container freight station",
+   "alt": [
+    "컨테이너 화물 조작장",
+    "CFS 창고"
+   ],
+   "definition": "여러 화주의 소량 화물을 한 컨테이너에 모아 싣거나 컨테이너에서 꺼내 나누는 작업장입니다.",
+   "category": "facility",
+   "broader": "port-facility",
+   "related": [
+    "lcl",
+    "freight-forwarder"
+   ],
+   "example": "포워더의 혼재 작업 지시에는 LCL 화물을 넣을 CFS와 작업 일자를 적습니다."
+  },
+  {
+   "id": "anchorage",
+   "ko": "정박지",
+   "en": "anchorage",
+   "alt": [
+    "묘박지",
+    "투묘지"
+   ],
+   "definition": "선석이 빌 때까지 선박이 닻을 내리고 기다리는 항만 수역입니다. 정박지에 머문 시간은 선박 대기 시간으로 집계하며, 적시 입항은 이 대기를 줄이려는 운영 방식입니다.",
+   "category": "facility",
+   "broader": "port-facility",
+   "related": [
+    "vessel-waiting-time",
+    "port-berth",
+    "just-in-time-arrival"
+   ],
+   "example": "선박 동정 기록에는 정박지 투묘 시각과 선석 접안 시각이 따로 남습니다."
+  },
+  {
+   "id": "reefer-plug",
+   "ko": "리퍼 플러그",
+   "en": "reefer plug",
+   "alt": [
+    "냉동 컨테이너 전원 소켓",
+    "리퍼 소켓"
+   ],
+   "definition": "야드에서 냉동 컨테이너에 전기를 공급하는 콘센트 설비입니다. 플러그 수가 터미널이 동시에 보관할 수 있는 냉동 컨테이너 수를 정합니다.",
+   "category": "facility",
+   "broader": "port-container-yard",
+   "related": [
+    "reefer-container",
+    "port-container-yard"
+   ]
+  },
+  {
+   "id": "automated-container-terminal",
+   "ko": "자동화 컨테이너 터미널",
+   "en": "automated container terminal",
+   "alt": [
+    "자동화 터미널",
+    "ACT"
+   ],
+   "definition": "야드 크레인과 수평 이송 장비를 사람 대신 제어 시스템이 움직이는 컨테이너 터미널입니다.",
+   "category": "facility",
+   "broader": "container-terminal",
+   "related": [
+    "port-agv",
+    "rmgc"
+   ]
+  },
+  {
+   "id": "cargo-handling-equipment",
+   "ko": "하역 장비",
+   "en": "cargo handling equipment",
+   "alt": [
+    "하역 기기",
+    "CHE"
+   ],
+   "definition": "선박과 야드, 트럭 사이에서 화물을 들어 옮기는 장비를 통틀어 이르는 말입니다.",
+   "category": "facility",
+   "related": [
+    "cargo-handling",
+    "tos"
+   ]
+  },
+  {
+   "id": "sts-crane",
+   "ko": "안벽 크레인",
+   "en": "ship-to-shore crane",
+   "alt": [
+    "STS",
+    "컨테이너 크레인",
+    "C/C",
+    "갠트리 크레인"
+   ],
+   "definition": "안벽 레일 위를 다니며 컨테이너선에서 컨테이너를 내리고 싣는 대형 크레인입니다. 터미널 처리 능력을 가장 크게 좌우합니다.",
+   "category": "facility",
+   "broader": "cargo-handling-equipment",
+   "related": [
+    "apron",
+    "crane-productivity"
+   ]
+  },
+  {
+   "id": "yard-crane",
+   "ko": "야드 크레인",
+   "en": "yard crane",
+   "alt": [
+    "장치장 크레인"
+   ],
+   "definition": "야드 블록에서 컨테이너를 쌓고 꺼내는 크레인입니다. 바퀴로 블록 사이를 옮겨 다니는 타이어식과 고정 레일 위를 달리는 레일식으로 나뉩니다.",
+   "category": "facility",
+   "broader": "cargo-handling-equipment",
+   "related": [
+    "port-container-yard",
+    "yard-tractor",
+    "rehandling"
+   ]
+  },
+  {
+   "id": "rtgc",
+   "ko": "타이어식 갠트리 크레인",
+   "en": "rubber-tyred gantry crane",
+   "alt": [
+    "RTGC",
+    "RTG",
+    "트랜스퍼 크레인"
+   ],
+   "definition": "고무 타이어 바퀴로 움직이는 야드 크레인입니다. 블록 사이를 옮겨 다닐 수 있습니다.",
+   "category": "facility",
+   "broader": "yard-crane",
+   "related": [
+    "rmgc",
+    "port-container-yard"
+   ]
+  },
+  {
+   "id": "rmgc",
+   "ko": "레일식 갠트리 크레인",
+   "en": "rail-mounted gantry crane",
+   "alt": [
+    "RMGC",
+    "RMG",
+    "ARMGC"
+   ],
+   "definition": "고정 레일 위를 움직이는 야드 크레인입니다. 자동화 터미널에서 많이 씁니다.",
+   "category": "facility",
+   "broader": "yard-crane",
+   "related": [
+    "rtgc",
+    "automated-container-terminal"
+   ]
+  },
+  {
+   "id": "straddle-carrier",
+   "ko": "스트래들 캐리어",
+   "en": "straddle carrier",
+   "alt": [
+    "SC",
+    "스트래들"
+   ],
+   "definition": "컨테이너를 다리 사이에 끼워 들고 달리며 운반과 적재를 함께 하는 차량입니다.",
+   "category": "facility",
+   "broader": "cargo-handling-equipment",
+   "related": [
+    "yard-tractor",
+    "rtgc"
+   ]
+  },
+  {
+   "id": "yard-tractor",
+   "ko": "야드 트랙터",
+   "en": "yard tractor",
+   "alt": [
+    "YT",
+    "터미널 트랙터",
+    "Y/T"
+   ],
+   "definition": "안벽 크레인과 야드 크레인 사이에서 샤시에 실은 컨테이너를 끌어 나르는 터미널 안 전용 차량입니다.",
+   "category": "facility",
+   "broader": "cargo-handling-equipment",
+   "related": [
+    "sts-crane",
+    "yard-crane"
+   ]
+  },
+  {
+   "id": "port-agv",
+   "ko": "항만 무인 운반차",
+   "en": "automated guided vehicle (port)",
+   "alt": [
+    "AGV",
+    "무인 이송 장비"
+   ],
+   "definition": "사람 없이 정해진 경로로 컨테이너를 안벽과 야드 사이에서 나르는 차량입니다.",
+   "category": "facility",
+   "broader": "cargo-handling-equipment",
+   "related": [
+    "automated-container-terminal",
+    "yard-tractor"
+   ]
+  },
+  {
+   "id": "tos",
+   "ko": "터미널 운영 시스템",
+   "en": "terminal operating system",
+   "alt": [
+    "TOS",
+    "터미널 운영 정보 시스템"
+   ],
+   "definition": "선석, 양적하, 야드, 게이트, 장비 작업을 계획하고 지시하며 기록하는 컨테이너 터미널의 핵심 소프트웨어입니다.",
+   "category": "terminal",
+   "related": [
+    "berth-planning",
+    "yard-planning",
+    "container-terminal"
+   ]
+  },
+  {
+   "id": "berth-planning",
+   "ko": "선석 계획",
+   "en": "berth planning",
+   "alt": [
+    "선석 배정",
+    "버스 플래닝"
+   ],
+   "definition": "도착 예정 선박마다 어느 선석에 언제부터 언제까지 댈지 정하는 일입니다.",
+   "category": "terminal",
+   "related": [
+    "port-berth",
+    "berth-window",
+    "port-eta"
+   ]
+  },
+  {
+   "id": "berth-window",
+   "ko": "선석 윈도",
+   "en": "berth window",
+   "alt": [
+    "고정 선석 시간대"
+   ],
+   "definition": "정기선 서비스에 매주 같은 요일과 시간대로 미리 약속해 둔 선석 사용 시간입니다.",
+   "category": "terminal",
+   "broader": "berth-planning",
+   "related": [
+    "liner-service",
+    "berth-planning"
+   ]
+  },
+  {
+   "id": "load-discharge-plan",
+   "ko": "양적하 계획",
+   "en": "loading and discharging plan",
+   "alt": [
+    "작업 계획",
+    "선적 계획"
+   ],
+   "definition": "한 선박에서 내릴 컨테이너와 실을 컨테이너의 순서와 위치를 정한 계획입니다. 선사가 보낸 적재 정보를 바탕으로 터미널이 세웁니다.",
+   "category": "terminal",
+   "related": [
+    "baplie",
+    "discharging",
+    "loading"
+   ]
+  },
+  {
+   "id": "yard-planning",
+   "ko": "야드 계획",
+   "en": "yard planning",
+   "alt": [
+    "장치 계획"
+   ],
+   "definition": "들어올 컨테이너를 야드의 어느 블록과 위치에 둘지 미리 정하는 일입니다. 재취급을 줄이는 것이 목표입니다.",
+   "category": "terminal",
+   "related": [
+    "port-container-yard",
+    "rehandling"
+   ]
+  },
+  {
+   "id": "container-stacking",
+   "ko": "장치",
+   "en": "container stacking",
+   "alt": [
+    "적치",
+    "스태킹"
+   ],
+   "definition": "컨테이너를 야드에 단을 쌓아 보관하는 일입니다. 무게, 목적항, 선적 순서로 쌓는 위치를 정합니다.",
+   "category": "terminal",
+   "broader": "yard-planning",
+   "related": [
+    "port-container-yard",
+    "yard-planning",
+    "rehandling"
+   ]
+  },
+  {
+   "id": "rehandling",
+   "ko": "재취급",
+   "en": "rehandling",
+   "alt": [
+    "리핸들링",
+    "셔플링",
+    "이적"
+   ],
+   "definition": "원하는 컨테이너를 꺼내려고 그 위에 쌓인 다른 컨테이너를 옮기는 생산성 없는 작업입니다.",
+   "category": "terminal",
+   "related": [
+    "yard-planning",
+    "container-stacking"
+   ]
+  },
+  {
+   "id": "cargo-handling",
+   "ko": "하역",
+   "en": "cargo handling",
+   "alt": [
+    "하역 작업",
+    "스테베도링"
+   ],
+   "definition": "선박에 화물을 싣거나 선박에서 화물을 내리고 항만 안에서 옮기는 작업을 통틀어 이르는 말입니다.",
+   "category": "terminal",
+   "related": [
+    "cargo-handling-equipment",
+    "thc"
+   ],
+   "refs": [
+    "항만운송사업법"
+   ]
+  },
+  {
+   "id": "discharging",
+   "ko": "양하",
+   "en": "discharging",
+   "alt": [
+    "하선",
+    "디스차지"
+   ],
+   "definition": "선박에서 화물을 내리는 작업입니다. 양적하 계획에 정한 순서를 따르며, 컨테이너는 안벽 크레인이 내려 야드로 옮깁니다.",
+   "category": "terminal",
+   "broader": "cargo-handling",
+   "related": [
+    "loading",
+    "load-discharge-plan",
+    "sts-crane"
+   ],
+   "example": "TOS 작업 기록에는 양하한 컨테이너마다 선박의 적재 위치와 내려놓은 야드 위치가 남습니다."
+  },
+  {
+   "id": "loading",
+   "ko": "적하",
+   "en": "loading",
+   "alt": [
+    "선적",
+    "로딩"
+   ],
+   "definition": "화물을 선박에 싣는 작업입니다. 양적하 계획에 정한 순서를 따르며, 컨테이너는 무게와 목적항을 고려해 선박의 칸에 배치합니다.",
+   "category": "terminal",
+   "broader": "cargo-handling",
+   "related": [
+    "discharging",
+    "load-discharge-plan",
+    "vgm"
+   ]
+  },
+  {
+   "id": "transshipment",
+   "ko": "환적",
+   "en": "transshipment",
+   "alt": [
+    "T/S",
+    "트랜십"
+   ],
+   "definition": "화물을 중간 항만에서 내린 뒤 다른 선박에 옮겨 실어 최종 목적지로 보내는 일입니다.",
+   "category": "terminal",
+   "broader": "cargo-handling",
+   "related": [
+    "port-throughput",
+    "liner-service"
+   ]
+  },
+  {
+   "id": "gate-in",
+   "ko": "반입",
+   "en": "gate-in",
+   "alt": [
+    "게이트 인",
+    "입문"
+   ],
+   "definition": "컨테이너가 트럭에 실려 터미널 게이트를 지나 들어오는 일입니다. 게이트에서 컨테이너 번호와 봉인, 외관 상태를 확인해 기기 인수도증에 남기고, 그 사실을 CODECO로 선사에 알립니다.",
+   "category": "terminal",
+   "related": [
+    "terminal-gate",
+    "gate-out",
+    "codeco"
+   ]
+  },
+  {
+   "id": "gate-out",
+   "ko": "반출",
+   "en": "gate-out",
+   "alt": [
+    "게이트 아웃",
+    "출문"
+   ],
+   "definition": "컨테이너가 트럭에 실려 터미널 게이트를 지나 나가는 일입니다. 게이트에서 화물인도지시서나 반출 승인을 확인하고, 반출 사실을 CODECO로 선사에 알립니다.",
+   "category": "terminal",
+   "related": [
+    "terminal-gate",
+    "gate-in",
+    "delivery-order"
+   ]
+  },
+  {
+   "id": "cargo-cut-off",
+   "ko": "반입 마감",
+   "en": "cargo cut-off",
+   "alt": [
+    "컷오프",
+    "CY 마감"
+   ],
+   "definition": "선적할 컨테이너를 터미널에 들여야 하는 마지막 시각입니다. 서류 마감 시각은 따로 둡니다.",
+   "category": "terminal",
+   "related": [
+    "gate-in",
+    "loading"
+   ]
+  },
+  {
+   "id": "equipment-interchange-receipt",
+   "ko": "기기 인수도증",
+   "en": "equipment interchange receipt",
+   "alt": [
+    "EIR",
+    "컨테이너 인수증"
+   ],
+   "definition": "게이트에서 컨테이너를 넘겨주고 받을 때 번호, 봉인, 외관 손상 상태를 적어 남기는 서류입니다.",
+   "category": "terminal",
+   "related": [
+    "terminal-gate",
+    "container-seal"
+   ]
+  },
+  {
+   "id": "port-call",
+   "ko": "기항",
+   "en": "port call",
+   "alt": [
+    "입항",
+    "콜"
+   ],
+   "definition": "선박이 항해 중 한 항만에 들러 하역하고 떠나는 한 번의 방문입니다. 입항 신고, 선석 배정, 항만시설 사용료 부과가 이 방문 단위로 이루어집니다.",
+   "category": "terminal",
+   "related": [
+    "port-eta",
+    "vessel-turnaround-time"
+   ]
+  },
+  {
+   "id": "port-eta",
+   "ko": "입항 예정 시각",
+   "en": "estimated time of arrival",
+   "alt": [
+    "ETA"
+   ],
+   "definition": "선박이 항만이나 선석에 도착할 것으로 예상하는 시각입니다. 선석 계획과 작업 인력 배치의 출발점입니다.",
+   "category": "terminal",
+   "related": [
+    "berth-planning",
+    "just-in-time-arrival"
+   ]
+  },
+  {
+   "id": "shipping-container",
+   "ko": "컨테이너",
+   "en": "freight container",
+   "alt": [
+    "화물 컨테이너",
+    "박스"
+   ],
+   "definition": "규격화된 크기의 강철 상자로, 화물을 꺼내지 않고 선박, 트럭, 철도로 옮겨 실을 수 있게 만든 운송 용기입니다.",
+   "category": "cargo",
+   "related": [
+    "teu",
+    "container-number"
+   ],
+   "refs": [
+    "ISO 668"
+   ]
+  },
+  {
+   "id": "teu",
+   "ko": "TEU",
+   "en": "twenty-foot equivalent unit",
+   "alt": [
+    "20피트 환산 단위"
+   ],
+   "definition": "길이 20피트 컨테이너 한 개를 1로 놓고 컨테이너 수를 세는 단위입니다. 선박 적재 능력과 항만 물동량을 나타낼 때 씁니다.",
+   "category": "cargo",
+   "related": [
+    "port-throughput",
+    "shipping-container"
+   ],
+   "example": "터미널 실적 보고서는 20피트 컨테이너를 1 TEU, 40피트 컨테이너를 2 TEU로 셉니다."
+  },
+  {
+   "id": "reefer-container",
+   "ko": "냉동 컨테이너",
+   "en": "reefer container",
+   "alt": [
+    "리퍼",
+    "RF",
+    "냉장 컨테이너"
+   ],
+   "definition": "냉동기를 달아 안의 온도를 정해진 값으로 유지하는 컨테이너입니다. 운송 내내 전원이 있어야 합니다.",
+   "category": "cargo",
+   "broader": "shipping-container",
+   "related": [
+    "reefer-plug"
+   ],
+   "example": "선적 요청서에는 냉동 컨테이너의 설정 온도와 환기 조건을 적습니다."
+  },
+  {
+   "id": "empty-container",
+   "ko": "공 컨테이너",
+   "en": "empty container",
+   "alt": [
+    "빈 컨테이너",
+    "MT",
+    "엠티"
+   ],
+   "definition": "화물을 싣지 않은 컨테이너입니다. 수출입 물량이 한쪽으로 치우치면 남는 곳에서 모자란 곳으로 옮겨야 합니다.",
+   "category": "cargo",
+   "broader": "shipping-container",
+   "related": [
+    "container-repositioning",
+    "container-detention"
+   ]
+  },
+  {
+   "id": "container-repositioning",
+   "ko": "공 컨테이너 재배치",
+   "en": "empty container repositioning",
+   "alt": [
+    "엠티 회송",
+    "공컨 회송"
+   ],
+   "definition": "남는 지역의 공 컨테이너를 수요가 있는 지역으로 옮기는 일입니다. 선사 비용에서 큰 몫을 차지합니다.",
+   "category": "cargo",
+   "related": [
+    "empty-container"
+   ]
+  },
+  {
+   "id": "fcl",
+   "ko": "FCL",
+   "en": "full container load",
+   "alt": [
+    "만재 화물",
+    "단일 화주 컨테이너"
+   ],
+   "definition": "한 화주의 화물로 컨테이너 하나를 채워 보내는 방식입니다. 화주가 직접 컨테이너에 싣고 봉인하므로 CFS를 거치지 않으며, 운임은 컨테이너 단위로 매깁니다.",
+   "category": "cargo",
+   "related": [
+    "lcl",
+    "container-seal"
+   ]
+  },
+  {
+   "id": "lcl",
+   "ko": "LCL",
+   "en": "less than container load",
+   "alt": [
+    "소량 화물",
+    "혼재 화물"
+   ],
+   "definition": "여러 화주의 소량 화물을 한 컨테이너에 모아 보내는 방식입니다. CFS에서 모으고 나눕니다.",
+   "category": "cargo",
+   "related": [
+    "fcl",
+    "cfs"
+   ]
+  },
+  {
+   "id": "bulk-cargo",
+   "ko": "벌크 화물",
+   "en": "bulk cargo",
+   "alt": [
+    "산적 화물",
+    "살화물"
+   ],
+   "definition": "곡물, 석탄, 광석, 원유처럼 포장하지 않고 통째로 싣는 화물입니다. 컨테이너 화물과 달리 전용선과 전용 부두에서 하역하며, 주로 용선 계약으로 운송합니다.",
+   "category": "cargo",
+   "related": [
+    "shipping-container",
+    "laytime"
+   ]
+  },
+  {
+   "id": "dangerous-goods",
+   "ko": "위험물",
+   "en": "dangerous goods",
+   "alt": [
+    "DG",
+    "위험 화물",
+    "IMDG 화물"
+   ],
+   "definition": "폭발, 인화, 독성, 부식 같은 성질 때문에 운송과 보관에 별도 규칙을 따라야 하는 화물입니다.",
+   "category": "cargo",
+   "related": [
+    "dg-class",
+    "container-stacking"
+   ],
+   "refs": [
+    "IMDG Code",
+    "위험물안전관리법"
+   ],
+   "example": "선적 요청서와 적하목록에는 위험물마다 UN 번호와 위험물 등급을 적습니다."
+  },
+  {
+   "id": "dg-class",
+   "ko": "위험물 등급",
+   "en": "dangerous goods class",
+   "alt": [
+    "IMDG 클래스",
+    "UN 등급"
+   ],
+   "definition": "위험물을 성질에 따라 아홉 가지로 나눈 분류입니다. 등급마다 표지와 격리 규칙이 다릅니다.",
+   "category": "cargo",
+   "broader": "dangerous-goods",
+   "related": [
+    "dangerous-goods",
+    "container-stacking"
+   ],
+   "refs": [
+    "IMDG Code",
+    "UN Model Regulations"
+   ]
+  },
+  {
+   "id": "vgm",
+   "ko": "검증 총중량",
+   "en": "verified gross mass",
+   "alt": [
+    "VGM"
+   ],
+   "definition": "화물과 포장, 컨테이너 자체 무게를 더해 화주가 확인한 컨테이너 총중량입니다. 이 값이 없으면 선적하지 않습니다.",
+   "category": "cargo",
+   "related": [
+    "loading",
+    "load-discharge-plan"
+   ],
+   "refs": [
+    "IMO SOLAS"
+   ]
+  },
+  {
+   "id": "container-number",
+   "ko": "컨테이너 번호",
+   "en": "container number",
+   "alt": [
+    "박스 번호",
+    "BIC 코드"
+   ],
+   "definition": "소유자 코드, 일련번호, 검증 숫자로 이루어져 컨테이너 하나를 세계에서 하나로 식별하는 번호입니다.",
+   "category": "cargo",
+   "related": [
+    "shipping-container",
+    "automated-gate"
+   ],
+   "refs": [
+    "ISO 6346"
+   ]
+  },
+  {
+   "id": "container-seal",
+   "ko": "컨테이너 봉인",
+   "en": "container seal",
+   "alt": [
+    "씰",
+    "봉인 번호"
+   ],
+   "definition": "컨테이너 문을 잠그고 번호를 매겨 운송 중 문이 열렸는지 확인하게 하는 장치입니다.",
+   "category": "cargo",
+   "related": [
+    "equipment-interchange-receipt",
+    "fcl"
+   ],
+   "refs": [
+    "ISO 17712"
+   ],
+   "example": "기기 인수도증과 선하증권에 봉인 번호를 적어 운송 구간마다 대조합니다."
+  },
+  {
+   "id": "bill-of-lading",
+   "ko": "선하증권",
+   "en": "bill of lading",
+   "alt": [
+    "B/L",
+    "BL"
+   ],
+   "definition": "운송인이 화물을 받았다는 것과 운송 계약 내용을 증명하고, 화물을 찾을 권리를 나타내는 서류입니다.",
+   "category": "trade",
+   "related": [
+    "delivery-order",
+    "cargo-manifest"
+   ],
+   "refs": [
+    "상법",
+    "Hague-Visby Rules"
+   ],
+   "example": "선하증권에는 송하인, 수하인, 통지처, 선적항, 양하항, 컨테이너 번호와 봉인 번호를 적습니다."
+  },
+  {
+   "id": "master-bl",
+   "ko": "마스터 B/L",
+   "en": "master bill of lading",
+   "alt": [
+    "MBL",
+    "오션 B/L"
+   ],
+   "definition": "선사가 발행하는 선하증권입니다. 포워더가 혼재한 화물에서는 포워더를 화주로 적습니다.",
+   "category": "trade",
+   "broader": "bill-of-lading",
+   "related": [
+    "house-bl",
+    "freight-forwarder"
+   ]
+  },
+  {
+   "id": "house-bl",
+   "ko": "하우스 B/L",
+   "en": "house bill of lading",
+   "alt": [
+    "HBL",
+    "포워더 B/L"
+   ],
+   "definition": "포워더가 실제 화주에게 발행하는 선하증권입니다. 선사가 포워더에게 발행한 마스터 B/L 한 장 아래에 실제 화주별 하우스 B/L 여러 장이 딸립니다.",
+   "category": "trade",
+   "broader": "bill-of-lading",
+   "related": [
+    "master-bl",
+    "freight-forwarder"
+   ]
+  },
+  {
+   "id": "cargo-manifest",
+   "ko": "적하목록",
+   "en": "cargo manifest",
+   "alt": [
+    "매니페스트",
+    "M/F"
+   ],
+   "definition": "한 선박에 실린 화물을 선하증권 단위로 적은 목록입니다. 입출항 전에 세관에 제출합니다.",
+   "category": "trade",
+   "related": [
+    "bill-of-lading",
+    "customs-clearance"
+   ],
+   "refs": [
+    "관세법"
+   ]
+  },
+  {
+   "id": "customs-clearance",
+   "ko": "통관",
+   "en": "customs clearance",
+   "alt": [
+    "세관 신고",
+    "수출입 통관"
+   ],
+   "definition": "물품을 수출하거나 수입할 때 세관에 신고하고 심사와 검사를 거쳐 허가를 받는 절차입니다.",
+   "category": "trade",
+   "related": [
+    "cargo-manifest",
+    "hs-code"
+   ],
+   "refs": [
+    "관세법",
+    "WCO Revised Kyoto Convention"
+   ]
+  },
+  {
+   "id": "import-declaration",
+   "ko": "수입신고",
+   "en": "import declaration",
+   "alt": [
+    "수입 통관 신고"
+   ],
+   "definition": "수입하려는 물품의 품목, 가격, 원산지를 세관에 신고하는 일입니다. 수리되어야 물품을 반출할 수 있습니다.",
+   "category": "trade",
+   "broader": "customs-clearance",
+   "related": [
+    "export-declaration",
+    "hs-code",
+    "bonded-warehouse"
+   ],
+   "refs": [
+    "관세법"
+   ]
+  },
+  {
+   "id": "export-declaration",
+   "ko": "수출신고",
+   "en": "export declaration",
+   "alt": [
+    "수출 통관 신고"
+   ],
+   "definition": "수출하려는 물품을 선적 전에 세관에 신고하는 일입니다. 품목, 가격, 목적국을 신고하며, 신고가 수리된 물품만 선적할 수 있습니다.",
+   "category": "trade",
+   "broader": "customs-clearance",
+   "related": [
+    "import-declaration",
+    "hs-code"
+   ],
+   "refs": [
+    "관세법"
+   ]
+  },
+  {
+   "id": "hs-code",
+   "ko": "HS 코드",
+   "en": "HS code",
+   "alt": [
+    "품목분류번호",
+    "세번",
+    "HSK"
+   ],
+   "definition": "국제 협약에 따라 물품을 숫자로 분류한 번호입니다. 관세율과 수출입 요건을 정하는 기준이 됩니다.",
+   "category": "trade",
+   "related": [
+    "customs-clearance",
+    "import-declaration"
+   ],
+   "refs": [
+    "WCO HS Convention"
+   ],
+   "example": "수입신고서의 품목 줄마다 HS 코드를 적고, 관세율은 이 번호로 찾습니다."
+  },
+  {
+   "id": "bonded-area",
+   "ko": "보세구역",
+   "en": "bonded area",
+   "alt": [
+    "보세 지역"
+   ],
+   "definition": "관세를 내지 않은 외국 물품을 세관 관리 아래 보관하거나 가공할 수 있도록 지정한 장소입니다.",
+   "category": "trade",
+   "related": [
+    "bonded-transport",
+    "customs-clearance"
+   ],
+   "refs": [
+    "관세법"
+   ]
+  },
+  {
+   "id": "bonded-warehouse",
+   "ko": "보세창고",
+   "en": "bonded warehouse",
+   "alt": [
+    "보세 장치장"
+   ],
+   "definition": "통관 전 외국 물품을 보관하도록 허가받은 창고입니다. 물품을 여기 두는 동안 관세 납부를 미루고, 수입신고가 수리되면 반출합니다.",
+   "category": "trade",
+   "broader": "bonded-area",
+   "related": [
+    "customs-clearance",
+    "import-declaration",
+    "bonded-transport"
+   ],
+   "refs": [
+    "관세법"
+   ]
+  },
+  {
+   "id": "bonded-transport",
+   "ko": "보세운송",
+   "en": "bonded transport",
+   "alt": [
+    "보세 운송"
+   ],
+   "definition": "통관하지 않은 외국 물품을 세관 허가를 받아 보세구역 사이로 옮기는 일입니다.",
+   "category": "trade",
+   "related": [
+    "bonded-area",
+    "icd"
+   ],
+   "refs": [
+    "관세법"
+   ]
+  },
+  {
+   "id": "delivery-order",
+   "ko": "화물인도지시서",
+   "en": "delivery order",
+   "alt": [
+    "D/O",
+    "딜리버리 오더"
+   ],
+   "definition": "운송인이 터미널이나 창고에 화물을 정당한 수하인에게 내주라고 지시하는 서류입니다.",
+   "category": "trade",
+   "related": [
+    "bill-of-lading",
+    "gate-out"
+   ]
+  },
+  {
+   "id": "ocean-freight",
+   "ko": "해상운임",
+   "en": "ocean freight",
+   "alt": [
+    "운임",
+    "O/F",
+    "해상 운송료"
+   ],
+   "definition": "화물을 바다로 옮겨 준 대가로 운송인에게 내는 요금입니다. 컨테이너 화물은 컨테이너 한 개 단위로, 벌크 화물은 톤 단위로 매기며 할증료는 따로 붙입니다.",
+   "category": "contract",
+   "related": [
+    "freight-surcharge",
+    "liner-service"
+   ]
+  },
+  {
+   "id": "freight-surcharge",
+   "ko": "할증료",
+   "en": "freight surcharge",
+   "alt": [
+    "부대 운임",
+    "서차지"
+   ],
+   "definition": "기본 운임에 덧붙여 연료비, 환율, 성수기 같은 사정을 반영해 받는 추가 요금입니다.",
+   "category": "contract",
+   "broader": "ocean-freight",
+   "related": [
+    "baf",
+    "ocean-freight"
+   ]
+  },
+  {
+   "id": "baf",
+   "ko": "유류할증료",
+   "en": "bunker adjustment factor",
+   "alt": [
+    "BAF",
+    "벙커 할증료"
+   ],
+   "definition": "선박 연료 가격 변동을 운임에 반영하려고 붙이는 할증료입니다. 선사가 연료 가격 변동에 맞춰 정기적으로 조정해 공표합니다.",
+   "category": "contract",
+   "broader": "freight-surcharge",
+   "related": [
+    "ocean-freight",
+    "thc"
+   ]
+  },
+  {
+   "id": "thc",
+   "ko": "터미널 화물 처리비",
+   "en": "terminal handling charge",
+   "alt": [
+    "THC"
+   ],
+   "definition": "컨테이너가 터미널에서 하역되고 이동하는 비용을 화주에게 받는 요금입니다.",
+   "category": "contract",
+   "broader": "freight-surcharge",
+   "related": [
+    "cargo-handling",
+    "ocean-freight"
+   ],
+   "example": "운임 청구서에는 해상운임, 유류할증료, THC가 항목별로 따로 적힙니다."
+  },
+  {
+   "id": "port-dues",
+   "ko": "항만시설 사용료",
+   "en": "port dues",
+   "alt": [
+    "입항료",
+    "정박료"
+   ],
+   "definition": "선박과 화물이 항만시설을 쓴 대가로 항만 관리자에게 내는 요금입니다. 선박에 물리는 입항료, 접안료, 정박료와 화물에 물리는 화물료로 나뉘며, 터미널 운영사가 받는 THC와는 다른 요금입니다.",
+   "category": "contract",
+   "related": [
+    "port-call",
+    "port-facility",
+    "thc"
+   ],
+   "refs": [
+    "항만법"
+   ]
+  },
+  {
+   "id": "laytime",
+   "ko": "정박기간",
+   "en": "laytime",
+   "alt": [
+    "허용 정박 기간",
+    "레이타임"
+   ],
+   "definition": "용선 계약에서 화주가 운임 외 추가 비용 없이 하역에 쓸 수 있도록 정한 시간입니다.",
+   "category": "contract",
+   "related": [
+    "vessel-demurrage",
+    "bulk-cargo"
+   ],
+   "example": "정박기간 계산서에는 하역 준비 완료 통지 시각, 하역 시작과 끝 시각, 계산에서 뺀 시간을 적습니다."
+  },
+  {
+   "id": "vessel-demurrage",
+   "ko": "체선료",
+   "en": "demurrage (vessel)",
+   "alt": [
+    "선박 체선료"
+   ],
+   "definition": "용선 계약에서 하역이 정박기간을 넘겨 선박이 늦게 떠날 때 화주가 선주에게 내는 배상금입니다.",
+   "category": "contract",
+   "related": [
+    "laytime",
+    "container-demurrage"
+   ]
+  },
+  {
+   "id": "container-demurrage",
+   "ko": "컨테이너 체화료",
+   "en": "container demurrage",
+   "alt": [
+    "디머리지",
+    "DEM"
+   ],
+   "definition": "수입 컨테이너를 무료 기간 안에 터미널에서 반출하지 않았을 때 선사가 받는 요금입니다.",
+   "category": "contract",
+   "related": [
+    "container-detention",
+    "dwell-time"
+   ]
+  },
+  {
+   "id": "container-detention",
+   "ko": "컨테이너 지체료",
+   "en": "container detention",
+   "alt": [
+    "디텐션",
+    "DET"
+   ],
+   "definition": "터미널에서 반출한 컨테이너를 무료 기간 안에 돌려주지 않았을 때 선사가 받는 요금입니다.",
+   "category": "contract",
+   "related": [
+    "container-demurrage",
+    "empty-container"
+   ]
+  },
+  {
+   "id": "incoterms",
+   "ko": "인코텀즈",
+   "en": "Incoterms",
+   "alt": [
+    "무역 거래 조건",
+    "국제무역조건"
+   ],
+   "definition": "국제 매매에서 운송비, 보험, 위험이 매도인에서 매수인으로 넘어가는 지점을 정한 표준 거래 조건입니다.",
+   "category": "contract",
+   "related": [
+    "fob",
+    "cif"
+   ],
+   "refs": [
+    "ICC Incoterms 2020"
+   ]
+  },
+  {
+   "id": "fob",
+   "ko": "FOB",
+   "en": "free on board",
+   "alt": [
+    "본선 인도"
+   ],
+   "definition": "매도인이 물품을 선적항의 본선에 실으면 위험이 매수인에게 넘어가는 거래 조건입니다.",
+   "category": "contract",
+   "broader": "incoterms",
+   "related": [
+    "cif",
+    "ocean-freight"
+   ],
+   "refs": [
+    "ICC Incoterms 2020"
+   ]
+  },
+  {
+   "id": "cif",
+   "ko": "CIF",
+   "en": "cost, insurance and freight",
+   "alt": [
+    "운임 보험료 포함 인도"
+   ],
+   "definition": "매도인이 목적항까지 운임과 보험료를 내지만 위험은 선적항 본선 적재 때 넘어가는 거래 조건입니다.",
+   "category": "contract",
+   "broader": "incoterms",
+   "related": [
+    "fob",
+    "ocean-freight"
+   ],
+   "refs": [
+    "ICC Incoterms 2020"
+   ]
+  },
+  {
+   "id": "freight-forwarder",
+   "ko": "포워더",
+   "en": "freight forwarder",
+   "alt": [
+    "복합운송주선업자",
+    "국제물류주선업자"
+   ],
+   "definition": "화주를 대신해 운송 수단을 예약하고 서류와 통관을 처리하는 운송 주선 업체입니다.",
+   "category": "contract",
+   "related": [
+    "house-bl",
+    "master-bl",
+    "cfs"
+   ],
+   "refs": [
+    "물류정책기본법"
+   ]
+  },
+  {
+   "id": "liner-service",
+   "ko": "정기선 서비스",
+   "en": "liner service",
+   "alt": [
+    "정기 항로",
+    "라이너 서비스"
+   ],
+   "definition": "정해진 항로와 기항지를 공표한 일정에 따라 반복 운항하는 해상 운송 서비스입니다.",
+   "category": "contract",
+   "related": [
+    "berth-window",
+    "port-call"
+   ]
+  },
+  {
+   "id": "icd",
+   "ko": "내륙 컨테이너 기지",
+   "en": "inland container depot",
+   "alt": [
+    "ICD",
+    "내륙 물류 기지"
+   ],
+   "definition": "항만에서 떨어진 내륙에서 컨테이너 보관, 통관, 혼재를 하는 기지입니다.",
+   "category": "inland",
+   "related": [
+    "bonded-transport",
+    "intermodal-transport"
+   ]
+  },
+  {
+   "id": "intermodal-transport",
+   "ko": "복합운송",
+   "en": "intermodal transport",
+   "alt": [
+    "멀티모달",
+    "연계 운송"
+   ],
+   "definition": "해상, 철도, 도로처럼 둘 이상의 운송 수단을 이어 한 계약으로 화물을 옮기는 방식입니다.",
+   "category": "inland",
+   "related": [
+    "icd",
+    "drayage"
+   ]
+  },
+  {
+   "id": "drayage",
+   "ko": "컨테이너 육상 운송",
+   "en": "drayage",
+   "alt": [
+    "셔틀 운송",
+    "드레이지",
+    "컨테이너 트럭 운송"
+   ],
+   "definition": "항만 터미널과 내륙 기지나 화주 공장 사이를 트럭으로 컨테이너를 옮기는 짧은 구간 운송입니다.",
+   "category": "inland",
+   "broader": "intermodal-transport",
+   "related": [
+    "gate-in",
+    "truck-turnaround-time"
+   ]
+  },
+  {
+   "id": "distribution-center",
+   "ko": "물류센터",
+   "en": "distribution center",
+   "alt": [
+    "DC",
+    "배송센터"
+   ],
+   "definition": "상품을 받아 보관하고 주문에 맞춰 골라 포장해 내보내는 물류 거점입니다.",
+   "category": "inland",
+   "related": [
+    "wms",
+    "cross-docking"
+   ]
+  },
+  {
+   "id": "cross-docking",
+   "ko": "크로스도킹",
+   "en": "cross-docking",
+   "alt": [
+    "통과형 물류"
+   ],
+   "definition": "들어온 화물을 보관하지 않고 바로 분류해 나가는 차량에 옮겨 싣는 방식입니다. 재고를 쌓지 않으므로 들어오는 차량과 나가는 차량의 도착 시각을 맞춰 계획해야 합니다.",
+   "category": "inland",
+   "related": [
+    "distribution-center",
+    "tms"
+   ]
+  },
+  {
+   "id": "third-party-logistics",
+   "ko": "제3자 물류",
+   "en": "third-party logistics",
+   "alt": [
+    "3PL",
+    "물류 아웃소싱"
+   ],
+   "definition": "화주가 운송, 보관, 하역 같은 물류 기능을 외부 전문 업체에 맡기는 방식입니다.",
+   "category": "inland",
+   "related": [
+    "distribution-center",
+    "freight-forwarder"
+   ]
+  },
+  {
+   "id": "wms",
+   "ko": "창고 관리 시스템",
+   "en": "warehouse management system",
+   "alt": [
+    "WMS"
+   ],
+   "definition": "창고의 입고, 보관 위치, 피킹, 출고와 재고를 관리하는 소프트웨어입니다.",
+   "category": "inland",
+   "related": [
+    "distribution-center",
+    "tms"
+   ]
+  },
+  {
+   "id": "tms",
+   "ko": "운송 관리 시스템",
+   "en": "transportation management system",
+   "alt": [
+    "TMS"
+   ],
+   "definition": "운송 주문, 배차, 경로, 운임 정산을 관리하는 소프트웨어입니다. 창고 안의 일을 다루는 WMS와 달리 창고 밖에서 화물이 움직이는 운송 구간을 맡습니다.",
+   "category": "inland",
+   "related": [
+    "wms",
+    "cargo-tracking"
+   ]
+  },
+  {
+   "id": "dwell-time",
+   "ko": "체류 시간",
+   "en": "container dwell time",
+   "alt": [
+    "장치 기간",
+    "드웰 타임"
+   ],
+   "definition": "컨테이너가 터미널에 들어와 나갈 때까지 머문 시간입니다. 야드 혼잡과 체화료의 원인을 볼 때 씁니다.",
+   "category": "metric",
+   "related": [
+    "container-demurrage",
+    "port-container-yard"
+   ]
+  },
+  {
+   "id": "vessel-turnaround-time",
+   "ko": "선박 재항 시간",
+   "en": "vessel turnaround time",
+   "alt": [
+    "재항 시간",
+    "턴어라운드 타임"
+   ],
+   "definition": "선박이 항만에 도착해 떠날 때까지 걸린 전체 시간입니다. 대기, 접안, 하역 시간을 합칩니다.",
+   "category": "metric",
+   "related": [
+    "vessel-waiting-time",
+    "port-call"
+   ]
+  },
+  {
+   "id": "vessel-waiting-time",
+   "ko": "선박 대기 시간",
+   "en": "vessel waiting time",
+   "alt": [
+    "체선 시간",
+    "대기 시간"
+   ],
+   "definition": "선박이 정박지에 도착한 뒤 선석에 붙기까지 기다린 시간입니다. 선석 점유율이 높을수록 길어지며, 선박 재항 시간 가운데 하역과 무관한 부분입니다.",
+   "category": "metric",
+   "broader": "vessel-turnaround-time",
+   "related": [
+    "anchorage",
+    "berth-occupancy"
+   ]
+  },
+  {
+   "id": "berth-occupancy",
+   "ko": "선석 점유율",
+   "en": "berth occupancy rate",
+   "alt": [
+    "선석 이용률",
+    "BOR"
+   ],
+   "definition": "일정 기간 동안 선석에 선박이 붙어 있던 시간의 비율입니다. 높으면 대기 선박이 늘어납니다.",
+   "category": "metric",
+   "related": [
+    "port-berth",
+    "vessel-waiting-time"
+   ]
+  },
+  {
+   "id": "crane-productivity",
+   "ko": "크레인 생산성",
+   "en": "crane productivity",
+   "alt": [
+    "GMPH",
+    "QC 생산성"
+   ],
+   "definition": "안벽 크레인 한 대가 한 시간에 처리하는 컨테이너 개수입니다. 선박 전체를 보는 선석 생산성과 달리 크레인 한 대만 보며, 작업 중 멈춘 시간을 빼는지에 따라 총 생산성과 순 생산성으로 나눠 셉니다.",
+   "category": "metric",
+   "related": [
+    "sts-crane",
+    "berth-productivity"
+   ]
+  },
+  {
+   "id": "berth-productivity",
+   "ko": "선석 생산성",
+   "en": "berth productivity",
+   "alt": [
+    "BMPH",
+    "선박 생산성"
+   ],
+   "definition": "선박 한 척이 선석에 붙어 있는 동안 시간당 처리한 컨테이너 개수입니다. 그 선박에 붙은 모든 크레인의 작업을 합칩니다.",
+   "category": "metric",
+   "related": [
+    "crane-productivity",
+    "vessel-turnaround-time"
+   ]
+  },
+  {
+   "id": "truck-turnaround-time",
+   "ko": "트럭 회전 시간",
+   "en": "truck turnaround time",
+   "alt": [
+    "트럭 체류 시간",
+    "TTT"
+   ],
+   "definition": "트럭이 터미널 게이트에 들어와 작업을 마치고 나갈 때까지 걸린 시간입니다.",
+   "category": "metric",
+   "related": [
+    "gate-in",
+    "gate-out",
+    "drayage"
+   ]
+  },
+  {
+   "id": "port-throughput",
+   "ko": "항만 물동량",
+   "en": "port throughput",
+   "alt": [
+    "처리 물동량",
+    "컨테이너 처리량"
+   ],
+   "definition": "일정 기간 동안 항만이 처리한 화물의 양입니다. 컨테이너는 TEU로, 다른 화물은 톤으로 셉니다.",
+   "category": "metric",
+   "related": [
+    "teu",
+    "transshipment"
+   ]
+  },
+  {
+   "id": "smart-port",
+   "ko": "스마트 항만",
+   "en": "smart port",
+   "alt": [
+    "지능형 항만",
+    "디지털 항만"
+   ],
+   "definition": "자동화 장비, 사물인터넷, 데이터 공유로 항만 운영을 효율화하고 안전과 환경 성과를 높이려는 항만입니다.",
+   "category": "digital",
+   "related": [
+    "automated-container-terminal",
+    "port-community-system"
+   ]
+  },
+  {
+   "id": "port-community-system",
+   "ko": "포트 커뮤니티 시스템",
+   "en": "port community system",
+   "alt": [
+    "PCS",
+    "항만 물류 정보망"
+   ],
+   "definition": "선사, 터미널, 포워더, 운송사, 세관이 항만 물류 정보를 한곳에서 주고받는 공동 정보 시스템입니다.",
+   "category": "digital",
+   "broader": "smart-port",
+   "related": [
+    "logistics-edi",
+    "trade-single-window"
+   ]
+  },
+  {
+   "id": "trade-single-window",
+   "ko": "무역 단일 창구",
+   "en": "trade single window",
+   "alt": [
+    "싱글 윈도",
+    "통관 단일 창구"
+   ],
+   "definition": "무역과 통관에 필요한 신고와 승인을 한 번의 전자 제출로 여러 기관에 처리하는 창구입니다.",
+   "category": "digital",
+   "related": [
+    "customs-clearance",
+    "port-community-system"
+   ],
+   "refs": [
+    "UN/CEFACT Recommendation 33"
+   ]
+  },
+  {
+   "id": "logistics-edi",
+   "ko": "물류 EDI",
+   "en": "logistics electronic data interchange",
+   "alt": [
+    "EDI",
+    "전자문서교환"
+   ],
+   "definition": "기업 사이에 물류 서류를 정해진 전자 메시지 형식으로 주고받는 방식입니다.",
+   "category": "digital",
+   "related": [
+    "baplie",
+    "codeco"
+   ],
+   "refs": [
+    "UN/EDIFACT"
+   ]
+  },
+  {
+   "id": "baplie",
+   "ko": "BAPLIE",
+   "en": "bayplan/stowage plan occupied and empty locations message",
+   "alt": [
+    "베이플랜 메시지"
+   ],
+   "definition": "선박의 칸마다 어떤 컨테이너가 실렸는지 선사와 터미널이 주고받는 EDI 메시지입니다.",
+   "category": "digital",
+   "broader": "logistics-edi",
+   "related": [
+    "load-discharge-plan",
+    "codeco"
+   ],
+   "refs": [
+    "UN/EDIFACT",
+    "SMDG"
+   ],
+   "example": "선사는 선박이 출항하면 다음 기항지 터미널에 BAPLIE를 보내 양하할 컨테이너의 칸 위치를 알립니다."
+  },
+  {
+   "id": "codeco",
+   "ko": "CODECO",
+   "en": "container gate-in/gate-out report message",
+   "alt": [
+    "반출입 보고 메시지"
+   ],
+   "definition": "터미널이 컨테이너 반입과 반출 사실을 선사에 알리는 EDI 메시지입니다.",
+   "category": "digital",
+   "broader": "logistics-edi",
+   "related": [
+    "gate-in",
+    "gate-out"
+   ],
+   "refs": [
+    "UN/EDIFACT",
+    "SMDG"
+   ]
+  },
+  {
+   "id": "automated-gate",
+   "ko": "자동화 게이트",
+   "en": "automated gate",
+   "alt": [
+    "OCR 게이트",
+    "무인 게이트"
+   ],
+   "definition": "카메라 판독과 전자 인식으로 트럭과 컨테이너 번호를 읽어 사람 없이 반출입을 처리하는 게이트입니다.",
+   "category": "digital",
+   "broader": "terminal-gate",
+   "related": [
+    "container-number",
+    "truck-turnaround-time"
+   ]
+  },
+  {
+   "id": "cargo-tracking",
+   "ko": "화물 추적",
+   "en": "cargo tracking",
+   "alt": [
+    "트래킹",
+    "컨테이너 추적"
+   ],
+   "definition": "화물이나 컨테이너가 지금 어디에 있고 어떤 단계를 지났는지 이벤트로 보여 주는 기능입니다.",
+   "category": "digital",
+   "related": [
+    "codeco",
+    "tms"
+   ],
+   "refs": [
+    "DCSA Track and Trace"
+   ]
+  },
+  {
+   "id": "just-in-time-arrival",
+   "ko": "적시 입항",
+   "en": "just-in-time arrival",
+   "alt": [
+    "JIT 입항",
+    "저스트 인 타임 어라이벌"
+   ],
+   "definition": "선석이 비는 시각에 맞춰 선박이 속도를 조절해 도착하게 하는 운영 방식입니다. 정박지 대기와 연료 소모를 줄입니다.",
+   "category": "digital",
+   "related": [
+    "port-eta",
+    "vessel-waiting-time"
+   ]
+  }
+ ]
+}

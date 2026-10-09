@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ontocraft-check 브라우저 검사 시연</title>
+<style>body{font-family:system-ui,sans-serif;max-width:900px;margin:24px auto;padding:0 16px}label{display:block;margin:8px 0}#status{color:#666}fieldset{margin:8px 0}#domains label{display:inline-block;margin:4px 12px 4px 0}</style></head>
+<body>
+<h1>ontocraft-check 브라우저 검사 시연</h1>
+<p>참고 구현입니다. 화면은 홈페이지가 만듭니다. 파일은 브라우저 안에서만 읽고 서버로 보내지 않습니다.</p>
+<label>온톨로지(필수) <input type="file" id="o"></label>
+<label>데이터(선택) <input type="file" id="d"></label>
+<label>SHACL 형상(선택) <input type="file" id="s"></label>
+<label>용어 등록부(선택, data/registry 의 분야 파일 여러 개) <input type="file" id="r" multiple accept=".json"></label>
+<fieldset><legend>등록부 분야(고르지 않으면 모든 분야를 봅니다)</legend><div id="domains">등록부 파일을 고르면 분야가 나옵니다.</div></fieldset>
+<label><input type="checkbox" id="offP13"> P13 끄기(역관계 없음. 속성 그래프 기반 설계에서는 역관계를 일부러 두지 않는 경우가 흔합니다)</label>
+<label>같은 규칙 항목 묶기 기준 <input type="number" id="group" min="0" value="10" style="width:5em"> 개를 넘으면 묶음(0이면 묶지 않음)</label>
+<button id="go">검사</button> <span id="status"></span>
+<pre id="out" hidden></pre>
+<div id="report"></div>
+<script>
+const WHEEL = "ontocraft_check-0.3.0-py3-none-any.whl";
+const SKIP = new Set(["domains.json", "candidates.json", "manifest.json"]);  // 분야 파일이 아닙니다(ontocraft-check 도 대조에 쓰지 않습니다)
+const worker = new Worker("ontocraft-check-worker.js");
+const st = document.getElementById("status");
+const read = async (id) => { const f = document.getElementById(id).files[0]; return f ? { name: f.name, text: await f.text() } : null; };
+let registry = null;
+// 등록부 파일에서 domain.id 와 이름을 읽어 체크박스로 보입니다.
+document.getElementById("r").onchange = async (e) => {
+  registry = {};
+  const box = document.getElementById("domains");
+  box.textContent = "";
+  for (const f of e.target.files) {
+    const text = await f.text();
+    registry[f.name] = text;
+    if (SKIP.has(f.name)) continue;
+    let d = null;
+    try { const j = JSON.parse(text); if (Array.isArray(j.terms)) d = j.domain || { id: f.name.replace(/\.json$/, "") }; } catch (_) {}
+    if (!d) continue;
+    const id = d.id || f.name.replace(/\.json$/, "");
+    const lab = document.createElement("label");
+    const cb = document.createElement("input");
+    cb.type = "checkbox"; cb.value = id; cb.className = "dom";
+    lab.append(cb, " " + (d.name || id) + " (" + id + ")");
+    box.append(lab);
+  }
+  if (!box.childElementCount) box.textContent = "분야 파일을 찾지 못했습니다.";
+};
+worker.onmessage = (e) => {
+  const m = e.data;
+  if (m.stage) { st.textContent = "검사 중"; return; }
+  if (!m.ok) { st.textContent = "오류: " + m.error; document.getElementById("out").textContent = "ERR " + m.error; return; }
+  st.textContent = "끝";
+  document.getElementById("report").innerHTML = m.html;
+  const j = JSON.parse(m.json);
+  document.getElementById("out").textContent = "OK " + Object.keys(j).join(",") + " | 보고서 HTML " + m.html.length + "자";
+};
+function options() {
+  const domains = [...document.querySelectorAll("input.dom:checked")].map((x) => x.value);
+  const disable = document.getElementById("offP13").checked ? ["P13"] : [];
+  const n = parseInt(document.getElementById("group").value, 10);
+  return { domains, disable, group_over: Number.isInteger(n) && n >= 0 ? n : null };
+}
+async function check(ontology, data, shapes) {
+  st.textContent = "검사기를 불러오는 중(처음 한 번 수십 초 걸릴 수 있습니다)";
+  worker.postMessage({ ontology, data, shapes, registry, wheel: new URL(WHEEL, location.href).href, ...options() });
+}
+document.getElementById("go").onclick = async () => check(await read("o"), await read("d"), await read("s"));
+// 시험용: ?auto=<ttl 주소> 이면 그 파일로 바로 검사합니다
+const auto = new URLSearchParams(location.search).get("auto");
+if (auto) fetch(auto).then((r) => r.text()).then((t) => check({ name: "auto.ttl", text: t }, null, null));
+</script>
+</body></html>

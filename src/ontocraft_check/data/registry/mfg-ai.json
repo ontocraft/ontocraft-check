@@ -1,0 +1,1653 @@
+{
+ "registry": "OntoCraft 한국 산업 용어 등록부",
+ "registry_en": "OntoCraft Korean Industry Term Registry",
+ "publisher": "OntoCraft",
+ "license": "CC BY 4.0",
+ "license_url": "https://creativecommons.org/licenses/by/4.0/",
+ "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
+ "base_uri": "https://w3id.org/ontocraft/terms/",
+ "uri_template": "https://w3id.org/ontocraft/terms/{id}",
+ "snapshot": "2026-10-09",
+ "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
+ "domain": {
+  "id": "mfg-ai",
+  "name": "제조 AI",
+  "en": "Manufacturing AI"
+ },
+ "version": "0.1.2",
+ "updated": "2026-10-09",
+ "categories": [
+  {
+   "id": "system",
+   "name": "제조 시스템과 데이터 원천",
+   "en": "Manufacturing systems and data sources"
+  },
+  {
+   "id": "data",
+   "name": "데이터 준비",
+   "en": "Data preparation"
+  },
+  {
+   "id": "quality",
+   "name": "품질 AI",
+   "en": "Quality AI"
+  },
+  {
+   "id": "process",
+   "name": "공정 최적화와 시뮬레이션",
+   "en": "Process optimization and simulation"
+  },
+  {
+   "id": "planning",
+   "name": "생산 계획과 스케줄링",
+   "en": "Production planning and scheduling"
+  },
+  {
+   "id": "llm",
+   "name": "제조 LLM과 지식",
+   "en": "Manufacturing LLMs and knowledge"
+  },
+  {
+   "id": "ops",
+   "name": "모델 운영",
+   "en": "Model operations"
+  },
+  {
+   "id": "adopt",
+   "name": "표준·데이터 공간·도입",
+   "en": "Standards, data spaces and adoption"
+  }
+ ],
+ "terms": [
+  {
+   "id": "smart-factory",
+   "ko": "스마트공장",
+   "en": "smart factory",
+   "alt": [
+    "스마트팩토리",
+    "지능형 공장"
+   ],
+   "definition": "설비, 시스템, 사람이 데이터로 연결되어 생산을 감시하고 스스로 조정하는 공장입니다. 자동화 설비만 있다고 스마트공장이 되지는 않고, 데이터가 의사결정에 쓰여야 합니다.",
+   "category": "system",
+   "related": [
+    "mes",
+    "isa95-hierarchy",
+    "data-maturity-level"
+   ]
+  },
+  {
+   "id": "isa95-hierarchy",
+   "ko": "ISA-95 계층",
+   "en": "ISA-95 hierarchy",
+   "alt": [
+    "퍼듀 모델",
+    "자동화 피라미드",
+    "레벨 0~4"
+   ],
+   "definition": "공장의 시스템을 센서와 설비(레벨 0~2), 제조 운영(레벨 3), 경영 계획(레벨 4)으로 나눈 기준 구조입니다. 어느 시스템이 어떤 데이터를 맡는지 정할 때 씁니다.",
+   "category": "system",
+   "related": [
+    "mes",
+    "erp",
+    "scada"
+   ],
+   "refs": [
+    "IEC 62264",
+    "ANSI/ISA-95"
+   ]
+  },
+  {
+   "id": "mes",
+   "ko": "제조실행시스템",
+   "en": "manufacturing execution system",
+   "alt": [
+    "MES"
+   ],
+   "definition": "생산 오더를 현장에 내리고 작업 실적, 자재 투입, 품질 결과를 기록하는 레벨 3 시스템입니다. 제조 AI가 쓰는 맥락 데이터의 주된 원천입니다.",
+   "category": "system",
+   "related": [
+    "isa95-hierarchy",
+    "production-order",
+    "erp"
+   ],
+   "refs": [
+    "IEC 62264"
+   ]
+  },
+  {
+   "id": "erp",
+   "ko": "전사적 자원관리",
+   "en": "enterprise resource planning",
+   "alt": [
+    "ERP"
+   ],
+   "definition": "구매, 재고, 판매, 원가, 회계를 한 데이터베이스로 관리하는 레벨 4 시스템입니다. 생산 계획과 자재 소요가 여기서 시작됩니다.",
+   "category": "system",
+   "related": [
+    "mes",
+    "mrp"
+   ],
+   "refs": [
+    "IEC 62264"
+   ]
+  },
+  {
+   "id": "plc",
+   "ko": "PLC",
+   "en": "programmable logic controller",
+   "alt": [
+    "프로그래머블 로직 컨트롤러",
+    "시퀀서"
+   ],
+   "definition": "센서 입력을 받아 정해진 논리대로 모터, 밸브 같은 구동기를 제어하는 산업용 제어기입니다. 설비 데이터의 가장 아래 원천입니다.",
+   "category": "system",
+   "broader": "operational-technology",
+   "related": [
+    "scada",
+    "signal-tag"
+   ],
+   "refs": [
+    "IEC 61131-3"
+   ]
+  },
+  {
+   "id": "scada",
+   "ko": "SCADA",
+   "en": "supervisory control and data acquisition",
+   "alt": [
+    "감시제어 데이터수집 시스템"
+   ],
+   "definition": "여러 PLC와 계측기의 값을 모아 운전 화면에 보여 주고 원격으로 명령을 내리는 감시 제어 시스템입니다.",
+   "category": "system",
+   "broader": "operational-technology",
+   "related": [
+    "plc",
+    "process-historian"
+   ]
+  },
+  {
+   "id": "process-historian",
+   "ko": "공정 히스토리언",
+   "en": "process historian",
+   "alt": [
+    "히스토리언",
+    "시계열 이력 DB"
+   ],
+   "definition": "제어 시스템의 태그 값을 시각과 함께 오래 저장하는 시계열 전용 데이터베이스입니다. 공정 데이터 분석과 모델 학습의 원천이 됩니다.",
+   "category": "system",
+   "related": [
+    "signal-tag",
+    "time-series-data"
+   ]
+  },
+  {
+   "id": "signal-tag",
+   "ko": "데이터 태그",
+   "en": "signal tag",
+   "alt": [
+    "태그",
+    "포인트",
+    "PV 태그"
+   ],
+   "definition": "제어 시스템이나 히스토리언에서 측정값 하나의 흐름에 붙이는 이름입니다. 설비 태그와 달리 온도, 압력 같은 신호 하나를 가리킵니다.",
+   "category": "system",
+   "related": [
+    "process-historian",
+    "plc",
+    "unified-namespace"
+   ]
+  },
+  {
+   "id": "opc-ua",
+   "ko": "OPC UA",
+   "en": "OPC Unified Architecture",
+   "alt": [
+    "OPC 통합 아키텍처"
+   ],
+   "definition": "설비와 시스템이 제조사와 상관없이 데이터와 그 의미를 주고받도록 정한 산업 통신 규격입니다. 값뿐 아니라 정보 모델도 함께 전달합니다.",
+   "category": "system",
+   "broader": "industrial-protocol",
+   "related": [
+    "mqtt",
+    "aas"
+   ],
+   "refs": [
+    "IEC 62541"
+   ]
+  },
+  {
+   "id": "mqtt",
+   "ko": "MQTT",
+   "en": "MQTT",
+   "alt": [
+    "MQ 텔레메트리 전송"
+   ],
+   "definition": "발행과 구독 방식으로 작은 메시지를 가볍게 주고받는 통신 규약입니다. 설비 데이터를 클라우드나 데이터 허브로 올릴 때 많이 씁니다.",
+   "category": "system",
+   "broader": "industrial-protocol",
+   "related": [
+    "opc-ua",
+    "unified-namespace"
+   ],
+   "refs": [
+    "ISO/IEC 20922"
+   ]
+  },
+  {
+   "id": "unified-namespace",
+   "ko": "통합 네임스페이스",
+   "en": "unified namespace",
+   "alt": [
+    "UNS"
+   ],
+   "definition": "공장의 모든 데이터를 사업장, 구역, 라인, 설비 순의 한 이름 체계 아래 실시간으로 발행하는 구성 방식입니다. 시스템끼리 일대일로 잇는 연결을 줄이려고 씁니다.",
+   "category": "system",
+   "related": [
+    "mqtt",
+    "signal-tag",
+    "isa95-hierarchy"
+   ]
+  },
+  {
+   "id": "edge-gateway",
+   "ko": "엣지 게이트웨이",
+   "en": "edge gateway",
+   "alt": [
+    "산업용 게이트웨이",
+    "IIoT 게이트웨이"
+   ],
+   "definition": "현장 설비의 통신 규격을 받아 상위 시스템이 읽을 수 있는 형식으로 바꾸어 넘기는 현장 장치입니다. 간단한 전처리와 추론을 맡기도 합니다.",
+   "category": "system",
+   "broader": "operational-technology",
+   "related": [
+    "opc-ua",
+    "mqtt",
+    "edge-inference"
+   ]
+  },
+  {
+   "id": "bom",
+   "ko": "자재명세서",
+   "en": "bill of materials",
+   "alt": [
+    "BOM",
+    "부품 구성표"
+   ],
+   "definition": "제품 하나를 만드는 데 들어가는 부품과 자재, 그 수량과 상하 구성을 적은 목록입니다.",
+   "category": "system",
+   "related": [
+    "mrp",
+    "erp",
+    "mfg-traceability"
+   ],
+   "example": "설계 변경이 생기면 자재명세서의 부품 번호와 수량을 고치고 변경 이력을 남깁니다."
+  },
+  {
+   "id": "production-order",
+   "ko": "생산 오더",
+   "en": "production order",
+   "alt": [
+    "작업 지시",
+    "제조 오더",
+    "워크 오더"
+   ],
+   "definition": "어떤 제품을 얼마나, 언제까지, 어느 라인에서 만들지 현장에 내리는 지시 단위입니다. 실적, 자재, 품질 기록이 이 번호로 묶입니다.",
+   "category": "system",
+   "related": [
+    "mes",
+    "production-lot"
+   ],
+   "refs": [
+    "IEC 62264"
+   ]
+  },
+  {
+   "id": "production-lot",
+   "ko": "로트",
+   "en": "production lot",
+   "alt": [
+    "배치",
+    "제조 로트",
+    "lot"
+   ],
+   "definition": "같은 조건에서 함께 만들어 하나로 추적하는 생산 묶음입니다. 품질 문제가 생기면 영향 범위를 로트 단위로 찾습니다.",
+   "category": "system",
+   "related": [
+    "production-order",
+    "mfg-traceability"
+   ]
+  },
+  {
+   "id": "mfg-traceability",
+   "ko": "추적성",
+   "en": "traceability",
+   "alt": [
+    "트레이서빌리티",
+    "이력 추적",
+    "제품 이력 관리"
+   ],
+   "definition": "완제품에서 거꾸로 원자재, 설비, 작업자, 공정 조건까지 따라갈 수 있게 기록을 잇는 능력입니다.",
+   "category": "system",
+   "related": [
+    "production-lot",
+    "bom"
+   ],
+   "refs": [
+    "ISO 9001"
+   ]
+  },
+  {
+   "id": "time-series-data",
+   "ko": "시계열 데이터",
+   "en": "time-series data",
+   "alt": [
+    "시계열",
+    "트렌드 데이터"
+   ],
+   "definition": "시각 순서로 쌓인 측정값입니다. 센서와 태그 값이 대부분 이 형태이며 시각을 기준으로 다른 데이터와 맞춥니다.",
+   "category": "data",
+   "related": [
+    "process-historian",
+    "signal-tag",
+    "data-alignment",
+    "feature-extraction"
+   ],
+   "example": "히스토리언에서 내려받은 태그 값은 시각, 태그 이름, 값, 품질 코드 열로 된 경우가 많습니다."
+  },
+  {
+   "id": "data-alignment",
+   "ko": "데이터 정합",
+   "en": "data alignment",
+   "alt": [
+    "시점 정렬",
+    "데이터 매칭"
+   ],
+   "definition": "서로 다른 시스템의 데이터를 같은 제품, 같은 로트, 같은 시각으로 맞추어 한 행에 묶는 작업입니다. 제조 데이터 준비에서 가장 시간이 많이 듭니다.",
+   "category": "data",
+   "broader": "data-preprocessing",
+   "related": [
+    "time-series-data",
+    "production-lot"
+   ]
+  },
+  {
+   "id": "data-cleansing",
+   "ko": "데이터 정제",
+   "en": "data cleansing",
+   "alt": [
+    "데이터 클렌징"
+   ],
+   "definition": "잘못된 값, 중복, 단위 차이, 형식 오류를 찾아 고치거나 표시하는 작업입니다.",
+   "category": "data",
+   "broader": "data-preprocessing",
+   "related": [
+    "data-preprocessing",
+    "data-contract",
+    "data-alignment"
+   ]
+  },
+  {
+   "id": "data-labeling",
+   "ko": "데이터 라벨링",
+   "en": "data labeling",
+   "alt": [
+    "라벨링",
+    "어노테이션",
+    "주석 작업"
+   ],
+   "definition": "학습 데이터에 양품과 불량, 불량 유형, 결함 위치 같은 정답을 붙이는 작업입니다. 제조에서는 검사원과 공정 기술자의 판단이 기준이 됩니다.",
+   "category": "data",
+   "related": [
+    "ground-truth",
+    "training-data"
+   ]
+  },
+  {
+   "id": "ground-truth",
+   "ko": "정답 데이터",
+   "en": "ground truth",
+   "alt": [
+    "기준 정답",
+    "그라운드 트루스"
+   ],
+   "definition": "모델의 예측과 비교하는 기준이 되는 실제 결과입니다. 검사원마다 판정이 다르면 정답부터 흔들립니다.",
+   "category": "data",
+   "related": [
+    "data-labeling",
+    "model-validation"
+   ]
+  },
+  {
+   "id": "training-data",
+   "ko": "학습 데이터",
+   "en": "training data",
+   "alt": [
+    "훈련 데이터",
+    "트레이닝 셋"
+   ],
+   "definition": "모델이 규칙을 배우는 데 쓰는 데이터입니다. 운영 중 만날 조건을 고르게 담아야 현장에서 성능이 유지됩니다.",
+   "category": "data",
+   "related": [
+    "data-split",
+    "data-labeling"
+   ]
+  },
+  {
+   "id": "data-split",
+   "ko": "데이터 분할",
+   "en": "data split",
+   "alt": [
+    "학습·검증·시험 분할",
+    "train-test split"
+   ],
+   "definition": "데이터를 학습용, 검증용, 시험용으로 나누는 일입니다. 제조에서는 무작위로 나누기보다 기간이나 로트로 나누어야 실제 성능에 가깝습니다.",
+   "category": "data",
+   "related": [
+    "training-data",
+    "data-leakage"
+   ]
+  },
+  {
+   "id": "data-leakage",
+   "ko": "데이터 누수",
+   "en": "data leakage",
+   "alt": [
+    "정보 누수",
+    "리키지"
+   ],
+   "definition": "예측 시점에는 알 수 없는 정보가 학습에 섞여 시험 성능이 실제보다 좋게 나오는 현상입니다. 검사 결과 뒤에 기록되는 값을 입력에 넣을 때 흔히 생깁니다.",
+   "category": "data",
+   "related": [
+    "data-split",
+    "model-validation"
+   ]
+  },
+  {
+   "id": "feature-extraction",
+   "ko": "특징 추출",
+   "en": "feature extraction",
+   "alt": [
+    "피처 추출",
+    "특징량 산출"
+   ],
+   "definition": "원시 신호나 이미지에서 평균, 기울기, 주파수 성분처럼 모델이 쓰기 좋은 값을 뽑아내는 작업입니다.",
+   "category": "data",
+   "broader": "data-preprocessing",
+   "related": [
+    "time-series-data",
+    "feature-store"
+   ]
+  },
+  {
+   "id": "class-imbalance",
+   "ko": "클래스 불균형",
+   "en": "class imbalance",
+   "alt": [
+    "데이터 불균형",
+    "불량 희소성"
+   ],
+   "definition": "양품은 많고 불량은 아주 적은 것처럼 범주별 데이터 수가 크게 차이 나는 상태입니다. 정확도만 보면 성능을 잘못 판단하게 됩니다.",
+   "category": "data",
+   "related": [
+    "synthetic-defect-data",
+    "precision-recall"
+   ]
+  },
+  {
+   "id": "data-drift",
+   "ko": "데이터 드리프트",
+   "en": "data drift",
+   "alt": [
+    "입력 분포 변화",
+    "공변량 이동"
+   ],
+   "definition": "운영 중 들어오는 입력 데이터의 분포가 학습 때와 달라지는 현상입니다. 원자재 변경, 계절, 설비 교체가 흔한 원인입니다.",
+   "category": "data",
+   "related": [
+    "concept-drift",
+    "model-monitoring"
+   ]
+  },
+  {
+   "id": "concept-drift",
+   "ko": "개념 드리프트",
+   "en": "concept drift",
+   "alt": [
+    "관계 변화"
+   ],
+   "definition": "입력과 결과 사이의 관계 자체가 바뀌는 현상입니다. 같은 공정 조건에서도 불량이 다르게 나오기 시작하면 모델을 다시 학습해야 합니다.",
+   "category": "data",
+   "broader": "data-drift",
+   "related": [
+    "model-retraining",
+    "data-drift",
+    "model-monitoring"
+   ]
+  },
+  {
+   "id": "data-contract",
+   "ko": "데이터 계약",
+   "en": "data contract",
+   "alt": [
+    "데이터 인터페이스 약속"
+   ],
+   "definition": "데이터를 내보내는 쪽과 받는 쪽이 필드 이름, 단위, 주기, 품질 기준을 미리 정해 둔 약속입니다. 원천 시스템이 바뀌어도 분석이 깨지지 않게 합니다.",
+   "category": "data",
+   "related": [
+    "mfg-data-governance",
+    "data-cleansing"
+   ]
+  },
+  {
+   "id": "machine-vision",
+   "ko": "머신비전",
+   "en": "machine vision",
+   "alt": [
+    "산업용 비전",
+    "비전 시스템"
+   ],
+   "definition": "카메라와 조명, 영상 처리로 제품의 모양, 치수, 표면을 자동으로 판단하는 기술입니다.",
+   "category": "quality",
+   "related": [
+    "vision-inspection",
+    "defect-detection",
+    "edge-inference"
+   ]
+  },
+  {
+   "id": "vision-inspection",
+   "ko": "비전 검사",
+   "en": "vision inspection",
+   "alt": [
+    "AI 비전 검사",
+    "외관 검사 자동화",
+    "AOI"
+   ],
+   "definition": "카메라 영상을 모델로 판독해 제품의 외관 불량을 찾아내는 검사입니다. 사람 육안 검사를 대신하거나 보조합니다.",
+   "category": "quality",
+   "broader": "machine-vision",
+   "related": [
+    "defect-classification",
+    "defect-detection"
+   ]
+  },
+  {
+   "id": "defect-detection",
+   "ko": "결함 검출",
+   "en": "defect detection",
+   "alt": [
+    "불량 검출",
+    "결함 위치 찾기"
+   ],
+   "definition": "영상이나 신호에서 결함이 있는지와 그 위치를 찾아내는 일입니다. 결함의 유형을 나누는 불량 분류보다 앞 단계이며, 영상에서는 위치를 상자나 픽셀 영역으로 표시합니다.",
+   "category": "quality",
+   "broader": "vision-inspection",
+   "related": [
+    "defect-classification",
+    "anomaly-detection",
+    "vision-inspection"
+   ],
+   "example": "검출 결과는 영상 위에 결함 위치를 상자로 표시해 검사원에게 보여 줍니다."
+  },
+  {
+   "id": "defect-classification",
+   "ko": "불량 분류",
+   "en": "defect classification",
+   "alt": [
+    "결함 분류",
+    "불량 유형 판정"
+   ],
+   "definition": "찾아낸 불량을 스크래치, 찍힘, 이물 같은 유형으로 나누는 일입니다. 유형별로 원인 공정이 달라 대책을 고르는 근거가 됩니다.",
+   "category": "quality",
+   "broader": "vision-inspection",
+   "related": [
+    "defect-detection",
+    "data-labeling"
+   ]
+  },
+  {
+   "id": "anomaly-detection",
+   "ko": "이상 탐지",
+   "en": "anomaly detection",
+   "alt": [
+    "이상 감지",
+    "어노멀리 디텍션"
+   ],
+   "definition": "정상 데이터의 패턴을 배워 그와 다른 관측을 찾아내는 방법입니다. 불량 사례가 적은 제조 현장에서 많이 씁니다.",
+   "category": "quality",
+   "related": [
+    "anomaly-score",
+    "multivariate-spc"
+   ]
+  },
+  {
+   "id": "anomaly-score",
+   "ko": "이상 점수",
+   "en": "anomaly score",
+   "alt": [
+    "이상도",
+    "재구성 오차"
+   ],
+   "definition": "관측 하나가 정상에서 얼마나 벗어났는지 나타내는 수치입니다. 어디서 경보를 낼지는 오경보 비용을 보고 정합니다.",
+   "category": "quality",
+   "broader": "anomaly-detection",
+   "related": [
+    "anomaly-detection",
+    "overkill",
+    "control-chart"
+   ],
+   "example": "설비 감시 화면은 이상 점수를 추이 그래프로 그리고 기준선을 넘으면 경보를 냅니다."
+  },
+  {
+   "id": "overkill",
+   "ko": "과검",
+   "en": "overkill",
+   "alt": [
+    "과판정",
+    "가성 불량",
+    "false reject"
+   ],
+   "definition": "양품을 불량으로 잘못 판정하는 일입니다. 검사 자동화에서 재검 인력과 수율 손실로 이어집니다.",
+   "category": "quality",
+   "broader": "inspection-misjudgment",
+   "related": [
+    "escape-defect",
+    "precision-recall",
+    "inspection-misjudgment"
+   ],
+   "example": "비전 검사기가 불량으로 걸러 낸 제품을 재검 작업자가 양품으로 돌리면 과검으로 집계합니다."
+  },
+  {
+   "id": "escape-defect",
+   "ko": "미검",
+   "en": "escape",
+   "alt": [
+    "불량 유출",
+    "누락 불량",
+    "false accept"
+   ],
+   "definition": "불량을 양품으로 잘못 판정해 다음 공정이나 고객에게 넘기는 일입니다. 대개 과검보다 비용이 훨씬 큽니다.",
+   "category": "quality",
+   "broader": "inspection-misjudgment",
+   "related": [
+    "overkill",
+    "precision-recall",
+    "inspection-misjudgment"
+   ],
+   "example": "고객 클레임으로 돌아온 불량은 출하 검사의 미검으로 분류해 원인을 찾습니다."
+  },
+  {
+   "id": "synthetic-defect-data",
+   "ko": "합성 결함 데이터",
+   "en": "synthetic defect data",
+   "alt": [
+    "가상 불량 이미지",
+    "합성 불량 데이터"
+   ],
+   "definition": "실제 불량이 적을 때 그래픽, 생성 모델, 시뮬레이션으로 만든 불량 영상이나 신호입니다. 실제 데이터로 성능을 다시 확인해야 합니다.",
+   "category": "quality",
+   "broader": "data-augmentation",
+   "related": [
+    "class-imbalance",
+    "data-augmentation",
+    "defect-detection"
+   ]
+  },
+  {
+   "id": "data-augmentation",
+   "ko": "데이터 증강",
+   "en": "data augmentation",
+   "alt": [
+    "어그멘테이션"
+   ],
+   "definition": "회전, 밝기 변화, 잡음 추가처럼 원본을 변형해 학습 데이터를 늘리는 방법입니다.",
+   "category": "quality",
+   "related": [
+    "synthetic-defect-data",
+    "training-data"
+   ]
+  },
+  {
+   "id": "spc",
+   "ko": "통계적 공정관리",
+   "en": "statistical process control",
+   "alt": [
+    "SPC"
+   ],
+   "definition": "공정에서 측정한 값의 변동을 통계로 감시해 이상 원인을 일찍 찾는 품질 관리 방법입니다.",
+   "category": "quality",
+   "related": [
+    "control-chart",
+    "multivariate-spc"
+   ],
+   "refs": [
+    "ISO 7870"
+   ]
+  },
+  {
+   "id": "control-chart",
+   "ko": "관리도",
+   "en": "control chart",
+   "alt": [
+    "컨트롤 차트",
+    "X-bar R 관리도"
+   ],
+   "definition": "측정값을 시간 순으로 그리고 관리 한계를 그어 우연 변동과 이상 변동을 나누는 그래프입니다.",
+   "category": "quality",
+   "broader": "spc",
+   "related": [
+    "anomaly-detection",
+    "spc"
+   ],
+   "refs": [
+    "ISO 7870-2"
+   ],
+   "example": "관리도의 점이 관리 한계를 벗어나면 작업자가 이상 조치 기록을 남깁니다."
+  },
+  {
+   "id": "multivariate-spc",
+   "ko": "다변량 공정관리",
+   "en": "multivariate statistical process control",
+   "alt": [
+    "MSPC",
+    "다변량 관리도",
+    "T² 관리도"
+   ],
+   "definition": "여러 변수를 한꺼번에 보아 변수 사이의 관계가 깨지는 이상을 찾는 공정 감시 방법입니다.",
+   "category": "quality",
+   "broader": "spc",
+   "related": [
+    "anomaly-detection",
+    "spc"
+   ]
+  },
+  {
+   "id": "process-parameter",
+   "ko": "공정 파라미터",
+   "en": "process parameter",
+   "alt": [
+    "공정 변수",
+    "공정 조건",
+    "운전 조건"
+   ],
+   "definition": "온도, 압력, 속도, 시간처럼 공정 결과에 영향을 주며 조정할 수 있는 조건입니다.",
+   "category": "process",
+   "related": [
+    "process-recipe",
+    "process-parameter-optimization",
+    "design-of-experiments"
+   ]
+  },
+  {
+   "id": "process-recipe",
+   "ko": "레시피",
+   "en": "recipe",
+   "alt": [
+    "공정 레시피",
+    "제조 처방"
+   ],
+   "definition": "제품 하나를 만들기 위한 공정 순서와 단계별 설정값을 묶은 실행 단위입니다. 배치 공정에서 많이 씁니다.",
+   "category": "process",
+   "related": [
+    "process-parameter",
+    "mes"
+   ],
+   "refs": [
+    "IEC 61512"
+   ],
+   "example": "품종이 바뀌면 설비에 그 제품의 레시피를 내려받아 설정값을 바꿉니다."
+  },
+  {
+   "id": "virtual-metrology",
+   "ko": "가상 계측",
+   "en": "virtual metrology",
+   "alt": [
+    "VM",
+    "예측 계측"
+   ],
+   "definition": "실제로 재지 않은 품질 값을 공정 데이터로 예측하는 모델입니다. 측정이 느리거나 표본으로만 재는 공정에서 씁니다.",
+   "category": "process",
+   "broader": "soft-sensor",
+   "related": [
+    "process-parameter",
+    "soft-sensor"
+   ]
+  },
+  {
+   "id": "soft-sensor",
+   "ko": "소프트 센서",
+   "en": "soft sensor",
+   "alt": [
+    "추론 센서",
+    "가상 센서"
+   ],
+   "definition": "직접 재기 어려운 값을 다른 측정값으로 계산해 내는 모델 기반 센서입니다.",
+   "category": "process",
+   "related": [
+    "virtual-metrology",
+    "signal-tag"
+   ]
+  },
+  {
+   "id": "process-parameter-optimization",
+   "ko": "공정 파라미터 최적화",
+   "en": "process parameter optimization",
+   "alt": [
+    "공정 조건 최적화",
+    "레시피 최적화"
+   ],
+   "definition": "품질, 생산성, 에너지 같은 목표를 함께 보며 공정 파라미터의 가장 좋은 조합을 찾는 일입니다.",
+   "category": "process",
+   "related": [
+    "design-of-experiments",
+    "bayesian-optimization",
+    "surrogate-model"
+   ]
+  },
+  {
+   "id": "design-of-experiments",
+   "ko": "실험계획법",
+   "en": "design of experiments",
+   "alt": [
+    "DOE",
+    "실험 설계"
+   ],
+   "definition": "적은 실험으로 여러 인자의 영향을 가려내도록 실험 조건의 조합을 미리 짜는 방법입니다.",
+   "category": "process",
+   "broader": "process-parameter-optimization",
+   "related": [
+    "process-parameter-optimization",
+    "bayesian-optimization"
+   ],
+   "refs": [
+    "ISO 3534-3"
+   ]
+  },
+  {
+   "id": "bayesian-optimization",
+   "ko": "베이지안 최적화",
+   "en": "Bayesian optimization",
+   "alt": [
+    "BO"
+   ],
+   "definition": "지금까지의 실험 결과로 다음에 시험할 조건을 고르며 적은 시도로 최적점에 다가가는 방법입니다. 실험 한 번이 비싼 공정에 맞습니다.",
+   "category": "process",
+   "broader": "process-parameter-optimization",
+   "related": [
+    "surrogate-model",
+    "process-parameter-optimization",
+    "design-of-experiments"
+   ]
+  },
+  {
+   "id": "surrogate-model",
+   "ko": "대리 모델",
+   "en": "surrogate model",
+   "alt": [
+    "메타 모델",
+    "서로게이트"
+   ],
+   "definition": "시간이 오래 걸리는 시뮬레이션이나 실험을 대신해 빠르게 결과를 근사하는 모델입니다.",
+   "category": "process",
+   "related": [
+    "process-simulation",
+    "bayesian-optimization"
+   ]
+  },
+  {
+   "id": "mfg-digital-twin",
+   "ko": "디지털 트윈",
+   "en": "digital twin",
+   "alt": [
+    "디지털쌍둥이",
+    "가상 공장"
+   ],
+   "definition": "실제 설비나 공정의 상태를 데이터로 계속 받아 가상 모델에 반영하고, 그 모델로 감시와 예측을 하는 구성입니다. 실물과 데이터가 이어져 있다는 점이 단순 시뮬레이션과 다릅니다.",
+   "category": "process",
+   "related": [
+    "process-simulation",
+    "discrete-event-simulation",
+    "aas"
+   ],
+   "refs": [
+    "ISO 23247"
+   ]
+  },
+  {
+   "id": "process-simulation",
+   "ko": "공정 시뮬레이션",
+   "en": "process simulation",
+   "alt": [
+    "공정 모사"
+   ],
+   "definition": "물리 법칙이나 공정 모델로 조건을 바꿨을 때의 결과를 계산해 보는 일입니다.",
+   "category": "process",
+   "related": [
+    "mfg-digital-twin",
+    "surrogate-model"
+   ]
+  },
+  {
+   "id": "discrete-event-simulation",
+   "ko": "이산사건 시뮬레이션",
+   "en": "discrete event simulation",
+   "alt": [
+    "DES",
+    "물류 시뮬레이션",
+    "라인 시뮬레이션"
+   ],
+   "definition": "작업 시작, 완료, 고장 같은 사건이 일어나는 시점만 따라가며 라인과 물류의 흐름을 모사하는 방법입니다. 병목과 재공을 미리 볼 때 씁니다.",
+   "category": "process",
+   "broader": "process-simulation",
+   "related": [
+    "production-bottleneck",
+    "process-simulation",
+    "capacity-planning"
+   ]
+  },
+  {
+   "id": "production-planning",
+   "ko": "생산 계획",
+   "en": "production planning",
+   "alt": [
+    "생산계획",
+    "PP"
+   ],
+   "definition": "수요와 재고, 생산능력을 보고 무엇을 언제 얼마나 만들지 정하는 일입니다.",
+   "category": "planning",
+   "related": [
+    "mps",
+    "capacity-planning"
+   ]
+  },
+  {
+   "id": "demand-forecasting",
+   "ko": "수요 예측",
+   "en": "demand forecasting",
+   "alt": [
+    "판매 예측"
+   ],
+   "definition": "과거 판매와 시장 정보로 앞으로의 제품 수요를 추정하는 일입니다. 생산 계획의 출발점입니다.",
+   "category": "planning",
+   "broader": "production-planning",
+   "related": [
+    "production-planning",
+    "mps"
+   ]
+  },
+  {
+   "id": "mps",
+   "ko": "기준생산계획",
+   "en": "master production schedule",
+   "alt": [
+    "MPS",
+    "주생산계획"
+   ],
+   "definition": "완제품을 기간별로 몇 개 만들지 확정한 계획입니다. 자재 소요 계산의 입력이 됩니다.",
+   "category": "planning",
+   "broader": "production-planning",
+   "related": [
+    "mrp",
+    "production-planning",
+    "demand-forecasting"
+   ]
+  },
+  {
+   "id": "mrp",
+   "ko": "자재소요계획",
+   "en": "material requirements planning",
+   "alt": [
+    "MRP"
+   ],
+   "definition": "기준생산계획과 자재명세서, 재고로 필요한 자재의 수량과 발주 시점을 계산하는 방법입니다.",
+   "category": "planning",
+   "broader": "production-planning",
+   "related": [
+    "mps",
+    "bom",
+    "erp"
+   ]
+  },
+  {
+   "id": "capacity-planning",
+   "ko": "생산능력 계획",
+   "en": "capacity planning",
+   "alt": [
+    "능력 계획",
+    "CRP",
+    "캐파 계획"
+   ],
+   "definition": "계획한 생산량을 설비와 인력으로 감당할 수 있는지 따지고 부족분을 맞추는 일입니다.",
+   "category": "planning",
+   "broader": "production-planning",
+   "related": [
+    "production-bottleneck",
+    "production-planning",
+    "mps"
+   ]
+  },
+  {
+   "id": "aps",
+   "ko": "고급계획스케줄링",
+   "en": "advanced planning and scheduling",
+   "alt": [
+    "APS"
+   ],
+   "definition": "자재, 설비 능력, 작업 순서 제약을 함께 고려해 실행 가능한 계획과 일정을 계산하는 시스템입니다.",
+   "category": "planning",
+   "related": [
+    "production-scheduling",
+    "mes",
+    "erp"
+   ]
+  },
+  {
+   "id": "production-scheduling",
+   "ko": "생산 스케줄링",
+   "en": "production scheduling",
+   "alt": [
+    "작업 일정 계획",
+    "스케줄링"
+   ],
+   "definition": "작업을 어느 설비에서 어떤 순서로 언제 할지 정하는 일입니다. 납기, 준비 시간, 설비 제약을 함께 맞춥니다.",
+   "category": "planning",
+   "broader": "production-planning",
+   "related": [
+    "aps",
+    "job-shop-scheduling",
+    "production-order"
+   ],
+   "example": "생산 스케줄은 설비별 간트 차트로 그려 현장에 공유합니다."
+  },
+  {
+   "id": "job-shop-scheduling",
+   "ko": "잡숍 스케줄링",
+   "en": "job shop scheduling",
+   "alt": [
+    "개별 작업장 일정 계획",
+    "JSSP"
+   ],
+   "definition": "제품마다 거치는 설비 순서가 다른 작업장에서 일정을 짜는 문제입니다. 조합이 많아 최적화 알고리즘이나 강화학습을 씁니다.",
+   "category": "planning",
+   "broader": "production-scheduling",
+   "related": [
+    "production-scheduling",
+    "aps"
+   ]
+  },
+  {
+   "id": "production-bottleneck",
+   "ko": "병목 공정",
+   "en": "bottleneck",
+   "alt": [
+    "병목",
+    "제약 공정"
+   ],
+   "definition": "라인 전체의 생산량을 정하는 가장 느린 공정이나 설비입니다. 병목이 아닌 곳을 개선해도 전체 생산량은 늘지 않습니다.",
+   "category": "planning",
+   "related": [
+    "capacity-planning",
+    "discrete-event-simulation"
+   ]
+  },
+  {
+   "id": "industrial-llm",
+   "ko": "제조 특화 LLM",
+   "en": "industrial large language model",
+   "alt": [
+    "산업 LLM",
+    "도메인 LLM"
+   ],
+   "definition": "제조 문서, 용어, 데이터로 맞추어 현장 질문과 문서 작업에 쓰는 대규모 언어 모델입니다. 범용 모델에 검색이나 미세 조정을 더해 만듭니다.",
+   "category": "llm",
+   "related": [
+    "mfg-ai-agent",
+    "manual-rag",
+    "llm-hallucination"
+   ]
+  },
+  {
+   "id": "manual-rag",
+   "ko": "매뉴얼 RAG",
+   "en": "manual RAG",
+   "alt": [
+    "설비 매뉴얼 질의응답",
+    "문서 질의응답"
+   ],
+   "definition": "설비 매뉴얼, 작업 표준서, 품질 기준서를 검색 대상으로 삼아 현장 질문에 답하는 RAG입니다.",
+   "category": "llm",
+   "related": [
+    "work-instruction",
+    "source-grounding",
+    "industrial-llm"
+   ]
+  },
+  {
+   "id": "mfg-ontology",
+   "ko": "제조 온톨로지",
+   "en": "manufacturing ontology",
+   "alt": [
+    "제조 도메인 온톨로지"
+   ],
+   "definition": "설비, 공정, 제품, 자재, 품질 기록 같은 개념과 그 관계를 정해 둔 공유 어휘입니다. 시스템마다 다른 이름을 같은 뜻으로 묶는 기준이 됩니다.",
+   "category": "llm",
+   "related": [
+    "mfg-knowledge-graph",
+    "ontology-based-query"
+   ]
+  },
+  {
+   "id": "mfg-knowledge-graph",
+   "ko": "제조 지식그래프",
+   "en": "manufacturing knowledge graph",
+   "alt": [
+    "제조 KG"
+   ],
+   "definition": "제조 온톨로지에 맞춰 실제 설비, 로트, 고장, 문서를 노드와 관계로 연결한 데이터입니다.",
+   "category": "llm",
+   "related": [
+    "mfg-ontology",
+    "ontology-based-query"
+   ]
+  },
+  {
+   "id": "ontology-based-query",
+   "ko": "온톨로지 기반 질의",
+   "en": "ontology-based query",
+   "alt": [
+    "시맨틱 질의",
+    "개념 기반 질의"
+   ],
+   "definition": "테이블 이름이 아니라 온톨로지의 개념과 관계로 질문을 적어 여러 원천 데이터를 함께 묻는 방식입니다.",
+   "category": "llm",
+   "related": [
+    "mfg-ontology",
+    "mfg-knowledge-graph"
+   ]
+  },
+  {
+   "id": "mfg-ai-agent",
+   "ko": "제조 AI 에이전트",
+   "en": "manufacturing AI agent",
+   "alt": [
+    "AI 에이전트",
+    "에이전트"
+   ],
+   "definition": "언어 모델이 목표에 맞춰 데이터 조회, 계산, 문서 작성 같은 도구를 골라 쓰며 여러 단계 업무를 처리하는 프로그램입니다. 설비를 직접 조작하는 결정은 사람에게 남깁니다.",
+   "category": "llm",
+   "related": [
+    "human-in-the-loop",
+    "industrial-llm"
+   ]
+  },
+  {
+   "id": "work-instruction",
+   "ko": "작업 표준서",
+   "en": "work instruction",
+   "alt": [
+    "작업 지도서",
+    "SOP",
+    "표준 작업서"
+   ],
+   "definition": "작업자가 한 공정을 어떤 순서와 기준으로 해야 하는지 적은 문서입니다. 매뉴얼 RAG의 주요 검색 대상입니다.",
+   "category": "llm",
+   "related": [
+    "manual-rag",
+    "work-order-summarization"
+   ]
+  },
+  {
+   "id": "work-order-summarization",
+   "ko": "작업 지시 요약",
+   "en": "work order summarization",
+   "alt": [
+    "작업 기록 요약",
+    "교대 일지 요약"
+   ],
+   "definition": "생산 오더, 정비 기록, 교대 일지처럼 길고 흩어진 기록을 언어 모델로 요약해 담당자에게 넘기는 일입니다.",
+   "category": "llm",
+   "related": [
+    "production-order",
+    "work-instruction",
+    "industrial-llm"
+   ]
+  },
+  {
+   "id": "source-grounding",
+   "ko": "근거 인용",
+   "en": "source grounding",
+   "alt": [
+    "그라운딩",
+    "출처 표시"
+   ],
+   "definition": "모델이 낸 답의 각 주장에 어떤 문서나 데이터가 근거인지 붙이는 일입니다. 사람이 답을 확인할 수 있게 합니다.",
+   "category": "llm",
+   "related": [
+    "llm-hallucination",
+    "manual-rag",
+    "explainable-ai"
+   ],
+   "example": "답변 아래에 근거가 된 작업 표준서의 문서 번호와 쪽을 함께 보여 줍니다."
+  },
+  {
+   "id": "llm-hallucination",
+   "ko": "환각",
+   "en": "hallucination",
+   "alt": [
+    "할루시네이션",
+    "지어낸 답"
+   ],
+   "definition": "언어 모델이 근거 없는 내용을 사실처럼 만들어 내는 현상입니다. 수치와 설비 번호가 틀리면 현장 사고로 이어질 수 있습니다.",
+   "category": "llm",
+   "related": [
+    "source-grounding",
+    "industrial-llm"
+   ],
+   "example": "답에 매뉴얼에 없는 체결 토크 값이 나오면 원문과 대조해 환각인지 확인합니다."
+  },
+  {
+   "id": "human-in-the-loop",
+   "ko": "사람 확인 단계",
+   "en": "human-in-the-loop",
+   "alt": [
+    "HITL",
+    "사람 개입"
+   ],
+   "definition": "AI의 판정이나 제안을 실제로 적용하기 전에 사람이 검토하고 승인하는 단계를 두는 설계입니다.",
+   "category": "llm",
+   "related": [
+    "mfg-ai-agent",
+    "explainable-ai"
+   ],
+   "example": "모델이 제안한 공정 조건 변경은 공정 기술자가 승인한 뒤에만 설비에 반영합니다."
+  },
+  {
+   "id": "mlops",
+   "ko": "MLOps",
+   "en": "machine learning operations",
+   "alt": [
+    "ML 운영",
+    "머신러닝 운영"
+   ],
+   "definition": "모델의 학습, 배포, 감시, 재학습을 반복 가능한 절차와 도구로 묶어 운영하는 방식입니다.",
+   "category": "ops",
+   "related": [
+    "model-registry",
+    "model-monitoring",
+    "model-retraining"
+   ]
+  },
+  {
+   "id": "model-registry",
+   "ko": "모델 저장소",
+   "en": "model registry",
+   "alt": [
+    "모델 레지스트리"
+   ],
+   "definition": "학습한 모델을 버전, 학습 데이터, 성능 기록과 함께 보관하고 어느 버전이 운영 중인지 관리하는 곳입니다.",
+   "category": "ops",
+   "broader": "mlops",
+   "related": [
+    "model-validation",
+    "mlops"
+   ],
+   "example": "운영에 올린 모델 버전에 운영 중 표시를 하고, 이전 버전은 되돌릴 수 있게 남깁니다."
+  },
+  {
+   "id": "feature-store",
+   "ko": "특징 저장소",
+   "en": "feature store",
+   "alt": [
+    "피처 스토어"
+   ],
+   "definition": "학습과 운영에서 같은 방식으로 계산한 특징 값을 함께 쓰도록 모아 두는 저장소입니다.",
+   "category": "ops",
+   "broader": "mlops",
+   "related": [
+    "feature-extraction",
+    "mlops"
+   ]
+  },
+  {
+   "id": "model-monitoring",
+   "ko": "모델 감시",
+   "en": "model monitoring",
+   "alt": [
+    "모델 모니터링",
+    "성능 감시"
+   ],
+   "definition": "운영 중인 모델의 입력 분포, 예측 결과, 실제 정답과의 차이를 계속 지켜보는 일입니다.",
+   "category": "ops",
+   "broader": "mlops",
+   "related": [
+    "data-drift",
+    "model-retraining"
+   ]
+  },
+  {
+   "id": "model-retraining",
+   "ko": "모델 재학습",
+   "en": "model retraining",
+   "alt": [
+    "재훈련",
+    "리트레이닝"
+   ],
+   "definition": "새로 쌓인 데이터로 모델을 다시 학습해 바뀐 공정 조건에 맞추는 일입니다. 재학습한 모델도 검증을 거쳐 배포합니다.",
+   "category": "ops",
+   "broader": "mlops",
+   "related": [
+    "concept-drift",
+    "model-validation"
+   ]
+  },
+  {
+   "id": "model-validation",
+   "ko": "모델 검증",
+   "en": "model validation",
+   "alt": [
+    "성능 검증",
+    "모델 밸리데이션"
+   ],
+   "definition": "모델이 운영에 쓰일 만큼 정확하고 안정적인지 학습에 쓰지 않은 데이터와 현장 조건으로 확인하는 일입니다.",
+   "category": "ops",
+   "related": [
+    "precision-recall",
+    "data-leakage"
+   ]
+  },
+  {
+   "id": "precision-recall",
+   "ko": "정밀도와 재현율",
+   "en": "precision and recall",
+   "alt": [
+    "정밀도",
+    "재현율",
+    "검출률"
+   ],
+   "definition": "불량이라고 판정한 것 가운데 진짜 불량의 비율이 정밀도이고, 진짜 불량 가운데 잡아낸 비율이 재현율입니다. 과검과 미검을 각각 보여 줍니다.",
+   "category": "ops",
+   "related": [
+    "overkill",
+    "escape-defect"
+   ]
+  },
+  {
+   "id": "edge-inference",
+   "ko": "엣지 추론",
+   "en": "edge inference",
+   "alt": [
+    "온디바이스 추론",
+    "현장 추론"
+   ],
+   "definition": "모델을 클라우드가 아니라 설비 옆 장치에서 실행해 결과를 바로 내는 방식입니다. 지연이 짧고 데이터를 밖으로 내보내지 않아도 됩니다.",
+   "category": "ops",
+   "related": [
+    "edge-gateway",
+    "vision-inspection"
+   ]
+  },
+  {
+   "id": "explainable-ai",
+   "ko": "설명 가능한 AI",
+   "en": "explainable AI",
+   "alt": [
+    "XAI",
+    "설명 가능성"
+   ],
+   "definition": "모델이 왜 그 판단을 했는지 사람이 이해할 수 있게 근거를 보여 주는 기법과 성질입니다. 공정 기술자가 결과를 받아들이는 데 필요합니다.",
+   "category": "ops",
+   "related": [
+    "feature-attribution",
+    "source-grounding"
+   ]
+  },
+  {
+   "id": "feature-attribution",
+   "ko": "특징 기여도",
+   "en": "feature attribution",
+   "alt": [
+    "변수 중요도",
+    "SHAP 값",
+    "히트맵"
+   ],
+   "definition": "예측 하나에 각 입력 변수나 영상 영역이 얼마나 기여했는지 나타낸 값입니다.",
+   "category": "ops",
+   "broader": "explainable-ai",
+   "related": [
+    "feature-extraction",
+    "explainable-ai"
+   ]
+  },
+  {
+   "id": "aas",
+   "ko": "자산관리셸",
+   "en": "asset administration shell",
+   "alt": [
+    "AAS",
+    "관리 셸"
+   ],
+   "definition": "설비나 부품 하나의 정보를 표준 구조의 서브모델로 묶어 디지털로 표현하는 껍데기입니다. 회사와 시스템 사이에서 자산 정보를 같은 형식으로 주고받게 합니다.",
+   "category": "adopt",
+   "related": [
+    "mfg-digital-twin",
+    "opc-ua",
+    "digital-product-passport"
+   ],
+   "refs": [
+    "IEC 63278"
+   ]
+  },
+  {
+   "id": "industrial-data-space",
+   "ko": "데이터 공간",
+   "en": "data space",
+   "alt": [
+    "데이터 스페이스",
+    "산업 데이터 공간"
+   ],
+   "definition": "여러 회사가 데이터를 한곳에 모으지 않고 각자 보관하면서, 정한 규칙과 계약에 따라 필요한 만큼만 주고받는 구조입니다.",
+   "category": "adopt",
+   "related": [
+    "catena-x",
+    "aas"
+   ]
+  },
+  {
+   "id": "catena-x",
+   "ko": "Catena-X",
+   "en": "Catena-X",
+   "alt": [
+    "카테나엑스"
+   ],
+   "definition": "자동차 공급망의 회사들이 데이터 공간 방식으로 부품 추적, 탄소 배출량 같은 데이터를 주고받으려고 만든 협력 생태계입니다.",
+   "category": "adopt",
+   "broader": "industrial-data-space",
+   "related": [
+    "aas",
+    "mfg-traceability"
+   ]
+  },
+  {
+   "id": "digital-product-passport",
+   "ko": "디지털 제품 여권",
+   "en": "digital product passport",
+   "alt": [
+    "DPP",
+    "제품 여권"
+   ],
+   "definition": "제품의 소재, 원산지, 수리 방법, 재활용 정보를 디지털로 담아 제품과 함께 넘기는 기록입니다.",
+   "category": "adopt",
+   "related": [
+    "aas",
+    "mfg-traceability"
+   ],
+   "refs": [
+    "EU ESPR"
+   ]
+  },
+  {
+   "id": "mfg-data-governance",
+   "ko": "제조 데이터 거버넌스",
+   "en": "manufacturing data governance",
+   "alt": [
+    "데이터 거버넌스",
+    "데이터 관리 체계"
+   ],
+   "definition": "제조 데이터의 주인, 품질 기준, 접근 권한, 보관 기간을 정하고 지키게 하는 조직의 규칙과 역할입니다.",
+   "category": "adopt",
+   "related": [
+    "data-contract",
+    "data-maturity-level"
+   ],
+   "refs": [
+    "ISO/IEC 38505-1"
+   ]
+  },
+  {
+   "id": "data-maturity-level",
+   "ko": "데이터 성숙도",
+   "en": "data maturity level",
+   "alt": [
+    "데이터 준비도",
+    "데이터 성숙 수준"
+   ],
+   "definition": "공장이 데이터를 얼마나 모으고, 잇고, 믿을 수 있게 관리하는지 단계로 나타낸 정도입니다. AI 과제를 고르기 전에 먼저 봅니다.",
+   "category": "adopt",
+   "related": [
+    "ai-use-case-selection",
+    "smart-factory",
+    "mfg-data-governance"
+   ]
+  },
+  {
+   "id": "ai-use-case-selection",
+   "ko": "AI 과제 선정",
+   "en": "AI use case selection",
+   "alt": [
+    "과제 발굴",
+    "유스케이스 선정"
+   ],
+   "definition": "현장 문제 가운데 데이터가 있고 효과가 크며 실패 비용이 감당할 만한 것을 골라 AI 과제로 정하는 일입니다.",
+   "category": "adopt",
+   "related": [
+    "ai-poc",
+    "ai-roi"
+   ]
+  },
+  {
+   "id": "ai-poc",
+   "ko": "개념 검증",
+   "en": "proof of concept",
+   "alt": [
+    "PoC",
+    "시범 과제"
+   ],
+   "definition": "작은 범위의 실제 데이터로 AI가 문제를 풀 수 있는지 짧은 기간에 확인하는 시험 과제입니다.",
+   "category": "adopt",
+   "related": [
+    "ai-use-case-selection",
+    "pilot-to-scale"
+   ]
+  },
+  {
+   "id": "pilot-to-scale",
+   "ko": "현장 확산",
+   "en": "pilot-to-scale",
+   "alt": [
+    "스케일업",
+    "전개",
+    "롤아웃"
+   ],
+   "definition": "개념 검증에 성공한 모델을 다른 라인과 공장으로 넓혀 상시 운영에 넣는 단계입니다. 데이터 연결과 운영 체계가 없어 여기서 멈추는 과제가 많습니다.",
+   "category": "adopt",
+   "related": [
+    "ai-poc",
+    "mlops"
+   ]
+  },
+  {
+   "id": "ai-roi",
+   "ko": "AI 투자수익률",
+   "en": "AI return on investment",
+   "alt": [
+    "ROI",
+    "투자 효과"
+   ],
+   "definition": "AI 도입에 든 비용 대비 불량 감소, 생산성 향상, 인력 절감으로 얻은 효과를 돈으로 따진 비율입니다.",
+   "category": "adopt",
+   "related": [
+    "ai-poc",
+    "ai-use-case-selection"
+   ]
+  },
+  {
+   "id": "operational-technology",
+   "ko": "운영기술",
+   "en": "operational technology",
+   "alt": [
+    "OT",
+    "제어 계층"
+   ],
+   "definition": "설비와 공정을 직접 감시하고 제어하는 하드웨어와 소프트웨어를 묶어 부르는 말입니다. 사무 정보 시스템과 보안, 가용성, 교체 주기의 기준이 다릅니다.",
+   "category": "system",
+   "related": [
+    "isa95-hierarchy",
+    "plc",
+    "scada"
+   ],
+   "refs": [
+    "IEC 62443"
+   ]
+  },
+  {
+   "id": "industrial-protocol",
+   "ko": "산업 통신 프로토콜",
+   "en": "industrial communication protocol",
+   "alt": [
+    "필드버스",
+    "산업용 프로토콜"
+   ],
+   "definition": "설비, 제어기, 상위 시스템이 데이터를 주고받는 방식을 정한 통신 규약입니다. 같은 공장 안에서도 여러 프로토콜이 섞여 있어 변환이 필요합니다.",
+   "category": "system",
+   "related": [
+    "edge-gateway",
+    "opc-ua",
+    "mqtt"
+   ],
+   "refs": [
+    "IEC 61158"
+   ]
+  },
+  {
+   "id": "data-preprocessing",
+   "ko": "데이터 전처리",
+   "en": "data preprocessing",
+   "alt": [
+    "프리프로세싱"
+   ],
+   "definition": "원천 데이터를 모델에 넣을 수 있게 고치고, 맞추고, 변환하는 작업 전체입니다.",
+   "category": "data",
+   "related": [
+    "training-data",
+    "data-cleansing",
+    "data-alignment",
+    "feature-extraction"
+   ]
+  },
+  {
+   "id": "inspection-misjudgment",
+   "ko": "검사 오판정",
+   "en": "inspection misjudgment",
+   "alt": [
+    "오판정",
+    "판정 오류"
+   ],
+   "definition": "검사에서 실제 상태와 다른 판정을 내리는 일입니다. 양품을 불량으로 보는 과검과 불량을 양품으로 보는 미검으로 나뉩니다.",
+   "category": "quality",
+   "related": [
+    "precision-recall",
+    "vision-inspection"
+   ]
+  }
+ ]
+}

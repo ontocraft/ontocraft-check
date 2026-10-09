@@ -1,0 +1,36 @@
+# GitHub 에서 릴리스(Release)를 발행하면 PyPI 에 올립니다.
+# 토큰 없이 PyPI 「신뢰 게시(Trusted Publishing)」로 인증합니다. PyPI 쪽에 이 저장소·이 파일·환경 pypi 를 등록해 둡니다.
+name: publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv sync --locked --extra mcp
+      - run: uv run pytest -q
+      - run: uv build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1

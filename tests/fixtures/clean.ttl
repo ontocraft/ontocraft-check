@@ -1,0 +1,37 @@
+@prefix ex:   <https://example.org/clean#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+# 함정이 없는 작은 온톨로지입니다. 모든 규칙이 아무것도 잡지 않아야 합니다.
+<https://example.org/clean> a owl:Ontology ;
+    rdfs:label "깨끗한 예시"@ko , "Clean example"@en ;
+    owl:versionInfo "1.0" ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> .
+
+skos:definition a owl:AnnotationProperty .
+dct:license a owl:AnnotationProperty .
+
+ex:Agent a owl:Class ; rdfs:label "행위자"@ko , "Agent"@en ;
+    skos:definition "일을 하는 주체입니다."@ko .
+ex:Person a owl:Class ; rdfs:subClassOf ex:Agent ; rdfs:label "사람"@ko , "Person"@en ;
+    skos:definition "사람입니다."@ko .
+ex:Organization a owl:Class ; rdfs:subClassOf ex:Agent ; rdfs:label "단체"@ko , "Organization"@en ;
+    rdfs:comment "회사나 기관입니다."@ko .
+[] a owl:AllDisjointClasses ; owl:members ( ex:Person ex:Organization ) .
+
+ex:memberOf a owl:ObjectProperty ; rdfs:label "소속"@ko , "member of"@en ;
+    skos:definition "사람이 속한 단체입니다."@ko ;
+    rdfs:domain ex:Person ; rdfs:range ex:Organization ; owl:inverseOf ex:hasMember .
+ex:hasMember a owl:ObjectProperty ; rdfs:label "구성원"@ko , "has member"@en ;
+    skos:definition "단체에 속한 사람입니다."@ko ;
+    rdfs:domain ex:Organization ; rdfs:range ex:Person .
+ex:knows a owl:ObjectProperty , owl:SymmetricProperty ; rdfs:label "아는 사이"@ko , "knows"@en ;
+    skos:definition "서로 아는 두 사람입니다. 대칭 속성이라 역관계를 따로 두지 않습니다."@ko ;
+    rdfs:domain ex:Person ; rdfs:range ex:Person .
+ex:name a owl:DatatypeProperty ; rdfs:label "이름"@ko , "name"@en ;
+    skos:definition "행위자의 이름입니다."@ko ;
+    rdfs:domain ex:Agent ; rdfs:range xsd:string .

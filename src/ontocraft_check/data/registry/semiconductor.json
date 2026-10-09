@@ -1,0 +1,1735 @@
+{
+ "registry": "OntoCraft 한국 산업 용어 등록부",
+ "registry_en": "OntoCraft Korean Industry Term Registry",
+ "publisher": "OntoCraft",
+ "license": "CC BY 4.0",
+ "license_url": "https://creativecommons.org/licenses/by/4.0/",
+ "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
+ "base_uri": "https://w3id.org/ontocraft/terms/",
+ "uri_template": "https://w3id.org/ontocraft/terms/{id}",
+ "snapshot": "2026-10-09",
+ "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
+ "domain": {
+  "id": "semiconductor",
+  "name": "반도체",
+  "en": "Semiconductors"
+ },
+ "version": "0.1.1",
+ "updated": "2026-10-09",
+ "categories": [
+  {
+   "id": "device",
+   "name": "소자와 제품",
+   "en": "Devices and products"
+  },
+  {
+   "id": "front-end",
+   "name": "전공정",
+   "en": "Front-end wafer processing"
+  },
+  {
+   "id": "back-end",
+   "name": "후공정",
+   "en": "Back-end test and packaging"
+  },
+  {
+   "id": "fab-ops",
+   "name": "팹 운영",
+   "en": "Fab operations"
+  },
+  {
+   "id": "control",
+   "name": "장비와 공정 제어",
+   "en": "Equipment and process control"
+  },
+  {
+   "id": "quality",
+   "name": "품질과 계측",
+   "en": "Quality and metrology"
+  },
+  {
+   "id": "utility",
+   "name": "팹 유틸리티",
+   "en": "Fab utilities"
+  },
+  {
+   "id": "standard",
+   "name": "데이터 표준",
+   "en": "Data standards"
+  }
+ ],
+ "terms": [
+  {
+   "id": "memory-semiconductor",
+   "ko": "메모리 반도체",
+   "en": "memory semiconductor",
+   "alt": [
+    "메모리",
+    "메모리 칩"
+   ],
+   "definition": "데이터를 저장하는 일을 맡는 반도체입니다. 전원이 꺼지면 내용이 사라지는 휘발성 메모리와 남는 비휘발성 메모리로 나눕니다.",
+   "category": "device",
+   "related": [
+    "dram",
+    "nand-flash"
+   ]
+  },
+  {
+   "id": "dram",
+   "ko": "DRAM",
+   "en": "dynamic random-access memory",
+   "alt": [
+    "디램",
+    "D램"
+   ],
+   "definition": "트랜지스터 하나와 커패시터 하나로 셀을 만들고 커패시터의 전하로 값을 저장하는 휘발성 메모리입니다. 전하가 새어 나가므로 주기적으로 다시 써 주어야 합니다.",
+   "category": "device",
+   "broader": "memory-semiconductor",
+   "related": [
+    "memory-cell",
+    "nand-flash",
+    "hbm"
+   ],
+   "refs": [
+    "JEDEC JESD79"
+   ]
+  },
+  {
+   "id": "nand-flash",
+   "ko": "NAND 플래시",
+   "en": "NAND flash memory",
+   "alt": [
+    "낸드",
+    "낸드 플래시"
+   ],
+   "definition": "셀을 직렬로 이어 블록 단위로 지우는 비휘발성 메모리입니다. SSD와 모바일 저장장치의 주 저장 매체로 씁니다.",
+   "category": "device",
+   "broader": "memory-semiconductor",
+   "related": [
+    "nand-3d",
+    "memory-cell"
+   ],
+   "refs": [
+    "JEDEC JESD230"
+   ]
+  },
+  {
+   "id": "nand-3d",
+   "ko": "3D NAND",
+   "en": "3D NAND flash",
+   "alt": [
+    "V낸드",
+    "수직 적층 낸드"
+   ],
+   "definition": "NAND 셀을 웨이퍼 위로 여러 층 쌓아 같은 면적에 더 많은 비트를 담는 구조입니다. 층수가 늘수록 깊은 구멍을 뚫고 채우는 공정이 어려워집니다.",
+   "category": "device",
+   "broader": "nand-flash",
+   "related": [
+    "wafer-etching",
+    "thin-film-deposition"
+   ]
+  },
+  {
+   "id": "hbm",
+   "ko": "HBM",
+   "en": "high bandwidth memory",
+   "alt": [
+    "고대역폭 메모리"
+   ],
+   "definition": "DRAM 다이를 여러 장 쌓고 실리콘 관통 전극으로 이어 넓은 버스로 데이터를 주고받게 만든 메모리입니다. 주로 AI 가속기와 같은 패키지 안에 붙여 씁니다.",
+   "category": "device",
+   "broader": "dram",
+   "related": [
+    "through-silicon-via",
+    "chip-bump",
+    "hybrid-bonding"
+   ],
+   "refs": [
+    "JEDEC JESD235"
+   ]
+  },
+  {
+   "id": "memory-cell",
+   "ko": "메모리 셀",
+   "en": "memory cell",
+   "alt": [
+    "셀",
+    "비트 셀"
+   ],
+   "definition": "메모리에서 한 비트 또는 몇 비트를 저장하는 가장 작은 회로 단위입니다. 셀 배열의 밀도가 칩 용량과 원가를 정합니다.",
+   "category": "device",
+   "related": [
+    "dram",
+    "nand-flash"
+   ]
+  },
+  {
+   "id": "mosfet",
+   "ko": "MOSFET",
+   "en": "metal-oxide-semiconductor field-effect transistor",
+   "alt": [
+    "모스펫",
+    "MOS 트랜지스터"
+   ],
+   "definition": "게이트에 건 전압으로 소스와 드레인 사이의 전류를 켜고 끄는 트랜지스터입니다. 메모리 셀과 주변 회로의 기본 소자입니다.",
+   "category": "device",
+   "related": [
+    "memory-cell",
+    "ion-implantation"
+   ]
+  },
+  {
+   "id": "semiconductor-wafer",
+   "ko": "웨이퍼",
+   "en": "wafer",
+   "alt": [
+    "실리콘 웨이퍼",
+    "기판"
+   ],
+   "definition": "단결정 실리콘을 얇은 원판으로 잘라 연마한 기판입니다. 팹에서 공정과 데이터를 추적하는 기본 단위가 됩니다.",
+   "category": "device",
+   "related": [
+    "wafer-die",
+    "wafer-lot"
+   ],
+   "refs": [
+    "SEMI M1"
+   ]
+  },
+  {
+   "id": "wafer-die",
+   "ko": "다이",
+   "en": "die",
+   "alt": [
+    "칩",
+    "다이스"
+   ],
+   "definition": "웨이퍼 위에 같은 회로를 반복해 찍은 하나하나의 사각 영역입니다. 자르기 전에는 웨이퍼 안의 좌표로, 자른 뒤에는 칩으로 다룹니다.",
+   "category": "device",
+   "related": [
+    "semiconductor-wafer",
+    "wafer-map"
+   ]
+  },
+  {
+   "id": "technology-node",
+   "ko": "공정 노드",
+   "en": "technology node",
+   "alt": [
+    "테크 노드",
+    "세대"
+   ],
+   "definition": "공정 세대를 가리키는 이름입니다. 예전에는 최소 선폭을 뜻했지만 지금은 세대를 구분하는 이름에 가깝습니다.",
+   "category": "device",
+   "related": [
+    "critical-dimension",
+    "photolithography"
+   ],
+   "refs": [
+    "IRDS"
+   ]
+  },
+  {
+   "id": "known-good-die",
+   "ko": "KGD",
+   "en": "known good die",
+   "alt": [
+    "검증된 양품 다이"
+   ],
+   "definition": "패키지에 넣기 전에 웨이퍼 상태에서 시험해 양품으로 확인한 다이입니다. 여러 다이를 쌓는 제품은 한 장만 불량이어도 패키지 전체를 버리므로 중요합니다.",
+   "category": "device",
+   "broader": "wafer-die",
+   "related": [
+    "wafer-probe-test",
+    "hbm"
+   ]
+  },
+  {
+   "id": "front-end-process",
+   "ko": "전공정",
+   "en": "front-end process",
+   "alt": [
+    "웨이퍼 공정",
+    "팹 공정",
+    "FAB 공정"
+   ],
+   "definition": "빈 웨이퍼 위에 소자와 배선을 만드는 공정 전체입니다. 산화, 포토, 식각, 증착, 이온주입, 연마, 세정을 수백 단계 되풀이합니다.",
+   "category": "front-end",
+   "related": [
+    "back-end-process",
+    "process-flow"
+   ]
+  },
+  {
+   "id": "beol",
+   "ko": "BEOL",
+   "en": "back end of line",
+   "alt": [
+    "배선 공정"
+   ],
+   "definition": "전공정 가운데 소자 위에 금속 배선과 절연막을 쌓는 뒤쪽 단계입니다. 패키징을 뜻하는 후공정과 다릅니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "back-end-process",
+    "front-end-process",
+    "thin-film-deposition",
+    "chemical-mechanical-polishing"
+   ]
+  },
+  {
+   "id": "thermal-oxidation",
+   "ko": "산화",
+   "en": "thermal oxidation",
+   "alt": [
+    "산화 공정",
+    "옥시데이션"
+   ],
+   "definition": "높은 온도에서 실리콘 표면을 산소나 수증기와 반응시켜 산화막을 기르는 공정입니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "diffusion-process",
+    "film-thickness"
+   ]
+  },
+  {
+   "id": "diffusion-process",
+   "ko": "확산 공정",
+   "en": "diffusion process",
+   "alt": [
+    "확산",
+    "퍼니스 공정"
+   ],
+   "definition": "여러 장의 웨이퍼를 고온 로에 넣어 산화, 불순물 확산, 열처리를 하는 공정을 묶어 부르는 말입니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "thermal-oxidation",
+    "wafer-anneal"
+   ]
+  },
+  {
+   "id": "ion-implantation",
+   "ko": "이온주입",
+   "en": "ion implantation",
+   "alt": [
+    "임플란트",
+    "IMP"
+   ],
+   "definition": "불순물 원소를 이온으로 만들어 전기장으로 가속해 웨이퍼에 박아 넣는 공정입니다. 넣는 양과 깊이를 정밀하게 맞출 수 있습니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "wafer-anneal",
+    "mosfet",
+    "photoresist"
+   ]
+  },
+  {
+   "id": "wafer-anneal",
+   "ko": "열처리",
+   "en": "anneal",
+   "alt": [
+    "어닐",
+    "어닐링"
+   ],
+   "definition": "웨이퍼를 가열해 주입한 불순물을 활성화하거나 막의 결함을 회복시키는 공정입니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "ion-implantation",
+    "diffusion-process"
+   ]
+  },
+  {
+   "id": "photolithography",
+   "ko": "포토 공정",
+   "en": "photolithography",
+   "alt": [
+    "포토",
+    "리소그래피",
+    "노광"
+   ],
+   "definition": "감광액을 바른 웨이퍼에 마스크의 회로 무늬를 빛으로 옮기는 공정입니다. 도포, 노광, 현상 단계로 이루어집니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "photoresist",
+    "photomask",
+    "overlay-error"
+   ]
+  },
+  {
+   "id": "photoresist",
+   "ko": "감광액",
+   "en": "photoresist",
+   "alt": [
+    "PR",
+    "포토레지스트"
+   ],
+   "definition": "빛을 받은 부분의 성질이 바뀌어 현상액에 녹거나 남는 고분자 재료입니다. 식각이나 이온주입 때 가림막 구실을 합니다.",
+   "category": "front-end",
+   "related": [
+    "photolithography",
+    "wafer-etching"
+   ]
+  },
+  {
+   "id": "photomask",
+   "ko": "포토마스크",
+   "en": "photomask",
+   "alt": [
+    "마스크",
+    "레티클"
+   ],
+   "definition": "노광 때 회로 무늬를 담아 빛을 통과시키거나 반사하는 원판입니다. 층마다 다른 마스크를 씁니다.",
+   "category": "front-end",
+   "related": [
+    "photolithography",
+    "euv-lithography"
+   ]
+  },
+  {
+   "id": "euv-lithography",
+   "ko": "EUV 노광",
+   "en": "extreme ultraviolet lithography",
+   "alt": [
+    "EUV",
+    "극자외선 노광"
+   ],
+   "definition": "파장이 아주 짧은 극자외선으로 미세한 무늬를 찍는 노광 방식입니다. 진공 안에서 거울로 빛을 반사시켜 씁니다.",
+   "category": "front-end",
+   "broader": "photolithography",
+   "related": [
+    "photomask",
+    "technology-node"
+   ]
+  },
+  {
+   "id": "wafer-etching",
+   "ko": "식각",
+   "en": "etching",
+   "alt": [
+    "에칭",
+    "에치"
+   ],
+   "definition": "감광액이나 하드 마스크로 가리지 않은 부분의 막을 깎아 내는 공정입니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "dry-etching",
+    "photoresist",
+    "critical-dimension"
+   ]
+  },
+  {
+   "id": "dry-etching",
+   "ko": "건식 식각",
+   "en": "dry etching",
+   "alt": [
+    "플라스마 식각",
+    "드라이 에치"
+   ],
+   "definition": "플라스마의 이온과 라디칼로 막을 깎는 식각입니다. 한 방향으로 곧게 깎을 수 있어 미세 무늬에 씁니다.",
+   "category": "front-end",
+   "broader": "wafer-etching",
+   "related": [
+    "process-chamber",
+    "wafer-etching",
+    "process-gas"
+   ]
+  },
+  {
+   "id": "thin-film-deposition",
+   "ko": "증착",
+   "en": "thin film deposition",
+   "alt": [
+    "디포",
+    "박막 증착"
+   ],
+   "definition": "웨이퍼 위에 절연막, 금속막 같은 얇은 막을 입히는 공정을 통틀어 부르는 말입니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "film-thickness",
+    "process-gas"
+   ]
+  },
+  {
+   "id": "cvd",
+   "ko": "CVD",
+   "en": "chemical vapor deposition",
+   "alt": [
+    "화학 기상 증착"
+   ],
+   "definition": "기체 원료를 반응시켜 생긴 물질을 웨이퍼 표면에 쌓는 증착 방식입니다. 원료를 함께 흘려 계속 쌓으므로 원료를 번갈아 넣는 ALD보다 빠르지만, 깊은 구조의 안쪽까지 고른 두께로 덮기는 어렵습니다.",
+   "category": "front-end",
+   "broader": "thin-film-deposition",
+   "related": [
+    "ald",
+    "process-gas"
+   ]
+  },
+  {
+   "id": "ald",
+   "ko": "ALD",
+   "en": "atomic layer deposition",
+   "alt": [
+    "원자층 증착"
+   ],
+   "definition": "원료 기체를 번갈아 넣어 원자 한 층씩 막을 쌓는 증착 방식입니다. 느리지만 깊은 구조 안에도 고른 두께로 덮습니다.",
+   "category": "front-end",
+   "broader": "thin-film-deposition",
+   "related": [
+    "cvd",
+    "nand-3d"
+   ]
+  },
+  {
+   "id": "chemical-mechanical-polishing",
+   "ko": "CMP",
+   "en": "chemical mechanical polishing",
+   "alt": [
+    "화학적 기계 연마",
+    "평탄화"
+   ],
+   "definition": "연마 패드와 슬러리로 웨이퍼 표면을 깎아 평평하게 만드는 공정입니다. 다음 층의 노광 초점을 맞추려면 필요합니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "film-thickness",
+    "process-chemical"
+   ]
+  },
+  {
+   "id": "wafer-cleaning",
+   "ko": "세정",
+   "en": "wafer cleaning",
+   "alt": [
+    "클린",
+    "웨트 세정"
+   ],
+   "definition": "공정 사이에 웨이퍼 표면의 입자, 유기물, 금속 오염을 씻어 내는 공정입니다. 전공정에서 가장 자주 반복되는 단계입니다.",
+   "category": "front-end",
+   "broader": "front-end-process",
+   "related": [
+    "ultrapure-water",
+    "process-chemical",
+    "queue-time-limit"
+   ]
+  },
+  {
+   "id": "back-end-process",
+   "ko": "후공정",
+   "en": "back-end process",
+   "alt": [
+    "패키지 공정",
+    "조립·테스트"
+   ],
+   "definition": "전공정을 마친 웨이퍼를 시험하고 잘라 패키지로 만들고 다시 시험하는 공정 전체입니다.",
+   "category": "back-end",
+   "related": [
+    "front-end-process",
+    "chip-packaging"
+   ]
+  },
+  {
+   "id": "wafer-probe-test",
+   "ko": "웨이퍼 테스트",
+   "en": "wafer probe test",
+   "alt": [
+    "EDS",
+    "프로브 테스트",
+    "웨이퍼 소트"
+   ],
+   "definition": "자르기 전 웨이퍼의 다이마다 탐침을 대어 전기적 동작을 시험하고 양품과 불량을 가르는 공정입니다.",
+   "category": "back-end",
+   "broader": "back-end-process",
+   "related": [
+    "test-bin",
+    "wafer-map"
+   ]
+  },
+  {
+   "id": "memory-repair",
+   "ko": "리페어",
+   "en": "memory redundancy repair",
+   "alt": [
+    "레이저 리페어",
+    "구제"
+   ],
+   "definition": "불량 셀이 있는 행이나 열을 미리 만들어 둔 여분 셀로 바꿔 다이를 살리는 작업입니다. 웨이퍼 테스트 결과를 받아 수행합니다.",
+   "category": "back-end",
+   "related": [
+    "wafer-probe-test",
+    "die-yield"
+   ]
+  },
+  {
+   "id": "wafer-dicing",
+   "ko": "다이싱",
+   "en": "wafer dicing",
+   "alt": [
+    "소잉",
+    "절단"
+   ],
+   "definition": "웨이퍼를 다이 단위로 자르는 공정입니다. 날로 자르는 방식과 레이저로 자르는 방식이 있고, 자른 뒤에는 웨이퍼 맵에서 양품으로 표시된 다이만 집어 패키징으로 넘깁니다.",
+   "category": "back-end",
+   "broader": "back-end-process",
+   "related": [
+    "wafer-die",
+    "wafer-map",
+    "chip-packaging"
+   ]
+  },
+  {
+   "id": "chip-packaging",
+   "ko": "패키징",
+   "en": "packaging",
+   "alt": [
+    "패키지",
+    "어셈블리"
+   ],
+   "definition": "다이를 외부 회로와 전기적으로 잇고 충격과 습기에서 보호하도록 감싸는 공정입니다.",
+   "category": "back-end",
+   "broader": "back-end-process",
+   "related": [
+    "flip-chip",
+    "chip-bump"
+   ]
+  },
+  {
+   "id": "flip-chip",
+   "ko": "플립칩",
+   "en": "flip chip",
+   "alt": [
+    "FC"
+   ],
+   "definition": "다이를 뒤집어 범프로 기판에 바로 붙이는 접속 방식입니다. 선이 짧아 신호가 빠르고 접점을 많이 둘 수 있습니다.",
+   "category": "back-end",
+   "broader": "chip-packaging",
+   "related": [
+    "chip-bump",
+    "chip-packaging",
+    "hybrid-bonding"
+   ]
+  },
+  {
+   "id": "chip-bump",
+   "ko": "범프",
+   "en": "bump",
+   "alt": [
+    "솔더 범프",
+    "마이크로 범프"
+   ],
+   "definition": "다이 표면에 만든 작은 금속 돌기로, 다이와 기판 또는 다이와 다이를 전기적으로 잇습니다.",
+   "category": "back-end",
+   "related": [
+    "flip-chip",
+    "through-silicon-via"
+   ]
+  },
+  {
+   "id": "through-silicon-via",
+   "ko": "TSV",
+   "en": "through-silicon via",
+   "alt": [
+    "실리콘 관통 전극"
+   ],
+   "definition": "다이를 위아래로 뚫어 금속으로 채운 수직 전극입니다. 쌓은 다이끼리 짧은 경로로 신호를 주고받게 합니다.",
+   "category": "back-end",
+   "related": [
+    "hbm",
+    "chip-bump"
+   ]
+  },
+  {
+   "id": "hybrid-bonding",
+   "ko": "하이브리드 본딩",
+   "en": "hybrid bonding",
+   "alt": [
+    "직접 본딩",
+    "Cu-Cu 본딩"
+   ],
+   "definition": "범프 없이 구리 패드와 절연막을 맞붙여 다이나 웨이퍼를 잇는 접합 방식입니다. 접점 간격을 더 좁힐 수 있습니다.",
+   "category": "back-end",
+   "broader": "chip-packaging",
+   "related": [
+    "chip-bump",
+    "hbm"
+   ]
+  },
+  {
+   "id": "package-test",
+   "ko": "패키지 테스트",
+   "en": "package test",
+   "alt": [
+    "최종 테스트",
+    "파이널 테스트",
+    "FT"
+   ],
+   "definition": "패키지로 만든 뒤 제품 규격대로 동작하는지 다시 시험하는 공정입니다. 결과에 따라 속도 등급을 나누기도 합니다.",
+   "category": "back-end",
+   "broader": "back-end-process",
+   "related": [
+    "burn-in-test",
+    "test-bin"
+   ]
+  },
+  {
+   "id": "burn-in-test",
+   "ko": "번인",
+   "en": "burn-in",
+   "alt": [
+    "번인 테스트",
+    "BI"
+   ],
+   "definition": "높은 온도와 전압을 걸어 초기에 고장 날 제품을 미리 걸러 내는 시험입니다.",
+   "category": "back-end",
+   "broader": "package-test",
+   "related": [
+    "known-good-die",
+    "package-test"
+   ]
+  },
+  {
+   "id": "wafer-fab",
+   "ko": "팹",
+   "en": "wafer fab",
+   "alt": [
+    "FAB",
+    "웨이퍼 팹",
+    "제조 라인"
+   ],
+   "definition": "웨이퍼 전공정을 수행하는 공장입니다. 클린룸, 공정 장비, 반송 설비, 유틸리티 설비로 이루어집니다.",
+   "category": "fab-ops",
+   "related": [
+    "fab-cleanroom",
+    "sub-fab"
+   ]
+  },
+  {
+   "id": "wafer-lot",
+   "ko": "로트",
+   "en": "lot",
+   "alt": [
+    "Lot",
+    "랏"
+   ],
+   "definition": "같은 공정을 함께 거치도록 묶은 웨이퍼 무리입니다. 보통 FOUP 하나에 담기고 팹 안에서 추적하는 기본 단위가 됩니다.",
+   "category": "fab-ops",
+   "related": [
+    "foup",
+    "lot-genealogy",
+    "semiconductor-wafer"
+   ],
+   "refs": [
+    "SEMI E90"
+   ],
+   "example": "MES 로트 기록에는 로트 번호, 담긴 웨이퍼 장수, 현재 공정 단계, FOUP 번호가 함께 남습니다."
+  },
+  {
+   "id": "process-flow",
+   "ko": "공정 흐름",
+   "en": "process flow",
+   "alt": [
+    "라우트",
+    "플로",
+    "공정 순서"
+   ],
+   "definition": "한 제품이 웨이퍼 투입부터 완료까지 거치는 공정 단계의 순서입니다. 같은 장비 군을 여러 번 다시 들르는 재진입 구조가 특징입니다.",
+   "category": "fab-ops",
+   "related": [
+    "fab-recipe",
+    "front-end-process",
+    "fab-cycle-time"
+   ]
+  },
+  {
+   "id": "fab-recipe",
+   "ko": "레시피",
+   "en": "recipe",
+   "alt": [
+    "공정 레시피",
+    "장비 레시피"
+   ],
+   "definition": "장비가 한 공정 단계를 처리할 때 따르는 온도, 압력, 가스 유량, 시간 같은 조건의 묶음입니다.",
+   "category": "fab-ops",
+   "related": [
+    "process-tool",
+    "run-to-run-control"
+   ],
+   "refs": [
+    "SEMI E42"
+   ],
+   "example": "장비 이벤트의 레시피 ID 칸은 그 웨이퍼를 어떤 조건 묶음으로 처리했는지 가리키며, 로트 이력과 이어 봅니다."
+  },
+  {
+   "id": "fab-wip",
+   "ko": "재공",
+   "en": "work in process",
+   "alt": [
+    "WIP",
+    "공정 중 재고"
+   ],
+   "definition": "투입은 되었지만 아직 완료되지 않아 팹 안에 머물러 있는 웨이퍼나 로트입니다.",
+   "category": "fab-ops",
+   "related": [
+    "fab-cycle-time",
+    "lot-dispatching",
+    "wafer-lot"
+   ],
+   "example": "MES의 재공 현황 화면은 공정 단계별로 대기 중인 로트 수와 웨이퍼 수를 보여 줍니다."
+  },
+  {
+   "id": "fab-cycle-time",
+   "ko": "사이클 타임",
+   "en": "cycle time",
+   "alt": [
+    "CT",
+    "TAT",
+    "공정 소요 시간"
+   ],
+   "definition": "로트가 투입부터 완료까지 걸린 시간입니다. 처리 시간보다 장비 앞에서 기다리는 시간이 큰 몫을 차지합니다.",
+   "category": "fab-ops",
+   "related": [
+    "fab-wip",
+    "lot-dispatching",
+    "queue-time-limit"
+   ]
+  },
+  {
+   "id": "queue-time-limit",
+   "ko": "Q타임 제한",
+   "en": "queue time limit",
+   "alt": [
+    "Q-time",
+    "큐타임"
+   ],
+   "definition": "앞 공정을 마친 뒤 다음 공정을 시작할 때까지 넘지 말아야 할 대기 시간입니다. 넘으면 표면이 산화되거나 오염되어 재작업이나 폐기로 이어집니다.",
+   "category": "fab-ops",
+   "related": [
+    "lot-dispatching",
+    "fab-cycle-time"
+   ],
+   "example": "MES 로트 기록의 「Q타임 초과」 홀드는 앞 공정 완료 시각과 다음 공정 투입 시각의 차이로 판정합니다."
+  },
+  {
+   "id": "lot-hold",
+   "ko": "홀드",
+   "en": "lot hold",
+   "alt": [
+    "로트 홀드",
+    "보류"
+   ],
+   "definition": "이상이 의심되는 로트를 다음 공정으로 넘기지 않고 멈춰 두는 조치입니다. 판정이 끝나면 풀거나 재작업, 폐기로 보냅니다.",
+   "category": "fab-ops",
+   "related": [
+    "out-of-control",
+    "wafer-lot",
+    "fab-mes",
+    "queue-time-limit"
+   ],
+   "example": "MES 로트 이력에는 홀드 사유 코드, 홀드를 건 사람과 시각이 남고, 풀 때 판정 결과가 함께 적힙니다."
+  },
+  {
+   "id": "lot-dispatching",
+   "ko": "디스패칭",
+   "en": "dispatching",
+   "alt": [
+    "배정",
+    "로트 배정"
+   ],
+   "definition": "장비가 비었을 때 기다리는 로트 가운데 무엇을 먼저 처리할지 정하는 일입니다.",
+   "category": "fab-ops",
+   "related": [
+    "queue-time-limit",
+    "fab-wip",
+    "fab-cycle-time"
+   ]
+  },
+  {
+   "id": "fab-mes",
+   "ko": "MES",
+   "en": "manufacturing execution system",
+   "alt": [
+    "제조실행시스템"
+   ],
+   "definition": "로트의 공정 진행, 장비 상태, 레시피, 홀드 같은 생산 실행 정보를 기록하고 통제하는 시스템입니다. 팹 데이터의 기준 원장 구실을 합니다.",
+   "category": "fab-ops",
+   "related": [
+    "wafer-lot",
+    "secs-gem"
+   ],
+   "refs": [
+    "IEC 62264",
+    "ISA-95"
+   ]
+  },
+  {
+   "id": "lot-genealogy",
+   "ko": "로트 이력",
+   "en": "lot genealogy",
+   "alt": [
+    "계보",
+    "트레이서빌리티",
+    "웨이퍼 이력"
+   ],
+   "definition": "로트와 웨이퍼가 어느 장비, 챔버, 레시피, 시각에 처리되었는지 이어 놓은 기록입니다. 수율 문제를 장비로 거슬러 올라갈 때 씁니다.",
+   "category": "fab-ops",
+   "related": [
+    "wafer-lot",
+    "commonality-analysis"
+   ],
+   "example": "수율이 떨어진 로트의 이력을 따라가면 공정 단계마다 처리한 장비, 챔버, 레시피, 시각이 한 줄씩 나옵니다."
+  },
+  {
+   "id": "amhs",
+   "ko": "AMHS",
+   "en": "automated material handling system",
+   "alt": [
+    "자동 반송 시스템",
+    "물류 자동화"
+   ],
+   "definition": "FOUP을 장비와 보관 설비 사이로 자동으로 옮기는 반송 시스템 전체입니다.",
+   "category": "fab-ops",
+   "related": [
+    "overhead-hoist-transport",
+    "foup"
+   ]
+  },
+  {
+   "id": "overhead-hoist-transport",
+   "ko": "OHT",
+   "en": "overhead hoist transport",
+   "alt": [
+    "천장 반송",
+    "오버헤드 호이스트"
+   ],
+   "definition": "천장 레일을 따라 달리며 FOUP을 장비 로드 포트에 내리고 올리는 반송 차량입니다.",
+   "category": "fab-ops",
+   "broader": "amhs",
+   "related": [
+    "load-port",
+    "amhs",
+    "foup"
+   ]
+  },
+  {
+   "id": "foup",
+   "ko": "FOUP",
+   "en": "front opening unified pod",
+   "alt": [
+    "풉",
+    "웨이퍼 캐리어"
+   ],
+   "definition": "300mm 웨이퍼를 담아 바깥 공기와 막아 둔 채 옮기는 앞문 달린 밀폐 용기입니다.",
+   "category": "fab-ops",
+   "related": [
+    "wafer-lot",
+    "load-port",
+    "amhs"
+   ],
+   "refs": [
+    "SEMI E47.1"
+   ]
+  },
+  {
+   "id": "load-port",
+   "ko": "로드 포트",
+   "en": "load port",
+   "alt": [
+    "LP"
+   ],
+   "definition": "장비 앞에서 FOUP을 받아 문을 열고 웨이퍼를 장비 안으로 넘기는 장치입니다.",
+   "category": "fab-ops",
+   "related": [
+    "foup",
+    "overhead-hoist-transport"
+   ],
+   "refs": [
+    "SEMI E84",
+    "SEMI E87"
+   ]
+  },
+  {
+   "id": "process-tool",
+   "ko": "공정 장비",
+   "en": "process tool",
+   "alt": [
+    "장비",
+    "툴",
+    "설비"
+   ],
+   "definition": "웨이퍼에 공정을 수행하는 장비 한 대입니다. 로드 포트, 이송 로봇, 하나 이상의 챔버로 이루어집니다.",
+   "category": "control",
+   "related": [
+    "process-chamber",
+    "fab-recipe"
+   ]
+  },
+  {
+   "id": "process-chamber",
+   "ko": "챔버",
+   "en": "process chamber",
+   "alt": [
+    "CH",
+    "공정 챔버"
+   ],
+   "definition": "장비 안에서 실제 공정이 일어나는 밀폐 공간입니다. 같은 장비의 챔버끼리도 결과가 다를 수 있어 따로 추적합니다.",
+   "category": "control",
+   "broader": "process-tool",
+   "related": [
+    "chamber-matching",
+    "process-tool",
+    "lot-genealogy"
+   ],
+   "example": "장비 이벤트와 로트 이력에는 웨이퍼마다 어느 챔버에서 처리했는지 챔버 번호가 함께 남습니다."
+  },
+  {
+   "id": "chamber-matching",
+   "ko": "챔버 매칭",
+   "en": "chamber matching",
+   "alt": [
+    "툴 매칭"
+   ],
+   "definition": "같은 공정을 맡는 챔버들이 같은 결과를 내도록 조건과 하드웨어를 맞추는 일입니다.",
+   "category": "control",
+   "related": [
+    "process-chamber",
+    "fdc"
+   ]
+  },
+  {
+   "id": "monitor-wafer",
+   "ko": "모니터 웨이퍼",
+   "en": "monitor wafer",
+   "alt": [
+    "테스트 웨이퍼",
+    "더미 웨이퍼",
+    "MW"
+   ],
+   "definition": "제품이 아닌 시험용 웨이퍼로, 장비 상태를 점검하거나 공정 결과를 측정하려고 흘립니다.",
+   "category": "control",
+   "related": [
+    "fab-metrology",
+    "statistical-process-control",
+    "process-tool"
+   ]
+  },
+  {
+   "id": "equipment-trace-data",
+   "ko": "트레이스 데이터",
+   "en": "equipment trace data",
+   "alt": [
+    "센서 데이터",
+    "장비 로그"
+   ],
+   "definition": "공정 중 장비 센서가 짧은 주기로 남기는 온도, 압력, 전력, 유량 같은 시계열 값입니다.",
+   "category": "control",
+   "related": [
+    "fdc",
+    "fab-virtual-metrology"
+   ],
+   "refs": [
+    "SEMI E134"
+   ],
+   "example": "트레이스 데이터는 웨이퍼 번호와 레시피 단계 번호를 붙인 센서 시계열로 저장되어 단계별로 잘라 봅니다."
+  },
+  {
+   "id": "fdc",
+   "ko": "FDC",
+   "en": "fault detection and classification",
+   "alt": [
+    "이상 감지·분류"
+   ],
+   "definition": "장비 트레이스 데이터를 실시간으로 보아 정상과 다른 처리를 찾아내고 원인 유형을 나누는 시스템입니다. 웨이퍼 결과가 아니라 장비 신호를 봅니다.",
+   "category": "control",
+   "related": [
+    "equipment-trace-data",
+    "statistical-process-control"
+   ]
+  },
+  {
+   "id": "apc",
+   "ko": "APC",
+   "en": "advanced process control",
+   "alt": [
+    "고급 공정 제어"
+   ],
+   "definition": "측정 결과와 모델을 써서 공정 조건을 자동으로 고치는 제어를 통틀어 부르는 말입니다.",
+   "category": "control",
+   "related": [
+    "run-to-run-control",
+    "fdc",
+    "fab-virtual-metrology"
+   ],
+   "refs": [
+    "SEMI E133"
+   ]
+  },
+  {
+   "id": "run-to-run-control",
+   "ko": "R2R 제어",
+   "en": "run-to-run control",
+   "alt": [
+    "Run-to-Run",
+    "R2R"
+   ],
+   "definition": "앞 로트나 앞 웨이퍼의 측정 결과를 보고 다음 처리의 레시피 값을 조금씩 바꾸는 제어 방식입니다.",
+   "category": "control",
+   "broader": "apc",
+   "related": [
+    "fab-recipe",
+    "overlay-error"
+   ],
+   "example": "R2R 제어 기록에는 앞 로트의 계측값과 그것으로 계산한 다음 로트의 보정값이 쌍으로 남습니다."
+  },
+  {
+   "id": "fab-virtual-metrology",
+   "ko": "가상 계측",
+   "en": "virtual metrology",
+   "alt": [
+    "VM"
+   ],
+   "definition": "측정하지 않은 웨이퍼의 공정 결과를 장비 데이터로 예측하는 방법입니다. 표본만 재는 실제 계측의 빈자리를 메우며, 예측 모델은 실측값과 견주어 계속 다시 맞춰야 합니다.",
+   "category": "control",
+   "related": [
+    "equipment-trace-data",
+    "fab-metrology",
+    "apc"
+   ]
+  },
+  {
+   "id": "statistical-process-control",
+   "ko": "SPC",
+   "en": "statistical process control",
+   "alt": [
+    "통계적 공정 관리"
+   ],
+   "definition": "공정 결과값을 통계적으로 감시해 우연한 흔들림과 원인이 있는 변화를 구분하는 관리 방법입니다.",
+   "category": "control",
+   "related": [
+    "spc-control-chart",
+    "fdc"
+   ],
+   "refs": [
+    "ISO 7870"
+   ]
+  },
+  {
+   "id": "spc-control-chart",
+   "ko": "관리도",
+   "en": "control chart",
+   "alt": [
+    "SPC 차트"
+   ],
+   "definition": "측정값을 시간 순서로 찍고 관리 한계선을 그어 공정이 벗어났는지 보는 그래프입니다.",
+   "category": "control",
+   "broader": "statistical-process-control",
+   "related": [
+    "out-of-control",
+    "statistical-process-control",
+    "fab-metrology"
+   ],
+   "refs": [
+    "ISO 7870-2"
+   ]
+  },
+  {
+   "id": "out-of-control",
+   "ko": "OOC",
+   "en": "out of control",
+   "alt": [
+    "관리 이탈"
+   ],
+   "definition": "측정값이 관리 한계를 벗어나거나 관리 규칙에 걸려 공정에 원인 있는 변화가 생겼다고 보는 상태입니다.",
+   "category": "control",
+   "related": [
+    "spc-control-chart",
+    "lot-hold"
+   ],
+   "example": "관리도에서 OOC가 뜨면 해당 로트나 장비에 홀드를 거는 조치로 이어지는 경우가 많습니다."
+  },
+  {
+   "id": "fab-yield",
+   "ko": "수율",
+   "en": "yield",
+   "alt": [
+    "Yield"
+   ],
+   "definition": "투입한 것 가운데 양품으로 나온 것의 비율입니다. 어느 단계에서 세느냐에 따라 라인 수율, 다이 수율, 패키지 수율로 나눕니다.",
+   "category": "quality",
+   "related": [
+    "die-yield",
+    "yield-management-system"
+   ]
+  },
+  {
+   "id": "die-yield",
+   "ko": "다이 수율",
+   "en": "die yield",
+   "alt": [
+    "프로브 수율",
+    "EDS 수율"
+   ],
+   "definition": "웨이퍼 테스트에서 양품으로 판정된 다이가 전체 다이 가운데 차지하는 비율입니다.",
+   "category": "quality",
+   "broader": "fab-yield",
+   "related": [
+    "wafer-probe-test",
+    "fab-yield",
+    "wafer-map",
+    "memory-repair"
+   ]
+  },
+  {
+   "id": "wafer-defect",
+   "ko": "결함",
+   "en": "defect",
+   "alt": [
+    "디펙트",
+    "결점"
+   ],
+   "definition": "웨이퍼 위의 입자, 긁힘, 무늬 이상처럼 소자의 동작을 해칠 수 있는 물리적 이상입니다. 전기적 불량과 바로 같지는 않습니다.",
+   "category": "quality",
+   "related": [
+    "defect-inspection",
+    "wafer-map",
+    "semi-failure-analysis"
+   ],
+   "example": "결함 검사 결과에는 결함마다 웨이퍼 위 좌표, 크기, 분류 코드가 남아 웨이퍼 맵 위에 겹쳐 봅니다."
+  },
+  {
+   "id": "defect-inspection",
+   "ko": "결함 검사",
+   "en": "defect inspection",
+   "alt": [
+    "인스펙션",
+    "디펙트 검사"
+   ],
+   "definition": "광학 장비나 전자빔으로 웨이퍼 표면을 훑어 결함의 위치와 크기를 찾는 일입니다. 막의 치수를 재는 계측과 구분합니다.",
+   "category": "quality",
+   "related": [
+    "wafer-defect",
+    "fab-metrology"
+   ]
+  },
+  {
+   "id": "fab-metrology",
+   "ko": "계측",
+   "en": "metrology",
+   "alt": [
+    "측정",
+    "메트롤로지"
+   ],
+   "definition": "막 두께, 선폭, 층간 정렬 같은 공정 결과값을 재는 일입니다. 정해진 지점만 표본으로 잽니다.",
+   "category": "quality",
+   "related": [
+    "critical-dimension",
+    "overlay-error",
+    "film-thickness"
+   ]
+  },
+  {
+   "id": "critical-dimension",
+   "ko": "CD",
+   "en": "critical dimension",
+   "alt": [
+    "선폭",
+    "임계 치수"
+   ],
+   "definition": "패턴에서 소자 특성을 좌우하는 가장 중요한 치수입니다. 주로 선의 폭이나 구멍의 지름을 잽니다.",
+   "category": "quality",
+   "broader": "fab-metrology",
+   "related": [
+    "photolithography",
+    "wafer-etching"
+   ],
+   "example": "계측 결과에는 측정 지점마다 CD 값이 남고, 현상 뒤 측정과 식각 뒤 측정을 따로 구분해 적습니다."
+  },
+  {
+   "id": "overlay-error",
+   "ko": "오버레이",
+   "en": "overlay",
+   "alt": [
+    "OVL",
+    "층간 정렬 오차"
+   ],
+   "definition": "새로 찍은 층의 무늬가 아래 층의 무늬와 어긋난 정도입니다. X와 Y 방향으로 나눠 재며, 어느 층을 기준으로 정렬했는지 함께 알아야 원인을 찾을 수 있습니다.",
+   "category": "quality",
+   "broader": "fab-metrology",
+   "related": [
+    "photolithography",
+    "run-to-run-control",
+    "fab-metrology"
+   ],
+   "example": "노광 뒤 계측 결과에는 샷과 지점마다 오버레이 X·Y 값이 남고, 웨이퍼 단위 평균과 3σ가 함께 기록됩니다."
+  },
+  {
+   "id": "film-thickness",
+   "ko": "막 두께",
+   "en": "film thickness",
+   "alt": [
+    "THK",
+    "두께"
+   ],
+   "definition": "증착, 산화, 연마 뒤에 남은 막의 두께입니다. 웨이퍼 안의 여러 지점을 재어 평균과 균일도를 봅니다.",
+   "category": "quality",
+   "broader": "fab-metrology",
+   "related": [
+    "thin-film-deposition",
+    "chemical-mechanical-polishing"
+   ],
+   "example": "증착 뒤 계측 결과에는 지점별 두께와 함께 웨이퍼 평균과 균일도가 적힙니다."
+  },
+  {
+   "id": "wafer-map",
+   "ko": "웨이퍼 맵",
+   "en": "wafer map",
+   "alt": [
+    "빈 맵",
+    "맵"
+   ],
+   "definition": "다이별 시험 결과나 결함 위치를 웨이퍼 모양 그대로 그린 그림과 그 데이터입니다. 무늬를 보면 원인 공정을 짐작할 수 있습니다.",
+   "category": "quality",
+   "related": [
+    "test-bin",
+    "wafer-die",
+    "wafer-defect"
+   ],
+   "refs": [
+    "SEMI E142"
+   ],
+   "example": "웨이퍼 맵 데이터는 다이마다 X·Y 좌표와 빈 번호를 담아, 패키징 공정이 양품 다이만 집도록 넘겨집니다."
+  },
+  {
+   "id": "test-bin",
+   "ko": "빈",
+   "en": "bin",
+   "alt": [
+    "Bin",
+    "빈 코드"
+   ],
+   "definition": "시험 결과에 따라 다이나 칩을 나눠 담는 분류 번호입니다. 양품 빈과 불량 유형별 빈을 둡니다.",
+   "category": "quality",
+   "related": [
+    "wafer-map",
+    "wafer-probe-test"
+   ]
+  },
+  {
+   "id": "semi-failure-analysis",
+   "ko": "불량 분석",
+   "en": "failure analysis",
+   "alt": [
+    "FA"
+   ],
+   "definition": "불량 칩을 단면 절단, 전자현미경, 전기 측정으로 파고들어 물리적 원인을 찾는 일입니다.",
+   "category": "quality",
+   "related": [
+    "commonality-analysis",
+    "wafer-defect"
+   ]
+  },
+  {
+   "id": "commonality-analysis",
+   "ko": "공통성 분석",
+   "en": "commonality analysis",
+   "alt": [
+    "장비 공통성 분석"
+   ],
+   "definition": "불량 로트들이 공통으로 거친 장비, 챔버, 레시피, 시간대를 찾아 원인 후보를 좁히는 분석입니다.",
+   "category": "quality",
+   "related": [
+    "lot-genealogy",
+    "yield-management-system"
+   ]
+  },
+  {
+   "id": "yield-management-system",
+   "ko": "YMS",
+   "en": "yield management system",
+   "alt": [
+    "수율 관리 시스템"
+   ],
+   "definition": "검사, 계측, 테스트, 로트 이력 데이터를 모아 수율 저하 원인을 찾도록 돕는 분석 시스템입니다.",
+   "category": "quality",
+   "related": [
+    "fab-yield",
+    "commonality-analysis",
+    "fab-mes"
+   ]
+  },
+  {
+   "id": "fab-cleanroom",
+   "ko": "클린룸",
+   "en": "cleanroom",
+   "alt": [
+    "청정실"
+   ],
+   "definition": "공기 중 입자 수, 온도, 습도, 압력을 정해진 범위로 관리하는 작업 공간입니다.",
+   "category": "utility",
+   "related": [
+    "cleanroom-class",
+    "fan-filter-unit"
+   ],
+   "refs": [
+    "ISO 14644-1"
+   ]
+  },
+  {
+   "id": "cleanroom-class",
+   "ko": "청정도 등급",
+   "en": "cleanroom class",
+   "alt": [
+    "클래스",
+    "ISO 등급"
+   ],
+   "definition": "단위 부피의 공기에 든 크기별 입자 수로 클린룸의 깨끗한 정도를 나눈 등급입니다.",
+   "category": "utility",
+   "related": [
+    "fab-cleanroom",
+    "fan-filter-unit",
+    "airborne-molecular-contamination"
+   ],
+   "refs": [
+    "ISO 14644-1"
+   ]
+  },
+  {
+   "id": "fan-filter-unit",
+   "ko": "FFU",
+   "en": "fan filter unit",
+   "alt": [
+    "팬 필터 유닛"
+   ],
+   "definition": "클린룸 천장에 붙어 공기를 고성능 필터로 걸러 아래로 내려보내는 장치입니다.",
+   "category": "utility",
+   "related": [
+    "fab-cleanroom",
+    "airborne-molecular-contamination"
+   ]
+  },
+  {
+   "id": "sub-fab",
+   "ko": "서브팹",
+   "en": "sub-fab",
+   "alt": [
+    "하부층",
+    "유틸리티층"
+   ],
+   "definition": "클린룸 아래층에서 진공 펌프, 배기 처리 장치, 공급 배관 같은 장비 지원 설비가 놓이는 공간입니다.",
+   "category": "utility",
+   "related": [
+    "wafer-fab",
+    "point-of-use-abatement"
+   ]
+  },
+  {
+   "id": "ultrapure-water",
+   "ko": "초순수",
+   "en": "ultrapure water",
+   "alt": [
+    "UPW",
+    "DI워터"
+   ],
+   "definition": "이온, 유기물, 입자, 용존 가스를 거의 다 걷어 낸 물입니다. 세정과 습식 공정에 대량으로 씁니다.",
+   "category": "utility",
+   "related": [
+    "wafer-cleaning",
+    "fab-wastewater"
+   ],
+   "refs": [
+    "SEMI F63",
+    "ASTM D5127"
+   ]
+  },
+  {
+   "id": "process-gas",
+   "ko": "공정 가스",
+   "en": "process gas",
+   "alt": [
+    "가스"
+   ],
+   "definition": "증착, 식각, 이온주입 같은 공정에 원료나 분위기로 들어가는 기체입니다. 대량으로 쓰는 벌크 가스와 소량의 특수 가스로 나눕니다.",
+   "category": "utility",
+   "related": [
+    "specialty-gas",
+    "gas-cabinet"
+   ]
+  },
+  {
+   "id": "specialty-gas",
+   "ko": "특수 가스",
+   "en": "specialty gas",
+   "alt": [
+    "스페셜티 가스",
+    "특수 고압가스"
+   ],
+   "definition": "독성, 가연성, 부식성이 있어 따로 관리하며 소량 공급하는 공정 가스입니다.",
+   "category": "utility",
+   "broader": "process-gas",
+   "related": [
+    "gas-cabinet",
+    "point-of-use-abatement"
+   ],
+   "refs": [
+    "고압가스 안전관리법"
+   ]
+  },
+  {
+   "id": "gas-cabinet",
+   "ko": "가스 캐비닛",
+   "en": "gas cabinet",
+   "alt": [
+    "G/C",
+    "가스 공급 장치"
+   ],
+   "definition": "특수 가스 용기를 넣고 누출을 감시하며 장비로 공급하는 밀폐 함입니다. 함 안의 공기를 배기로 계속 빼내 새어 나온 가스가 작업 공간으로 퍼지지 않게 합니다.",
+   "category": "utility",
+   "related": [
+    "specialty-gas",
+    "process-exhaust"
+   ]
+  },
+  {
+   "id": "process-chemical",
+   "ko": "공정 케미컬",
+   "en": "process chemical",
+   "alt": [
+    "케미컬",
+    "약액"
+   ],
+   "definition": "세정, 습식 식각, 연마, 현상에 쓰는 액체 화학 약품입니다. 기체로 들어가는 공정 가스와 따로 공급하고 관리하며, 쓰고 난 약품은 공정 폐수로 나눠 모읍니다.",
+   "category": "utility",
+   "related": [
+    "wafer-cleaning",
+    "chemical-mechanical-polishing",
+    "fab-wastewater"
+   ],
+   "refs": [
+    "화학물질관리법"
+   ]
+  },
+  {
+   "id": "process-exhaust",
+   "ko": "공정 배기",
+   "en": "process exhaust",
+   "alt": [
+    "배기",
+    "덕트 배기"
+   ],
+   "definition": "장비에서 나오는 가스와 증기를 빨아내 처리 설비로 보내는 배기 계통입니다. 일반, 산성, 알칼리, 유기 배기처럼 성질별로 나눕니다.",
+   "category": "utility",
+   "related": [
+    "point-of-use-abatement",
+    "gas-cabinet"
+   ]
+  },
+  {
+   "id": "point-of-use-abatement",
+   "ko": "로컬 스크러버",
+   "en": "point-of-use abatement",
+   "alt": [
+    "POU 스크러버",
+    "가스 처리 장치"
+   ],
+   "definition": "장비 가까이에서 유해 배기가스를 태우거나 씻어 독성을 줄이는 장치입니다.",
+   "category": "utility",
+   "broader": "process-exhaust",
+   "related": [
+    "specialty-gas",
+    "sub-fab"
+   ]
+  },
+  {
+   "id": "fab-wastewater",
+   "ko": "공정 폐수",
+   "en": "fab wastewater",
+   "alt": [
+    "폐수",
+    "산·알칼리 폐수"
+   ],
+   "definition": "세정과 습식 공정에서 나온 물로, 성분별로 나눠 모아 처리하거나 되살려 씁니다.",
+   "category": "utility",
+   "related": [
+    "ultrapure-water",
+    "process-chemical"
+   ],
+   "refs": [
+    "물환경보전법"
+   ]
+  },
+  {
+   "id": "airborne-molecular-contamination",
+   "ko": "AMC",
+   "en": "airborne molecular contamination",
+   "alt": [
+    "분자 오염",
+    "가스상 오염"
+   ],
+   "definition": "입자가 아니라 산, 염기, 유기물 같은 기체 분자로 클린룸 공기에 섞인 오염입니다. 필터로 걸러지지 않아 따로 감시합니다.",
+   "category": "utility",
+   "related": [
+    "fab-cleanroom",
+    "fan-filter-unit"
+   ],
+   "refs": [
+    "SEMI F21",
+    "ISO 14644-8"
+   ]
+  },
+  {
+   "id": "semi-standards",
+   "ko": "SEMI 표준",
+   "en": "SEMI standards",
+   "alt": [
+    "SEMI 규격"
+   ],
+   "definition": "반도체 장비와 재료 업계 단체가 만드는 장비 통신, 재료, 안전, 용기 규격의 묶음입니다.",
+   "category": "standard",
+   "related": [
+    "secs-gem",
+    "semi-e10"
+   ]
+  },
+  {
+   "id": "secs-gem",
+   "ko": "SECS/GEM",
+   "en": "SECS/GEM",
+   "alt": [
+    "GEM",
+    "장비 통신 표준"
+   ],
+   "definition": "공장 호스트와 장비가 상태, 알람, 레시피, 데이터를 주고받는 메시지 규칙입니다. 메시지 형식, 전송, 장비 동작 모델 규격을 묶어 부릅니다.",
+   "category": "standard",
+   "broader": "semi-standards",
+   "related": [
+    "fab-mes",
+    "hsms"
+   ],
+   "refs": [
+    "SEMI E5",
+    "SEMI E30"
+   ],
+   "example": "장비 이벤트 로그의 알람 발생, 레시피 선택, 공정 시작과 종료 기록은 SECS/GEM 메시지로 호스트에 전해진 것입니다."
+  },
+  {
+   "id": "hsms",
+   "ko": "HSMS",
+   "en": "high-speed SECS message services",
+   "alt": [
+    "SECS 전송"
+   ],
+   "definition": "SECS 메시지를 TCP/IP 네트워크로 보내는 전송 규격입니다. 예전의 직렬선 전송을 대신하며, 메시지 내용과 장비 동작 규칙은 SECS-II와 GEM이 따로 정합니다.",
+   "category": "standard",
+   "broader": "secs-gem",
+   "related": [
+    "gem300",
+    "secs-gem"
+   ],
+   "refs": [
+    "SEMI E37"
+   ]
+  },
+  {
+   "id": "gem300",
+   "ko": "GEM300",
+   "en": "GEM300",
+   "alt": [
+    "300mm 표준"
+   ],
+   "definition": "300mm 팹 자동화를 위해 캐리어, 작업, 로드 포트 관리 규격을 GEM에 더한 표준 묶음입니다.",
+   "category": "standard",
+   "broader": "semi-standards",
+   "related": [
+    "secs-gem",
+    "load-port"
+   ],
+   "refs": [
+    "SEMI E39",
+    "SEMI E40",
+    "SEMI E87",
+    "SEMI E90",
+    "SEMI E94"
+   ]
+  },
+  {
+   "id": "semi-e10",
+   "ko": "SEMI E10",
+   "en": "SEMI E10",
+   "alt": [
+    "E10",
+    "장비 상태 분류"
+   ],
+   "definition": "장비 시간을 생산, 대기, 엔지니어링, 계획 정지, 비계획 정지, 미가동으로 나누는 규격입니다. 장비 가동 지표를 회사끼리 같은 뜻으로 세게 합니다.",
+   "category": "standard",
+   "broader": "semi-standards",
+   "related": [
+    "equipment-state",
+    "semi-standards"
+   ],
+   "refs": [
+    "SEMI E10"
+   ]
+  },
+  {
+   "id": "equipment-state",
+   "ko": "장비 상태",
+   "en": "equipment state",
+   "alt": [
+    "툴 상태",
+    "E10 상태"
+   ],
+   "definition": "어느 시점에 장비가 생산 중인지, 대기 중인지, 정비로 멈췄는지 나타내는 값입니다. 상태 변경 이력이 가동률 계산의 원자료가 됩니다.",
+   "category": "standard",
+   "related": [
+    "semi-e10",
+    "process-tool"
+   ],
+   "refs": [
+    "SEMI E10",
+    "SEMI E58"
+   ],
+   "example": "장비 이벤트의 상태 변경 기록에는 이전 상태, 새 상태, 바뀐 시각이 남아 가동률 계산에 쓰입니다."
+  },
+  {
+   "id": "interface-a",
+   "ko": "Interface A",
+   "en": "Interface A",
+   "alt": [
+    "EDA",
+    "장비 데이터 수집 규격"
+   ],
+   "definition": "SECS/GEM과 별도로 장비의 대량 센서 데이터를 고속으로 꺼내 가는 통로를 정한 규격 묶음입니다.",
+   "category": "standard",
+   "broader": "semi-standards",
+   "related": [
+    "equipment-trace-data",
+    "fdc"
+   ],
+   "refs": [
+    "SEMI E120",
+    "SEMI E125",
+    "SEMI E132",
+    "SEMI E134"
+   ]
+  },
+  {
+   "id": "stdf",
+   "ko": "STDF",
+   "en": "standard test data format",
+   "alt": [
+    "테스트 데이터 형식"
+   ],
+   "definition": "반도체 시험 장비가 시험 결과를 남기는 이진 파일 형식입니다. 다이별 빈과 측정값을 담습니다.",
+   "category": "standard",
+   "related": [
+    "test-bin",
+    "wafer-probe-test"
+   ]
+  }
+ ]
+}

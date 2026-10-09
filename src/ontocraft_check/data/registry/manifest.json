@@ -1,0 +1,87 @@
+{
+ "registry": "OntoCraft 한국 산업 용어 등록부",
+ "registry_en": "OntoCraft Korean Industry Term Registry",
+ "publisher": "OntoCraft",
+ "license": "CC BY 4.0",
+ "license_url": "https://creativecommons.org/licenses/by/4.0/",
+ "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
+ "base_uri": "https://w3id.org/ontocraft/terms/",
+ "uri_template": "https://w3id.org/ontocraft/terms/{id}",
+ "snapshot": "2026-10-09",
+ "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
+ "domains": [
+  {
+   "id": "onto",
+   "name": "온톨로지 공학",
+   "en": "Ontology engineering",
+   "file": "onto.json",
+   "version": "0.1.1",
+   "terms": 65
+  },
+  {
+   "id": "maint",
+   "name": "설비 보전·신뢰성",
+   "en": "Equipment maintenance and reliability",
+   "file": "maint.json",
+   "version": "0.2.2",
+   "terms": 100
+  },
+  {
+   "id": "semiconductor",
+   "name": "반도체",
+   "en": "Semiconductors",
+   "file": "semiconductor.json",
+   "version": "0.1.1",
+   "terms": 100
+  },
+  {
+   "id": "maritime",
+   "name": "해양·조선",
+   "en": "Maritime and shipbuilding",
+   "file": "maritime.json",
+   "version": "0.1.1",
+   "terms": 100
+  },
+  {
+   "id": "port",
+   "name": "항만·물류",
+   "en": "Ports and logistics",
+   "file": "port.json",
+   "version": "0.1.1",
+   "terms": 100
+  },
+  {
+   "id": "defense",
+   "name": "방산",
+   "en": "Defense industry",
+   "file": "defense.json",
+   "version": "0.1.1",
+   "terms": 100
+  },
+  {
+   "id": "smartcity",
+   "name": "스마트시티",
+   "en": "Smart city",
+   "file": "smartcity.json",
+   "version": "0.1.1",
+   "terms": 100
+  },
+  {
+   "id": "mfg-ai",
+   "name": "제조 AI",
+   "en": "Manufacturing AI",
+   "file": "mfg-ai.json",
+   "version": "0.1.2",
+   "terms": 97
+  },
+  {
+   "id": "physical-ai",
+   "name": "Physical AI",
+   "en": "Physical AI",
+   "file": "physical-ai.json",
+   "version": "0.1.1",
+   "terms": 100
+  }
+ ],
+ "total_terms": 862
+}

@@ -1,0 +1,8 @@
+@prefix ex:   <https://example.org/noonto#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Thing1 a owl:Class ; rdfs:label "하나"@ko , "One"@en ; rdfs:comment "예시입니다."@ko .
+ex:Thing2 a owl:Class ; rdfs:subClassOf ex:Thing1 ; rdfs:label "둘"@ko , "Two"@en ; rdfs:comment "예시입니다."@ko .
+ex:Thing3 a owl:Class ; rdfs:subClassOf ex:Thing1 ; rdfs:label "셋"@ko , "Three"@en ; rdfs:comment "예시입니다."@ko ;
+    owl:disjointWith ex:Thing2 .

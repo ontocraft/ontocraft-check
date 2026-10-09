@@ -1,0 +1,810 @@
+{
+ "registry": "OntoCraft 한국 산업 용어 등록부",
+ "registry_en": "OntoCraft Korean Industry Term Registry",
+ "publisher": "OntoCraft",
+ "license": "CC BY 4.0",
+ "license_url": "https://creativecommons.org/licenses/by/4.0/",
+ "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
+ "base_uri": "https://w3id.org/ontocraft/terms/",
+ "uri_template": "https://w3id.org/ontocraft/terms/{id}",
+ "snapshot": "2026-10-09",
+ "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
+ "domain": {
+  "id": "onto",
+  "name": "온톨로지 공학",
+  "en": "Ontology engineering"
+ },
+ "version": "0.1.1",
+ "updated": "2026-10-09",
+ "categories": [
+  {
+   "id": "basics",
+   "name": "기초 개념",
+   "en": "Basic concepts"
+  },
+  {
+   "id": "languages",
+   "name": "표현 언어",
+   "en": "Representation languages"
+  },
+  {
+   "id": "tools",
+   "name": "도구와 검증",
+   "en": "Tools and validation"
+  },
+  {
+   "id": "methods",
+   "name": "방법론과 품질",
+   "en": "Methodology and quality"
+  },
+  {
+   "id": "operations",
+   "name": "운영과 심화",
+   "en": "Operations and advanced topics"
+  }
+ ],
+ "terms": [
+  {
+   "id": "ontology",
+   "ko": "온톨로지",
+   "en": "Ontology",
+   "definition": "한 도메인의 개념과 관계를 기계가 처리할 수 있게 명시한 공유된 개념화입니다.",
+   "category": "basics",
+   "related": [
+    "knowledge-graph",
+    "conceptualization"
+   ]
+  },
+  {
+   "id": "conceptualization",
+   "ko": "개념화",
+   "en": "Conceptualization",
+   "definition": "도메인을 어떤 개념과 관계로 볼지 정한 추상적 관점입니다. 온톨로지는 이 관점을 형식 언어로 적은 산출물이므로, 같은 개념화를 OWL이나 SKOS 같은 여러 언어로 적을 수 있습니다.",
+   "category": "basics",
+   "related": [
+    "ontology",
+    "upper-ontology"
+   ]
+  },
+  {
+   "id": "knowledge-graph",
+   "ko": "지식그래프",
+   "en": "Knowledge Graph",
+   "definition": "개체와 관계를 그래프로 저장한 데이터입니다. 온톨로지가 그 스키마 역할을 합니다.",
+   "category": "basics",
+   "related": [
+    "ontology",
+    "lpg",
+    "rdf-triple",
+    "entity-resolution"
+   ]
+  },
+  {
+   "id": "taxonomy",
+   "ko": "분류 체계",
+   "en": "Taxonomy",
+   "definition": "개념을 상하 관계 하나로만 나눈 트리입니다. 동의어와 관련어를 담지 않는 점에서 시소러스와 다르고, 속성과 제약을 정의하지 않는 점에서 온톨로지와 다릅니다.",
+   "category": "basics",
+   "related": [
+    "thesaurus",
+    "skos",
+    "is-a"
+   ],
+   "example": "제품 카탈로그의 대분류, 중분류, 소분류 코드표는 분류 체계로 다룹니다."
+  },
+  {
+   "id": "thesaurus",
+   "ko": "시소러스",
+   "en": "Thesaurus",
+   "definition": "용어 사이의 상하·동의·관련 관계를 담은 어휘집입니다. 검색어 확장과 색인어 통제에 쓰며, 관계를 형식 논리로 정의하지 않으므로 클래스 계층처럼 추론하지는 않습니다.",
+   "category": "basics",
+   "related": [
+    "taxonomy",
+    "skos",
+    "non-ontological-resource"
+   ]
+  },
+  {
+   "id": "class",
+   "ko": "클래스",
+   "en": "Class",
+   "definition": "같은 성질을 공유하는 개체들의 집합입니다. 한 개체는 여러 클래스에 동시에 속할 수 있고, 클래스 사이의 상하 관계는 subClassOf로 적습니다.",
+   "category": "basics",
+   "related": [
+    "individual",
+    "is-a",
+    "domain-range"
+   ]
+  },
+  {
+   "id": "individual",
+   "ko": "개체(인스턴스)",
+   "en": "Individual (Instance)",
+   "definition": "클래스에 속하는 하나하나의 대상입니다. 클래스가 「선박」이라면 특정 선박 한 척이 개체이며, OWL에서는 IRI로 이름을 붙여 구분합니다.",
+   "category": "basics",
+   "related": [
+    "class",
+    "iri",
+    "unique-name-assumption"
+   ]
+  },
+  {
+   "id": "object-property",
+   "ko": "객체 속성",
+   "en": "Object Property",
+   "definition": "개체와 개체를 잇는 관계입니다. 값이 다른 개체라는 점에서 문자열·숫자를 값으로 갖는 데이터 속성과 갈리며, 역관계나 추이성 같은 특성을 선언할 수 있습니다.",
+   "category": "basics",
+   "related": [
+    "datatype-property",
+    "domain-range",
+    "property-chain"
+   ]
+  },
+  {
+   "id": "datatype-property",
+   "ko": "데이터 속성",
+   "en": "Datatype Property",
+   "definition": "개체에 문자열·숫자 같은 값을 붙이는 속성입니다. 값은 xsd:decimal, xsd:dateTime 같은 자료형으로 적으며, 값이 개체가 아니므로 역관계를 선언할 수 없습니다.",
+   "category": "basics",
+   "related": [
+    "object-property",
+    "domain-range",
+    "cardinality"
+   ],
+   "example": "선박의 총톤수와 건조 연도는 데이터 속성으로 적습니다."
+  },
+  {
+   "id": "domain-range",
+   "ko": "정의역 / 치역",
+   "en": "Domain / Range",
+   "definition": "속성의 주어가 속하는 클래스와 값이 속하는 클래스(또는 자료형)입니다. RDFS와 OWL에서는 검사 조건이 아니라 추론 규칙으로 작동해, 정의역 밖의 주어가 오면 오류를 내지 않고 그 주어를 정의역 클래스의 개체로 봅니다.",
+   "category": "basics",
+   "related": [
+    "object-property",
+    "datatype-property",
+    "entailment",
+    "shacl"
+   ]
+  },
+  {
+   "id": "cardinality",
+   "ko": "기수",
+   "en": "Cardinality",
+   "definition": "한 개체가 어떤 속성의 값을 최소 몇 개, 최대 몇 개 가질 수 있는지 정하는 제약입니다. OWL에서는 열린 세계 가정 때문에 값이 모자라도 위반으로 보지 않으므로, 데이터 누락을 잡으려면 SHACL의 개수 제약을 씁니다.",
+   "category": "basics",
+   "related": [
+    "open-world-assumption",
+    "shacl",
+    "closed-world-validation"
+   ]
+  },
+  {
+   "id": "is-a",
+   "ko": "상하위 관계",
+   "en": "is-a (subClassOf)",
+   "definition": "「B는 A의 한 종류다」가 성립하는 관계입니다. B의 모든 개체가 A의 개체가 되므로, 부분이나 역할을 하위 클래스로 두면 개수와 추론 결과가 틀어집니다.",
+   "category": "basics",
+   "related": [
+    "part-of",
+    "class",
+    "ontoclean"
+   ]
+  },
+  {
+   "id": "part-of",
+   "ko": "부분-전체 관계",
+   "en": "part-of",
+   "definition": "「B는 A의 일부다」인 관계입니다. is-a와 달리 부분의 개체가 전체의 개체가 되지 않으므로, 클래스 계층이 아니라 객체 속성으로 적습니다.",
+   "category": "basics",
+   "related": [
+    "is-a",
+    "object-property"
+   ],
+   "example": "선박과 엔진은 상하위 관계가 아니라 hasPart 같은 부분-전체 관계로 잇습니다."
+  },
+  {
+   "id": "open-world-assumption",
+   "ko": "열린 세계 가정",
+   "en": "Open World Assumption",
+   "definition": "적혀 있지 않은 것을 거짓이 아니라 모르는 것으로 보는 가정입니다. OWL 추론이 이 가정을 따르므로, 값이 빠진 데이터를 위반으로 잡는 일은 닫힌 세계 검증에 맡깁니다.",
+   "category": "basics",
+   "related": [
+    "closed-world-validation",
+    "unique-name-assumption",
+    "owl-2"
+   ]
+  },
+  {
+   "id": "iri",
+   "ko": "국제화 자원 식별자",
+   "en": "IRI",
+   "definition": "유니코드를 허용하는 URI입니다. RDF에서 클래스, 속성, 개체의 이름은 IRI이므로, 한 번 공개한 IRI를 다른 뜻으로 다시 쓰면 그것을 가리키던 데이터가 잘못 읽힙니다.",
+   "category": "languages",
+   "related": [
+    "rdf-triple",
+    "named-graph",
+    "deprecation"
+   ]
+  },
+  {
+   "id": "rdf-triple",
+   "ko": "RDF 트리플",
+   "en": "RDF Triple",
+   "definition": "주어·술어·목적어 세 요소로 된 사실 한 개입니다. 주어는 IRI나 빈 노드, 술어는 IRI, 목적어는 IRI나 빈 노드나 리터럴이며, 트리플의 집합이 RDF 그래프입니다.",
+   "category": "languages",
+   "related": [
+    "iri",
+    "named-graph",
+    "turtle-json-ld",
+    "reification"
+   ]
+  },
+  {
+   "id": "named-graph",
+   "ko": "이름 붙은 그래프",
+   "en": "Named Graph",
+   "definition": "트리플 묶음에 IRI를 붙여 출처나 버전을 구분하는 방식입니다. 트리플에 그래프 이름이 네 번째 요소로 붙으므로, SPARQL의 GRAPH 절로 특정 묶음만 골라 질의할 수 있습니다.",
+   "category": "languages",
+   "related": [
+    "rdf-triple",
+    "prov-o",
+    "sparql"
+   ]
+  },
+  {
+   "id": "turtle-json-ld",
+   "ko": "Turtle / JSON-LD",
+   "en": "Turtle / JSON-LD",
+   "definition": "RDF를 적는 문법입니다. Turtle은 사람이 읽기 쉽고 JSON-LD는 웹 개발에 맞습니다.",
+   "category": "languages",
+   "related": [
+    "rdf-triple",
+    "iri"
+   ]
+  },
+  {
+   "id": "rdfs",
+   "ko": "RDF Schema",
+   "en": "RDFS",
+   "definition": "클래스, 하위 클래스, 정의역·치역을 선언하는 기본 어휘입니다. 하위 클래스 전이와 정의역·치역에 따른 함의만 정하며, 서로소나 기수 같은 제약은 표현하지 못해 OWL이 맡습니다.",
+   "category": "languages",
+   "related": [
+    "owl-2",
+    "domain-range",
+    "entailment"
+   ]
+  },
+  {
+   "id": "entailment",
+   "ko": "함의(추론)",
+   "en": "Entailment",
+   "definition": "명시된 트리플에서 규칙에 따라 새 트리플을 끌어내는 일입니다. 저장소가 함의를 계산하는지에 따라 같은 SPARQL 질의의 결과 수가 달라지므로, 질의 전에 추론 설정을 확인해야 합니다.",
+   "category": "languages",
+   "related": [
+    "reasoner",
+    "rdfs",
+    "ancestor-label-materialization"
+   ]
+  },
+  {
+   "id": "owl-2",
+   "ko": "OWL 2",
+   "en": "OWL 2",
+   "definition": "클래스 표현, 속성 특성, 제약을 쓸 수 있는 W3C 온톨로지 언어입니다.",
+   "category": "languages",
+   "related": [
+    "description-logic",
+    "owl-profile"
+   ]
+  },
+  {
+   "id": "description-logic",
+   "ko": "기술 논리",
+   "en": "Description Logic",
+   "definition": "OWL의 형식 의미를 주는 논리 체계입니다. 개념(클래스), 역할(속성), 개체로 지식을 적고, 어떤 생성자를 허용하느냐에 따라 표현력과 추론의 계산 복잡도가 정해집니다. OWL 2 DL은 SROIQ에 해당합니다.",
+   "category": "languages",
+   "related": [
+    "owl-2",
+    "owl-profile",
+    "reasoner"
+   ]
+  },
+  {
+   "id": "owl-profile",
+   "ko": "OWL 프로파일",
+   "en": "OWL Profile (EL·QL·RL)",
+   "definition": "추론 비용을 낮추려고 표현력을 제한한 OWL의 부분 언어입니다. 큰 클래스 계층에는 EL, 관계형 데이터베이스 질의 재작성에는 QL, 규칙 엔진 구현에는 RL이 맞습니다.",
+   "category": "languages",
+   "related": [
+    "owl-2",
+    "description-logic",
+    "obda"
+   ]
+  },
+  {
+   "id": "unique-name-assumption",
+   "ko": "고유 이름 가정",
+   "en": "Unique Name Assumption",
+   "definition": "이름이 다르면 다른 개체로 보는 가정입니다. OWL은 이 가정을 하지 않습니다.",
+   "category": "languages",
+   "related": [
+    "open-world-assumption",
+    "entity-resolution",
+    "individual"
+   ]
+  },
+  {
+   "id": "skos",
+   "ko": "SKOS",
+   "en": "SKOS",
+   "definition": "분류 체계와 시소러스를 표현하는 W3C 어휘입니다. broader, prefLabel, exactMatch 같은 속성이 있습니다.",
+   "category": "languages",
+   "related": [
+    "taxonomy",
+    "thesaurus"
+   ]
+  },
+  {
+   "id": "reasoner",
+   "ko": "추론기",
+   "en": "Reasoner",
+   "definition": "온톨로지의 일관성을 검사하고 함의를 계산하는 프로그램입니다. HermiT, ELK 같은 것이 있습니다.",
+   "category": "tools",
+   "related": [
+    "entailment",
+    "classification",
+    "justification",
+    "unsatisfiable-class"
+   ]
+  },
+  {
+   "id": "classification",
+   "ko": "자동 분류",
+   "en": "Classification",
+   "definition": "추론기가 클래스 사이의 숨은 상하 관계를 계산하는 일입니다. 명시하지 않은 subClassOf를 공리에서 끌어내 완성된 계층을 만들며, 그 과정에서 만족불가 클래스도 드러납니다.",
+   "category": "tools",
+   "related": [
+    "reasoner",
+    "is-a",
+    "unsatisfiable-class"
+   ]
+  },
+  {
+   "id": "sparql",
+   "ko": "SPARQL",
+   "en": "SPARQL",
+   "definition": "RDF 그래프에 대한 W3C 질의 언어입니다. 변수가 든 트리플 패턴을 그래프에 맞춰 답을 찾으며, SELECT·CONSTRUCT·ASK 질의와 갱신 연산을 지원합니다.",
+   "category": "tools",
+   "related": [
+    "property-path",
+    "named-graph",
+    "rdf-triple",
+    "competency-question"
+   ]
+  },
+  {
+   "id": "property-path",
+   "ko": "속성 경로",
+   "en": "Property Path",
+   "definition": "SPARQL에서 여러 단계의 관계를 한 식으로 따라가는 문법입니다. rdfs:subClassOf* 처럼 반복 연산자를 붙이면 추론기 없이도 상위 클래스 전체를 찾을 수 있습니다.",
+   "category": "tools",
+   "related": [
+    "sparql",
+    "property-chain",
+    "is-a"
+   ]
+  },
+  {
+   "id": "shacl",
+   "ko": "SHACL",
+   "en": "SHACL",
+   "definition": "RDF 데이터가 형상(shape)을 지키는지 검증하는 W3C 언어입니다.",
+   "category": "tools",
+   "related": [
+    "closed-world-validation",
+    "open-world-assumption"
+   ]
+  },
+  {
+   "id": "closed-world-validation",
+   "ko": "닫힌 세계 검증",
+   "en": "Closed World Validation",
+   "definition": "없는 값을 위반으로 보는 검증입니다. SHACL이 이 방식입니다. OWL 추론은 빠진 값을 모르는 것으로 두므로, 필수 값 누락은 이 검증으로 잡습니다.",
+   "category": "tools",
+   "related": [
+    "shacl",
+    "open-world-assumption",
+    "cardinality"
+   ]
+  },
+  {
+   "id": "lpg",
+   "ko": "속성 그래프",
+   "en": "LPG — Labeled Property Graph",
+   "definition": "노드와 관계에 라벨과 속성을 붙이는 그래프 모델입니다. Neo4j가 대표적입니다.",
+   "category": "tools",
+   "related": [
+    "ancestor-label-materialization",
+    "project-label"
+   ]
+  },
+  {
+   "id": "ancestor-label-materialization",
+   "ko": "조상 레이블 물리화",
+   "en": "Ancestor Label Materialization",
+   "definition": "노드에 모든 상위 클래스 라벨을 붙여 계층을 흉내 내는 LPG 기법입니다.",
+   "category": "tools",
+   "related": [
+    "lpg",
+    "is-a",
+    "entailment"
+   ],
+   "example": "유조선 노드에 :Vessel:CargoVessel:Tanker 라벨을 모두 붙이면 :Vessel 라벨만으로 선박 전체를 셀 수 있습니다."
+  },
+  {
+   "id": "project-label",
+   "ko": "프로젝트 라벨",
+   "en": "Project Label",
+   "definition": "공유 데이터베이스에서 한 프로젝트의 노드를 구분하는 라벨입니다. 제약과 색인을 이 라벨에만 걸어 다른 프로젝트의 노드를 건드리지 않게 하지만, 읽기를 막는 접근 제어 장치는 아닙니다.",
+   "category": "tools",
+   "related": [
+    "lpg",
+    "idempotent-load"
+   ]
+  },
+  {
+   "id": "competency-question",
+   "ko": "역량 질문",
+   "en": "Competency Question",
+   "definition": "온톨로지가 답해야 할 질문입니다. 범위와 완성 판정의 기준입니다. 질문을 SPARQL이나 Cypher 질의로 옮겨 두면 온톨로지를 고칠 때마다 다시 돌리는 시험이 됩니다.",
+   "category": "methods",
+   "related": [
+    "orsd",
+    "extreme-design",
+    "sparql"
+   ],
+   "example": "「이 선박이 지난달 기항한 항구는 어디인가」 같은 질문을 역량 질문으로 적습니다."
+  },
+  {
+   "id": "orsd",
+   "ko": "요구사항 명세서",
+   "en": "ORSD — Ontology Requirements Specification Document",
+   "definition": "목적·범위·사용자·CQ를 적는 NeOn·LOT의 양식입니다. 구현 전에 무엇을 다루고 무엇을 다루지 않을지 합의해 두는 문서이며, 뒤의 평가는 이 문서의 CQ를 기준으로 삼습니다.",
+   "category": "methods",
+   "related": [
+    "competency-question",
+    "extreme-design"
+   ]
+  },
+  {
+   "id": "odp",
+   "ko": "설계 패턴",
+   "en": "ODP — Ontology Design Pattern",
+   "definition": "검증된 모델링 조각입니다. N-ary 관계, 관측 같은 패턴이 있습니다.",
+   "category": "methods",
+   "related": [
+    "n-ary-relation",
+    "extreme-design",
+    "reification"
+   ]
+  },
+  {
+   "id": "upper-ontology",
+   "ko": "상위 온톨로지",
+   "en": "Upper Ontology",
+   "definition": "도메인과 무관한 최상위 범주 체계입니다. BFO, DOLCE가 대표적입니다.",
+   "category": "methods",
+   "related": [
+    "continuant-occurrent",
+    "alignment",
+    "conceptualization"
+   ]
+  },
+  {
+   "id": "continuant-occurrent",
+   "ko": "존속자 / 발생자",
+   "en": "Continuant / Occurrent",
+   "definition": "시간 속에서 유지되는 것과 시간 속에서 일어나는 것을 나누는 BFO의 최상위 구분입니다.",
+   "category": "methods",
+   "related": [
+    "upper-ontology",
+    "part-of"
+   ]
+  },
+  {
+   "id": "alignment",
+   "ko": "정렬",
+   "en": "Alignment",
+   "definition": "서로 다른 온톨로지의 개념 사이 대응을 찾는 일입니다. 결과는 동치·포함 같은 대응 관계와 신뢰도의 목록이며, SKOS의 exactMatch·closeMatch나 OWL의 equivalentClass로 적습니다.",
+   "category": "methods",
+   "related": [
+    "skos",
+    "entity-resolution",
+    "upper-ontology"
+   ]
+  },
+  {
+   "id": "non-ontological-resource",
+   "ko": "비온톨로지 자원",
+   "en": "Non-ontological Resource",
+   "definition": "분류표, 코드 체계, 데이터베이스 스키마처럼 온톨로지가 아닌 재사용 원천입니다.",
+   "category": "methods",
+   "related": [
+    "taxonomy",
+    "thesaurus"
+   ],
+   "example": "업종 분류표나 부품 코드 체계를 클래스 계층의 출발점으로 가져오는 것이 비온톨로지 자원 재사용입니다."
+  },
+  {
+   "id": "ontoclean",
+   "ko": "OntoClean",
+   "en": "OntoClean",
+   "definition": "정체성·강성·단일성 같은 메타 속성으로 is-a 계층을 점검하는 방법입니다.",
+   "category": "methods",
+   "related": [
+    "rigidity",
+    "is-a",
+    "oops"
+   ]
+  },
+  {
+   "id": "rigidity",
+   "ko": "강성",
+   "en": "Rigidity",
+   "definition": "어떤 성질이 그 개체에 항상 필수인지의 여부입니다. 학생은 강성이 없고 사람은 강성이 있습니다.",
+   "category": "methods",
+   "related": [
+    "ontoclean",
+    "is-a"
+   ]
+  },
+  {
+   "id": "oops",
+   "ko": "OOPS!",
+   "en": "OOPS!",
+   "definition": "온톨로지 설계의 흔한 함정을 자동으로 찾는 도구입니다. OWL 파일을 넣으면 역관계 누락, 고립 요소, 잘못된 정의역 같은 함정 목록 항목을 짚어 주지만, 도메인 오류나 주석에만 적힌 제약은 판단하지 못합니다.",
+   "category": "methods",
+   "related": [
+    "ontoclean",
+    "reasoner"
+   ]
+  },
+  {
+   "id": "entity-resolution",
+   "ko": "개체 식별",
+   "en": "Entity Resolution",
+   "definition": "같은 대상을 가리키는 여러 레코드를 하나로 묶는 일입니다. 이름·식별번호·속성의 일치도로 후보를 고르고, 확신이 낮은 쌍은 합치지 않고 동일 후보 관계로 남겨 검토합니다.",
+   "category": "operations",
+   "related": [
+    "unique-name-assumption",
+    "idempotent-load",
+    "alignment"
+   ],
+   "example": "같은 선박이 IMO 번호와 선명 표기만 다른 두 레코드로 들어오면 개체 식별로 하나로 묶습니다."
+  },
+  {
+   "id": "idempotent-load",
+   "ko": "멱등 적재",
+   "en": "Idempotent Load",
+   "definition": "여러 번 실행해도 결과가 같은 적재입니다. Cypher의 MERGE가 대표적입니다.",
+   "category": "operations",
+   "related": [
+    "entity-resolution",
+    "project-label"
+   ]
+  },
+  {
+   "id": "rag",
+   "ko": "검색 증강 생성",
+   "en": "RAG — Retrieval-Augmented Generation",
+   "definition": "검색한 근거를 LLM에 넣어 답을 만드는 방식입니다. 모델이 학습하지 않은 최신 자료나 내부 자료로 답하게 하고, 답에 근거를 인용하게 해 환각을 줄이는 데 씁니다.",
+   "category": "operations",
+   "related": [
+    "graphrag",
+    "text-to-cypher"
+   ]
+  },
+  {
+   "id": "graphrag",
+   "ko": "GraphRAG",
+   "en": "GraphRAG",
+   "definition": "문서 대신 또는 함께 지식그래프를 근거로 쓰는 RAG입니다. 이웃 개체와 관계를 따라가 근거를 모으므로 여러 문서에 흩어진 사실을 잇는 질문에 쓰며, 이 이름은 그래프 질의와 커뮤니티 요약처럼 서로 다른 방식을 함께 가리킵니다.",
+   "category": "operations",
+   "related": [
+    "rag",
+    "text-to-cypher",
+    "knowledge-graph"
+   ]
+  },
+  {
+   "id": "text-to-cypher",
+   "ko": "Text-to-Cypher",
+   "en": "Text-to-Cypher",
+   "definition": "자연어 질문을 Cypher 질의로 바꾸는 방식입니다. LLM에 노드 라벨·관계·속성을 적은 스키마 텍스트를 함께 주어야 그래프에 없는 라벨이나 관계를 지어내지 않습니다.",
+   "category": "operations",
+   "related": [
+    "graphrag",
+    "rag",
+    "lpg"
+   ]
+  },
+  {
+   "id": "obda",
+   "ko": "온톨로지 기반 데이터 접근",
+   "en": "OBDA — Ontology-Based Data Access",
+   "definition": "관계형 데이터를 옮기지 않고 매핑으로 온톨로지 질의에 답하는 방식입니다.",
+   "category": "operations",
+   "related": [
+    "r2rml",
+    "owl-profile"
+   ]
+  },
+  {
+   "id": "r2rml",
+   "ko": "R2RML",
+   "en": "R2RML",
+   "definition": "관계형 데이터베이스를 RDF로 매핑하는 W3C 언어입니다. 표·열·행을 어떤 IRI와 클래스·속성으로 바꿀지 적으며, 매핑으로 RDF를 미리 만들어 둘 수도 있고 OBDA처럼 질의할 때 바꿔 쓸 수도 있습니다.",
+   "category": "operations",
+   "related": [
+    "obda",
+    "iri",
+    "non-ontological-resource"
+   ]
+  },
+  {
+   "id": "deprecation",
+   "ko": "폐기 표시",
+   "en": "Deprecation",
+   "definition": "요소를 지우지 않고 더 쓰지 말라고 표시하는 일입니다. IRI와 정의를 남겨 과거 데이터와 외부 참조가 깨지지 않게 하며, OWL에서는 owl:deprecated 주석과 대체 용어를 함께 적습니다.",
+   "category": "operations",
+   "related": [
+    "iri"
+   ],
+   "example": "오타가 난 속성 이름은 고쳐 쓰지 않고, 새 속성을 만든 뒤 옛 속성에 폐기 표시와 대체 속성을 적습니다."
+  },
+  {
+   "id": "property-chain",
+   "ko": "속성 체인",
+   "en": "Property Chain",
+   "definition": "두 관계를 이으면 세 번째 관계가 성립한다는 OWL 공리입니다. 「A가 B 안에 있고 B가 C 안에 있으면 A는 C 안에 있다」 같은 경로 추론을 규칙 없이 적을 수 있지만, 값 비교나 산술이 필요하면 SWRL을 씁니다.",
+   "category": "operations",
+   "related": [
+    "swrl",
+    "object-property",
+    "property-path"
+   ]
+  },
+  {
+   "id": "swrl",
+   "ko": "SWRL",
+   "en": "SWRL",
+   "definition": "OWL에 규칙을 더하는 언어입니다. 몸체의 조건 원자들이 모두 참이면 머리의 결론 원자를 덧붙이는 Horn 형태 규칙을 쓰고 비교·산술 내장 술어를 지원하며, W3C 권고안이 아니라 Member Submission입니다.",
+   "category": "operations",
+   "related": [
+    "property-chain",
+    "reasoner"
+   ]
+  },
+  {
+   "id": "justification",
+   "ko": "정당화",
+   "en": "Justification",
+   "definition": "어떤 추론 결과를 낳는 최소한의 공리 집합입니다. 공리를 하나라도 빼면 그 결과가 더는 나오지 않으므로, 추론기가 낸 분류나 비일관성의 원인을 사람에게 설명하는 데 씁니다.",
+   "category": "operations",
+   "related": [
+    "reasoner",
+    "unsatisfiable-class",
+    "prov-o"
+   ]
+  },
+  {
+   "id": "prov-o",
+   "ko": "PROV-O",
+   "en": "PROV-O",
+   "definition": "개체·활동·행위자로 출처를 기록하는 W3C 온톨로지입니다. 어떤 데이터가 어느 원천에서 어떤 처리로 만들어졌고 누가 책임지는지를 wasDerivedFrom, wasGeneratedBy 같은 속성으로 적습니다.",
+   "category": "operations",
+   "related": [
+    "justification",
+    "named-graph"
+   ]
+  },
+  {
+   "id": "evidence-fusion",
+   "ko": "증거 융합",
+   "en": "Evidence Fusion",
+   "definition": "여러 증거의 신뢰도를 하나로 합치는 일입니다. 베이지안 방법, Dempster–Shafer 이론을 씁니다.",
+   "category": "operations",
+   "related": [
+    "cep",
+    "prov-o"
+   ]
+  },
+  {
+   "id": "cep",
+   "ko": "복합 이벤트 처리",
+   "en": "CEP — Complex Event Processing",
+   "definition": "이벤트 흐름에서 시간 패턴을 찾는 처리입니다. 여러 단일 이벤트가 정해진 순서와 시간 창 안에 맞물리면 상위 이벤트를 만들며, SEQ·AND·NOT·WITHIN 같은 연산자로 패턴을 적습니다.",
+   "category": "operations",
+   "related": [
+    "evidence-fusion",
+    "swrl"
+   ]
+  },
+  {
+   "id": "odrl",
+   "ko": "ODRL",
+   "en": "ODRL",
+   "definition": "허가·의무·금지를 표현하는 W3C 정책 언어입니다. 정책은 당사자·행동·대상·제약으로 된 규칙의 묶음이며, 디지털 콘텐츠 이용 조건을 위해 만들었지만 데이터 이용 정책과 운영 규범에도 씁니다.",
+   "category": "operations",
+   "related": [
+    "deontic-logic",
+    "cep"
+   ]
+  },
+  {
+   "id": "deontic-logic",
+   "ko": "의무 논리",
+   "en": "Deontic Logic",
+   "definition": "의무·허가·금지를 다루는 논리입니다. 「해야 한다」와 「해도 된다」를 연산자로 다루어 규범 사이의 충돌, 의무를 어겼을 때 생기는 다음 의무(반의무) 같은 문제를 분석합니다.",
+   "category": "operations",
+   "related": [
+    "odrl"
+   ]
+  },
+  {
+   "id": "n-ary-relation",
+   "ko": "N-ary 관계",
+   "en": "N-ary Relation",
+   "definition": "둘보다 많은 참여자나 관계 자체의 속성을 표현하려고 관계를 하나의 개체로 만들어 참여자들을 잇는 패턴입니다. W3C 모범 사례 노트(2006)가 정리했습니다.",
+   "category": "methods",
+   "related": [
+    "odp",
+    "reification"
+   ]
+  },
+  {
+   "id": "reification",
+   "ko": "리피케이션",
+   "en": "Reification",
+   "definition": "문장이나 관계 자체를 개체로 만들어 그것에 대해 다시 진술할 수 있게 하는 방법입니다. RDF 리피케이션 어휘, N-ary 관계, 사건 객체화가 모두 이 생각에서 나옵니다.",
+   "category": "languages",
+   "related": [
+    "n-ary-relation",
+    "action-type"
+   ]
+  },
+  {
+   "id": "unsatisfiable-class",
+   "ko": "만족불가 클래스",
+   "en": "Unsatisfiable Class",
+   "definition": "공리들 때문에 어떤 개체도 속할 수 없는 클래스입니다. 추론기가 owl:Nothing과 동치로 분류합니다. 개체가 하나라도 그 클래스에 속하면 온톨로지가 비일관해집니다.",
+   "category": "tools",
+   "related": [
+    "reasoner",
+    "justification"
+   ]
+  },
+  {
+   "id": "extreme-design",
+   "ko": "익스트림 디자인",
+   "en": "XD — eXtreme Design",
+   "definition": "사용자 이야기에서 CQ를 뽑고 CQ마다 맞는 내용 패턴을 골라 특수화한 뒤 CQ를 테스트로 돌리는 반복형 패턴 기반 방법론입니다. MOMo가 이어받았습니다.",
+   "category": "methods",
+   "related": [
+    "odp",
+    "competency-question"
+   ]
+  },
+  {
+   "id": "action-type",
+   "ko": "액션 타입",
+   "en": "Action Type",
+   "definition": "객체·속성·링크를 바꾸는 쓰기 연산을 파라미터, 규칙, 제출 기준, 부수 효과와 함께 정의한 스키마 요소입니다. Palantir Foundry의 용어이며, 실행 이력은 액션 로그 객체로 따로 남깁니다.",
+   "category": "operations",
+   "related": [
+    "reification",
+    "prov-o"
+   ]
+  }
+ ]
+}

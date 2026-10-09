@@ -1,0 +1,1717 @@
+{
+ "registry": "OntoCraft 한국 산업 용어 등록부",
+ "registry_en": "OntoCraft Korean Industry Term Registry",
+ "publisher": "OntoCraft",
+ "license": "CC BY 4.0",
+ "license_url": "https://creativecommons.org/licenses/by/4.0/",
+ "attribution": "출처: OntoCraft 한국 산업 용어 등록부(OntoCraft), CC BY 4.0. 용어 주소는 https://w3id.org/ontocraft/terms/<id> 입니다.",
+ "base_uri": "https://w3id.org/ontocraft/terms/",
+ "uri_template": "https://w3id.org/ontocraft/terms/{id}",
+ "snapshot": "2026-10-09",
+ "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
+ "domain": {
+  "id": "physical-ai",
+  "name": "Physical AI",
+  "en": "Physical AI"
+ },
+ "version": "0.1.1",
+ "updated": "2026-10-09",
+ "categories": [
+  {
+   "id": "structure",
+   "name": "로봇 구조와 형태",
+   "en": "Robot structure and types"
+  },
+  {
+   "id": "kinematics",
+   "name": "운동학과 동역학",
+   "en": "Kinematics and dynamics"
+  },
+  {
+   "id": "control",
+   "name": "제어",
+   "en": "Control"
+  },
+  {
+   "id": "perception",
+   "name": "인지와 센서",
+   "en": "Perception and sensing"
+  },
+  {
+   "id": "planning",
+   "name": "계획",
+   "en": "Planning"
+  },
+  {
+   "id": "learning",
+   "name": "학습",
+   "en": "Robot learning"
+  },
+  {
+   "id": "software",
+   "name": "시뮬레이션과 소프트웨어",
+   "en": "Simulation and software"
+  },
+  {
+   "id": "safety",
+   "name": "안전과 표준",
+   "en": "Safety and standards"
+  }
+ ],
+ "terms": [
+  {
+   "id": "industrial-robot",
+   "ko": "산업용 로봇",
+   "en": "industrial robot",
+   "alt": [
+    "산업 로봇"
+   ],
+   "definition": "공장에서 용접, 도장, 조립, 운반 같은 일을 프로그램대로 반복하는 로봇입니다. 여러 축을 움직여 정해진 자세와 경로를 따릅니다.",
+   "category": "structure",
+   "related": [
+    "robot-manipulator",
+    "collaborative-robot"
+   ],
+   "refs": [
+    "ISO 8373",
+    "ISO 10218-1"
+   ]
+  },
+  {
+   "id": "robot-manipulator",
+   "ko": "매니퓰레이터",
+   "en": "manipulator",
+   "alt": [
+    "로봇 팔",
+    "로봇암",
+    "로봇팔"
+   ],
+   "definition": "링크와 관절을 이어 물체를 잡거나 옮기도록 만든 팔 모양의 기구입니다. 끝에 엔드 이펙터를 달아 일을 합니다.",
+   "category": "structure",
+   "related": [
+    "robot-link",
+    "robot-joint",
+    "end-effector"
+   ],
+   "refs": [
+    "ISO 8373"
+   ]
+  },
+  {
+   "id": "robot-link",
+   "ko": "링크",
+   "en": "link",
+   "alt": [
+    "암",
+    "링크 부재"
+   ],
+   "definition": "관절과 관절 사이를 잇는 단단한 몸체입니다. 링크의 길이와 질량이 로봇의 도달 범위와 동역학을 정합니다.",
+   "category": "structure",
+   "related": [
+    "robot-joint",
+    "robot-manipulator"
+   ],
+   "refs": [
+    "ISO 8373"
+   ]
+  },
+  {
+   "id": "robot-joint",
+   "ko": "관절",
+   "en": "joint",
+   "alt": [
+    "조인트",
+    "축"
+   ],
+   "definition": "두 링크를 이어 서로 움직일 수 있게 하는 부분입니다. 관절 하나가 보통 자유도 하나를 줍니다.",
+   "category": "structure",
+   "related": [
+    "robot-link",
+    "degrees-of-freedom"
+   ],
+   "refs": [
+    "ISO 8373"
+   ]
+  },
+  {
+   "id": "degrees-of-freedom",
+   "ko": "자유도",
+   "en": "degrees of freedom",
+   "alt": [
+    "DOF",
+    "DoF"
+   ],
+   "definition": "기구가 서로 독립으로 움직일 수 있는 방향의 수입니다. 공간에서 물체의 위치와 방향을 모두 정하려면 6개가 필요합니다.",
+   "category": "structure",
+   "related": [
+    "robot-joint",
+    "robot-pose"
+   ],
+   "refs": [
+    "ISO 8373"
+   ]
+  },
+  {
+   "id": "end-effector",
+   "ko": "엔드 이펙터",
+   "en": "end effector",
+   "alt": [
+    "말단 장치",
+    "EOAT",
+    "툴"
+   ],
+   "definition": "매니퓰레이터 끝에 달려 실제로 일을 하는 장치입니다. 그리퍼, 용접 토치, 흡착 패드, 드라이버 등이 있습니다.",
+   "category": "structure",
+   "related": [
+    "robot-gripper",
+    "tool-center-point"
+   ],
+   "refs": [
+    "ISO 8373"
+   ]
+  },
+  {
+   "id": "robot-gripper",
+   "ko": "그리퍼",
+   "en": "gripper",
+   "alt": [
+    "집게",
+    "로봇 핸드",
+    "핸드"
+   ],
+   "definition": "물체를 잡고 놓는 엔드 이펙터입니다. 손가락형, 흡착형, 자석형 등이 있고 물체 모양과 무게에 맞춰 고릅니다.",
+   "category": "structure",
+   "broader": "end-effector",
+   "related": [
+    "grasp-planning",
+    "pick-and-place",
+    "bin-picking"
+   ],
+   "example": "ROS 2에서는 그리퍼를 열고 닫는 명령을 control_msgs의 GripperCommand 액션으로 보냅니다."
+  },
+  {
+   "id": "tool-center-point",
+   "ko": "공구 중심점",
+   "en": "tool center point",
+   "alt": [
+    "TCP",
+    "툴 중심점"
+   ],
+   "definition": "엔드 이펙터에서 작업의 기준으로 삼는 한 점입니다. 로봇에게 목표 위치를 줄 때 보통 이 점의 위치와 방향을 지정합니다.",
+   "category": "structure",
+   "related": [
+    "end-effector",
+    "robot-coordinate-frame"
+   ],
+   "refs": [
+    "ISO 8373"
+   ]
+  },
+  {
+   "id": "robot-actuator",
+   "ko": "액추에이터",
+   "en": "actuator",
+   "alt": [
+    "구동기",
+    "구동부"
+   ],
+   "definition": "전기, 유압, 공압 에너지를 받아 관절을 움직이는 힘이나 토크로 바꾸는 장치입니다.",
+   "category": "structure",
+   "related": [
+    "servo-motor",
+    "speed-reducer"
+   ]
+  },
+  {
+   "id": "servo-motor",
+   "ko": "서보 모터",
+   "en": "servo motor",
+   "alt": [
+    "서보",
+    "서보모터"
+   ],
+   "definition": "엔코더로 위치와 속도를 되먹임받아 지령대로 정밀하게 도는 모터입니다. 로봇 관절 구동에 가장 널리 씁니다.",
+   "category": "structure",
+   "broader": "robot-actuator",
+   "related": [
+    "joint-encoder",
+    "speed-reducer"
+   ]
+  },
+  {
+   "id": "speed-reducer",
+   "ko": "감속기",
+   "en": "speed reducer",
+   "alt": [
+    "기어 감속기",
+    "리듀서"
+   ],
+   "definition": "모터의 빠른 회전을 느리게 줄이면서 토크를 키우는 장치입니다. 관절의 정밀도와 강성, 백래시에 큰 영향을 줍니다.",
+   "category": "structure",
+   "related": [
+    "servo-motor",
+    "robot-actuator"
+   ]
+  },
+  {
+   "id": "robot-workspace",
+   "ko": "작업 공간",
+   "en": "workspace",
+   "alt": [
+    "작업 영역",
+    "도달 범위",
+    "워크스페이스"
+   ],
+   "definition": "엔드 이펙터가 닿을 수 있는 공간 전체입니다. 링크 길이와 관절 가동 범위가 정합니다.",
+   "category": "structure",
+   "related": [
+    "robot-link",
+    "inverse-kinematics"
+   ],
+   "refs": [
+    "ISO 8373"
+   ]
+  },
+  {
+   "id": "collaborative-robot",
+   "ko": "협동 로봇",
+   "en": "collaborative robot",
+   "alt": [
+    "코봇",
+    "cobot"
+   ],
+   "definition": "사람과 같은 공간에서 일하도록 힘과 속도를 제한하고 접촉을 감지하는 기능을 갖춘 로봇입니다.",
+   "category": "structure",
+   "broader": "industrial-robot",
+   "related": [
+    "collaborative-operation",
+    "power-and-force-limiting"
+   ],
+   "refs": [
+    "ISO 10218-1",
+    "ISO/TS 15066"
+   ]
+  },
+  {
+   "id": "mobile-robot",
+   "ko": "이동 로봇",
+   "en": "mobile robot",
+   "alt": [
+    "모바일 로봇"
+   ],
+   "definition": "바퀴나 다리로 스스로 자리를 옮기는 로봇입니다. 위치 추정과 경로 계획이 핵심 기능입니다.",
+   "category": "structure",
+   "related": [
+    "robot-navigation",
+    "robot-localization"
+   ],
+   "refs": [
+    "ISO 8373"
+   ]
+  },
+  {
+   "id": "autonomous-mobile-robot",
+   "ko": "자율 이동 로봇",
+   "en": "autonomous mobile robot",
+   "alt": [
+    "AMR"
+   ],
+   "definition": "정해진 선을 따르지 않고 센서로 주변을 파악해 스스로 경로를 정하는 이동 로봇입니다.",
+   "category": "structure",
+   "broader": "mobile-robot",
+   "related": [
+    "slam",
+    "path-planning"
+   ]
+  },
+  {
+   "id": "mobile-manipulator",
+   "ko": "모바일 매니퓰레이터",
+   "en": "mobile manipulator",
+   "alt": [
+    "이동형 매니퓰레이터",
+    "모바일 매니퓰레이션 로봇"
+   ],
+   "definition": "이동 로봇 위에 매니퓰레이터를 얹어 옮겨 다니며 물체를 다루는 로봇입니다. 이동과 팔 동작을 함께 계획해야 합니다.",
+   "category": "structure",
+   "broader": "mobile-robot",
+   "related": [
+    "robot-manipulator",
+    "whole-body-control"
+   ]
+  },
+  {
+   "id": "legged-robot",
+   "ko": "보행 로봇",
+   "en": "legged robot",
+   "alt": [
+    "다리 로봇",
+    "족형 로봇",
+    "4족 보행 로봇"
+   ],
+   "definition": "바퀴 대신 다리로 걷는 로봇입니다. 계단이나 거친 땅을 지날 수 있지만 균형 제어가 어렵습니다.",
+   "category": "structure",
+   "broader": "mobile-robot",
+   "related": [
+    "bipedal-locomotion",
+    "whole-body-control",
+    "model-predictive-control"
+   ]
+  },
+  {
+   "id": "humanoid-robot",
+   "ko": "휴머노이드",
+   "en": "humanoid robot",
+   "alt": [
+    "인간형 로봇",
+    "휴머노이드 로봇"
+   ],
+   "definition": "사람과 비슷하게 두 다리, 두 팔, 몸통을 갖춘 로봇입니다. 사람을 위해 만든 공간과 도구를 그대로 쓰려는 목적으로 만듭니다.",
+   "category": "structure",
+   "broader": "legged-robot",
+   "related": [
+    "bipedal-locomotion",
+    "whole-body-control"
+   ]
+  },
+  {
+   "id": "bipedal-locomotion",
+   "ko": "이족 보행",
+   "en": "bipedal locomotion",
+   "alt": [
+    "두 발 보행"
+   ],
+   "definition": "두 다리로 번갈아 몸을 지탱하며 걷는 동작입니다. 넘어지지 않도록 무게 중심과 발 디딤을 계속 조절해야 합니다.",
+   "category": "structure",
+   "related": [
+    "humanoid-robot",
+    "legged-robot",
+    "whole-body-control"
+   ]
+  },
+  {
+   "id": "robot-coordinate-frame",
+   "ko": "좌표계",
+   "en": "coordinate frame",
+   "alt": [
+    "프레임",
+    "좌표 프레임"
+   ],
+   "definition": "위치와 방향을 적을 때 기준으로 삼는 원점과 세 축입니다. 로봇에는 베이스, 관절, 공구, 카메라, 작업물마다 좌표계가 따로 있습니다.",
+   "category": "kinematics",
+   "related": [
+    "homogeneous-transform",
+    "tf-tree"
+   ],
+   "refs": [
+    "ISO 9787"
+   ]
+  },
+  {
+   "id": "homogeneous-transform",
+   "ko": "동차 변환",
+   "en": "homogeneous transformation",
+   "alt": [
+    "변환 행렬",
+    "좌표 변환",
+    "4x4 변환 행렬"
+   ],
+   "definition": "회전과 이동을 한 행렬에 묶어 한 좌표계의 값을 다른 좌표계로 옮기는 계산입니다. 여러 변환을 곱해 이어 붙일 수 있습니다.",
+   "category": "kinematics",
+   "related": [
+    "robot-coordinate-frame",
+    "forward-kinematics"
+   ]
+  },
+  {
+   "id": "robot-pose",
+   "ko": "자세",
+   "en": "pose",
+   "alt": [
+    "포즈",
+    "위치·자세"
+   ],
+   "definition": "물체나 공구의 위치와 방향을 함께 이르는 말입니다. 3차원에서는 위치 셋과 회전 셋으로 적습니다.",
+   "category": "kinematics",
+   "related": [
+    "degrees-of-freedom",
+    "six-d-pose-estimation"
+   ],
+   "refs": [
+    "ISO 8373"
+   ]
+  },
+  {
+   "id": "joint-space",
+   "ko": "관절 공간",
+   "en": "joint space",
+   "alt": [
+    "조인트 공간",
+    "관절 좌표"
+   ],
+   "definition": "각 관절의 각도나 변위로 로봇의 상태를 나타내는 공간입니다. 제어기는 결국 이 값으로 모터를 움직입니다.",
+   "category": "kinematics",
+   "related": [
+    "configuration-space",
+    "forward-kinematics",
+    "inverse-kinematics"
+   ],
+   "example": "ROS 2의 sensor_msgs/JointState 메시지는 관절 이름과 함께 관절 공간의 위치, 속도, 힘 값을 담습니다."
+  },
+  {
+   "id": "forward-kinematics",
+   "ko": "정기구학",
+   "en": "forward kinematics",
+   "alt": [
+    "순기구학",
+    "FK"
+   ],
+   "definition": "관절 값이 주어졌을 때 엔드 이펙터의 위치와 방향을 구하는 계산입니다. 답이 하나로 정해집니다.",
+   "category": "kinematics",
+   "broader": "robot-kinematics",
+   "related": [
+    "inverse-kinematics",
+    "homogeneous-transform",
+    "joint-space"
+   ]
+  },
+  {
+   "id": "inverse-kinematics",
+   "ko": "역기구학",
+   "en": "inverse kinematics",
+   "alt": [
+    "IK"
+   ],
+   "definition": "엔드 이펙터의 목표 위치와 방향이 주어졌을 때 그렇게 만드는 관절 값을 구하는 계산입니다. 답이 여러 개이거나 없을 수 있습니다.",
+   "category": "kinematics",
+   "broader": "robot-kinematics",
+   "related": [
+    "forward-kinematics",
+    "kinematic-singularity"
+   ]
+  },
+  {
+   "id": "robot-kinematics",
+   "ko": "로봇 기구학",
+   "en": "robot kinematics",
+   "alt": [
+    "운동학",
+    "키네마틱스"
+   ],
+   "definition": "힘은 따지지 않고 관절의 움직임과 링크 끝의 위치, 속도 사이의 관계만 다루는 분야입니다.",
+   "category": "kinematics",
+   "related": [
+    "robot-dynamics",
+    "homogeneous-transform",
+    "joint-space"
+   ]
+  },
+  {
+   "id": "robot-jacobian",
+   "ko": "자코비안",
+   "en": "Jacobian",
+   "alt": [
+    "야코비안",
+    "자코비안 행렬"
+   ],
+   "definition": "관절 속도와 엔드 이펙터 속도 사이의 관계를 나타내는 행렬입니다. 힘 제어와 특이점 판단에도 씁니다.",
+   "category": "kinematics",
+   "broader": "robot-kinematics",
+   "related": [
+    "kinematic-singularity",
+    "force-control"
+   ]
+  },
+  {
+   "id": "kinematic-singularity",
+   "ko": "특이점",
+   "en": "kinematic singularity",
+   "alt": [
+    "특이 자세",
+    "싱귤래리티"
+   ],
+   "definition": "자코비안의 계수가 떨어져 어떤 방향으로는 움직일 수 없게 되는 자세입니다. 근처에서는 작은 이동에도 관절 속도가 크게 튑니다.",
+   "category": "kinematics",
+   "related": [
+    "robot-jacobian",
+    "inverse-kinematics"
+   ]
+  },
+  {
+   "id": "robot-dynamics",
+   "ko": "로봇 동역학",
+   "en": "robot dynamics",
+   "alt": [
+    "다이내믹스"
+   ],
+   "definition": "관절에 주는 토크와 로봇의 가속도, 질량, 관성, 중력 사이의 관계를 다루는 분야입니다. 빠른 동작과 토크 제어에 필요합니다.",
+   "category": "kinematics",
+   "related": [
+    "robot-kinematics",
+    "torque-control"
+   ]
+  },
+  {
+   "id": "robot-trajectory",
+   "ko": "궤적",
+   "en": "trajectory",
+   "alt": [
+    "트래젝토리",
+    "경로 궤적"
+   ],
+   "definition": "경로 위의 각 점에 언제 도달할지 시간까지 붙인 움직임입니다. 위치, 속도, 가속도가 시간의 함수로 정해집니다.",
+   "category": "kinematics",
+   "related": [
+    "path-planning",
+    "motion-planning",
+    "position-control"
+   ],
+   "example": "ROS 2의 trajectory_msgs/JointTrajectory 메시지는 각 점에 관절 위치, 속도, 가속도와 출발 후 도달 시각(time_from_start)을 함께 적습니다."
+  },
+  {
+   "id": "pose-repeatability",
+   "ko": "반복 정밀도",
+   "en": "pose repeatability",
+   "alt": [
+    "반복 정도",
+    "반복성"
+   ],
+   "definition": "같은 지령으로 같은 자세에 여러 번 갈 때 도착점이 얼마나 모여 있는지 나타냅니다.",
+   "category": "kinematics",
+   "related": [
+    "pose-accuracy",
+    "tool-center-point"
+   ],
+   "refs": [
+    "ISO 9283"
+   ],
+   "example": "로봇 사양서에는 반복 정밀도를 ± 밀리미터 값으로 적고 시험 방법으로 ISO 9283을 듭니다."
+  },
+  {
+   "id": "pose-accuracy",
+   "ko": "위치 정확도",
+   "en": "pose accuracy",
+   "alt": [
+    "절대 정확도",
+    "절대 정밀도"
+   ],
+   "definition": "지령한 자세와 실제로 도착한 자세가 얼마나 가까운지 나타냅니다. 반복 정밀도보다 보통 나쁘며 캘리브레이션으로 개선합니다.",
+   "category": "kinematics",
+   "related": [
+    "pose-repeatability",
+    "tool-center-point",
+    "robot-kinematics"
+   ],
+   "refs": [
+    "ISO 9283"
+   ]
+  },
+  {
+   "id": "motion-control",
+   "ko": "모션 제어",
+   "en": "motion control",
+   "alt": [
+    "모션컨트롤",
+    "운동 제어"
+   ],
+   "definition": "모터와 관절이 지령한 위치, 속도, 힘을 따르도록 구동을 조절하는 일입니다.",
+   "category": "control",
+   "related": [
+    "servo-motor",
+    "feedback-control"
+   ]
+  },
+  {
+   "id": "feedback-control",
+   "ko": "피드백 제어",
+   "en": "feedback control",
+   "alt": [
+    "폐루프 제어",
+    "되먹임 제어"
+   ],
+   "definition": "센서로 잰 현재 값과 목표 값의 차이를 보고 다음 명령을 고치는 제어 방식입니다.",
+   "category": "control",
+   "related": [
+    "pid-control",
+    "joint-encoder"
+   ]
+  },
+  {
+   "id": "pid-control",
+   "ko": "PID 제어",
+   "en": "PID control",
+   "alt": [
+    "PID",
+    "비례 적분 미분 제어"
+   ],
+   "definition": "오차, 오차의 누적, 오차의 변화율에 각각 이득을 곱해 더한 값으로 명령을 만드는 피드백 제어입니다. 이득 조정이 성능을 좌우합니다.",
+   "category": "control",
+   "broader": "feedback-control",
+   "related": [
+    "position-control",
+    "servo-motor"
+   ],
+   "example": "ros2_control 컨트롤러 설정 파일의 gains 항목에 관절마다 p, i, d 값을 적습니다."
+  },
+  {
+   "id": "position-control",
+   "ko": "위치 제어",
+   "en": "position control",
+   "alt": [
+    "위치 서보"
+   ],
+   "definition": "관절이나 공구가 목표 위치에 가도록 하는 제어입니다. 접촉이 없는 이송 동작에 주로 씁니다.",
+   "category": "control",
+   "broader": "motion-control",
+   "related": [
+    "pid-control",
+    "force-control"
+   ]
+  },
+  {
+   "id": "torque-control",
+   "ko": "토크 제어",
+   "en": "torque control",
+   "alt": [
+    "전류 제어",
+    "힘 지령 제어"
+   ],
+   "definition": "관절 모터가 내는 토크를 직접 지령하는 제어입니다. 동역학 모델과 함께 써서 부드러운 접촉과 빠른 동작을 만듭니다.",
+   "category": "control",
+   "broader": "motion-control",
+   "related": [
+    "robot-dynamics",
+    "impedance-control"
+   ]
+  },
+  {
+   "id": "force-control",
+   "ko": "힘 제어",
+   "en": "force control",
+   "alt": [
+    "힘 피드백 제어"
+   ],
+   "definition": "공구가 물체에 가하는 힘이 목표 값을 따르도록 하는 제어입니다. 연마, 끼워 맞춤, 접촉 검사에 씁니다.",
+   "category": "control",
+   "broader": "motion-control",
+   "related": [
+    "force-torque-sensor",
+    "impedance-control"
+   ]
+  },
+  {
+   "id": "impedance-control",
+   "ko": "임피던스 제어",
+   "en": "impedance control",
+   "alt": [
+    "임피던스 제어기"
+   ],
+   "definition": "로봇이 스프링과 댐퍼처럼 행동하도록 위치 오차와 힘의 관계를 정해 두는 제어입니다. 외력을 받으면 정한 만큼 밀려납니다.",
+   "category": "control",
+   "broader": "motion-control",
+   "related": [
+    "force-control",
+    "torque-control",
+    "force-torque-sensor"
+   ],
+   "example": "임피던스 제어기 설정에는 축마다 강성(stiffness)과 감쇠(damping) 값을 적습니다."
+  },
+  {
+   "id": "model-predictive-control",
+   "ko": "모델 예측 제어",
+   "en": "model predictive control",
+   "alt": [
+    "MPC"
+   ],
+   "definition": "시스템 모델로 앞으로 몇 걸음을 예측해 제약을 지키며 비용이 가장 작은 명령을 매 주기 다시 구하는 제어입니다.",
+   "category": "control",
+   "related": [
+    "whole-body-control",
+    "robot-dynamics"
+   ]
+  },
+  {
+   "id": "whole-body-control",
+   "ko": "전신 제어",
+   "en": "whole-body control",
+   "alt": [
+    "WBC",
+    "전신 제어기"
+   ],
+   "definition": "다리, 몸통, 팔의 관절을 한꺼번에 놓고 균형, 접촉, 손 작업 같은 여러 목표를 우선순위에 따라 함께 푸는 제어입니다.",
+   "category": "control",
+   "related": [
+    "humanoid-robot",
+    "model-predictive-control"
+   ]
+  },
+  {
+   "id": "teleoperation",
+   "ko": "원격 조작",
+   "en": "teleoperation",
+   "alt": [
+    "텔레오퍼레이션",
+    "원격 조종"
+   ],
+   "definition": "사람이 떨어진 곳에서 입력 장치로 로봇을 직접 움직이는 방식입니다. 학습용 시연 데이터를 모을 때도 씁니다.",
+   "category": "control",
+   "related": [
+    "demonstration-data",
+    "imitation-learning"
+   ]
+  },
+  {
+   "id": "teach-pendant",
+   "ko": "티치 펜던트",
+   "en": "teach pendant",
+   "alt": [
+    "교시 펜던트",
+    "펜던트"
+   ],
+   "definition": "작업자가 손에 들고 로봇을 움직이고 프로그램을 만드는 조작반입니다. 비상 정지 버튼과 인에이블 스위치가 달려 있습니다.",
+   "category": "control",
+   "related": [
+    "robot-emergency-stop",
+    "industrial-robot"
+   ],
+   "refs": [
+    "ISO 10218-1"
+   ]
+  },
+  {
+   "id": "robot-perception",
+   "ko": "로봇 인지",
+   "en": "robot perception",
+   "alt": [
+    "인지",
+    "지각",
+    "퍼셉션"
+   ],
+   "definition": "센서 데이터에서 물체, 위치, 장면 상태 같은 쓸 수 있는 정보를 뽑아내는 기능입니다.",
+   "category": "perception",
+   "related": [
+    "sensor-fusion",
+    "six-d-pose-estimation"
+   ]
+  },
+  {
+   "id": "rgbd-camera",
+   "ko": "깊이 카메라",
+   "en": "depth camera",
+   "alt": [
+    "RGB-D 카메라",
+    "3D 카메라",
+    "뎁스 카메라"
+   ],
+   "definition": "색 영상과 함께 픽셀마다 거리를 재는 카메라입니다. 스테레오, 구조광, 비행시간 방식이 있습니다.",
+   "category": "perception",
+   "related": [
+    "point-cloud",
+    "six-d-pose-estimation",
+    "hand-eye-calibration"
+   ],
+   "example": "깊이 카메라 드라이버는 색 영상, 깊이 영상, 카메라 내부 파라미터(camera_info)를 서로 다른 토픽으로 발행합니다."
+  },
+  {
+   "id": "lidar",
+   "ko": "라이다",
+   "en": "LiDAR",
+   "alt": [
+    "레이저 스캐너",
+    "LIDAR",
+    "레이저 거리 센서"
+   ],
+   "definition": "레이저를 쏘아 되돌아오는 시간으로 주변까지의 거리를 재는 센서입니다. 이동 로봇의 지도 작성과 장애물 감지에 씁니다.",
+   "category": "perception",
+   "related": [
+    "point-cloud",
+    "slam"
+   ]
+  },
+  {
+   "id": "inertial-measurement-unit",
+   "ko": "관성 측정 장치",
+   "en": "inertial measurement unit",
+   "alt": [
+    "IMU",
+    "관성 센서"
+   ],
+   "definition": "가속도계와 자이로로 몸체의 가속도와 회전 속도를 재는 센서입니다. 짧은 시간의 자세 변화를 빠르게 알려 주지만 오래 적분하면 오차가 쌓입니다.",
+   "category": "perception",
+   "related": [
+    "sensor-fusion",
+    "kalman-filter",
+    "robot-localization"
+   ],
+   "example": "ROS 2의 sensor_msgs/Imu 메시지는 방향, 각속도, 선가속도와 각 값의 공분산을 담습니다."
+  },
+  {
+   "id": "joint-encoder",
+   "ko": "엔코더",
+   "en": "encoder",
+   "alt": [
+    "인코더",
+    "회전 엔코더",
+    "관절 엔코더"
+   ],
+   "definition": "모터나 관절의 회전 각도를 재는 센서입니다. 절대식과 증분식이 있으며 위치 제어의 기준이 됩니다.",
+   "category": "perception",
+   "related": [
+    "servo-motor",
+    "feedback-control"
+   ]
+  },
+  {
+   "id": "force-torque-sensor",
+   "ko": "힘·토크 센서",
+   "en": "force/torque sensor",
+   "alt": [
+    "F/T 센서",
+    "6축 힘 센서",
+    "힘 센서"
+   ],
+   "definition": "손목이나 관절에 달아 세 방향의 힘과 세 축의 토크를 재는 센서입니다. 힘 제어와 충돌 감지에 씁니다.",
+   "category": "perception",
+   "related": [
+    "force-control",
+    "impedance-control",
+    "power-and-force-limiting"
+   ],
+   "example": "ROS 2에서는 힘 세 성분과 토크 세 성분을 geometry_msgs/WrenchStamped 메시지로 보냅니다."
+  },
+  {
+   "id": "point-cloud",
+   "ko": "포인트 클라우드",
+   "en": "point cloud",
+   "alt": [
+    "점군",
+    "3D 점군"
+   ],
+   "definition": "공간의 점들을 좌표로 모아 놓은 데이터입니다. 깊이 카메라와 라이다가 만들며 물체 모양 파악과 충돌 검사에 씁니다.",
+   "category": "perception",
+   "related": [
+    "rgbd-camera",
+    "lidar"
+   ]
+  },
+  {
+   "id": "sensor-fusion",
+   "ko": "센서 융합",
+   "en": "sensor fusion",
+   "alt": [
+    "센서 퓨전",
+    "다중 센서 융합"
+   ],
+   "definition": "성질이 다른 여러 센서의 값을 합쳐 하나의 센서보다 정확하고 안정된 추정을 얻는 일입니다.",
+   "category": "perception",
+   "related": [
+    "kalman-filter",
+    "inertial-measurement-unit"
+   ]
+  },
+  {
+   "id": "kalman-filter",
+   "ko": "칼만 필터",
+   "en": "Kalman filter",
+   "alt": [
+    "KF",
+    "확장 칼만 필터",
+    "EKF"
+   ],
+   "definition": "예측 모델과 잡음이 섞인 측정을 불확실성의 크기에 따라 섞어 상태를 추정하는 방법입니다.",
+   "category": "perception",
+   "broader": "sensor-fusion",
+   "related": [
+    "robot-localization",
+    "inertial-measurement-unit",
+    "slam"
+   ],
+   "example": "위치 추정 필터의 설정 파일에는 공정 잡음 공분산과 측정 잡음 공분산 행렬을 적습니다."
+  },
+  {
+   "id": "robot-localization",
+   "ko": "위치 추정",
+   "en": "localization",
+   "alt": [
+    "로컬라이제이션",
+    "측위"
+   ],
+   "definition": "로봇이 이미 가진 지도 안에서 자기 위치와 방향을 알아내는 일입니다. 바퀴 주행 기록과 관성 측정 값으로 예측한 위치를 라이다나 카메라가 본 주변 모습과 지도를 맞춰 고칩니다. 지도를 함께 만들지 않는다는 점에서 SLAM과 다릅니다.",
+   "category": "perception",
+   "related": [
+    "slam",
+    "kalman-filter",
+    "robot-navigation"
+   ],
+   "example": "ROS 2 내비게이션에서는 위치 추정 노드가 map 좌표계에서 odom 좌표계로 가는 변환을 계속 고쳐 발행합니다."
+  },
+  {
+   "id": "slam",
+   "ko": "SLAM",
+   "en": "simultaneous localization and mapping",
+   "alt": [
+    "동시적 위치 추정 및 지도 작성",
+    "슬램"
+   ],
+   "definition": "모르는 공간을 다니며 지도를 만드는 동시에 그 지도 안의 자기 위치를 추정하는 기법입니다.",
+   "category": "perception",
+   "broader": "robot-localization",
+   "related": [
+    "lidar",
+    "autonomous-mobile-robot",
+    "point-cloud"
+   ],
+   "example": "SLAM으로 만든 지도는 점유 격자 이미지와, 해상도와 원점을 적은 YAML 파일로 저장합니다."
+  },
+  {
+   "id": "six-d-pose-estimation",
+   "ko": "6D 자세 추정",
+   "en": "6D pose estimation",
+   "alt": [
+    "6자유도 자세 추정",
+    "물체 자세 추정"
+   ],
+   "definition": "영상이나 점군에서 물체의 3차원 위치와 회전을 함께 구하는 일입니다. 로봇이 물체를 집기 전에 필요합니다.",
+   "category": "perception",
+   "broader": "robot-perception",
+   "related": [
+    "robot-pose",
+    "grasp-planning"
+   ]
+  },
+  {
+   "id": "hand-eye-calibration",
+   "ko": "핸드아이 캘리브레이션",
+   "en": "hand-eye calibration",
+   "alt": [
+    "핸드-아이 보정",
+    "카메라-로봇 캘리브레이션"
+   ],
+   "definition": "카메라 좌표계와 로봇 좌표계 사이의 변환을 구하는 일입니다. 카메라가 본 위치로 로봇을 보내려면 먼저 해야 합니다.",
+   "category": "perception",
+   "related": [
+    "homogeneous-transform",
+    "robot-coordinate-frame",
+    "rgbd-camera"
+   ],
+   "example": "캘리브레이션 결과는 카메라 좌표계와 로봇 플랜지 또는 베이스 사이의 고정 변환으로 저장해 좌표 변환 트리에 넣습니다."
+  },
+  {
+   "id": "motion-planning",
+   "ko": "동작 계획",
+   "en": "motion planning",
+   "alt": [
+    "모션 플래닝",
+    "운동 계획"
+   ],
+   "definition": "시작 상태에서 목표 상태까지 충돌 없이 제약을 지키며 가는 움직임을 찾는 일입니다.",
+   "category": "planning",
+   "related": [
+    "configuration-space",
+    "collision-checking"
+   ]
+  },
+  {
+   "id": "path-planning",
+   "ko": "경로 계획",
+   "en": "path planning",
+   "alt": [
+    "경로 탐색",
+    "패스 플래닝"
+   ],
+   "definition": "시작점에서 목표점까지 장애물을 피해 가는 길의 모양을 찾는 일입니다. 시간은 따로 붙입니다.",
+   "category": "planning",
+   "broader": "motion-planning",
+   "related": [
+    "robot-trajectory",
+    "robot-navigation",
+    "obstacle-avoidance"
+   ],
+   "example": "ROS 2 내비게이션은 경로 계획 결과를 자세(PoseStamped)의 나열인 nav_msgs/Path 메시지로 발행합니다."
+  },
+  {
+   "id": "configuration-space",
+   "ko": "형상 공간",
+   "en": "configuration space",
+   "alt": [
+    "C-space",
+    "컨피규레이션 공간"
+   ],
+   "definition": "로봇의 모든 관절 값 조합을 한 점으로 나타내는 공간입니다. 충돌하는 조합을 빼고 남은 영역에서 길을 찾습니다.",
+   "category": "planning",
+   "related": [
+    "joint-space",
+    "motion-planning"
+   ]
+  },
+  {
+   "id": "collision-checking",
+   "ko": "충돌 검사",
+   "en": "collision checking",
+   "alt": [
+    "간섭 검사",
+    "충돌 감지"
+   ],
+   "definition": "주어진 자세나 경로에서 로봇이 자기 몸이나 주변 물체와 부딪히는지 계산하는 일입니다.",
+   "category": "planning",
+   "related": [
+    "motion-planning",
+    "point-cloud"
+   ]
+  },
+  {
+   "id": "sampling-based-planning",
+   "ko": "샘플링 기반 계획",
+   "en": "sampling-based planning",
+   "alt": [
+    "RRT",
+    "PRM"
+   ],
+   "definition": "형상 공간에서 무작위로 점을 뽑아 충돌 없는 점끼리 이어 길을 찾는 계획 방식입니다. 관절이 많을 때 씁니다.",
+   "category": "planning",
+   "broader": "motion-planning",
+   "related": [
+    "configuration-space",
+    "collision-checking"
+   ]
+  },
+  {
+   "id": "obstacle-avoidance",
+   "ko": "장애물 회피",
+   "en": "obstacle avoidance",
+   "alt": [
+    "충돌 회피"
+   ],
+   "definition": "움직이는 동안 나타난 장애물을 감지해 경로나 속도를 바꾸는 일입니다. 출발 전에 지도 전체를 보고 세우는 경로 계획과 달리, 센서가 매 주기 보는 가까운 주변만 보고 짧은 시간 안에 반응합니다.",
+   "category": "planning",
+   "related": [
+    "path-planning",
+    "lidar"
+   ]
+  },
+  {
+   "id": "robot-navigation",
+   "ko": "내비게이션",
+   "en": "navigation",
+   "alt": [
+    "자율 주행",
+    "주행"
+   ],
+   "definition": "이동 로봇이 위치 추정, 경로 계획, 장애물 회피를 엮어 목적지까지 가는 기능 전체입니다.",
+   "category": "planning",
+   "related": [
+    "robot-localization",
+    "path-planning",
+    "obstacle-avoidance"
+   ]
+  },
+  {
+   "id": "grasp-planning",
+   "ko": "파지 계획",
+   "en": "grasp planning",
+   "alt": [
+    "그래스핑",
+    "파지점 계산",
+    "그립 계획"
+   ],
+   "definition": "물체를 어디를 어떤 방향으로 잡을지 정하는 일입니다. 물체 자세, 그리퍼 모양, 미끄러짐을 함께 고려합니다.",
+   "category": "planning",
+   "broader": "motion-planning",
+   "related": [
+    "robot-gripper",
+    "six-d-pose-estimation"
+   ]
+  },
+  {
+   "id": "pick-and-place",
+   "ko": "픽앤플레이스",
+   "en": "pick and place",
+   "alt": [
+    "집어 놓기",
+    "피킹"
+   ],
+   "definition": "물체를 집어 정해진 위치에 놓는 작업입니다. 인지, 파지 계획, 동작 계획을 모두 거칩니다.",
+   "category": "planning",
+   "related": [
+    "grasp-planning",
+    "bin-picking"
+   ]
+  },
+  {
+   "id": "bin-picking",
+   "ko": "빈 피킹",
+   "en": "bin picking",
+   "alt": [
+    "랜덤 피킹",
+    "무작위 피킹"
+   ],
+   "definition": "상자 안에 어지럽게 쌓인 물체를 하나씩 인식해 집어내는 작업입니다. 물체가 겹치고 가려져 있어 한 번 집을 때마다 6D 자세 추정, 파지 계획, 상자 벽과의 충돌 검사를 다시 합니다.",
+   "category": "planning",
+   "broader": "pick-and-place",
+   "related": [
+    "six-d-pose-estimation",
+    "point-cloud"
+   ]
+  },
+  {
+   "id": "task-planning",
+   "ko": "작업 계획",
+   "en": "task planning",
+   "alt": [
+    "태스크 플래닝",
+    "상위 계획"
+   ],
+   "definition": "목표를 이루기 위해 어떤 동작을 어떤 순서로 할지 정하는 일입니다. 정해진 순서는 동작 계획으로 넘깁니다.",
+   "category": "planning",
+   "related": [
+    "motion-planning",
+    "vision-language-action-model"
+   ]
+  },
+  {
+   "id": "robot-learning",
+   "ko": "로봇 학습",
+   "en": "robot learning",
+   "definition": "사람이 규칙을 다 적지 않고 데이터와 경험에서 로봇의 행동을 익히게 하는 방법 전체입니다.",
+   "category": "learning",
+   "related": [
+    "imitation-learning",
+    "reinforcement-learning"
+   ]
+  },
+  {
+   "id": "robot-policy",
+   "ko": "정책",
+   "en": "policy",
+   "alt": [
+    "폴리시",
+    "제어 정책"
+   ],
+   "definition": "현재 관측을 받아 다음 행동을 내놓는 함수입니다. 학습의 결과물로 로봇에 실어 돌립니다.",
+   "category": "learning",
+   "related": [
+    "robot-learning",
+    "reinforcement-learning"
+   ]
+  },
+  {
+   "id": "imitation-learning",
+   "ko": "모방 학습",
+   "en": "imitation learning",
+   "alt": [
+    "시연 학습",
+    "데모 학습"
+   ],
+   "definition": "사람이 보여 준 시연을 보고 같은 행동을 하도록 정책을 학습하는 방법입니다.",
+   "category": "learning",
+   "broader": "robot-learning",
+   "related": [
+    "demonstration-data",
+    "behavior-cloning"
+   ]
+  },
+  {
+   "id": "behavior-cloning",
+   "ko": "행동 복제",
+   "en": "behavior cloning",
+   "alt": [
+    "BC",
+    "행동 클로닝"
+   ],
+   "definition": "시연 데이터의 관측과 행동 쌍을 지도 학습으로 그대로 따라 하게 만드는 모방 학습입니다. 시연에 없던 상황에서 오차가 커지기 쉽습니다.",
+   "category": "learning",
+   "broader": "imitation-learning",
+   "related": [
+    "demonstration-data",
+    "robot-policy"
+   ],
+   "example": "시연 데이터셋의 각 에피소드는 시간 순 관측(카메라 영상, 관절 상태)과 그때의 행동을 짝지어 담고, 행동 복제는 이 짝으로 학습합니다."
+  },
+  {
+   "id": "demonstration-data",
+   "ko": "시연 데이터",
+   "en": "demonstration data",
+   "alt": [
+    "데모 데이터",
+    "시연 궤적"
+   ],
+   "definition": "사람이 원격 조작이나 직접 교시로 작업을 해 보인 기록입니다. 관측, 행동, 로봇 상태를 시간 순으로 담습니다.",
+   "category": "learning",
+   "related": [
+    "teleoperation",
+    "imitation-learning"
+   ]
+  },
+  {
+   "id": "reinforcement-learning",
+   "ko": "강화 학습",
+   "en": "reinforcement learning",
+   "alt": [
+    "RL"
+   ],
+   "definition": "행동을 해 보고 받은 보상을 바탕으로 보상의 합이 커지도록 정책을 고쳐 가는 학습 방법입니다.",
+   "category": "learning",
+   "broader": "robot-learning",
+   "related": [
+    "reward-function",
+    "robot-policy"
+   ]
+  },
+  {
+   "id": "reward-function",
+   "ko": "보상 함수",
+   "en": "reward function",
+   "alt": [
+    "보상 설계",
+    "리워드"
+   ],
+   "definition": "강화 학습에서 행동의 결과가 얼마나 좋은지 점수로 매기는 함수입니다. 목표 달성, 에너지 사용, 충돌 같은 항목에 가중치를 붙여 더하는 형태가 많고, 잘못 설계하면 정책이 의도하지 않은 지름길을 배웁니다.",
+   "category": "learning",
+   "related": [
+    "reinforcement-learning",
+    "robot-policy"
+   ],
+   "example": "강화 학습 설정 파일에는 보상 항목 이름과 가중치를 나란히 적어 목표 거리 보상과 관절 토크 벌점 같은 항목을 조절합니다."
+  },
+  {
+   "id": "sim-to-real",
+   "ko": "sim-to-real 이전",
+   "en": "sim-to-real transfer",
+   "alt": [
+    "sim2real",
+    "심투리얼"
+   ],
+   "definition": "시뮬레이션에서 학습하거나 검증한 정책을 실제 로봇으로 옮기는 일입니다. 현실 격차 때문에 그대로 옮기면 성능이 떨어지므로 도메인 무작위화, 실측 값으로 시뮬레이터 맞추기, 실제 로봇에서의 추가 학습을 함께 씁니다.",
+   "category": "learning",
+   "related": [
+    "reality-gap",
+    "domain-randomization",
+    "robot-simulation"
+   ]
+  },
+  {
+   "id": "reality-gap",
+   "ko": "현실 격차",
+   "en": "reality gap",
+   "alt": [
+    "sim-to-real 격차",
+    "시뮬레이션 격차"
+   ],
+   "definition": "시뮬레이션과 실제 세계의 물리, 센서, 지연이 달라 생기는 성능 차이입니다.",
+   "category": "learning",
+   "related": [
+    "sim-to-real",
+    "physics-engine"
+   ]
+  },
+  {
+   "id": "domain-randomization",
+   "ko": "도메인 무작위화",
+   "en": "domain randomization",
+   "alt": [
+    "도메인 랜덤화"
+   ],
+   "definition": "시뮬레이션의 질량, 마찰, 조명, 질감 같은 값을 학습마다 무작위로 바꿔 정책이 실제 환경 차이에도 버티게 하는 기법입니다.",
+   "category": "learning",
+   "related": [
+    "sim-to-real",
+    "reality-gap"
+   ]
+  },
+  {
+   "id": "robot-foundation-model",
+   "ko": "로봇 파운데이션 모델",
+   "en": "robot foundation model",
+   "alt": [
+    "로봇 기반 모델",
+    "범용 로봇 모델"
+   ],
+   "definition": "여러 로봇과 작업의 대규모 데이터로 미리 학습해 새 작업에 조금만 맞추면 쓸 수 있게 만든 큰 모델입니다.",
+   "category": "learning",
+   "broader": "robot-learning",
+   "related": [
+    "vision-language-action-model",
+    "world-model"
+   ]
+  },
+  {
+   "id": "vision-language-action-model",
+   "ko": "VLA 모델",
+   "en": "vision-language-action model",
+   "alt": [
+    "VLA",
+    "시각 언어 행동 모델"
+   ],
+   "definition": "카메라 영상과 자연어 지시를 함께 받아 로봇 행동을 바로 출력하는 모델입니다.",
+   "category": "learning",
+   "broader": "robot-foundation-model",
+   "related": [
+    "task-planning",
+    "robot-policy"
+   ]
+  },
+  {
+   "id": "world-model",
+   "ko": "월드 모델",
+   "en": "world model",
+   "alt": [
+    "세계 모델"
+   ],
+   "definition": "현재 상태와 행동이 주어지면 다음 상태나 관측을 예측하도록 학습한 모델입니다. 실제로 해 보기 전에 결과를 상상해 계획과 학습에 씁니다.",
+   "category": "learning",
+   "related": [
+    "robot-foundation-model",
+    "model-predictive-control"
+   ]
+  },
+  {
+   "id": "physics-engine",
+   "ko": "물리 엔진",
+   "en": "physics engine",
+   "alt": [
+    "물리 시뮬레이터"
+   ],
+   "definition": "강체의 운동, 충돌, 마찰, 관절 구속을 수치로 계산해 시간에 따라 갱신하는 소프트웨어입니다.",
+   "category": "software",
+   "related": [
+    "contact-model",
+    "robot-simulation"
+   ]
+  },
+  {
+   "id": "contact-model",
+   "ko": "접촉 모델",
+   "en": "contact model",
+   "alt": [
+    "접촉 역학 모델",
+    "마찰 모델"
+   ],
+   "definition": "물체끼리 닿을 때의 힘과 마찰을 물리 엔진이 계산하는 방식입니다. 집기와 걷기의 시뮬레이션 품질을 크게 좌우합니다.",
+   "category": "software",
+   "related": [
+    "physics-engine",
+    "reality-gap"
+   ]
+  },
+  {
+   "id": "robot-simulation",
+   "ko": "로봇 시뮬레이션",
+   "en": "robot simulation",
+   "alt": [
+    "시뮬",
+    "로봇 시뮬레이터"
+   ],
+   "definition": "로봇과 주변 환경을 가상으로 만들어 동작, 센서, 제어를 실물 없이 시험하는 일입니다.",
+   "category": "software",
+   "related": [
+    "physics-engine",
+    "sim-to-real"
+   ]
+  },
+  {
+   "id": "urdf",
+   "ko": "URDF",
+   "en": "Unified Robot Description Format",
+   "alt": [
+    "로봇 기술 파일"
+   ],
+   "definition": "로봇의 링크, 관절, 질량, 외형, 충돌 모양을 XML로 적는 파일 형식입니다. 시뮬레이터와 ROS 도구가 같이 읽습니다.",
+   "category": "software",
+   "related": [
+    "robot-link",
+    "robot-joint",
+    "ros-2"
+   ],
+   "example": "URDF 파일에서 관절은 joint 태그에 type(revolute, prismatic 등), parent, child, limit을 적습니다."
+  },
+  {
+   "id": "robot-digital-twin",
+   "ko": "로봇 디지털 트윈",
+   "en": "robot digital twin",
+   "alt": [
+    "디지털 트윈",
+    "디지털트윈"
+   ],
+   "definition": "실제 로봇이나 셀의 상태를 데이터로 받아 가상 모델에 계속 반영하는 쌍둥이 모델입니다. 모니터링, 시험, 변경 검토에 씁니다.",
+   "category": "software",
+   "related": [
+    "robot-simulation",
+    "urdf"
+   ],
+   "refs": [
+    "ISO 23247"
+   ]
+  },
+  {
+   "id": "ros-2",
+   "ko": "ROS 2",
+   "en": "Robot Operating System 2",
+   "alt": [
+    "ROS2",
+    "로스 2"
+   ],
+   "definition": "로봇 소프트웨어를 여러 노드로 나누고 메시지로 잇게 해 주는 오픈소스 미들웨어와 도구 모음입니다.",
+   "category": "software",
+   "related": [
+    "ros-node",
+    "ros-topic"
+   ]
+  },
+  {
+   "id": "ros-node",
+   "ko": "노드",
+   "en": "node",
+   "alt": [
+    "ROS 노드"
+   ],
+   "definition": "ROS 2에서 한 가지 역할을 맡아 실행되는 프로그램 단위입니다. 센서 드라이버, 인지, 계획, 제어가 각각 노드가 됩니다.",
+   "category": "software",
+   "related": [
+    "ros-2",
+    "ros-topic"
+   ]
+  },
+  {
+   "id": "ros-topic",
+   "ko": "토픽",
+   "en": "topic",
+   "alt": [
+    "ROS 토픽",
+    "발행·구독"
+   ],
+   "definition": "노드끼리 메시지를 발행하고 구독하는 이름 붙은 통로입니다. 센서 값처럼 계속 흐르는 데이터를 보냅니다.",
+   "category": "software",
+   "related": [
+    "ros-node",
+    "ros-service"
+   ]
+  },
+  {
+   "id": "ros-service",
+   "ko": "서비스",
+   "en": "service",
+   "alt": [
+    "ROS 서비스",
+    "서비스 호출"
+   ],
+   "definition": "한 노드가 요청을 보내면 다른 노드가 한 번 응답하는 ROS 2 통신 방식입니다.",
+   "category": "software",
+   "related": [
+    "ros-topic",
+    "ros-node",
+    "ros-2"
+   ],
+   "example": "ROS 2의 .srv 파일은 요청 필드와 응답 필드를 --- 줄로 나눠 적습니다."
+  },
+  {
+   "id": "tf-tree",
+   "ko": "좌표 변환 트리",
+   "en": "transform tree",
+   "alt": [
+    "tf",
+    "tf2",
+    "TF 트리"
+   ],
+   "definition": "로봇의 여러 좌표계를 부모와 자식으로 이어 시간마다 변환을 관리하는 구조입니다. 어느 두 좌표계 사이든 변환을 바로 구할 수 있습니다.",
+   "category": "software",
+   "related": [
+    "robot-coordinate-frame",
+    "homogeneous-transform"
+   ],
+   "example": "tf2_tools의 view_frames 명령은 좌표 변환 트리를 그림 파일로 그려 줍니다."
+  },
+  {
+   "id": "robot-safety",
+   "ko": "로봇 안전",
+   "en": "robot safety",
+   "alt": [
+    "로봇 안전 설계"
+   ],
+   "definition": "로봇이 사람과 설비를 다치게 하지 않도록 설계, 방호, 운전 절차를 갖추는 일입니다.",
+   "category": "safety",
+   "related": [
+    "robot-risk-assessment",
+    "collaborative-operation"
+   ],
+   "refs": [
+    "ISO 10218-1",
+    "ISO 10218-2"
+   ]
+  },
+  {
+   "id": "robot-risk-assessment",
+   "ko": "로봇 위험성 평가",
+   "en": "robot risk assessment",
+   "alt": [
+    "위험성 평가",
+    "리스크 어세스먼트"
+   ],
+   "definition": "로봇 셀의 위험 요인을 찾고 위험의 크기를 따져 줄이는 대책을 정하는 절차입니다.",
+   "category": "safety",
+   "broader": "robot-safety",
+   "related": [
+    "robot-safeguarded-space",
+    "collaborative-operation"
+   ],
+   "refs": [
+    "ISO 12100",
+    "ISO 10218-2"
+   ]
+  },
+  {
+   "id": "collaborative-operation",
+   "ko": "협동 운전",
+   "en": "collaborative operation",
+   "alt": [
+    "협동 작업",
+    "협업 운전"
+   ],
+   "definition": "사람과 로봇이 같은 작업 공간에서 함께 일하는 운전 방식입니다. 감시 정지, 핸드 가이딩, 속도·분리 감시, 동력·힘 제한으로 나눕니다.",
+   "category": "safety",
+   "broader": "robot-safety",
+   "related": [
+    "collaborative-robot",
+    "robot-risk-assessment"
+   ],
+   "refs": [
+    "ISO 10218-1",
+    "ISO/TS 15066"
+   ]
+  },
+  {
+   "id": "safety-rated-monitored-stop",
+   "ko": "안전 등급 감시 정지",
+   "en": "safety-rated monitored stop",
+   "alt": [
+    "감시 정지"
+   ],
+   "definition": "사람이 협동 공간에 들어오면 로봇이 멈춘 채 대기하고, 정지 상태를 안전 기능이 계속 감시하는 협동 운전 방식입니다.",
+   "category": "safety",
+   "broader": "collaborative-operation",
+   "related": [
+    "robot-protective-stop",
+    "speed-and-separation-monitoring"
+   ],
+   "refs": [
+    "ISO 10218-1"
+   ]
+  },
+  {
+   "id": "hand-guiding",
+   "ko": "핸드 가이딩",
+   "en": "hand guiding",
+   "alt": [
+    "직접 교시",
+    "손 안내"
+   ],
+   "definition": "작업자가 로봇을 손으로 잡고 끌어 움직이는 협동 운전 방식입니다. 교시에도 씁니다.",
+   "category": "safety",
+   "broader": "collaborative-operation",
+   "related": [
+    "teach-pendant",
+    "safety-rated-monitored-stop"
+   ],
+   "refs": [
+    "ISO 10218-1"
+   ]
+  },
+  {
+   "id": "speed-and-separation-monitoring",
+   "ko": "속도·분리 감시",
+   "en": "speed and separation monitoring",
+   "alt": [
+    "SSM",
+    "속도 및 거리 감시"
+   ],
+   "definition": "사람과 로봇 사이 거리를 계속 재어 가까워지면 속도를 줄이거나 멈추는 협동 운전 방식입니다.",
+   "category": "safety",
+   "broader": "collaborative-operation",
+   "related": [
+    "lidar",
+    "robot-protective-stop",
+    "safety-rated-monitored-stop"
+   ],
+   "refs": [
+    "ISO/TS 15066"
+   ]
+  },
+  {
+   "id": "power-and-force-limiting",
+   "ko": "동력·힘 제한",
+   "en": "power and force limiting",
+   "alt": [
+    "PFL",
+    "힘 제한"
+   ],
+   "definition": "로봇이 사람과 닿더라도 다치지 않도록 접촉 힘과 압력을 제한하는 협동 운전 방식입니다.",
+   "category": "safety",
+   "broader": "collaborative-operation",
+   "related": [
+    "collaborative-robot",
+    "force-torque-sensor"
+   ],
+   "refs": [
+    "ISO/TS 15066"
+   ]
+  },
+  {
+   "id": "robot-protective-stop",
+   "ko": "보호 정지",
+   "en": "protective stop",
+   "alt": [
+    "안전 정지"
+   ],
+   "definition": "안전 장치나 안전 기능이 위험을 감지해 로봇을 멈추게 하는 정지입니다. 비상 정지와 달리 자동으로 걸리고 풀릴 수 있습니다.",
+   "category": "safety",
+   "broader": "robot-safety",
+   "related": [
+    "robot-emergency-stop",
+    "safety-rated-monitored-stop",
+    "robot-safeguarded-space"
+   ],
+   "refs": [
+    "ISO 10218-1"
+   ]
+  },
+  {
+   "id": "robot-emergency-stop",
+   "ko": "비상 정지",
+   "en": "emergency stop",
+   "alt": [
+    "E-Stop",
+    "비상 정지 버튼",
+    "이머전시 스톱"
+   ],
+   "definition": "사람이 버튼을 눌러 로봇의 모든 위험한 움직임을 즉시 멈추는 기능입니다. 다시 움직이려면 사람이 직접 해제해야 합니다.",
+   "category": "safety",
+   "broader": "robot-safety",
+   "related": [
+    "teach-pendant",
+    "robot-protective-stop"
+   ],
+   "refs": [
+    "ISO 13850",
+    "ISO 10218-1"
+   ]
+  },
+  {
+   "id": "robot-safeguarded-space",
+   "ko": "방호 공간",
+   "en": "safeguarded space",
+   "alt": [
+    "안전 방호 구역",
+    "안전 펜스 구역"
+   ],
+   "definition": "펜스, 라이트 커튼, 레이저 스캐너 같은 방호 장치로 둘러 사람의 출입을 감시하는 로봇 주변 공간입니다.",
+   "category": "safety",
+   "broader": "robot-safety",
+   "related": [
+    "robot-workspace",
+    "robot-risk-assessment"
+   ],
+   "refs": [
+    "ISO 10218-2"
+   ]
+  }
+ ]
+}

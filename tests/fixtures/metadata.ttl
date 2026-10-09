@@ -1,0 +1,15 @@
+@prefix ex:   <https://example.org/meta#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+# 레이블 언어 검사용입니다. 버전 정보 대신 owl:versionIRI 만 둡니다(META01 통과).
+<https://example.org/meta> a owl:Ontology ; owl:versionIRI <https://example.org/meta/1.0> ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> .
+dct:license a owl:AnnotationProperty .
+
+ex:Root a owl:Class ; rdfs:label "뿌리"@ko , "Root"@en ; rdfs:comment "기준 클래스입니다."@ko .
+ex:EnglishOnly a owl:Class ; rdfs:subClassOf ex:Root ; rdfs:label "English only"@en ; rdfs:comment "한국어 레이블이 없습니다."@ko .
+ex:KoreanOnly a owl:Class ; rdfs:subClassOf ex:Root ; rdfs:label "한국어만"@ko ; rdfs:comment "영어 레이블이 없습니다."@ko ;
+    owl:disjointWith ex:EnglishOnly .

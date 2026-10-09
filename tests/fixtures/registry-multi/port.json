@@ -1,0 +1,3 @@
+{"domain": {"id": "port", "name": "항만·물류"}, "terms": [
+ {"id": "shipping-container", "ko": "컨테이너", "alt": ["화물 컨테이너"]},
+ {"id": "vessel-call", "ko": "선박", "alt": ["입항 선박"]}]}

@@ -1,0 +1,12 @@
+@prefix ex:   <https://example.org/logic#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://example.org/logic> a owl:Ontology .
+ex:Cat a owl:Class . ex:Dog a owl:Class . ex:Pet a owl:Class .
+ex:Cat rdfs:subClassOf ex:Pet . ex:Dog rdfs:subClassOf ex:Pet .
+ex:Cat owl:disjointWith ex:Dog .
+ex:Impossible a owl:Class ; owl:equivalentClass owl:Nothing .
+ex:mother a owl:ObjectProperty , owl:FunctionalProperty .
+ex:hates a owl:ObjectProperty , owl:IrreflexiveProperty .
+ex:Puppy a owl:Class ; rdfs:subClassOf ex:Dog .
