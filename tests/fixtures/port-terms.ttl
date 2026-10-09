@@ -1,0 +1,19 @@
+@prefix ex: <https://example.org/flux#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# 해사 온톨로지에 흔한 항만 용어와, 개념 용어와 이름이 같은 속성(0.4 실사용 피드백)입니다.
+<https://example.org/flux> a owl:Ontology .
+ex:Vessel a owl:Class ; rdfs:label "선박"@ko .
+ex:Anchorage a owl:Class ; rdfs:label "정박지"@ko .
+ex:Berth a owl:Class ; rdfs:label "선석"@ko .
+ex:DangerousGoods a owl:Class ; rdfs:label "위험물"@ko .
+ex:Loading a owl:Class ; rdfs:label "적하"@ko .
+ex:Discharging a owl:Class ; rdfs:label "양하"@ko .
+ex:PortFacility a owl:Class ; rdfs:label "항만시설"@ko .
+ex:CargoHandling a owl:Class ; rdfs:label "하역"@ko .
+ex:ShipMaster a owl:Class ; rdfs:label "선박 지휘자"@ko .
+ex:commandedBy a owl:ObjectProperty ; rdfs:label "선장"@ko ; rdfs:domain ex:Vessel ; rdfs:range ex:ShipMaster .
+ex:arrivedAt a owl:ObjectProperty ; rdfs:label "입항"@ko ; rdfs:domain ex:Vessel ; rdfs:range ex:Berth .
+ex:arrivalTime a owl:DatatypeProperty ; rdfs:label "입항"@ko ; rdfs:domain ex:Vessel ; rdfs:range xsd:dateTime .

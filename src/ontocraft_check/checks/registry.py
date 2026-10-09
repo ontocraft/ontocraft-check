@@ -8,6 +8,10 @@ skos:exactMatch 후보를 제안합니다. 심각도가 없는 정보 항목입�
 분야를 고르면 고르지 않은 분야와만 맞는 것은 REG02(다른 분야에서 같은 이름이 있음)로 나눕니다.
 
 0.3: 등록부 폴더 대신 "builtin" 을 주면 패키지에 넣은 공개 분야 사본(data/registry)을 씁니다.
+
+0.4: 고른 분야에 관련 분야(related)를 한 단계 더합니다(strict 이면 더하지 않음).
+온톨로지의 클래스만 REG01 후보로 냅니다. 객체·데이터 속성이 개념 용어와 표기가 같으면 REG03 으로 따로 냅니다.
+등록부 용어에 선택 필드 kind(class·property·relation)가 있으면 같은 종류끼리만 REG01 로 맞춥니다.
 """
 
 from __future__ import annotations
@@ -22,6 +26,7 @@ from rdflib.namespace import RDFS, SKOS
 
 from ..graph import Inventory, has_lang, local_name
 from ..model import Finding, Report
+from ..related import default_related
 
 CAT = "registry"
 EXCLUDE = {"domains.json", "candidates.json", "manifest.json"}
@@ -53,9 +58,20 @@ def josa_iga(word: str) -> str:
     return "가"
 
 
+def josa_wagwa(word: str) -> str:
+    """앞말의 받침에 맞춰 「과」나 「와」를 고릅니다. 한글이 아니면 「와」입니다."""
+    last = word.strip()[-1:] if word.strip() else ""
+    if "가" <= last <= "힣" and (ord(last) - 0xAC00) % 28:
+        return "과"
+    return "와"
+
+
 def norm(s: str) -> str:
     return unicodedata.normalize("NFC", s).strip()
 
+
+PROPERTY_KINDS = {"property", "relation"}
+REG03_ADVICE = "관계 이름은 동사구로, 개념과의 연결은 range 클래스에서 하기를 권합니다."
 
 CONFIDENCE_HIGH = "높음"
 CONFIDENCE_LOW = "낮음"
@@ -94,7 +110,8 @@ def list_domains(folder: str | Path) -> list[dict]:
 def load_registry(folder: str | Path) -> tuple[dict, list[str]]:
     """정규화한 표기 -> [항목] 사전과 읽은 파일 목록을 돌려줍니다.
 
-    항목은 (용어 id, 기준 IRI, 분야 id, 맞은 필드 ko|alt, 표제어, 분야 이름) 입니다.
+    항목은 (용어 id, 기준 IRI, 분야 id, 맞은 필드 ko|alt, 표제어, 분야 이름, 종류) 입니다.
+    종류는 용어의 선택 필드 kind(class·property·relation)이고 없으면 None 입니다(개념 용어로 봄).
     """
     folder = Path(folder)
     index: dict = defaultdict(list)
@@ -108,11 +125,12 @@ def load_registry(folder: str | Path) -> tuple[dict, list[str]]:
                 continue
             if t.get("status") not in (None, "active"):
                 continue
+            kind = t.get("kind") if t.get("kind") in ({"class"} | PROPERTY_KINDS) else None
             entries = [("ko", t.get("ko"))] + [("alt", a) for a in (t.get("alt") or [])]
             for fld, text in entries:
                 if isinstance(text, str) and norm(text):
                     key = norm(text)
-                    item = (t["id"], base + t["id"], domain, fld, t.get("ko") or "", domain_name)
+                    item = (t["id"], base + t["id"], domain, fld, t.get("ko") or "", domain_name, kind)
                     # 같은 용어가 ko 와 alt 에 모두 걸리면 ko 하나만 둡니다.
                     if any(x[1] == item[1] for x in index[key]):
                         continue
@@ -120,8 +138,65 @@ def load_registry(folder: str | Path) -> tuple[dict, list[str]]:
     return index, files
 
 
-def check(inv: Inventory, folder: str | None, report: Report, domains: list[str] | None = None) -> None:
-    """domains 를 주면 그 분야 용어만 REG01 후보로 내고, 다른 분야와만 맞는 것은 REG02 로 냅니다."""
+def _related_from(path: Path) -> dict[str, list[str]] | None:
+    """domains.json 이나 manifest.json 의 분야별 related 입니다. 어느 분야에도 related 가 없으면 None 입니다."""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    doms = data.get("domains") if isinstance(data, dict) else None
+    if not isinstance(doms, list) or not any(isinstance(d, dict) and "related" in d for d in doms):
+        return None
+    out: dict[str, set[str]] = {}
+    for d in doms:
+        if not isinstance(d, dict) or not d.get("id"):
+            continue
+        for r in d.get("related") or []:
+            if isinstance(r, str) and r and r != d["id"]:
+                out.setdefault(d["id"], set()).add(r)
+                out.setdefault(r, set()).add(d["id"])  # 한쪽에만 적어도 양방향으로 씁니다
+    return {k: sorted(v) for k, v in out.items()}
+
+
+def related_map(folder: str | Path) -> tuple[dict[str, list[str]], str]:
+    """(분야 id -> 관련 분야 목록, 어디서 읽었는지) 입니다.
+
+    등록부 폴더의 domains.json, manifest.json 순으로 related 를 찾고, 없으면 기본표(related.py)를 씁니다.
+    """
+    folder = Path(folder)
+    for name in ("domains.json", "manifest.json"):
+        got = _related_from(folder / name)
+        if got is not None:
+            return got, name
+    return default_related(), "기본표"
+
+
+def expand_domains(folder: str | Path | None, chosen: list[str], strict: bool = False) -> list[str]:
+    """고른 분야에 더할 관련 분야 id 목록입니다. 등록부에 있는 분야만 더하고, 한 단계만 따라갑니다."""
+    if strict or not chosen or not folder or not Path(folder).is_dir():
+        return []
+    rel, _ = related_map(folder)
+    known = {d["id"] for d in list_domains(folder)}
+    picked = set(chosen)
+    return sorted({r for d in chosen for r in rel.get(d, []) if r in known and r not in picked})
+
+
+def _kind_ko(inv: Inventory, e) -> str:
+    if e in inv.object_props:
+        return "객체 속성"
+    if e in inv.data_props:
+        return "데이터 속성"
+    return "속성"
+
+
+def check(inv: Inventory, folder: str | None, report: Report, domains: list[str] | None = None,
+          related: list[str] | None = None) -> None:
+    """domains(와 related)를 주면 그 분야 용어만 후보로 내고, 다른 분야와만 맞는 것은 REG02 로 냅니다.
+
+    related 는 runner 가 관련 분야로 더한 분야 id 입니다. 후보를 고를 때는 domains 와 똑같이 봅니다.
+    클래스만 REG01 로 냅니다. 속성이 개념 용어(kind 없음이나 class)와 같으면 REG03 입니다.
+    용어에 kind 가 property·relation 이면 속성끼리 REG01 로 맞추고, 클래스와는 맞추지 않습니다.
+    """
     if not folder:
         report.skip(CAT, "용어 등록부 대조", "--registry가 주어지지 않았습니다.")
         return
@@ -133,43 +208,69 @@ def check(inv: Inventory, folder: str | None, report: Report, domains: list[str]
         report.skip(CAT, "용어 등록부 대조", f"읽을 수 있는 등록부 파일이 없습니다: {folder}")
         return
     known = {d["id"]: d["name"] for d in list_domains(folder)}
-    chosen = set(domains or [])
+    picked = set(domains or [])
+    chosen = picked | set(related or [])
     g = inv.graph
+    kind_skipped = 0
     for e in sorted(inv.entities, key=str):
+        is_class = e in inv.classes
         ko = [str(l) for l in g.objects(e, RDFS.label) if has_lang(l, "ko")]
         keys = ko if ko else [local_name(str(e))]
         source = "@ko 레이블" if ko else "로컬 이름"
         existing = {str(o) for o in g.objects(e, SKOS.exactMatch)}
-        inside, outside = [], []
+        inside, outside, concept = [], [], []
         for key in keys:
             for item in index.get(norm(key), []):
                 if item[1] in existing:
                     continue
-                if not chosen or item[2] in chosen:
-                    inside.append((key, item))
-                else:
-                    outside.append((key, item))
-        for key, (term_id, iri, domain, fld, term_ko, dname) in inside:
+                in_scope = not chosen or item[2] in chosen
+                term_is_prop = item[6] in PROPERTY_KINDS
+                if is_class and term_is_prop:
+                    kind_skipped += 1  # 관계 용어와 클래스는 맞추지 않습니다
+                    continue
+                if not is_class and not term_is_prop:
+                    if in_scope:
+                        concept.append((key, item))  # 속성과 개념 용어: REG03
+                    continue
+                (inside if in_scope else outside).append((key, item))
+        for key, (term_id, iri, domain, fld, term_ko, dname, tkind) in inside:
             conf = CONFIDENCE_HIGH if fld == "ko" else CONFIDENCE_LOW
             how = "표제어(ko)" if fld == "ko" else "동의어(alt)"
             msg = (f"skos:exactMatch 후보: {iri} ({source} 「{key}」{josa_iga(key)} 등록부 {domain}({dname}) 분야 용어 "
                    f"「{term_ko}」의 {how}와 같습니다). 일치 신뢰도는 {conf}입니다.")
             if conf == CONFIDENCE_LOW:
                 msg += " " + LOW_NOTE
+            detail = {"term_id": term_id, "term_iri": iri, "domain": domain, "domain_name": dname,
+                      "matched_field": fld, "matched_text": key, "confidence": conf}
+            if tkind:
+                detail["term_kind"] = tkind
+            if domain in chosen - picked:
+                detail["via_related"] = True
             report.add(Finding(
                 CAT, "REG01", "info", str(e), msg,
                 f"뜻이 같은지 정의를 읽고 확인한 뒤 <{e}> skos:exactMatch <{iri}>를 더합니다. 표기만 같고 뜻이 다르면 넣지 않습니다.",
+                detail,
+            ))
+        for key, (term_id, iri, domain, fld, term_ko, dname, tkind) in concept:
+            what = _kind_ko(inv, e)
+            report.add(Finding(
+                CAT, "REG03", "info", str(e),
+                f"속성 이름이 개념 용어와 같습니다: {what}의 {source} 「{key}」{josa_iga(key)} 등록부 {domain}({dname}) 분야 "
+                f"개념 용어 「{term_ko}」{josa_wagwa(term_ko)} 표기가 같습니다({iri}). {REG03_ADVICE}",
+                f"속성 이름을 「~에 입항함」, 「~의 지휘를 받음」처럼 동사구로 바꿉니다. 「{term_ko}」 개념과의 skos:exactMatch는 "
+                "이 속성의 rdfs:range 클래스에 둡니다. 속성 자체에는 넣지 않습니다.",
                 {"term_id": term_id, "term_iri": iri, "domain": domain, "domain_name": dname,
-                 "matched_field": fld, "matched_text": key, "confidence": conf},
+                 "matched_field": fld, "matched_text": key, "entity_kind": what,
+                 **({"term_kind": tkind} if tkind else {})},
             ))
         if inside:
             continue  # 고른 분야에 후보가 있으면 다른 분야의 같은 이름은 싣지 않습니다
-        for key, (term_id, iri, domain, fld, term_ko, dname) in outside:
+        for key, (term_id, iri, domain, fld, term_ko, dname, tkind) in outside:
             conf = CONFIDENCE_HIGH if fld == "ko" else CONFIDENCE_LOW
             report.add(Finding(
                 CAT, "REG02", "info", str(e),
                 f"다른 분야에서 같은 이름이 있습니다(뜻이 다를 수 있음): {source} 「{key}」{josa_iga(key)} 고르지 않은 "
-                f"{domain}({dname}) 분야 용어 「{term_ko}」({iri})와 표기만 같습니다.",
+                f"{domain}({dname}) 분야 용어 「{term_ko}」{josa_wagwa(term_ko)} 표기만 같습니다({iri}).",
                 "고른 분야의 개념이 맞다면 넣지 않습니다. 그 분야의 개념을 뜻한 것이 맞을 때만 정의를 읽고 skos:exactMatch를 검토합니다.",
                 {"term_id": term_id, "term_iri": iri, "domain": domain, "domain_name": dname,
                  "matched_field": fld, "matched_text": key, "confidence": conf},
@@ -177,9 +278,13 @@ def check(inv: Inventory, folder: str | None, report: Report, domains: list[str]
     report.stats["registry_files"] = files
     report.stats["registry_keys"] = len(index)
     report.stats["registry_domains"] = [{"id": k, "name": v} for k, v in known.items()]
-    if chosen:
-        report.stats["registry_selected_domains"] = sorted(chosen)
-        unknown = sorted(chosen - set(known))
+    if kind_skipped:
+        report.stats["registry_kind_skipped"] = kind_skipped
+    if picked:
+        report.stats["registry_selected_domains"] = sorted(picked)
+        unknown = sorted(picked - set(known))
         if unknown:
             report.stats["registry_unknown_domains"] = unknown
+    if related:
+        report.stats["registry_related_domains"] = sorted(related)
     report.ran.append("registry")

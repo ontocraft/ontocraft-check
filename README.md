@@ -2,7 +2,7 @@
 
 **English summary.** ontocraft-check is an OWL ontology checker by OntoCraft. It reports modelling pitfalls (approximate re-implementations inspired by the public OOPS! pitfall catalogue), metadata and naming issues, OWL 2 RL consistency, SHACL validation, and `skos:exactMatch` candidates against a bundled snapshot of the OntoCraft Korean Industry Term Registry (CC BY 4.0). Reports are written in Korean (Markdown, HTML, JSON). It ships a command-line tool, a Python API, an MCP server for AI agents (`ontocraft-check-mcp`), and a Pyodide web worker. Files never leave your machine. Code is Apache-2.0.
 
-OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사해 한국어 보고서를 냅니다. 현재 버전은 0.3.0입니다. 명령행 도구, 파이썬 API, AI 에이전트용 MCP 서버, 브라우저 실행기(Pyodide)가 있습니다. 검사는 모두 이 컴퓨터 안에서 돌고, 파일을 밖으로 보내지 않습니다.
+OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사해 한국어 보고서를 냅니다. 현재 버전은 0.4.0입니다. 명령행 도구, 파이썬 API, AI 에이전트용 MCP 서버, 브라우저 실행기(Pyodide)가 있습니다. 검사는 모두 이 컴퓨터 안에서 돌고, 파일을 밖으로 보내지 않습니다.
 
 ## 1. 무엇을 검사하는지
 
@@ -14,10 +14,12 @@ OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사�
 | 메타데이터·명명 | META01 버전, META02 @ko 없음, META03 @en 없음, META04 레이블 없음 | rdflib |
 | 논리 | LOGIC01 owl:Nothing, LOGIC02 서로소 위반, LOGIC03 sameAs·differentFrom 충돌, LOGIC04 그 밖의 OWL 2 RL 모순, LOGIC05 HermiT(선택) | owlrl, 선택 owlready2 |
 | 데이터 제약 | SHACL 형상 위반. 심각도는 형상의 sh:resultSeverity를 따릅니다 | pyshacl |
-| 용어 등록부 대조(선택) | REG01 skos:exactMatch 후보, REG02 다른 분야에서 같은 이름이 있음 | 표준 라이브러리 |
+| 용어 등록부 대조(선택) | REG01 skos:exactMatch 후보, REG02 다른 분야에서 같은 이름이 있음, REG03 속성 이름이 개념 용어와 같음 | 표준 라이브러리 |
 
 - 모델링 함정과 메타데이터는 온톨로지 파일만 봅니다. 데이터 파일은 논리와 SHACL에만 씁니다.
-- 용어 등록부 대조는 클래스·속성의 @ko 레이블(없으면 로컬 이름)이 등록부 용어의 표제어나 동의어와 표기가 같을 때 후보를 냅니다. 표제어와 같으면 일치 신뢰도 높음, 동의어로만 맞으면 낮음입니다. 심각도가 없는 정보 항목이라 종료 코드에 영향을 주지 않습니다.
+- 용어 등록부 대조는 클래스의 @ko 레이블(없으면 로컬 이름)이 등록부 용어의 표제어나 동의어와 표기가 같을 때 후보(REG01)를 냅니다. 표제어와 같으면 일치 신뢰도 높음, 동의어로만 맞으면 낮음입니다. 심각도가 없는 정보 항목이라 종료 코드에 영향을 주지 않습니다.
+- 등록부 용어는 대부분 개념(클래스 성격)입니다. 그래서 객체 속성이나 데이터 속성이 개념 용어와 표기가 같으면 후보로 내지 않고 REG03으로 따로 적습니다. 예를 들어 객체 속성 commandedBy의 @ko 레이블이 「선장」이면 사람 용어 「선장」과 맞추지 않습니다. 관계 이름은 동사구로 짓고, 개념과의 연결은 그 속성의 range 클래스에서 합니다.
+- 등록부 용어에 선택 필드 `kind`(class, property, relation)가 있으면 같은 종류끼리만 REG01로 맞춥니다. property·relation 용어는 속성과 맞추고 클래스와는 맞추지 않습니다. 지금 내장 사본에는 이 필드가 없습니다.
 - 등록부는 패키지에 넣은 사본(`--registry builtin`)이나 같은 형식의 폴더를 씁니다. 기본값은 대조하지 않는 것입니다.
 
 규칙의 세부 정의는 MCP 도구 `explain_rule`이나 소스의 `src/ontocraft_check/rules.py`에 있습니다.
@@ -44,6 +46,7 @@ pip install "ontocraft-check[mcp] @ git+https://github.com/ontocraft/ontocraft-c
 ontocraft-check 온톨로지.ttl
 ontocraft-check 온톨로지.ttl --data 데이터.ttl --shapes shapes.ttl --format html --out 보고서.html
 ontocraft-check 온톨로지.ttl --registry builtin --domains maritime,port
+ontocraft-check 온톨로지.ttl --registry builtin --domains maritime --strict-domains
 ontocraft-check 온톨로지.ttl --disable P13,P22 --fail-on important
 ```
 
@@ -52,6 +55,9 @@ ontocraft-check 온톨로지.ttl --disable P13,P22 --fail-on important
 - 종료 코드는 0(기준 미만), 1(`--fail-on` 기준 이상의 항목이 있음), 2(입력 파일을 읽지 못함)입니다. `--fail-on`의 기본값은 critical입니다.
 - `--registry builtin`은 내장 등록부와 대조합니다. 폴더 경로를 주면 그 폴더의 `<분야>.json`을 씁니다.
 - `--domains`는 후보(REG01)로 낼 분야 id입니다. 고르지 않은 분야와만 표기가 같은 것은 REG02로 따로 냅니다.
+- 고른 분야에는 관련 분야를 한 단계 더해 함께 봅니다. 해사 온톨로지에는 정박지, 선석, 위험물, 적하, 양하, 항만시설, 하역 같은 항만 용어가 흔하기 때문입니다. 예를 들어 `--domains maritime`이면 port와 defense를 함께 보고, 보고서 머리와 JSON `options.related_domains`에 「관련 분야로 함께 봄: defense, port」처럼 적습니다. 관련의 관련은 더하지 않습니다.
+- 관련 분야는 maritime과 port, maritime과 defense, maint와 mfg-ai, mfg-ai와 semiconductor, mfg-ai와 physical-ai입니다. 양방향으로 씁니다. 표는 내장 사본의 `manifest.json`에 있고, 폴더를 주면 그 폴더의 `domains.json`이나 `manifest.json`에 적힌 `related`를 씁니다. 둘 다 없으면 같은 기본표를 씁니다.
+- `--strict-domains`를 주면 관련 분야를 더하지 않고 고른 분야만 봅니다. 해사 온톨로지라도 항만 용어를 따로 보고 싶을 때 씁니다. 처음부터 두 분야를 보려면 `--domains maritime,port`처럼 직접 고릅니다.
 - `--disable`은 끌 규칙 id입니다. 끈 규칙은 보고서 머리에 적고 요약과 종료 코드에서 뺍니다. 속성 그래프(LPG) 기반 설계처럼 역관계를 일부러 두지 않으면 P13을 끕니다.
 - `--group-over N`은 같은 규칙의 항목이 N개를 넘으면 md·html 보고서에서 한 항목으로 묶습니다(기본 10, 0이면 묶지 않음). JSON의 `findings`는 묶지 않습니다.
 - `--reasoner hermit`은 실행 가능한 Java와 owlready2(`pip install "ontocraft-check[hermit]"`)가 있을 때만 HermiT 만족불가 검사를 더합니다. 없으면 보고서에 건너뜀으로 적습니다.
@@ -64,6 +70,7 @@ from ontocraft_check.render import render
 
 report = run("온톨로지.ttl", data="데이터.ttl", shapes="shapes.ttl",
              registry_dir="builtin", domains=["maritime"], disable=["P13"])
+# 관련 분야를 더하지 않으려면 strict_domains=True 를 줍니다.
 print(report.summary())
 open("보고서.md", "w", encoding="utf-8").write(render(report, "md"))
 ```
@@ -76,7 +83,7 @@ open("보고서.md", "w", encoding="utf-8").write(render(report, "md"))
 
 | 도구 | 하는 일 |
 |---|---|
-| `check_ontology` | ontology, data, shapes(파일 경로나 Turtle 등 본문), domains, disable, use_registry(기본 참), format(summary, json, markdown)을 받아 검사합니다. summary는 종류별 개수, 치명·중요 항목 상위 20개, 건너뛴 검사, 이 도구로 말할 수 없는 것을 담습니다 |
+| `check_ontology` | ontology, data, shapes(파일 경로나 Turtle 등 본문), domains, strict_domains(기본 거짓), disable, use_registry(기본 참), format(summary, json, markdown)을 받아 검사합니다. summary는 종류별 개수, 치명·중요 항목 상위 20개, 건너뛴 검사, 이 도구로 말할 수 없는 것을 담습니다 |
 | `explain_rule` | 규칙의 뜻, 심각도, 고치는 법 |
 | `list_rules` | 규칙 목록 |
 | `search_terms` | 내장 등록부에서 한국어 표제어·동의어, 영어, id로 찾아 id, ko, en, definition, uri, domain을 돌려줍니다 |
@@ -105,7 +112,7 @@ PyPI에 올리기 전에는 `--from` 값을 `ontocraft-check[mcp] @ git+https://
 
 ## 6. 브라우저 실행
 
-설치 없이 검사하려면 브라우저 실행 화면(https://ontocraft.com/tools/ontocheck)을 엽니다. 브라우저 안의 Pyodide가 이 패키지의 wheel을 돌리므로 파일이 서버로 가지 않습니다. 참고 구현은 `web/ontocraft-check-worker.js`와 `web/demo.html`입니다. worker 메시지 형식은 파일 머리의 주석에 있고, `registry`에 문자열 `"builtin"`을 주면 wheel에 든 등록부 사본과 대조합니다.
+설치 없이 검사하려면 브라우저 실행 화면(https://ontocraft.com/tools/ontocheck)을 엽니다. 브라우저 안의 Pyodide가 이 패키지의 wheel을 돌리므로 파일이 서버로 가지 않습니다. 참고 구현은 `web/ontocraft-check-worker.js`와 `web/demo.html`입니다. worker 메시지 형식은 파일 머리의 주석에 있고, `registry`에 문자열 `"builtin"`을 주면 wheel에 든 등록부 사본과 대조합니다. `strict_domains: true`를 주면 관련 분야를 더하지 않습니다. 이 값은 참일 때만 run()에 넘기므로 0.3 wheel을 쓰는 화면도 그대로 돕니다.
 
 ## 7. 내장 용어 등록부
 
@@ -113,7 +120,8 @@ PyPI에 올리기 전에는 `--from` 값을 `ontocraft-check[mcp] @ git+https://
 
 - 라이선스는 CC BY 4.0입니다. 코드의 Apache-2.0과 다릅니다. 용어를 인용할 때 출처 「OntoCraft 한국 산업 용어 등록부」와 용어 주소를 적습니다.
 - 용어 주소는 `https://w3id.org/ontocraft/terms/<id>`입니다.
-- 용어마다 id, ko, en, alt, definition, category, broader, related, refs, example만 남겼습니다.
+- 용어마다 id, ko, en, alt, kind, definition, category, broader, related, refs, example만 남겼습니다. kind는 정본에 있을 때만 옮깁니다.
+- `manifest.json`의 분야마다 관련 분야 목록(`related`)이 있습니다. 정본의 `domains.json`에 `related`가 있으면 그것을 옮기고, 없으면 `src/ontocraft_check/related.py`의 기본표를 씁니다.
 - 정의는 OntoCraft가 쓴 문장입니다. refs는 같은 개념을 다루는 표준의 이름이며, 정의가 표준과 같다는 뜻이 아닙니다.
 - 사본은 개발자가 `python3 scripts/sync_registry.py <aki-space 경로>`로 다시 만듭니다. 손으로 고치지 않습니다.
 
@@ -124,6 +132,7 @@ PyPI에 올리기 전에는 `--from` 값을 `ontocraft-check[mcp] @ git+https://
 - 의미 판단이 필요한 함정(P01 한 클래스에 여러 뜻, P05 잘못된 역관계, P31 잘못된 동치 관계 등)은 검사하지 않습니다.
 - owl:imports를 따라가지 않습니다. 온톨로지 파일 하나만 봅니다.
 - SHACL 검증은 형상이 표현한 조건만큼만 말합니다.
+- 관련 분야 표는 사람이 정한 짧은 목록입니다. 관련 분야로 더한 후보는 고른 분야의 후보보다 뜻이 어긋날 가능성이 큽니다. 등록부에 kind가 없으므로, 클래스가 사건이나 관계를 뜻하더라도 개념 용어와 REG01로 맞춥니다.
 - 등록부 대조는 표기만 비교합니다. 후보를 넣기 전에 정의를 읽고 뜻이 같은지 사람이 확인해야 합니다. 내장 사본은 스냅샷 날짜 이후의 등록부 변경을 담지 않습니다.
 
 ## 9. OOPS! 고지
@@ -153,6 +162,15 @@ uv build
 mcp가 없으면 MCP 시험은 건너뜁니다. 환경 변수 `ONTOCRAFT_REGISTRY_DIR`에 정본 등록부 폴더를 주면 그 폴더로 대조하는 시험 하나가 더 돕니다. GitHub Actions가 파이썬 3.11과 3.12에서 시험을 돌립니다.
 
 ## 12. 변경 기록
+
+### 0.4.0 (2026-10-09)
+
+- 관련 분야를 함께 봅니다. `--domains`로 고른 분야에 관련 분야를 한 단계 더하고, 보고서 머리와 JSON `options.related_domains`에 밝힙니다. `--strict-domains`(파이썬 `strict_domains=True`)이면 더하지 않습니다. 내장 `manifest.json`의 분야마다 `related`가 생겼습니다.
+- 등록부 후보(REG01)는 클래스만 냅니다. 객체·데이터 속성이 개념 용어와 표기가 같으면 새 규칙 REG03(정보)으로 따로 적습니다. 0.3까지는 속성도 REG01 후보로 냈습니다.
+- 등록부 용어의 선택 필드 `kind`(class, property, relation)를 읽어 같은 종류끼리 맞춥니다. 지금 내장 사본에는 이 필드가 없습니다.
+- MCP `check_ontology`와 브라우저 실행기가 `strict_domains`를 받습니다. `explain_rule`과 `list_rules`에 REG03이 있습니다.
+- REG02와 REG03 설명의 조사를 앞말 받침에 맞춥니다(「기항」과, 「선박」과).
+- 모델링 함정, 메타데이터, 논리, SHACL 검사의 규칙과 결과는 0.3.0과 같습니다.
 
 ### 0.3.0 (2026-10-09)
 

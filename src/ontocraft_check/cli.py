@@ -40,7 +40,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     p.add_argument(
         "--domains",
-        help="등록부 대조에서 후보로 낼 분야 id(쉼표로 구분, 예: maint,maritime). 다른 분야와만 맞는 것은 정보 항목 REG02로 따로 냅니다",
+        help="등록부 대조에서 후보로 낼 분야 id(쉼표로 구분, 예: maritime,port). 관련 분야를 함께 보고, 다른 분야와만 맞는 것은 정보 항목 REG02로 따로 냅니다",
+    )
+    p.add_argument(
+        "--strict-domains",
+        action="store_true",
+        help="--domains로 고른 분야만 봅니다. 주지 않으면 등록부에 적힌 관련 분야(예: maritime이면 port)를 함께 봅니다",
     )
     p.add_argument("--disable", help="끌 규칙 id(쉼표로 구분, 예: P13,P22). 보고서 머리에 「사용자가 끈 규칙」으로 적습니다")
     p.add_argument(
@@ -69,6 +74,7 @@ def main(argv: list[str] | None = None) -> int:
             domains=args.domains,
             disable=args.disable,
             group_over=args.group_over,
+            strict_domains=args.strict_domains,
         )
     except LoadError as exc:
         print(f"ontocraft-check: {exc}", file=sys.stderr)

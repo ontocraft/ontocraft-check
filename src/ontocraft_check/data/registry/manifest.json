@@ -9,6 +9,7 @@
  "uri_template": "https://w3id.org/ontocraft/terms/{id}",
  "snapshot": "2026-10-09",
  "note": "ontocraft-check 에 넣은 공개 분야 사본입니다. 정본은 OntoCraft 가 관리하는 등록부이고, 이 사본은 스냅샷 날짜 기준입니다. 내부 필드는 뺐습니다.",
+ "related_source": "기본표(related.py)",
  "domains": [
   {
    "id": "onto",
@@ -16,7 +17,8 @@
    "en": "Ontology engineering",
    "file": "onto.json",
    "version": "0.1.1",
-   "terms": 65
+   "terms": 65,
+   "related": []
   },
   {
    "id": "maint",
@@ -24,7 +26,10 @@
    "en": "Equipment maintenance and reliability",
    "file": "maint.json",
    "version": "0.2.2",
-   "terms": 100
+   "terms": 100,
+   "related": [
+    "mfg-ai"
+   ]
   },
   {
    "id": "semiconductor",
@@ -32,7 +37,10 @@
    "en": "Semiconductors",
    "file": "semiconductor.json",
    "version": "0.1.1",
-   "terms": 100
+   "terms": 100,
+   "related": [
+    "mfg-ai"
+   ]
   },
   {
    "id": "maritime",
@@ -40,7 +48,11 @@
    "en": "Maritime and shipbuilding",
    "file": "maritime.json",
    "version": "0.1.1",
-   "terms": 100
+   "terms": 100,
+   "related": [
+    "defense",
+    "port"
+   ]
   },
   {
    "id": "port",
@@ -48,7 +60,10 @@
    "en": "Ports and logistics",
    "file": "port.json",
    "version": "0.1.1",
-   "terms": 100
+   "terms": 100,
+   "related": [
+    "maritime"
+   ]
   },
   {
    "id": "defense",
@@ -56,7 +71,10 @@
    "en": "Defense industry",
    "file": "defense.json",
    "version": "0.1.1",
-   "terms": 100
+   "terms": 100,
+   "related": [
+    "maritime"
+   ]
   },
   {
    "id": "smartcity",
@@ -64,7 +82,8 @@
    "en": "Smart city",
    "file": "smartcity.json",
    "version": "0.1.1",
-   "terms": 100
+   "terms": 100,
+   "related": []
   },
   {
    "id": "mfg-ai",
@@ -72,7 +91,12 @@
    "en": "Manufacturing AI",
    "file": "mfg-ai.json",
    "version": "0.1.2",
-   "terms": 97
+   "terms": 97,
+   "related": [
+    "maint",
+    "physical-ai",
+    "semiconductor"
+   ]
   },
   {
    "id": "physical-ai",
@@ -80,7 +104,10 @@
    "en": "Physical AI",
    "file": "physical-ai.json",
    "version": "0.1.1",
-   "terms": 100
+   "terms": 100,
+   "related": [
+    "mfg-ai"
+   ]
   }
  ],
  "total_terms": 862

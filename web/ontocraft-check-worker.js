@@ -1,8 +1,13 @@
 // ontocraft-check 브라우저 실행기(Web Worker). 파일은 브라우저 밖으로 나가지 않습니다.
 // 쓰는 쪽: new Worker("ontocraft-check-worker.js")
-//   postMessage({ontology, data, shapes, registry, wheel, domains, disable, group_over})
+//   postMessage({ontology, data, shapes, registry, wheel, domains, disable, group_over, strict_domains})
 //   → 진행 중 {stage: "running"}, 끝나면 {ok: true, json, html} 또는 {ok: false, error}
 // ontology·data·shapes 는 파일 내용(문자열)과 이름 {name, text}, registry 는 {파일이름: 내용} 객체입니다.
+//
+// 0.4.0: strict_domains(참·거짓)를 받습니다. 참이면 domains 에 관련 분야(maritime 이면 port 등)를 더하지 않습니다.
+//   값이 true 일 때만 run() 에 넘기므로, 이 필드를 쓰지 않는 화면과 0.3 wheel 도 그대로 돕니다.
+//   json.options 에 related_domains(더한 분야), strict_domains 가 늘었고, 속성이 개념 용어와 같으면 rule "REG03" 입니다.
+//   wheel 은 ontocraft_check-0.4.0-py3-none-any.whl 입니다.
 //
 // 0.3.0: 패키지 이름이 ontocheck 에서 ontocraft-check(import ontocraft_check)로 바뀌었습니다.
 //   wheel 은 ontocraft_check-0.3.0-py3-none-any.whl 이고, 0.2 이하의 ontocheck wheel 은 이 worker 로 돌지 않습니다.
@@ -52,12 +57,13 @@ self.onmessage = async (e) => {
       for (const [k, v] of Object.entries(m.registry)) fs.writeFile(reg + "/" + k.replace(/[^\w.-]/g, "_"), v);
     }
     const groupOver = Number.isInteger(m.group_over) && m.group_over >= 0 ? m.group_over : null;
-    py.globals.set("args", py.toPy({ o, d, s, reg, domains: ids(m.domains), disable: ids(m.disable), group_over: groupOver }));
+    const strict = m.strict_domains === true ? true : null;  // 거짓이나 없음이면 넘기지 않습니다(기본값과 같음)
+    py.globals.set("args", py.toPy({ o, d, s, reg, domains: ids(m.domains), disable: ids(m.disable), group_over: groupOver, strict_domains: strict }));
     const out = py.runPython(`
 from ontocraft_check.runner import run
 from ontocraft_check.render import render
 # 값을 준 선택지만 넘깁니다. 그래서 새 필드를 쓰지 않는 화면도 그대로 돕니다(배포 순서가 엇갈려도 깨지지 않게).
-kw = {k: args[k] for k in ("domains", "disable", "group_over") if args[k] is not None and args[k] != []}  # group_over=0(묶지 않음)도 넘김
+kw = {k: args[k] for k in ("domains", "disable", "group_over", "strict_domains") if args[k] is not None and args[k] != []}  # group_over=0(묶지 않음)도 넘김
 r = run(args["o"], data=args["d"], shapes=args["s"], registry_dir=args["reg"], **kw)
 [render(r, "json"), render(r, "html")]
 `).toJs();

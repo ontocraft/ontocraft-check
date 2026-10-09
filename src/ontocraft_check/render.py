@@ -47,6 +47,7 @@ RULE_TITLES = OrderedDict([
     ("SHACL", "형상 위반"),
     ("REG01", "등록부 skos:exactMatch 후보"),
     ("REG02", "다른 분야에서 같은 이름이 있음(뜻이 다를 수 있음)"),
+    ("REG03", "속성 이름이 개념 용어와 같음"),
 ])
 
 CANNOT_SAY = [
@@ -133,6 +134,17 @@ def _disabled_text(report: Report) -> str | None:
     return text
 
 
+REG03_NOTE = "관계 이름은 동사구로, 개념과의 연결은 range 클래스에서 하기를 권합니다."
+
+
+def _related_text(report: Report) -> str | None:
+    rel = report.options.get("related_domains") or []
+    if not rel:
+        return None
+    return ("관련 분야로 함께 봄: " + ", ".join(rel) + ". 고른 분야(" + ", ".join(report.options.get("domains") or [])
+            + ")와 가까운 분야라 등록부 대조 후보에 더했습니다. 빼려면 --strict-domains를 줍니다.")
+
+
 def build_blocks(report: Report) -> list:
     b = []
     b.append(("h1", f"{TOOL_TITLE} 보고서"))
@@ -140,6 +152,9 @@ def build_blocks(report: Report) -> list:
     off_text = _disabled_text(report)
     if off_text:
         b.append(("p", off_text))
+    rel_text = _related_text(report)
+    if rel_text:
+        b.append(("p", rel_text))
 
     s = report.stats
     b.append(("h2", "1. 입력과 규모"))
@@ -167,6 +182,10 @@ def build_blocks(report: Report) -> list:
         rows.append(["용어 등록부", report.inputs["registry"]])
     if report.inputs.get("registry"):
         rows.append(["고른 분야", ", ".join(report.options.get("domains") or []) or "(모든 분야)"])
+        if report.options.get("related_domains"):
+            rows.append(["관련 분야로 함께 봄", ", ".join(report.options["related_domains"])])
+        elif report.options.get("strict_domains") and report.options.get("domains"):
+            rows.append(["관련 분야로 함께 봄", "(더하지 않음, --strict-domains)"])
     if "disjoint_axioms" in s:
         rows.append(["서로소 공리 수", str(s["disjoint_axioms"])])
     rows.append(["사용자가 끈 규칙", ", ".join(report.options.get("disabled") or []) or "(없음)"])
@@ -203,12 +222,19 @@ def build_blocks(report: Report) -> list:
             b.append(("p", "후보마다 등록부 분야를 적습니다. 일치 신뢰도는 표제어(ko)와 같으면 높음, 동의어(alt)로만 맞으면 "
                            "낮음입니다. 낮음은 동의어로 맞은 것이라 상위·하위 개념일 수 있으니 넣기 전에 정의를 꼭 읽습니다."))
             sel = report.options.get("domains") or []
-            if sel:
+            rel = report.options.get("related_domains") or []
+            if sel and rel:
+                b.append(("p", "고른 분야는 " + ", ".join(sel) + "이고, 관련 분야 " + ", ".join(rel) + "를 함께 봤습니다. "
+                               "이 분야들의 용어만 REG01 후보로 냈고, 다른 분야와만 표기가 같은 것은 REG02로 따로 묶었습니다. "
+                               "관련 분야를 빼려면 --strict-domains를 줍니다."))
+            elif sel:
                 b.append(("p", "고른 분야는 " + ", ".join(sel) + "입니다. 이 분야의 용어만 REG01 후보로 냈고, "
                                "다른 분야와만 표기가 같은 것은 REG02로 따로 묶었습니다."))
             else:
                 b.append(("p", "분야를 고르지 않아 모든 분야의 용어와 대조했습니다. --domains로 분야를 고르면 "
                                "다른 분야와만 맞는 것을 따로 묶습니다."))
+            b.append(("p", "REG01 후보는 클래스만 냅니다. 등록부 용어는 대부분 개념이라, 객체·데이터 속성이 개념 용어와 "
+                           "표기가 같으면 REG03으로 따로 적습니다. " + REG03_NOTE))
             unknown = s.get("registry_unknown_domains") or []
             if unknown:
                 b.append(("p", "등록부에 없는 분야 id입니다: " + ", ".join(unknown) + "."))

@@ -40,13 +40,13 @@ def test_new_name_in_report_heads():
     assert f"ontocraft-check {__version__}으로 만들었습니다" in md
     assert "<title>ontocraft-check 보고서:" in render(r, "html")
     d = json.loads(render(r, "json"))
-    assert d["tool"] == "ontocraft-check" and d["version"] == "0.3.0"
+    assert d["tool"] == "ontocraft-check" and d["version"] == __version__
 
 
 def test_cli_version(capsys):
     with pytest.raises(SystemExit):
         main(["--version"])
-    assert "ontocraft-check 0.3.0" in capsys.readouterr().out
+    assert f"ontocraft-check {__version__}" in capsys.readouterr().out
 
 
 # 내장 등록부
@@ -71,7 +71,7 @@ def test_builtin_snapshot_is_published_only_and_clean():
 
 
 def test_builtin_registry_matches_like_real_registry():
-    r = run(f("maritime-like.ttl"), registry_dir="builtin", domains=["maritime"])
+    r = run(f("maritime-like.ttl"), registry_dir="builtin", domains=["maritime"], strict_domains=True)
     assert WRONG_DOMAIN <= triples(r, "REG02")
     assert ("Vessel", "maritime", "ship") in triples(r, "REG01")
     assert not {t for t in triples(r, "REG01") if t[1] != "maritime"}
@@ -138,7 +138,7 @@ def test_tool_check_summary_from_path_and_content():
 def test_tool_check_formats_and_registry():
     d = T.check_ontology(f("maritime-like.ttl"), domains=["maritime"], format="json")
     assert d["summary"]["registry"]["status"] == "ran"
-    s = T.check_ontology(f("maritime-like.ttl"), domains=["maritime"])
+    s = T.check_ontology(f("maritime-like.ttl"), domains=["maritime"], strict_domains=True)
     assert s["registry_candidates"]["REG01"] >= 1 and s["registry_candidates"]["REG02"] >= 5
     s = T.check_ontology(f("maritime-like.ttl"), use_registry=False)
     assert "registry_candidates" not in s

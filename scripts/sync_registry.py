@@ -3,6 +3,8 @@
 aki-space 저장소의 data/registry 에서 domains.json 의 status 가 published 인 분야만 골라
 src/ontocraft_check/data/registry/<분야>.json 으로 옮깁니다. 용어마다 공개 필드만 남기고
 seed·notes 같은 내부 필드는 뺍니다. 쓰지 않게 된 용어(status 가 active 가 아닌 것)는 넣지 않습니다.
+분야마다 관련 분야(related)를 manifest.json 에 적습니다. domains.json 에 related 가 있으면 그것을 옮기고,
+어느 분야에도 없으면 src/ontocraft_check/related.py 의 기본표를 씁니다. 공개 분야끼리만 남깁니다.
 
     python3 scripts/sync_registry.py <aki-space 경로> [--date 2026-10-09]
 
@@ -13,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import datetime as dt
+import importlib.util
 import json
 import sys
 from pathlib import Path
@@ -25,8 +28,30 @@ REGISTRY_EN = "OntoCraft Korean Industry Term Registry"
 BASE_URI = "https://w3id.org/ontocraft/terms/"
 LICENSE = "CC BY 4.0"
 LICENSE_URL = "https://creativecommons.org/licenses/by/4.0/"
-TERM_FIELDS = ("id", "ko", "en", "alt", "definition", "category", "broader", "related", "refs", "example")
+TERM_FIELDS = ("id", "ko", "en", "alt", "kind", "definition", "category", "broader", "related", "refs", "example")
 FILE_FIELDS = ("domain", "version", "updated", "categories")
+
+
+def default_related() -> dict[str, list[str]]:
+    """패키지를 설치하지 않아도 되도록 related.py 를 파일 경로로 읽습니다(표준 라이브러리만 씀)."""
+    path = ROOT / "src" / "ontocraft_check" / "related.py"
+    spec = importlib.util.spec_from_file_location("_ontocraft_related", path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.default_related()
+
+
+def related_table(domains: list[dict]) -> tuple[dict[str, list[str]], str]:
+    """(분야 id -> 관련 분야 목록, 출처) 입니다. 한쪽에만 적어도 양방향으로 씁니다."""
+    if not any("related" in d for d in domains):
+        return default_related(), "기본표(related.py)"
+    out: dict[str, set[str]] = {}
+    for d in domains:
+        for r in d.get("related") or []:
+            if r and r != d["id"]:
+                out.setdefault(d["id"], set()).add(r)
+                out.setdefault(r, set()).add(d["id"])
+    return {k: sorted(v) for k, v in out.items()}, "domains.json"
 
 
 def header(snapshot: str) -> dict:
@@ -64,7 +89,9 @@ def build(aki_space: Path, snapshot: str, out: Path = OUT) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     for old in out.glob("*.json"):
         old.unlink()
-    manifest = {**header(snapshot), "domains": [], "total_terms": 0}
+    rel, rel_source = related_table(domains)
+    public = {d["id"] for d in published}
+    manifest = {**header(snapshot), "related_source": rel_source, "domains": [], "total_terms": 0}
     seen: dict[str, str] = {}
     for d in sorted(published, key=lambda x: x.get("order", 0)):
         src = json.loads((reg / f"{d['id']}.json").read_text(encoding="utf-8"))
@@ -78,7 +105,8 @@ def build(aki_space: Path, snapshot: str, out: Path = OUT) -> dict:
         (out / f"{d['id']}.json").write_text(json.dumps(data, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
         dom = src.get("domain") or {"id": d["id"]}
         manifest["domains"].append({"id": dom.get("id", d["id"]), "name": dom.get("name"), "en": dom.get("en"),
-                                    "file": f"{d['id']}.json", "version": src.get("version"), "terms": len(terms)})
+                                    "file": f"{d['id']}.json", "version": src.get("version"), "terms": len(terms),
+                                    "related": [r for r in rel.get(d["id"], []) if r in public]})
         manifest["total_terms"] += len(terms)
     (out / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return manifest
@@ -91,7 +119,7 @@ def main(argv: list[str] | None = None) -> int:
     args = p.parse_args(argv)
     m = build(Path(args.aki_space).expanduser(), args.date)
     for d in m["domains"]:
-        print(f"{d['id']:<14} {d['name']:<12} v{d['version']:<6} {d['terms']}개")
+        print(f"{d['id']:<14} {d['name']:<12} v{d['version']:<6} {d['terms']}개  관련: {', '.join(d['related']) or '-'}")
     print(f"합계 {len(m['domains'])}개 분야, 용어 {m['total_terms']}개, 스냅샷 {m['snapshot']} -> {OUT}")
     return 0
 

@@ -31,8 +31,8 @@ def triples(report, rule):
 
 
 def test_version():
-    assert __version__ == "0.3.0"
-    assert "ontocraft-check 0.3.0으로 만들었습니다" in render(run(f("clean.ttl")), "md")
+    assert __version__ == "0.4.0"
+    assert "ontocraft-check 0.4.0으로 만들었습니다" in render(run(f("clean.ttl")), "md")
 
 
 def test_all_domains_shows_domain_on_each_candidate():
@@ -48,7 +48,8 @@ def test_all_domains_shows_domain_on_each_candidate():
 
 
 def test_domains_moves_other_domain_matches_to_reg02():
-    r = run(f("maritime-like.ttl"), registry_dir=REG, domains=["maritime"])
+    # 0.4 부터 관련 분야(port)를 함께 보므로, 0.2 의 분야 나누기는 strict 로 시험합니다.
+    r = run(f("maritime-like.ttl"), registry_dir=REG, domains=["maritime"], strict_domains=True)
     assert triples(r, "REG01") == {("Vessel", "maritime", "ship"), ("Tanker", "maritime", "oil-tanker")}
     assert triples(r, "REG02") == WRONG_DOMAIN
     assert all(x.severity == "info" for x in r.by_category("registry"))
@@ -90,14 +91,15 @@ def test_list_domains():
 
 @pytest.mark.skipif(not REAL_REGISTRY.is_dir(), reason="ONTOCRAFT_REGISTRY_DIR 가 없습니다")
 def test_real_registry_wrong_domain_examples():
-    r = run(f("maritime-like.ttl"), registry_dir=str(REAL_REGISTRY), domains=["maritime"])
+    r = run(f("maritime-like.ttl"), registry_dir=str(REAL_REGISTRY), domains=["maritime"], strict_domains=True)
     assert WRONG_DOMAIN <= triples(r, "REG02")
     assert not {t for t in triples(r, "REG01") if t[1] != "maritime"}
 
 
 def test_cli_domains(tmp_path):
     out = tmp_path / "r.json"
-    main([f("maritime-like.ttl"), "--registry", REG, "--domains", "maritime", "--format", "json", "--out", str(out)])
+    main([f("maritime-like.ttl"), "--registry", REG, "--domains", "maritime", "--strict-domains",
+          "--format", "json", "--out", str(out)])
     d = json.loads(out.read_text(encoding="utf-8"))
     assert d["options"]["domains"] == ["maritime"]
     assert sum(1 for x in d["findings"] if x["rule"] == "REG02") == 5
@@ -175,7 +177,7 @@ def test_grouping_does_not_change_counts(many_props):
 
 
 def test_grouped_targets_keep_differing_messages():
-    r = run(f("maritime-like.ttl"), registry_dir=REG, domains=["maritime"], group_over=2)
+    r = run(f("maritime-like.ttl"), registry_dir=REG, domains=["maritime"], group_over=2, strict_domains=True)
     md = render(r, "md")
     assert "| 정보 | REG02 | 5개 요소 | REG02 항목이 5개입니다." in md
     # 설명이 대상마다 다르므로 목록에 대상과 설명을 함께 적습니다.

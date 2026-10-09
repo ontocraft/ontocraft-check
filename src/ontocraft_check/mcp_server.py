@@ -25,7 +25,7 @@ INSTRUCTIONS = f"""{TOOL_TITLE} {__version__}: OWL 온톨로지를 검사하고 
 - 파일은 이 컴퓨터 밖으로 보내지 않습니다. 검사와 용어 찾기는 모두 이 컴퓨터 안에서 돕니다.
 - check_ontology 는 파일 경로나 Turtle 등 본문 문자열을 받습니다. 기본 format=summary 는 짧은 요약입니다.
 - 모델링 함정(Pxx)은 OOPS! 공개 설명을 참고해 다시 구현한 근사 검사입니다. 논리 검사는 OWL 2 RL 수준이라 모순이 없다는 결과가 OWL 2 DL 일관성을 뜻하지 않습니다. 의미 판단이 필요한 함정은 검사하지 않습니다.
-- 등록부 후보(REG01)는 표기만 같은 것입니다. get_term 으로 정의를 읽고 뜻이 같을 때만 skos:exactMatch 를 제안합니다.
+- 등록부 후보(REG01)는 클래스만, 표기만 같은 것입니다. 속성이 개념 용어와 같으면 REG03 입니다. get_term 으로 정의를 읽고 뜻이 같을 때만 skos:exactMatch 를 제안합니다.
 - 등록부는 공개 분야 사본이고 CC BY 4.0 입니다. 용어를 인용할 때 출처 「OntoCraft 한국 산업 용어 등록부」와 주소를 적습니다."""
 
 
@@ -56,16 +56,18 @@ def build_server():
         disable: list[str] | None = None,
         use_registry: bool = True,
         format: Literal["summary", "json", "markdown"] = "summary",
+        strict_domains: bool = False,
     ) -> str:
         """OWL 온톨로지를 모델링 함정, 메타데이터·명명, OWL 2 RL 논리, SHACL, 용어 등록부 대조로 검사합니다.
 
         ontology, data(ABox), shapes(SHACL)는 파일 경로나 본문 문자열(Turtle, RDF/XML, JSON-LD, N-Triples)입니다.
         있는 파일 경로면 경로로 읽습니다. shapes 는 data 와 함께 줘야 검증합니다.
-        domains: 등록부 분야 id(예: ["maritime"]). disable: 끌 규칙 id(예: ["P13"]).
+        domains: 등록부 분야 id(예: ["maritime"]). 관련 분야(maritime 이면 port, defense)를 함께 봅니다.
+        strict_domains: 참이면 관련 분야를 더하지 않습니다. disable: 끌 규칙 id(예: ["P13"]).
         format: summary(짧은 요약), json(전체 보고서), markdown(사람이 읽는 보고서).
         """
         return _guard(T.check_ontology, ontology, data=data, shapes=shapes, domains=domains,
-                      disable=disable, use_registry=use_registry, format=format)
+                      disable=disable, use_registry=use_registry, format=format, strict_domains=strict_domains)
 
     @server.tool()
     def explain_rule(rule_id: str) -> str:

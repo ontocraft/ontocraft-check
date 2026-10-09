@@ -95,10 +95,13 @@ def summarize(report) -> dict:
         out["registry_candidates"] = {
             "REG01": sum(1 for f in reg if f.rule == "REG01"),
             "REG02": sum(1 for f in reg if f.rule == "REG02"),
+            "REG03": sum(1 for f in reg if f.rule == "REG03"),
             "examples": [{"target": f.target, "term_iri": f.detail.get("term_iri"),
                           "confidence": f.detail.get("confidence")} for f in reg if f.rule == "REG01"][:10],
             "note": "표기만 같은 후보입니다. get_term 으로 정의를 읽고 뜻이 같을 때만 skos:exactMatch 를 더합니다.",
         }
+    if report.options.get("related_domains"):
+        out["related_domains"] = report.options["related_domains"]
     if report.options.get("disabled"):
         out["disabled"] = report.options["disabled"]
     return out
@@ -112,11 +115,13 @@ def check_ontology(
     disable: list[str] | None = None,
     use_registry: bool = True,
     format: str = "summary",
+    strict_domains: bool = False,
 ) -> dict | str:
     """온톨로지를 검사합니다. ontology·data·shapes 는 파일 경로나 본문 문자열입니다.
 
     format: summary(요약 사전), json(전체 보고서 사전), markdown(보고서 문자열).
     use_registry 가 참이면 내장 용어 등록부와 대조합니다.
+    domains 에는 관련 분야를 한 단계 더해 봅니다. strict_domains 가 참이면 더하지 않습니다.
     """
     if format not in FORMATS:
         raise InputError(f"format 은 {', '.join(FORMATS)} 가운데 하나입니다: {format}")
@@ -129,7 +134,7 @@ def check_ontology(
         s_path, s_label = resolve_input(shapes, "shapes", work)
         report = run(o_path, data=d_path, shapes=s_path,
                      registry_dir="builtin" if use_registry else None,
-                     domains=domains or None, disable=disable or None)
+                     domains=domains or None, disable=disable or None, strict_domains=strict_domains)
     report.source = o_label
     report.inputs.update({"ontology": o_label, "data": d_label, "shapes": s_label})
     if format == "summary":

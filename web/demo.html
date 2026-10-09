@@ -10,13 +10,14 @@
 <label>SHACL 형상(선택) <input type="file" id="s"></label>
 <label>용어 등록부(선택, data/registry 의 분야 파일 여러 개) <input type="file" id="r" multiple accept=".json"></label>
 <fieldset><legend>등록부 분야(고르지 않으면 모든 분야를 봅니다)</legend><div id="domains">등록부 파일을 고르면 분야가 나옵니다.</div></fieldset>
+<label><input type="checkbox" id="strict"> 고른 분야만 보기(관련 분야를 더하지 않음, 0.4.0 이상)</label>
 <label><input type="checkbox" id="offP13"> P13 끄기(역관계 없음. 속성 그래프 기반 설계에서는 역관계를 일부러 두지 않는 경우가 흔합니다)</label>
 <label>같은 규칙 항목 묶기 기준 <input type="number" id="group" min="0" value="10" style="width:5em"> 개를 넘으면 묶음(0이면 묶지 않음)</label>
 <button id="go">검사</button> <span id="status"></span>
 <pre id="out" hidden></pre>
 <div id="report"></div>
 <script>
-const WHEEL = "ontocraft_check-0.3.0-py3-none-any.whl";
+const WHEEL = "ontocraft_check-0.4.0-py3-none-any.whl";
 const SKIP = new Set(["domains.json", "candidates.json", "manifest.json"]);  // 분야 파일이 아닙니다(ontocraft-check 도 대조에 쓰지 않습니다)
 const worker = new Worker("ontocraft-check-worker.js");
 const st = document.getElementById("status");
@@ -56,7 +57,9 @@ function options() {
   const domains = [...document.querySelectorAll("input.dom:checked")].map((x) => x.value);
   const disable = document.getElementById("offP13").checked ? ["P13"] : [];
   const n = parseInt(document.getElementById("group").value, 10);
-  return { domains, disable, group_over: Number.isInteger(n) && n >= 0 ? n : null };
+  const out = { domains, disable, group_over: Number.isInteger(n) && n >= 0 ? n : null };
+  if (document.getElementById("strict").checked) out.strict_domains = true;  // 고를 때만 보냅니다
+  return out;
 }
 async function check(ontology, data, shapes) {
   st.textContent = "검사기를 불러오는 중(처음 한 번 수십 초 걸릴 수 있습니다)";
