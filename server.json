@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.ontocraft/ontocraft-check",
+  "title": "OntoCraft Ontology Check",
+  "description": "Check OWL/SHACL ontologies with Korean reports and search a Korean industrial term registry.",
+  "repository": {
+    "url": "https://github.com/ontocraft/ontocraft-check",
+    "source": "github"
+  },
+  "websiteUrl": "https://ontocraft.com/tools/ontocheck",
+  "version": "0.7.3",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "ontocraft-check",
+      "version": "0.7.3",
+      "runtimeHint": "uvx",
+      "runtimeArguments": [
+        { "type": "named", "name": "--from", "value": "ontocraft-check[mcp]==0.7.3" }
+      ],
+      "packageArguments": [
+        { "type": "positional", "value": "mcp" }
+      ],
+      "transport": { "type": "stdio" }
+    }
+  ]
+}

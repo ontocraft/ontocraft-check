@@ -76,6 +76,13 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    # `ontocraft-check mcp` 는 MCP 서버를 띄웁니다(uvx 처럼 패키지 이름으로 실행하는 곳을 위해).
+    # 같은 이름의 파일이 있으면 온톨로지로 읽습니다.
+    args_in = sys.argv[1:] if argv is None else argv
+    if args_in[:1] == ["mcp"] and not Path("mcp").exists():
+        from .mcp_server import main as mcp_main
+
+        return mcp_main()
     parser = build_parser()
     args = parser.parse_args(argv)
     if args.group_over < 0:

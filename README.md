@@ -1,8 +1,10 @@
 # ontocraft-check
 
-**English summary.** ontocraft-check is an OWL ontology checker by OntoCraft. It reports modelling pitfalls (approximate re-implementations inspired by the public OOPS! pitfall catalogue), metadata and naming issues, OWL 2 RL consistency, SHACL validation, `skos:exactMatch` candidates against a bundled snapshot of the OntoCraft Korean Industry Term Registry (CC BY 4.0), and competency-question (CQ) coverage: which classes, object properties and data properties your Cypher or SPARQL CQs actually touch. Since 0.7 it also matches English-only labels against the registry, skips tool-generated names from naming rules, and reads ONTOFLOW CQ catalogues. Reports are written in Korean (Markdown, HTML, JSON). It ships a command-line tool, a Python API, an MCP server for AI agents (`ontocraft-check-mcp`), and a Pyodide web worker. Files never leave your machine. Code is Apache-2.0.
+<!-- mcp-name: io.github.ontocraft/ontocraft-check -->
 
-OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사해 한국어 보고서를 냅니다. 현재 버전은 0.7.0입니다. 명령행 도구, 파이썬 API, AI 에이전트용 MCP 서버, 브라우저 실행기(Pyodide)가 있습니다. 검사는 모두 이 컴퓨터 안에서 돌고, 파일을 밖으로 보내지 않습니다.
+**English summary.** ontocraft-check is an OWL ontology checker by OntoCraft. It reports modelling pitfalls (approximate re-implementations inspired by the public OOPS! pitfall catalogue), metadata and naming issues, OWL 2 RL consistency, SHACL validation, `skos:exactMatch` candidates against a bundled snapshot of the OntoCraft Korean Industry Term Registry (CC BY 4.0), and competency-question (CQ) coverage: which classes, object properties and data properties your Cypher or SPARQL CQs actually touch. Since 0.7 it also matches English-only labels against the registry, skips tool-generated names from naming rules, and reads ONTOFLOW CQ catalogues. Reports are written in Korean (Markdown, HTML, JSON). It ships a command-line tool, a Python API, an MCP server for AI agents (`ontocraft-check-mcp`, or `ontocraft-check mcp`; listed in the official MCP Registry as `io.github.ontocraft/ontocraft-check`), and a Pyodide web worker. Files never leave your machine. Code is Apache-2.0.
+
+OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사해 한국어 보고서를 냅니다. 명령행 도구, 파이썬 API, AI 에이전트용 MCP 서버, 브라우저 실행기(Pyodide)가 있습니다. 검사는 모두 이 컴퓨터 안에서 돌고, 파일을 밖으로 보내지 않습니다.
 
 ## 1. 무엇을 검사하는지
 
@@ -265,6 +267,11 @@ uv build
 mcp가 없으면 MCP 시험은 건너뜁니다. 환경 변수 `ONTOCRAFT_REGISTRY_DIR`에 정본 등록부 폴더를 주면 그 폴더로 대조하는 시험 하나가 더 돕니다. GitHub Actions가 파이썬 3.11과 3.12에서 시험을 돌립니다.
 
 ## 13. 변경 기록
+
+### 0.7.3 (2026-10-21)
+
+- `ontocraft-check mcp` 로도 MCP 서버를 띄웁니다. `uvx` 처럼 패키지 이름으로 실행하는 곳(공식 MCP Registry 등)을 위해서입니다. 현재 폴더에 `mcp` 라는 파일이 있으면 지금처럼 온톨로지로 읽습니다.
+- 공식 MCP Registry 등록 파일 `server.json` 을 더했습니다. 검사 결과는 0.7.2 와 같습니다.
 
 ### 0.7.0 (2026-10-09)
 
