@@ -27,7 +27,7 @@ def short(x):
 
 
 def test_version():
-    assert __version__ == "0.7.4"
+    assert __version__ == "0.7.5"
 
 
 # 1. 등록부: @ko 0개 구분과 영어 대조

@@ -14,7 +14,7 @@ import tempfile
 from pathlib import Path
 
 from rdflib import Graph, URIRef
-from rdflib.namespace import OWL, RDF
+from rdflib.namespace import OWL, RDF, RDFS
 
 from ..graph import find_individuals, rdf_list
 from ..model import Finding, Report
@@ -85,6 +85,18 @@ def check(tbox: Graph, data: Graph | None, report: Report, reasoner: str = "rl")
             "OWL 2 RL 추론 결과 이 개체가 owl:Nothing(어떤 개체도 속할 수 없는 클래스)에 속합니다. 온톨로지와 데이터가 모순입니다.",
             "이 개체의 타입과 이 개체가 속하게 된 클래스의 공리(owl:equivalentClass, 제약)를 거슬러 올라가 모순된 쪽을 고칩니다.",
         ))
+
+    # TBox 만으로 드러나는 만족불가 클래스: 폐포에서 owl:Nothing 의 하위 클래스가 된 이름 있는 클래스입니다.
+    # owl:equivalentClass owl:Nothing 처럼 직접 적은 것과 그 하위 클래스를 잡습니다. 서로소·제약이 얽힌 경우는 HermiT 가 필요합니다.
+    unsat_rl = sorted({c for c in g.subjects(RDFS.subClassOf, OWL.Nothing)
+                       if isinstance(c, URIRef) and c != OWL.Nothing}, key=str)
+    for c in unsat_rl:
+        report.add(Finding(
+            CAT, "LOGIC06", "critical", str(c),
+            "OWL 2 RL 폐포에서 이 클래스가 owl:Nothing 의 하위 클래스가 됩니다. 어떤 개체도 이 클래스에 속할 수 없습니다.",
+            "owl:equivalentClass·rdfs:subClassOf 로 owl:Nothing 에 이어진 공리를 찾아 고칩니다. 일부러 둔 것이면 그대로 둡니다.",
+        ))
+    report.stats["logic_unsat_rl"] = len(unsat_rl)
 
     pairs = disjoint_pairs(g)
     seen = set()

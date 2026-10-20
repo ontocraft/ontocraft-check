@@ -14,7 +14,7 @@ OntoCraft 온톨로지 검사기(ontocraft-check)는 OWL 온톨로지를 검사�
 |---|---|---|
 | 모델링 함정 | P04, P06, P08, P10, P11, P13, P19, P22, P32, P34, P35, P34-EXT, P35-EXT, P38, P41, DT01 선언되지 않은 데이터 타입, LBL01 종류가 다른 요소의 같은 레이블, LBL02 같은 레이블을 가진 객체 속성 | rdflib |
 | 메타데이터·명명 | META01 버전, META02 @ko 없음, META03 @en 없음, META04 레이블 없음 | rdflib |
-| 논리 | LOGIC01 owl:Nothing, LOGIC02 서로소 위반, LOGIC03 sameAs·differentFrom 충돌, LOGIC04 그 밖의 OWL 2 RL 모순, LOGIC05 HermiT(선택) | owlrl, 선택 owlready2 |
+| 논리 | LOGIC01 owl:Nothing, LOGIC02 서로소 위반, LOGIC03 sameAs·differentFrom 충돌, LOGIC04 그 밖의 OWL 2 RL 모순, LOGIC05 HermiT(선택), LOGIC06 OWL 2 RL 로 드러난 만족불가 클래스 | owlrl, 선택 owlready2 |
 | 데이터 제약 | SHACL 형상 위반. 심각도는 형상의 sh:resultSeverity를 따릅니다 | pyshacl |
 | 용어 등록부 대조(선택) | REG01 skos:exactMatch 후보, REG02 다른 분야에서 같은 이름이 있음, REG03 속성 이름이 개념 용어와 같음 | 표준 라이브러리 |
 | CQ 커버리지(선택) | 클래스·관계·데이터 속성별로 CQ가 닿는지 셈, CQ01 CQ 질의가 쓴 이름이 온톨로지에 없음 | rdflib(SPARQL 파싱), 표준 라이브러리 |
@@ -223,9 +223,12 @@ PyPI에 올리기 전에는 `--from` 값을 `ontocraft-check[mcp] @ git+https://
 ## 8. 한계
 
 - 모델링 함정(Pxx)은 OOPS! 함정 목록의 공개 설명을 참고해 다시 구현한 근사 검사입니다. OOPS!가 내는 결과와 개수가 다르기도 합니다.
-- 논리 검사는 OWL 2 RL 규칙 수준의 일관성만 봅니다. 모순이 없다는 결과는 OWL 2 DL로도 일관하다는 뜻이 아닙니다. HermiT 경로는 Java가 있는 환경에서 실행해 확인하지 못했습니다.
+- 논리 검사의 기본값은 OWL 2 RL 규칙 수준의 일관성만 봅니다. 온톨로지만 줄 때는 서로소·제약이 얽힌 만족불가 클래스를 찾지 못합니다. 2026-10-21 비교 시험에서 HermiT 가 찾은 만족불가 클래스 6개(Pizza 2, Koala 3, 시험 파일 1)를 0.7.4 기본 모드는 하나도 찾지 못했습니다. 0.7.5 의 LOGIC06 은 `owl:equivalentClass owl:Nothing` 처럼 RL 폐포에서 드러나는 것(시험 파일 1)만 잡습니다. 그래서 결과 요약의 논리 상태에 「OWL 2 RL 범위만」을 적습니다. 기본 모드의 「논리 0건」은 「만족불가 클래스가 없다」는 뜻이 아닙니다. 만족불가 클래스는 `--reasoner hermit` 으로 확인합니다. 이 경로는 OpenJDK 21 과 owlready2 0.51 에서 ROBOT 의 HermiT 와 같은 6개를 냈고, 시간은 기본의 약 4.5~7배였습니다. 개체 데이터(`--data`)를 함께 주면 기본 모드도 모순을 개체 단위로 짚습니다.
+- 함정 번호가 OOPS! 와 같지 않은 곳이 있습니다. P34-EXT·P35-EXT 는 OOPS! 의 P34·P35 와 같은 대상을 가리켰고(FOAF 에서 5개와 1개), P08 은 P08 과 META04 로 나눠 냅니다. OOPS! 의 P05, P07, P12, P21, P24, P29, P30, P31, P39 에 해당하는 검사는 없습니다.
+- 정의 검사(P08)는 rdfs:comment 와 skos:definition 을 정의로 인정합니다. ROBOT report 의 missing_definition 은 IAO:0000115 만 보는 것으로 보여 같은 파일에서 훨씬 많이 지적할 수 있습니다(SOSA 36 대 3). 원인은 규칙 정의를 확인하지 않은 추정입니다.
+- 온톨로지 제목·설명(ROBOT 의 missing_ontology_title·description)과 레이블 여럿(multiple_labels)은 검사하지 않습니다.
 - 의미 판단이 필요한 함정(P01 한 클래스에 여러 뜻, P05 잘못된 역관계, P31 잘못된 동치 관계 등)은 검사하지 않습니다.
-- owl:imports를 따라가지 않습니다. 온톨로지 파일 하나만 봅니다.
+- owl:imports를 따라가지 않습니다. 온톨로지 파일 하나만 봅니다. 2026-10-21 시험에서 Wine(food 를 가져옴)을 OOPS! 가 가져온 것까지 합쳐 검사했을 때 OOPS! 만 낸 항목 101개 가운데 72개가 가져온 요소였습니다.
 - SHACL 검증은 형상이 표현한 조건만큼만 말합니다.
 - 관련 분야 표는 사람이 정한 짧은 목록입니다. 관련 분야로 더한 후보는 고른 분야의 후보보다 뜻이 어긋날 가능성이 큽니다. 등록부에 kind가 없으므로, 클래스가 사건이나 관계를 뜻하더라도 개념 용어와 REG01로 맞춥니다.
 - LBL01·LBL02는 공백만 정규화하고 대소문자는 구별합니다. 「Port」@en과 「port」@en은 다른 레이블로 봅니다. 레이블이 같아도 뜻이 같은지는 보지 않습니다.
@@ -267,6 +270,12 @@ uv build
 mcp가 없으면 MCP 시험은 건너뜁니다. 환경 변수 `ONTOCRAFT_REGISTRY_DIR`에 정본 등록부 폴더를 주면 그 폴더로 대조하는 시험 하나가 더 돕니다. GitHub Actions가 파이썬 3.11과 3.12에서 시험을 돌립니다.
 
 ## 13. 변경 기록
+
+### 0.7.5 (2026-10-21)
+
+- LOGIC06 을 더했습니다. OWL 2 RL 폐포에서 owl:Nothing 의 하위 클래스가 된 이름 있는 클래스(owl:equivalentClass owl:Nothing 과 그 하위 클래스)를 치명으로 냅니다.
+- 결과 요약의 논리 상태를 「실행」 대신 「실행(OWL 2 RL 범위만 …)」 또는 「실행(OWL 2 RL 과 HermiT)」로 적고, JSON 의 summary.logic.note 에도 같은 문장을 둡니다. 0.7.4 까지는 HermiT 없이 「논리 0건」이 나와 만족불가 클래스가 없다는 뜻으로 읽힐 수 있었습니다.
+- 8절 한계를 OOPS!·ROBOT·HermiT 비교 시험(2026-10-21) 결과로 고쳤습니다.
 
 ### 0.7.4 (2026-10-21)
 

@@ -49,6 +49,7 @@ RULE_TITLES = OrderedDict([
     ("LOGIC03", "owl:sameAs와 owl:differentFrom 충돌"),
     ("LOGIC04", "그 밖의 OWL 2 RL 모순(owlrl 보고)"),
     ("LOGIC05", "HermiT 만족불가 판정"),
+    ("LOGIC06", "OWL 2 RL 로 드러난 만족불가 클래스"),
     ("SHACL", "형상 위반"),
     ("REG01", "등록부 skos:exactMatch 후보"),
     ("REG02", "다른 분야에서 같은 이름이 있음(뜻이 다를 수 있음)"),
@@ -160,6 +161,18 @@ def registry_status(report: Report) -> str:
     return "실행"
 
 
+LOGIC_RL_ONLY = "실행(OWL 2 RL 범위만. 서로소·제약이 얽힌 만족불가 클래스는 찾지 못함, --reasoner hermit 로 확인)"
+
+
+def logic_status(report: Report) -> str:
+    """결과 요약 표의 논리 검사 상태입니다. HermiT 를 돌리지 않았으면 0건이 「만족불가 클래스 없음」으로 읽히지 않게 범위를 적습니다."""
+    if "logic" not in report.ran:
+        return "건너뜀"
+    if "logic-hermit" in report.ran:
+        return "실행(OWL 2 RL 과 HermiT)"
+    return LOGIC_RL_ONLY
+
+
 MATCH_KO = {"ko": "한국어(@ko 레이블, 없으면 로컬 이름)", "en": "영어 이름(en)",
             "both": "한국어 먼저, 한국어로 맞지 않은 요소는 영어 이름"}
 
@@ -232,7 +245,8 @@ def build_blocks(report: Report) -> list:
     summ = report.summary()
     rows = []
     for cat in _shown(report):
-        status = registry_status(report) if cat == "registry" else ("실행" if _ran(report, cat) else "건너뜀")
+        status = (registry_status(report) if cat == "registry" else logic_status(report) if cat == "logic"
+                  else ("실행" if _ran(report, cat) else "건너뜀"))
         c = summ[cat]
         rows.append([CATEGORY_KO[cat], status] + [str(c[sev]) for sev in SEVERITIES])
     b.append(("table", ["검사 종류", "상태"] + [SEVERITY_KO[sv] for sv in SEVERITIES], rows))
@@ -545,7 +559,8 @@ def to_dict(report: Report) -> dict:
         "stats": report.stats,
         "summary": {
             cat: {"name": CATEGORY_KO[cat], "status": "ran" if _ran(report, cat) else "skipped", **report.summary()[cat],
-                  **({"note": registry_status(report)} if cat == "registry" and report.stats.get("registry_no_ko") else {})}
+                  **({"note": registry_status(report)} if cat == "registry" and report.stats.get("registry_no_ko") else {}),
+                  **({"note": logic_status(report)} if cat == "logic" and _ran(report, cat) else {})}
             for cat in CATEGORIES
             if cat != "cq" or report.cq is not None
         },
