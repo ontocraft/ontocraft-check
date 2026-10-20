@@ -271,6 +271,10 @@ mcp가 없으면 MCP 시험은 건너뜁니다. 환경 변수 `ONTOCRAFT_REGISTR
 
 ## 13. 변경 기록
 
+### 0.7.6 (2026-10-21)
+
+- 브라우저(Pyodide)에서 돌 때는 논리 상태 문장에서 「--reasoner hermit 로 확인」을 뺍니다. 브라우저에서는 HermiT 를 돌릴 수 없기 때문입니다. 명령행 결과는 0.7.5 와 같습니다.
+
 ### 0.7.5 (2026-10-21)
 
 - LOGIC06 을 더했습니다. OWL 2 RL 폐포에서 owl:Nothing 의 하위 클래스가 된 이름 있는 클래스(owl:equivalentClass owl:Nothing 과 그 하위 클래스)를 치명으로 냅니다.

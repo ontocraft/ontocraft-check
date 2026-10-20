@@ -162,6 +162,8 @@ def registry_status(report: Report) -> str:
 
 
 LOGIC_RL_ONLY = "실행(OWL 2 RL 범위만. 서로소·제약이 얽힌 만족불가 클래스는 찾지 못함, --reasoner hermit 로 확인)"
+# 브라우저(Pyodide)에서는 HermiT 를 돌릴 수 없으므로 명령행 옵션 안내를 뺍니다.
+LOGIC_RL_ONLY_WEB = "실행(OWL 2 RL 범위만. 서로소·제약이 얽힌 만족불가 클래스는 찾지 못함)"
 
 
 def logic_status(report: Report) -> str:
@@ -170,7 +172,9 @@ def logic_status(report: Report) -> str:
         return "건너뜀"
     if "logic-hermit" in report.ran:
         return "실행(OWL 2 RL 과 HermiT)"
-    return LOGIC_RL_ONLY
+    import sys
+
+    return LOGIC_RL_ONLY_WEB if sys.platform == "emscripten" else LOGIC_RL_ONLY
 
 
 MATCH_KO = {"ko": "한국어(@ko 레이블, 없으면 로컬 이름)", "en": "영어 이름(en)",

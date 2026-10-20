@@ -33,3 +33,15 @@ def test_logic_status_says_rl_only(tmp_path):
     import json
     j = json.loads(render(r, "json"))
     assert "OWL 2 RL 범위만" in j["summary"]["logic"]["note"]
+
+
+def test_logic_status_web_drops_cli_hint(tmp_path, monkeypatch):
+    import sys
+
+    from ontocraft_check.render import logic_status
+
+    r = _run(tmp_path)
+    assert "--reasoner hermit" in logic_status(r)
+    monkeypatch.setattr(sys, "platform", "emscripten")
+    s = logic_status(r)
+    assert "OWL 2 RL 범위만" in s and "--reasoner" not in s
