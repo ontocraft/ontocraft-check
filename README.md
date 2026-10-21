@@ -301,6 +301,8 @@ mcp가 없으면 MCP 시험은 건너뜁니다. 환경 변수 `ONTOCRAFT_REGISTR
 
 ### 0.8.0 (2026-10-21)
 
+- AIR06 의 JSON Schema 선택 열 판단은 그 스키마가 정의하는 표에만 적용합니다(표의 열이 모두 properties 안에 있거나, properties 가 없으면 required 열이 모두 표에 있을 때). 다른 표의 빈 열은 README 결측 절에 열 이름과 사유가 있어야 사유 있음으로 봅니다.
+
 - AI 레디 자가진단을 더했습니다. `ontocraft-check ai-ready <폴더 또는 파일>`(`--format md|html|json`), 파이썬 `ontocraft_check.ai_ready.check(path)`, MCP 도구 `check_ai_ready`입니다. 규칙 AIR01~AIR14(필수 10, 권장 4)를 점검하고, 기계로 확인할 수 없는 문항은 「사람 확인 필요」 목록으로 보입니다. 공식 진단이 아니라는 문구가 보고서에 고정됩니다. 새 의존성은 없습니다.
 - 온톨로지 검사 규칙과 결과는 0.7.6과 같습니다.
 

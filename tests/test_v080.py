@@ -119,3 +119,22 @@ def test_air06_no_reason_and_required_fails(tmp_path):
     assert [x["column"] for x in r["detail"]["over_20pct"]] == ["memo"]
     r2 = _air06(tmp_path, "# 자료\n\n## 결측\n\nreferences 는 비어도 됩니다.\n")  # 스키마 없음: refs 는 낱말 경계로 안 맞음
     assert r2["status"] == "fail"
+
+
+def test_air06_schema_applies_only_to_matching_table(tmp_path):
+    """스키마가 정의하지 않은 표(열이 properties 밖)에는 required 로 선택 열을 가리지 않습니다."""
+    import json
+
+    from ontocraft_check.ai_ready import check
+
+    (tmp_path / "schema.json").write_text(json.dumps({
+        "$schema": "https://json-schema.org/draft/2020-12/schema", "type": "object",
+        "required": ["id"], "properties": {"id": {"type": "string"}, "note": {"type": "string"}}}), encoding="utf-8")
+    (tmp_path / "records.jsonl").write_text("\n".join(json.dumps({"id": str(i), "note": ""}) for i in range(10)) + "\n", encoding="utf-8")
+    (tmp_path / "table.csv").write_text("a,b\n1,\n2,\n3,\n", encoding="utf-8")
+    (tmp_path / "README.md").write_text("# x\n\n## Missing values\n\n빈 칸은 기록 없음입니다.\n", encoding="utf-8")
+    res = check(str(tmp_path))
+    air06 = next(i for i in res["items"] if i["id"] == "AIR06")
+    detail = json.dumps(air06, ensure_ascii=False)
+    assert air06["status"] == "fail"
+    assert "table.csv" in detail

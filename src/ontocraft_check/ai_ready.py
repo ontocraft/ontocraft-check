@@ -312,12 +312,17 @@ def _check_rules(s: dict) -> list[dict]:
     else:
         reason_text = "\n".join(
             sec for sec in re.split(r"^#+\s", readme, flags=re.M) if re.search(r"결측|missing", sec, re.I))
-        required = None
+        # 스키마는 그 스키마가 정의하는 레코드에만 적용합니다(다른 표, 예: 문서별 표 CSV 에는 적용하지 않음).
+        schemas = []
         for _, sch in s["schema"]:
+            props = set((sch.get("properties") or {}).keys()) if isinstance(sch.get("properties"), dict) else set()
             if isinstance(sch.get("required"), list):
-                required = (required or set()) | {str(x) for x in sch["required"]}
+                schemas.append(({str(x) for x in sch["required"]}, props))
         bad, excused = [], []
         for f, (cols, rows) in tb:
+            # properties 가 있으면 표의 열이 모두 그 안에 있어야, 없으면 required 열이 모두 표에 있어야 같은 레코드로 봅니다.
+            match = [req for req, props in schemas if (set(cols) <= props if props else req <= set(cols))]
+            required = set().union(*match) if match else None
             for c in cols:
                 n = sum(1 for r in rows if r.get(c) is None or (isinstance(r.get(c), str) and not r.get(c).strip()))
                 if n / len(rows) > 0.20:
