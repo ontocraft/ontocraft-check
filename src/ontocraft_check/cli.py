@@ -83,6 +83,11 @@ def main(argv: list[str] | None = None) -> int:
         from .mcp_server import main as mcp_main
 
         return mcp_main()
+    # `ontocraft-check ai-ready <폴더 또는 파일>` 은 AI 레디 자가진단입니다(0.8.0). 같은 이름의 파일이 있으면 온톨로지로 읽습니다.
+    if args_in[:1] == ["ai-ready"] and not Path("ai-ready").exists():
+        from .ai_ready import main as ai_main
+
+        return ai_main(args_in[1:])
     parser = build_parser()
     args = parser.parse_args(argv)
     if args.group_over < 0:

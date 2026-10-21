@@ -206,7 +206,7 @@ def _call(server, name, args):
 def test_mcp_lists_five_tools():
     server = _mcp()
     names = {t.name for t in asyncio.run(server.list_tools())}
-    assert names == {"check_ontology", "explain_rule", "list_rules", "search_terms", "get_term"}
+    assert names == {"check_ontology", "explain_rule", "list_rules", "search_terms", "get_term", "check_ai_ready"}
     assert "파일은 이 컴퓨터 밖으로 보내지 않습니다" in server.instructions
     assert "OWL 2 RL" in server.instructions
 

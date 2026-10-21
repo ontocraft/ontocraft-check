@@ -109,6 +109,33 @@ ontocraft-check ontosafety-ontology.ttl --cq ontosafety-cq.json \
 
 규칙의 세부 정의는 MCP 도구 `explain_rule`이나 소스의 `src/ontocraft_check/rules.py`에 있습니다.
 
+## 1-4. AI 레디 자가진단
+
+`ontocraft-check ai-ready <폴더 또는 파일>`은 데이터 묶음이 AI가 쓰기 좋게 갖춰졌는지 기계로 확인할 수 있는 만큼만 점검합니다(0.8.0). `--format md|html|json`, `--out`을 받습니다. 파이썬에서는 `from ontocraft_check import ai_ready; ai_ready.check(path)`가 결과 dict를 돌려주고, MCP에서는 `check_ai_ready(path)`입니다. 현재 폴더에 `ai-ready`라는 파일이 있으면 지금처럼 온톨로지로 읽습니다.
+
+이 점검은 공식 진단이 아닙니다. 근거는 행정안전부·NIA 「공공데이터의 인공지능 친화적 관리 가이드라인 V1.0」(2026-03-31) 부록의 자가진단 38문항(공통 33, 유형별 5)이고, 그 가운데 파일에서 확인되는 것만 요지로 근사했습니다. 적정이 나와도 가이드라인을 충족한다는 뜻이 아니며 인증을 대신하지 못합니다. 보고서에 이 문구가 고정되어 들어갑니다.
+
+읽는 것은 폴더 안의 CSV, JSON, JSONL, JSON-LD, XML, Parquet(파일만 알아보고 내용은 읽지 않음), DCAT 기록(dcat.jsonld 또는 @type이 dcat:Dataset인 JSON-LD), Croissant(croissant.json 또는 conformsTo가 mlcommons croissant), JSON Schema(schema.json 또는 $schema 키), quality 파일, README.md입니다. 접두사 표기와 전체 IRI 표기를 모두 받습니다. 표는 파일마다 앞의 10만 행까지 읽습니다.
+
+| 규칙 | 구분 | 보는 것 |
+|---|---|---|
+| AIR01 | 필수 | 개방형 포맷 파일 |
+| AIR02 | 필수 | 표 또는 JSON 객체 목록으로 읽힘 |
+| AIR03 | 필수 | JSON Schema 또는 Croissant recordSet 필드 |
+| AIR04 | 필수 | DCAT 또는 Croissant |
+| AIR05 | 필수 | DCAT 필수 항목 누락(빠진 항목을 나열) |
+| AIR06 | 필수 | 열별 빈 값 20% 초과, README의 결측 표기 규칙 |
+| AIR07 | 필수 | 품질평가 결과(quality 파일, dqv:) |
+| AIR08 | 필수 | 합성·자동 생성 구분(authoring, dct:provenance, prov:, rai 등) |
+| AIR09 | 필수 | 라이선스 표시 |
+| AIR10 | 필수 | id 열 중복, 표제어 열 중복(domain 열이 있으면 분야 안에서만 셈) |
+| AIR11 | 권장 | 영구 식별자(http(s)·DOI, 레코드 uri 열) |
+| AIR12 | 권장 | 데이터 카드(README, Croissant) |
+| AIR13 | 권장 | 버전별 변경 이력 |
+| AIR14 | 권장 | 해시(sha256 등) |
+
+문항마다 적정, 미흡, 해당없음(점검할 대상이 없음), 사람 확인 필요 가운데 하나를 냅니다. 요약은 「필수 자동 점검 문항 가운데 적정 수」입니다. 필수 미흡이 하나라도 있으면 종료 코드 1, 경로 오류는 2입니다. 데이터 사전 내용의 적정성, 개인정보 비식별, 재식별 위험 평가, 책임 주체의 실제 운영, 오류 신고 절차, API 제공 같은 문항은 기계로 확인할 수 없어 「사람 확인 필요」 목록으로만 보입니다. 이 목록의 이름은 도구가 묶은 것이고 가이드라인의 문항 번호가 아닙니다. AIR06은 선택 열(예: 상위 용어가 없는 용어의 broader)도 빈 값으로 세므로, 선택 열이면 그 사유를 README에 적어 둡니다.
+
 ## 2. 설치
 
 파이썬 3.11 이상이 필요합니다.
@@ -174,7 +201,7 @@ open("보고서.md", "w", encoding="utf-8").write(render(report, "md"))
 
 ## 5. MCP 서버
 
-`ontocraft-check-mcp`는 stdio로 도는 MCP 서버입니다. 도구는 다섯 개입니다.
+`ontocraft-check-mcp`는 stdio로 도는 MCP 서버입니다. 도구는 여섯 개입니다.
 
 | 도구 | 하는 일 |
 |---|---|
@@ -183,6 +210,7 @@ open("보고서.md", "w", encoding="utf-8").write(render(report, "md"))
 | `list_rules` | 규칙 목록 |
 | `search_terms` | 내장 등록부에서 한국어 표제어·동의어, 영어, id로 찾아 id, ko, en, definition, uri, domain을 돌려줍니다 |
 | `get_term` | id로 용어 하나의 공개 필드 전부와 출처를 돌려줍니다 |
+| `check_ai_ready` | 0.8부터. 데이터 묶음 경로(path)를 AI 레디 자가진단으로 점검해 규칙별 판정을 JSON으로 돌려줍니다 |
 
 Claude Code에는 다음처럼 더합니다.
 
@@ -270,6 +298,11 @@ uv build
 mcp가 없으면 MCP 시험은 건너뜁니다. 환경 변수 `ONTOCRAFT_REGISTRY_DIR`에 정본 등록부 폴더를 주면 그 폴더로 대조하는 시험 하나가 더 돕니다. GitHub Actions가 파이썬 3.11과 3.12에서 시험을 돌립니다.
 
 ## 13. 변경 기록
+
+### 0.8.0 (2026-10-21)
+
+- AI 레디 자가진단을 더했습니다. `ontocraft-check ai-ready <폴더 또는 파일>`(`--format md|html|json`), 파이썬 `ontocraft_check.ai_ready.check(path)`, MCP 도구 `check_ai_ready`입니다. 규칙 AIR01~AIR14(필수 10, 권장 4)를 점검하고, 기계로 확인할 수 없는 문항은 「사람 확인 필요」 목록으로 보입니다. 공식 진단이 아니라는 문구가 보고서에 고정됩니다. 새 의존성은 없습니다.
+- 온톨로지 검사 규칙과 결과는 0.7.6과 같습니다.
 
 ### 0.7.6 (2026-10-21)
 

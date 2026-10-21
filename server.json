@@ -8,15 +8,15 @@
     "source": "github"
   },
   "websiteUrl": "https://ontocraft.com/tools/ontocheck",
-  "version": "0.7.6",
+  "version": "0.8.0",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "ontocraft-check",
-      "version": "0.7.6",
+      "version": "0.8.0",
       "runtimeHint": "uvx",
       "runtimeArguments": [
-        { "type": "named", "name": "--from", "value": "ontocraft-check[mcp]==0.7.6" }
+        { "type": "named", "name": "--from", "value": "ontocraft-check[mcp]==0.8.0" }
       ],
       "packageArguments": [
         { "type": "positional", "value": "mcp" }

@@ -1,6 +1,6 @@
 """MCP 서버입니다(stdio). 설치: pip install "ontocraft-check[mcp]", 실행: ontocraft-check-mcp
 
-도구 다섯 개를 냅니다: check_ontology, explain_rule, list_rules, search_terms, get_term.
+도구 여섯 개를 냅니다: check_ontology, explain_rule, list_rules, search_terms, get_term, check_ai_ready.
 """
 
 from __future__ import annotations
@@ -112,6 +112,20 @@ def build_server():
     def get_term(id: str) -> str:  # noqa: A002
         """용어 id(또는 https://w3id.org/ontocraft/terms/<id>)로 정의, 동의어, 상위·관련 용어, 참고 표준, 쓰임 예를 돌려줍니다."""
         return _guard(T.get_term, id)
+
+    @server.tool()
+    def check_ai_ready(path: str) -> str:
+        """데이터 묶음(폴더 또는 파일)을 AI 레디 자가진단으로 점검합니다(규칙 AIR01~AIR14).
+
+        행정안전부·NIA 공공데이터 인공지능 친화적 관리 가이드라인 V1.0 자가진단 문항 가운데 기계로 확인할 수 있는 것만 봅니다.
+        공식 진단이 아닙니다. 문항마다 적정·미흡·해당없음·사람 확인 필요를 돌려줍니다.
+        """
+        from . import ai_ready
+
+        try:
+            return _dump(ai_ready.check(path))
+        except ai_ready.InputError as exc:
+            raise ToolError(str(exc)) from exc
 
     return server
 
