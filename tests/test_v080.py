@@ -89,3 +89,33 @@ def test_mcp_tool_registered():
     res = asyncio.run(build_server().call_tool("check_ai_ready", {"path": COMPLETE}))
     assert not res.is_error
     assert json.loads(res.content[0].text)["summary"]["required_auto_ok"] == 10
+
+
+def _air06(tmp_path, readme, schema=None):
+    (tmp_path / "d.csv").write_text("id,memo,refs\n1,,x\n2,,y\n3,a,z\n", encoding="utf-8")
+    (tmp_path / "README.md").write_text(readme, encoding="utf-8")
+    if schema is not None:
+        (tmp_path / "schema.json").write_text(json.dumps(schema), encoding="utf-8")
+    return by_id(ai_ready.check(str(tmp_path)))["AIR06"]
+
+
+def test_air06_reason_in_readme_excuses_column(tmp_path):
+    r = _air06(tmp_path, "# 자료\n\n## 결측\n\nmemo 가 비면 아직 안 쓴 것입니다.\n")
+    assert r["status"] == "ok"
+    assert [x["column"] for x in r["detail"]["over_20pct_with_reason"]] == ["memo"]
+
+
+def test_air06_optional_in_schema_excuses_column(tmp_path):
+    r = _air06(tmp_path, "# 자료\n\n## 결측\n\n빈 문자열이 결측입니다.\n",
+               {"$schema": "https://json-schema.org/draft/2020-12/schema", "required": ["id", "refs"]})
+    assert r["status"] == "ok"
+    assert r["detail"]["over_20pct_with_reason"][0]["reason"].startswith("JSON Schema")
+
+
+def test_air06_no_reason_and_required_fails(tmp_path):
+    r = _air06(tmp_path, "# 자료\n\n## 결측\n\nreferences 는 비어도 됩니다.\n",
+               {"$schema": "https://json-schema.org/draft/2020-12/schema", "required": ["id", "memo"]})
+    assert r["status"] == "fail"
+    assert [x["column"] for x in r["detail"]["over_20pct"]] == ["memo"]
+    r2 = _air06(tmp_path, "# 자료\n\n## 결측\n\nreferences 는 비어도 됩니다.\n")  # 스키마 없음: refs 는 낱말 경계로 안 맞음
+    assert r2["status"] == "fail"

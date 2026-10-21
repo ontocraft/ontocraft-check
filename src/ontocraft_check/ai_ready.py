@@ -310,23 +310,37 @@ def _check_rules(s: dict) -> list[dict]:
     if not tb:
         out.append(_res("AIR06", "na", "빈 값 비율을 셀 CSV·JSONL 표가 없습니다."))
     else:
-        bad = []
+        reason_text = "\n".join(
+            sec for sec in re.split(r"^#+\s", readme, flags=re.M) if re.search(r"결측|missing", sec, re.I))
+        required = None
+        for _, sch in s["schema"]:
+            if isinstance(sch.get("required"), list):
+                required = (required or set()) | {str(x) for x in sch["required"]}
+        bad, excused = [], []
         for f, (cols, rows) in tb:
             for c in cols:
                 n = sum(1 for r in rows if r.get(c) is None or (isinstance(r.get(c), str) and not r.get(c).strip()))
                 if n / len(rows) > 0.20:
-                    bad.append({"file": f, "column": c, "empty_pct": round(100 * n / len(rows), 1)})
+                    rec = {"file": f, "column": c, "empty_pct": round(100 * n / len(rows), 1)}
+                    if re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", reason_text):
+                        excused.append({**rec, "reason": "README 결측 절에 열 이름과 사유가 있음"})
+                    elif required is not None and c not in required:
+                        excused.append({**rec, "reason": "JSON Schema required 에 없는 선택 열"})
+                    else:
+                        bad.append(rec)
         problems = []
         if bad:
-            problems.append(f"빈 값이 20%를 넘는 열이 {len(bad)}개입니다")
+            problems.append(f"사유 없이 빈 값이 20%를 넘는 열이 {len(bad)}개입니다")
         if not has_rule:
             problems.append("README 에 결측 표기 규칙(「결측」 또는 「missing」)이 없습니다")
-        msg = "; ".join(problems) + "." if problems else "빈 값이 20%를 넘는 열이 없고 README 에 결측 표기 규칙이 있습니다."
-        if bad and has_rule:
-            msg += " README 에 결측 표기 규칙은 있습니다. 선택 열이라 비어 있는 것이면 그 사유를 README 에 열 이름과 함께 적어 둡니다."
+        msg = "; ".join(problems) + "." if problems else "사유 없이 빈 값이 20%를 넘는 열이 없고 README 에 결측 표기 규칙이 있습니다."
         if bad:
             msg += " 대표 열: " + ", ".join(f"{b['file']}:{b['column']} {b['empty_pct']}%" for b in bad[:6]) + ("..." if len(bad) > 6 else "") + "."
-        out.append(_res("AIR06", "fail" if problems else "ok", msg, {"over_20pct": bad, "readme_missing_rule": has_rule, "scanned_files": [f for f, _ in tb]}))
+        if excused:
+            msg += f" 사유 있음(선택 열) {len(excused)}개는 미흡에서 뺐습니다."
+        out.append(_res("AIR06", "fail" if problems else "ok", msg, {
+            "over_20pct": bad, "over_20pct_with_reason": excused, "readme_missing_rule": has_rule,
+            "scanned_files": [f for f, _ in tb]}))
     # AIR07
     qual = list(s["quality"])
     qkeys = [k for k in list(dkeys) + list(ckeys) if k.startswith("dqv:") or "quality" in k.lower()]
