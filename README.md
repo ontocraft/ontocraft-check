@@ -301,6 +301,8 @@ mcp가 없으면 MCP 시험은 건너뜁니다. 환경 변수 `ONTOCRAFT_REGISTR
 
 ### 0.8.0 (2026-10-21)
 
+- AIR06: README 결측 절에 파일 경로 접두어(예: `tables/`)를 적으면 그 아래 표의 모든 열을 사유 있음으로 봅니다. 문서마다 열 이름이 다른 표를 위한 것입니다. 열 이름 맞춤은 빈 이름과 한 글자 이름을 쓰지 않습니다.
+
 - AIR06 의 JSON Schema 선택 열 판단은 그 스키마가 정의하는 표에만 적용합니다(표의 열이 모두 properties 안에 있거나, properties 가 없으면 required 열이 모두 표에 있을 때). 다른 표의 빈 열은 README 결측 절에 열 이름과 사유가 있어야 사유 있음으로 봅니다.
 
 - AI 레디 자가진단을 더했습니다. `ontocraft-check ai-ready <폴더 또는 파일>`(`--format md|html|json`), 파이썬 `ontocraft_check.ai_ready.check(path)`, MCP 도구 `check_ai_ready`입니다. 규칙 AIR01~AIR14(필수 10, 권장 4)를 점검하고, 기계로 확인할 수 없는 문항은 「사람 확인 필요」 목록으로 보입니다. 공식 진단이 아니라는 문구가 보고서에 고정됩니다. 새 의존성은 없습니다.

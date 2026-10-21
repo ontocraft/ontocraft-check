@@ -138,3 +138,22 @@ def test_air06_schema_applies_only_to_matching_table(tmp_path):
     detail = json.dumps(air06, ensure_ascii=False)
     assert air06["status"] == "fail"
     assert "table.csv" in detail
+
+
+def test_air06_path_reason_and_no_accidental_name_match(tmp_path):
+    """경로 접두어 사유는 그 아래 표 전체에 적용하고, 빈 열 이름이나 한 글자 이름은 결측 절 문장과 우연히 맞지 않습니다."""
+    import json
+
+    from ontocraft_check.ai_ready import check
+
+    (tmp_path / "tables").mkdir()
+    (tmp_path / "tables" / "t1.csv").write_text(",빈\n1,\n2,\n3,\n", encoding="utf-8")
+    (tmp_path / "other.csv").write_text("x,y\n1,\n2,\n3,\n", encoding="utf-8")
+    (tmp_path / "README.md").write_text("# x\n\n## Missing values\n\n`tables/` 아래 표 CSV 의 빈 칸은 병합으로 가려진 칸입니다.\n", encoding="utf-8")
+    res = check(str(tmp_path))
+    air06 = next(i for i in res["items"] if i["id"] == "AIR06")
+    bad = [(x["file"], x["column"]) for x in air06["detail"]["over_20pct"]]
+    assert any(f.endswith("other.csv") and c == "y" for f, c in bad)
+    assert not any("tables/" in f for f, _ in bad)
+    reasons = [x["reason"] for x in air06["detail"]["over_20pct_with_reason"]]
+    assert reasons and all("경로" in r for r in reasons)

@@ -327,7 +327,11 @@ def _check_rules(s: dict) -> list[dict]:
                 n = sum(1 for r in rows if r.get(c) is None or (isinstance(r.get(c), str) and not r.get(c).strip()))
                 if n / len(rows) > 0.20:
                     rec = {"file": f, "column": c, "empty_pct": round(100 * n / len(rows), 1)}
-                    if re.search(r"(?<!\w)" + re.escape(c) + r"(?!\w)", reason_text):
+                    path_hit = _path_reason(f, reason_text)
+                    name = (c or "").strip()
+                    if path_hit:
+                        excused.append({**rec, "reason": f"README 결측 절에 파일 경로({path_hit}) 사유가 있음"})
+                    elif len(name) >= 2 and re.search(r"(?<!\w)" + re.escape(name) + r"(?!\w)", reason_text):
                         excused.append({**rec, "reason": "README 결측 절에 열 이름과 사유가 있음"})
                     elif required is not None and c not in required:
                         excused.append({**rec, "reason": "JSON Schema required 에 없는 선택 열"})
@@ -437,6 +441,17 @@ def _check_rules(s: dict) -> list[dict]:
         hashes.append("Croissant distribution 해시")
     out.append(_res("AIR14", "ok" if hashes else "fail", ("해시가 있습니다: " + ", ".join(hashes) + ".") if hashes else "sha256 등 파일 해시를 찾지 못했습니다."))
     return out
+
+
+def _path_reason(file, reason_text):
+    """README 결측 절에 적힌 경로 접두어(예: tables/)가 이 파일 경로의 앞부분과 맞으면 그 접두어를 돌려줍니다.
+    문서마다 열 이름이 다른 표(HWP 표 CSV 등)는 이름 대신 경로로 사유를 적게 합니다."""
+    rel = file.replace("\\", "/")
+    for m in re.finditer(r"`?([A-Za-z0-9_.\-]+(?:/[A-Za-z0-9_.\-]+)*/)`?", reason_text):
+        pre = m.group(1)
+        if rel.startswith(pre) or ("/" + pre) in ("/" + rel):
+            return pre
+    return None
 
 
 def check(path) -> dict:
