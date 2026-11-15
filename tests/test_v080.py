@@ -17,7 +17,7 @@ def by_id(res):
 
 
 def test_version():
-    assert __version__ == "0.8.0"
+    assert __version__ == "0.9.0"
 
 
 def test_complete_bundle_passes_all_required():
