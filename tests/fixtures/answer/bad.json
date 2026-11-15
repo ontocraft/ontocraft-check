@@ -1,0 +1,33 @@
+{
+  "meeting_question": "CNC-01 직경 이탈의 원인은?",
+  "observations": [
+    {
+      "statement": "직경과 부하가 함께 이상했습니다.",
+      "evidence": [
+        "SIG-034",
+        "SIG-057"
+      ]
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H1",
+      "statement": "직경 이탈은 공구 마모 때문임이 분명하며, 공구 수명 120분을 넘긴 것이 원인입니다.",
+      "status": "Confirmed",
+      "supporting": [
+        "WO-2420",
+        "SIG-034",
+        "WO-2433"
+      ],
+      "contradicting": [],
+      "missing": [],
+      "confounders": [],
+      "next_check": null
+    }
+  ],
+  "cannot_conclude": [],
+  "decisions_for_humans": [],
+  "actions": [
+    "공구 교체 주기를 100분으로 변경"
+  ]
+}

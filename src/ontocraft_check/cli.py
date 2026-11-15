@@ -88,6 +88,11 @@ def main(argv: list[str] | None = None) -> int:
         from .ai_ready import main as ai_main
 
         return ai_main(args_in[1:])
+    # `ontocraft-check answer <답.json> --ledger <원장.csv>` 는 AI 답변 근거 검사입니다. 같은 이름의 파일이 있으면 온톨로지로 읽습니다.
+    if args_in[:1] == ["answer"] and not Path("answer").exists():
+        from .answer import main as answer_main
+
+        return answer_main(args_in[1:])
     parser = build_parser()
     args = parser.parse_args(argv)
     if args.group_over < 0:

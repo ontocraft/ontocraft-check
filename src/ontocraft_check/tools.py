@@ -225,3 +225,23 @@ def get_term(id: str) -> dict:  # noqa: A002 (도구 인자 이름을 id 로 둡
     if t is None:
         raise InputError(f"내장 등록부에 없는 용어 id 입니다: {id}. search_terms 로 찾습니다.")
     return t
+
+
+def check_answer(answer: str | dict, ledger: str, config: str | dict | None = None) -> dict:
+    """AI 답변 근거 검사(C1~C10)입니다. answer 는 답 JSON 본문(또는 사전), ledger 는 원장 CSV 본문(id,type,text),
+    config 는 설정 JSON 본문(또는 사전)입니다. 결과 머리말은 「형식 검사 통과」나 「형식 검사 실패 N건」입니다."""
+    from . import answer as A
+
+    try:
+        if isinstance(config, str):
+            config = json.loads(config) if config.strip() else None
+        led = A.parse_ledger(ledger or "")
+        if isinstance(answer, str):
+            results = A.check_answer_text(answer, led, config)
+        else:
+            results = A.check_answer(answer, led, config)
+    except json.JSONDecodeError as exc:
+        raise InputError(f"config JSON 을 읽을 수 없습니다: {exc}") from exc
+    except A.InputError as exc:
+        raise InputError(str(exc)) from exc
+    return A.to_payload(results)

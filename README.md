@@ -136,6 +136,39 @@ ontocraft-check ontosafety-ontology.ttl --cq ontosafety-cq.json \
 
 문항마다 적정, 미흡, 해당없음(점검할 대상이 없음), 사람 확인 필요 가운데 하나를 냅니다. 요약은 「필수 자동 점검 문항 가운데 적정 수」입니다. 필수 미흡이 하나라도 있으면 종료 코드 1, 경로 오류는 2입니다. 데이터 사전 내용의 적정성, 개인정보 비식별, 재식별 위험 평가, 책임 주체의 실제 운영, 오류 신고 절차, API 제공 같은 문항은 기계로 확인할 수 없어 「사람 확인 필요」 목록으로만 보입니다. 이 목록의 이름은 도구가 묶은 것이고 가이드라인의 문항 번호가 아닙니다. AIR06에서 빈 값이 20%를 넘는 열도, README의 결측 절(「결측」이나 「missing」이 든 절) 안에 열 이름이 낱말로 적혀 있거나 JSON Schema의 required에 없으면 「사유 있음(선택 열)」로 따로 보이고 미흡에서 뺍니다. 사유도 없고 required인 열이 20%를 넘으면 미흡입니다.
 
+## 1-5. AI 답변 근거 검사
+
+`ontocraft-check answer <답.json> --ledger <원장.csv>`는 AI 에이전트가 낸 답(JSON)이 근거 원장(CSV)에 기대고 있는지 형식으로 검사합니다. 검사 C1~C10은 제조 AI 책 12장 실습 검증기를 파이썬으로 옮긴 것이고, 책의 좋은 예는 실패 0건, 나쁜 예는 실패 8건(C1, C2, C3, C6, C7, C8, C9, C10)으로 같게 나옵니다. 현재 폴더에 `answer`라는 파일이 있으면 지금처럼 온톨로지로 읽습니다.
+
+```bash
+ontocraft-check answer answer.json --ledger ledger.csv
+ontocraft-check answer answer.json --ledger ledger.csv --config answer-config.json --json
+```
+
+원장 CSV의 머리 줄은 `id,type,text`입니다. type은 signal, maintenance, test, unknown 같은 값이고, 빠진 기록은 type을 unknown이나 GAP으로 둔 행으로 적습니다. 결과는 표로 나오고 머리말은 「형식 검사 통과」 또는 「형식 검사 실패 N건」입니다. 끝에 「인용이 내용상 맞는지는 사람이 확인합니다」를 붙입니다. 종료 코드는 통과 0, 실패 1, 파일 오류 2입니다. 답 파일을 JSON으로 읽을 수 없으면 C1 실패 하나만 냅니다.
+
+| 검사 | 이름 | 실패 조건 |
+|---|---|---|
+| C1 | 필수 칸 | 필수 칸(meeting_question, observations, hypotheses, cannot_conclude, decisions_for_humans)이 빠졌거나 그 밖의 칸이 있음 |
+| C2 | 가설 상태 | 가설 status가 허용 목록(Needs Evidence, Association, Tested, Rejected) 밖 |
+| C3 | 인용 ID 존재 | 관찰 evidence, 가설 supporting·contradicting·missing에 원장에 없는 ID가 있음 |
+| C4 | 관찰마다 인용 | evidence가 빈 관찰이 있음 |
+| C5 | Tested 근거 | status가 Tested인데 supporting에 type test 근거가 없음 |
+| C6 | 다음 검증 | 가설의 next_check에 what이나 decision_rule이 없음 |
+| C7 | 확정할 수 없는 것 | cannot_conclude가 비었음(메시지에 원장의 unknown·GAP 행 수를 적음) |
+| C8 | 금지 표현 | 답의 모든 문자열 값에 금지 표현 목록의 말이 들어 있음 |
+| C9 | 숫자 출처 | 가설 statement의 숫자가 그 가설이 인용한 근거 문장에 글자로 없음 |
+| C10 | 사람 결정 지점 | decisions_for_humans가 비었음 |
+
+설정 파일(JSON)로 `required_fields`, `allowed_statuses`, `banned_phrases`, `test_types`, `unknown_types`를 문자열 목록으로 바꿀 수 있습니다. 주지 않은 키는 책 값을 씁니다. PyYAML이 설치되어 있으면 `.yaml` 설정도 읽지만 이 패키지의 의존성에는 넣지 않았습니다. 파이썬에서는 `from ontocraft_check import answer; answer.check_answer(답_사전, answer.read_ledger("ledger.csv"), 설정)`이 C1~C10 결과 목록(id, name, ok, message)을 돌려주고, MCP에서는 `check_answer(answer, ledger, config)`입니다.
+
+이 검사가 하지 않는 것은 다음과 같습니다.
+
+- 인용이 내용상 주장을 뒷받침하는지(타당성) 판단하지 않습니다. 사람이 확인합니다.
+- C9는 글자 일치만 봅니다. 계산한 값, 단위를 바꾼 값, 관찰 문장의 숫자는 보지 않습니다.
+- 금지 표현은 목록에 든 말만 잡고 같은 뜻의 다른 말은 놓칩니다.
+- LLM을 부르지 않고 파일을 이 컴퓨터 밖으로 보내지 않습니다.
+
 ## 2. 설치
 
 파이썬 3.11 이상이 필요합니다.
@@ -201,7 +234,7 @@ open("보고서.md", "w", encoding="utf-8").write(render(report, "md"))
 
 ## 5. MCP 서버
 
-`ontocraft-check-mcp`는 stdio로 도는 MCP 서버입니다. 도구는 여섯 개입니다.
+`ontocraft-check-mcp`는 stdio로 도는 MCP 서버입니다. 도구는 일곱 개입니다.
 
 | 도구 | 하는 일 |
 |---|---|
@@ -211,6 +244,7 @@ open("보고서.md", "w", encoding="utf-8").write(render(report, "md"))
 | `search_terms` | 내장 등록부에서 한국어 표제어·동의어, 영어, id로 찾아 id, ko, en, definition, uri, domain을 돌려줍니다 |
 | `get_term` | id로 용어 하나의 공개 필드 전부와 출처를 돌려줍니다 |
 | `check_ai_ready` | 0.8부터. 데이터 묶음 경로(path)를 AI 레디 자가진단으로 점검해 규칙별 판정을 JSON으로 돌려줍니다 |
+| `check_answer` | AI 답변 JSON 본문(answer)과 근거 원장 CSV 본문(ledger), 설정 JSON 본문(config, 선택)을 받아 C1~C10 형식 검사 결과를 JSON으로 돌려줍니다 |
 
 Claude Code에는 다음처럼 더합니다.
 

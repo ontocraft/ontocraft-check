@@ -1,6 +1,6 @@
 """MCP 서버입니다(stdio). 설치: pip install "ontocraft-check[mcp]", 실행: ontocraft-check-mcp
 
-도구 여섯 개를 냅니다: check_ontology, explain_rule, list_rules, search_terms, get_term, check_ai_ready.
+도구 일곱 개를 냅니다: check_ontology, explain_rule, list_rules, search_terms, get_term, check_ai_ready, check_answer.
 """
 
 from __future__ import annotations
@@ -28,6 +28,7 @@ INSTRUCTIONS = f"""{TOOL_TITLE} {__version__}: OWL 온톨로지를 검사하고 
 - 등록부 후보(REG01)는 클래스만, 표기만 같은 것입니다. 속성이 개념 용어와 같으면 REG03 입니다. get_term 으로 정의를 읽고 뜻이 같을 때만 skos:exactMatch 를 제안합니다.
 - check_ontology 에 cq(역량 질문 JSON)를 주면 관계·데이터 속성 단위 CQ 커버리지를 셉니다. 닿지 않은 요소는 지워도 된다는 뜻이 아닙니다. ONTOFLOW 카탈로그는 cq_profile="ontoflow" 로 읽습니다.
 - 레이블이 영어뿐인 온톨로지도 등록부와 영어 이름으로 맞춥니다(신뢰도 낮음). 도구가 만든 이름은 ignore_names 로 명명 규칙에서 뺍니다.
+- check_answer 는 AI 답변 JSON 과 근거 원장 CSV 본문을 받아 형식만 검사합니다(C1~C10). 인용이 내용상 맞는지는 판단하지 않으니 사람에게 넘깁니다.
 - 등록부는 공개 분야 사본이고 CC BY 4.0 입니다. 용어를 인용할 때 출처 「OntoCraft 한국 산업 용어 등록부」와 주소를 적습니다."""
 
 
@@ -126,6 +127,17 @@ def build_server():
             return _dump(ai_ready.check(path))
         except ai_ready.InputError as exc:
             raise ToolError(str(exc)) from exc
+
+    @server.tool()
+    def check_answer(answer: str, ledger: str, config: str | None = None) -> str:
+        """AI 답변(JSON 본문)이 근거 원장(CSV 본문, 머리 줄 id,type,text)에 기대고 있는지 형식으로 검사합니다(C1~C10).
+
+        C1 필수 칸, C2 가설 상태, C3 인용 ID 존재, C4 관찰마다 인용, C5 Tested 근거, C6 다음 검증,
+        C7 확정할 수 없는 것, C8 금지 표현, C9 숫자 출처(글자 일치), C10 사람 결정 지점.
+        config: 설정 JSON 본문(required_fields, allowed_statuses, banned_phrases, test_types, unknown_types). 없으면 책 기본값.
+        결과는 「형식 검사 통과」 또는 「형식 검사 실패 N건」입니다. 인용이 내용상 맞는지는 사람이 확인합니다.
+        """
+        return _guard(T.check_answer, answer, ledger, config)
 
     return server
 
