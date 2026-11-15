@@ -106,3 +106,15 @@ def test_mcp_tool_registered():
         "check_answer", {"answer": GOOD.read_text(encoding="utf-8"), "ledger": LEDGER.read_text(encoding="utf-8")}))
     assert not res.is_error
     assert json.loads(res.content[0].text)["summary"] == "형식 검사 통과"
+
+
+def test_worker_answer_mode_backward_compatible():
+    worker = (Path(__file__).parent.parent / "web" / "ontocraft-check-worker.js").read_text(encoding="utf-8")
+    assert 'm.mode === "answer"' in worker
+    assert "from ontocraft_check.tools import check_answer" in worker
+    assert 'ans["answer"], ans["ledger"], ans["config"]' in worker
+    assert 'mode: "answer", result:' in worker
+    # mode 가 없을 때의 기존 경로는 그대로
+    assert 'from ontocraft_check.runner import run' in worker
+    assert 'self.postMessage({ ok: true, json: out[0], html: out[1] });' in worker
+    assert worker.index('m.mode === "answer"') < worker.index("const o = put(m.ontology")

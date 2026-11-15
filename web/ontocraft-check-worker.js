@@ -6,6 +6,11 @@
 //   → 진행 중 {stage: "running"}, 끝나면 {ok: true, json, html} 또는 {ok: false, error}
 // ontology·data·shapes 는 파일 내용(문자열)과 이름 {name, text}, registry 는 {파일이름: 내용} 객체입니다.
 //
+// 0.9.0: answer 모드(AI 답변 근거 검사)를 더했습니다. mode 가 "answer" 일 때만 돌고, 없거나 다른 값이면 아래 온톨로지 검사 그대로입니다.
+//   postMessage({mode: "answer", answer: {text}, ledger: {text}, config: {text}?, wheel})
+//   → 진행 중 {stage: "running"}, 끝나면 {ok: true, mode: "answer", result: {feature, summary, failed, checks, failed_ids, results:[{id,name,ok,message}], note}}
+//   입력 오류(InputError)는 {ok: false, error} 로 보냅니다. wheel 은 0.9.0 이상이어야 합니다.
+//
 // 0.7.0: 선택 필드 다섯 개를 더했습니다. 모두 값을 줄 때만 run() 에 넘기므로 0.6 wheel 과 이전 화면도 그대로 돕니다.
 //   ignore_names: 명명·메타데이터 규칙(P08, P22 등)에서 뺄 이름 glob 배열(예: ["ActionLog_*"]).
 //   registry_match: "ko" | "en" | "both"(기본). 영어 이름으로 맞은 등록부 후보는 detail.match_lang "en", 신뢰도 "낮음" 입니다.
@@ -58,6 +63,16 @@ self.onmessage = async (e) => {
     if (!ready) ready = boot(m.wheel);
     const py = await ready;
     self.postMessage({ stage: "running" });
+    if (m.mode === "answer") {
+      py.globals.set("ans", py.toPy({ answer: m.answer && m.answer.text, ledger: m.ledger && m.ledger.text, config: m.config && m.config.text ? m.config.text : null }));
+      const res = py.runPython(`
+import json
+from ontocraft_check.tools import check_answer
+json.dumps(check_answer(ans["answer"], ans["ledger"], ans["config"]), ensure_ascii=False)
+`);
+      self.postMessage({ ok: true, mode: "answer", result: JSON.parse(res) });
+      return;
+    }
     const fs = py.FS;
     try { fs.mkdir("/work"); } catch (_) {}
     const put = (f, p) => { if (!f) return null; const path = "/work/" + p + "-" + f.name.replace(/[^\w.-]/g, "_"); fs.writeFile(path, f.text); return path; };
